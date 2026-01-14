@@ -1,0 +1,22 @@
+{
+    
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "OpenOCD",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/build_ICA2D13_ZNT/ICA2D13_ZNT.elf",
+            "svdFile": "${workspaceFolder}/STM32F103.svd",
+            "request": "launch",
+            "type": "cortex-debug",
+            "runToEntryPoint": "main",
+            "servertype": "openocd",
+            //"showDevDebugOutput": "raw",
+            "configFiles": [
+                "${workspaceFolder}/stlink.cfg",
+                "${workspaceFolder}/stm32f1x_geehy.cfg"
+            ],
+            "preLaunchTask": "Build"
+        }
+    ]
+}

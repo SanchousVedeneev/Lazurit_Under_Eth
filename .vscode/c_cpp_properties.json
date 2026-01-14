@@ -1,0 +1,32 @@
+{
+    "configurations": [
+        {
+            "name": "STM32",
+            "includePath": [
+                "Core/Inc",
+                "${workspaceFolder}/Drivers/STM32F1xx_HAL_Driver/Inc",
+                "${workspaceFolder}/Drivers/CMSIS/Device/ST/STM32F1xx/Include",
+                "${workspaceFolder}/Drivers/CMSIS/Include",
+                "${workspaceFolder}/ioLibrary_Driver-master/Ethernet/W5500",
+                "${workspaceFolder}/ioLibrary_Driver-master/Ethernet",
+                "${workspaceFolder}/ioLibrary_Driver-master/Internet/DHCP",
+                "${workspaceFolder}/ioLibrary_Driver-master/Internet/httpServer",
+                "${workspaceFolder}/Drivers/Ethernet",
+                "${workspaceFolder}/Drivers/Parameters",
+                "${workspaceFolder}/Middlewares/Third_Party/FreeRTOS/Source/include",
+                "${workspaceFolder}/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2",
+                "${workspaceFolder}/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3",
+                "${workspaceFolder}/Drivers/BSP",
+                "${workspaceFolder}/Drivers/ModbusSS",
+                "${workspaceFolder}/USB_DEVICE/App"
+            ],
+            "defines": [
+                "STM32F103xB",
+                "USE_HAL_DRIVER"
+            ],
+            "compilerPath": "${execPath}\\..\\..\\VsCodeStmTools\\arm-none-eabi-gcc\\12.2.1-1.2.1\\.content\\bin\\ARM-NONE-EABI-GCC.EXE",
+            "intelliSenseMode": "gcc-arm"
+        }
+    ],
+    "version": 4
+}
