@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccFZ3IpH.s 			page 1
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccotx5nd.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccFZ3IpH.s 			page 1
   29:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   * All rights reserved.</center></h2>
   30:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   *
   31:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   * This software component is licensed by ST under BSD 3-Clause license,
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccFZ3IpH.s 			page 2
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccotx5nd.s 			page 2
 
 
   32:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   * the "License"; You may not use this file except in compliance with the
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccFZ3IpH.s 			page 1
   31              		@ frame_needed = 0, uses_anonymous_args = 0
   32              		@ link register save eliminated.
   83:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   /* Verify the parameters */
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccFZ3IpH.s 			page 3
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccotx5nd.s 			page 3
 
 
   84:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   assert_param(IS_AFIO_EVENTOUT_PORT(GPIO_PortSource));
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccFZ3IpH.s 			page 1
   74              	.L6:
   75              		.align	2
   76              	.L5:
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccFZ3IpH.s 			page 4
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccotx5nd.s 			page 4
 
 
   77 000c 00000140 		.word	1073807360
@@ -224,19 +224,19 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccFZ3IpH.s 			page 1
  111              		.file 2 "c:\\vscode\\vscodestmtools\\arm-none-eabi-gcc\\12.2.1-1.2.1\\.content\\arm-none-eabi\\inc
  112              		.file 3 "c:\\vscode\\vscodestmtools\\arm-none-eabi-gcc\\12.2.1-1.2.1\\.content\\arm-none-eabi\\inc
  113              		.file 4 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccFZ3IpH.s 			page 5
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccotx5nd.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32f1xx_hal_gpio_ex.c
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccFZ3IpH.s:19     .text.HAL_GPIOEx_ConfigEventout:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccFZ3IpH.s:25     .text.HAL_GPIOEx_ConfigEventout:0000000000000000 HAL_GPIOEx_ConfigEventout
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccFZ3IpH.s:49     .text.HAL_GPIOEx_ConfigEventout:0000000000000010 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccFZ3IpH.s:54     .text.HAL_GPIOEx_EnableEventout:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccFZ3IpH.s:60     .text.HAL_GPIOEx_EnableEventout:0000000000000000 HAL_GPIOEx_EnableEventout
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccFZ3IpH.s:77     .text.HAL_GPIOEx_EnableEventout:000000000000000c $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccFZ3IpH.s:82     .text.HAL_GPIOEx_DisableEventout:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccFZ3IpH.s:88     .text.HAL_GPIOEx_DisableEventout:0000000000000000 HAL_GPIOEx_DisableEventout
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccFZ3IpH.s:105    .text.HAL_GPIOEx_DisableEventout:000000000000000c $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccotx5nd.s:19     .text.HAL_GPIOEx_ConfigEventout:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccotx5nd.s:25     .text.HAL_GPIOEx_ConfigEventout:0000000000000000 HAL_GPIOEx_ConfigEventout
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccotx5nd.s:49     .text.HAL_GPIOEx_ConfigEventout:0000000000000010 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccotx5nd.s:54     .text.HAL_GPIOEx_EnableEventout:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccotx5nd.s:60     .text.HAL_GPIOEx_EnableEventout:0000000000000000 HAL_GPIOEx_EnableEventout
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccotx5nd.s:77     .text.HAL_GPIOEx_EnableEventout:000000000000000c $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccotx5nd.s:82     .text.HAL_GPIOEx_DisableEventout:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccotx5nd.s:88     .text.HAL_GPIOEx_DisableEventout:0000000000000000 HAL_GPIOEx_DisableEventout
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccotx5nd.s:105    .text.HAL_GPIOEx_DisableEventout:000000000000000c $d
 
 NO UNDEFINED SYMBOLS

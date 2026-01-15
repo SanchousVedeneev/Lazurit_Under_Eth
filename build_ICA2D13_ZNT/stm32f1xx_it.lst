@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
   30:Core/Src/stm32f1xx_it.c **** /* USER CODE END TD */
   31:Core/Src/stm32f1xx_it.c **** 
   32:Core/Src/stm32f1xx_it.c **** /* Private define ------------------------------------------------------------*/
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 2
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 2
 
 
   33:Core/Src/stm32f1xx_it.c **** /* USER CODE BEGIN PD */
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
   34              		.loc 1 79 3 discriminator 1 view .LVU1
   80:Core/Src/stm32f1xx_it.c ****   {
   81:Core/Src/stm32f1xx_it.c ****   }
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 3
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 3
 
 
   35              		.loc 1 81 3 discriminator 1 view .LVU2
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
  100:Core/Src/stm32f1xx_it.c **** /**
  101:Core/Src/stm32f1xx_it.c ****   * @brief This function handles Memory management fault.
  102:Core/Src/stm32f1xx_it.c ****   */
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 4
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 4
 
 
  103:Core/Src/stm32f1xx_it.c **** void MemManage_Handler(void)
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
  127:Core/Src/stm32f1xx_it.c ****   }
  104              		.loc 1 127 3 discriminator 1 view .LVU14
  123:Core/Src/stm32f1xx_it.c ****   {
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 5
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 5
 
 
  105              		.loc 1 123 9 discriminator 1 view .LVU15
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
  148:Core/Src/stm32f1xx_it.c **** void DebugMon_Handler(void)
  149:Core/Src/stm32f1xx_it.c **** {
  142              		.loc 1 149 1 view -0
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 6
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 6
 
 
  143              		.cfi_startproc
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
  175:Core/Src/stm32f1xx_it.c **** 
  176:Core/Src/stm32f1xx_it.c ****   /* USER CODE END DMA1_Channel4_IRQn 1 */
  177:Core/Src/stm32f1xx_it.c **** }
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 7
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 7
 
 
  174              		.loc 1 177 1 is_stmt 0 view .LVU24
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
  217              		.syntax unified
  218              		.thumb
  219              		.thumb_func
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 8
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 8
 
 
  221              	EXTI9_5_IRQHandler:
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
   33:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   */
   34:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h **** 
   35:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h **** #if defined (EXTI)
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 9
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 9
 
 
   36:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h **** 
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
   90:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h **** #define LL_EXTI_LINE_3                 EXTI_IMR_IM3           /*!< Extended line 3 */
   91:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h **** #define LL_EXTI_LINE_4                 EXTI_IMR_IM4           /*!< Extended line 4 */
   92:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h **** #define LL_EXTI_LINE_5                 EXTI_IMR_IM5           /*!< Extended line 5 */
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 10
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 10
 
 
   93:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h **** #define LL_EXTI_LINE_6                 EXTI_IMR_IM6           /*!< Extended line 6 */
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
  147:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h **** #define LL_EXTI_LINE_31                EXTI_IMR_IM31          /*!< Extended line 31 */
  148:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h **** #endif
  149:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h **** #define LL_EXTI_LINE_ALL_0_31          EXTI_IMR_IM            /*!< All Extended line not reserved*/
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 11
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 11
 
 
  150:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h **** 
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
  204:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   * @param  __REG__ Register to be written
  205:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   * @param  __VALUE__ Value to be written in the register
  206:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   * @retval None
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 12
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 12
 
 
  207:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   */
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
  261:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_19
  262:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_ALL_0_31
  263:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   * @note   Please check each device line mapping for EXTI Line availability
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 13
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 13
 
 
  264:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   * @retval None
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
  318:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_3
  319:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_4
  320:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_5
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 14
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 14
 
 
  321:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_6
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
  375:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_18
  376:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_19
  377:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_ALL_0_31
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 15
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 15
 
 
  378:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   * @note   Please check each device line mapping for EXTI Line availability
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
  432:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_6
  433:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_7
  434:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_8
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 16
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 16
 
 
  435:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_9
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
  489:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_13
  490:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_14
  491:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_15
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 17
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 17
 
 
  492:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_16
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
  546:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   * @brief  Check if rising edge trigger is enabled for Lines in range 0 to 31
  547:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   * @rmtoll RTSR        RTx           LL_EXTI_IsEnabledRisingTrig_0_31
  548:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   * @param  ExtiLine This parameter can be a combination of the following values:
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 18
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 18
 
 
  549:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_0
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
  603:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_7
  604:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_8
  605:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_9
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 19
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 19
 
 
  606:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_10
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
  660:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h **** 
  661:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h **** 
  662:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h **** /**
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 20
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 20
 
 
  663:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   * @brief  Check if falling edge trigger is enabled for Lines in range 0 to 31
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
  717:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_6
  718:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_7
  719:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_8
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 21
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 21
 
 
  720:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   *         @arg @ref LL_EXTI_LINE_9
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
  774:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h ****   */
  775:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h **** __STATIC_INLINE uint32_t LL_EXTI_IsActiveFlag_0_31(uint32_t ExtiLine)
  233              		.loc 2 775 26 view .LVU30
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 22
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 22
 
 
  234              	.LBB11:
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
  812:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h **** }
  813:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h **** 
  814:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h **** 
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 23
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 23
 
 
  815:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h **** /**
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
  266              		.loc 2 777 3 view .LVU41
  777:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h **** }
  267              		.loc 2 777 11 is_stmt 0 view .LVU42
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 24
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 24
 
 
  268 0012 054B     		ldr	r3, .L23
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
  221:Core/Src/stm32f1xx_it.c ****   * @brief This function handles TIM4 global interrupt.
  222:Core/Src/stm32f1xx_it.c ****   */
  223:Core/Src/stm32f1xx_it.c **** void TIM4_IRQHandler(void)
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 25
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 25
 
 
  224:Core/Src/stm32f1xx_it.c **** {
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
  348              		.cfi_offset 3, -8
  349              		.cfi_offset 14, -4
  242:Core/Src/stm32f1xx_it.c ****   /* USER CODE BEGIN USART1_IRQn 0 */
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 26
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 26
 
 
  243:Core/Src/stm32f1xx_it.c **** 
@@ -1532,38 +1532,38 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 1
  372              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h"
  373              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h"
  374              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h"
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s 			page 27
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s 			page 27
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32f1xx_it.c
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:19     .text.NMI_Handler:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:25     .text.NMI_Handler:0000000000000000 NMI_Handler
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:42     .text.HardFault_Handler:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:48     .text.HardFault_Handler:0000000000000000 HardFault_Handler
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:65     .text.MemManage_Handler:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:71     .text.MemManage_Handler:0000000000000000 MemManage_Handler
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:88     .text.BusFault_Handler:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:94     .text.BusFault_Handler:0000000000000000 BusFault_Handler
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:111    .text.UsageFault_Handler:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:117    .text.UsageFault_Handler:0000000000000000 UsageFault_Handler
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:134    .text.DebugMon_Handler:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:140    .text.DebugMon_Handler:0000000000000000 DebugMon_Handler
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:153    .text.DMA1_Channel4_IRQHandler:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:159    .text.DMA1_Channel4_IRQHandler:0000000000000000 DMA1_Channel4_IRQHandler
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:179    .text.DMA1_Channel4_IRQHandler:000000000000000c $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:184    .text.DMA1_Channel5_IRQHandler:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:190    .text.DMA1_Channel5_IRQHandler:0000000000000000 DMA1_Channel5_IRQHandler
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:210    .text.DMA1_Channel5_IRQHandler:000000000000000c $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:215    .text.EXTI9_5_IRQHandler:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:221    .text.EXTI9_5_IRQHandler:0000000000000000 EXTI9_5_IRQHandler
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:297    .text.EXTI9_5_IRQHandler:0000000000000028 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:302    .text.TIM4_IRQHandler:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:308    .text.TIM4_IRQHandler:0000000000000000 TIM4_IRQHandler
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:328    .text.TIM4_IRQHandler:000000000000000c $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:333    .text.USART1_IRQHandler:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:339    .text.USART1_IRQHandler:0000000000000000 USART1_IRQHandler
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccygw2Cd.s:359    .text.USART1_IRQHandler:000000000000000c $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:19     .text.NMI_Handler:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:25     .text.NMI_Handler:0000000000000000 NMI_Handler
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:42     .text.HardFault_Handler:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:48     .text.HardFault_Handler:0000000000000000 HardFault_Handler
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:65     .text.MemManage_Handler:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:71     .text.MemManage_Handler:0000000000000000 MemManage_Handler
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:88     .text.BusFault_Handler:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:94     .text.BusFault_Handler:0000000000000000 BusFault_Handler
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:111    .text.UsageFault_Handler:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:117    .text.UsageFault_Handler:0000000000000000 UsageFault_Handler
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:134    .text.DebugMon_Handler:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:140    .text.DebugMon_Handler:0000000000000000 DebugMon_Handler
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:153    .text.DMA1_Channel4_IRQHandler:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:159    .text.DMA1_Channel4_IRQHandler:0000000000000000 DMA1_Channel4_IRQHandler
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:179    .text.DMA1_Channel4_IRQHandler:000000000000000c $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:184    .text.DMA1_Channel5_IRQHandler:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:190    .text.DMA1_Channel5_IRQHandler:0000000000000000 DMA1_Channel5_IRQHandler
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:210    .text.DMA1_Channel5_IRQHandler:000000000000000c $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:215    .text.EXTI9_5_IRQHandler:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:221    .text.EXTI9_5_IRQHandler:0000000000000000 EXTI9_5_IRQHandler
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:297    .text.EXTI9_5_IRQHandler:0000000000000028 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:302    .text.TIM4_IRQHandler:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:308    .text.TIM4_IRQHandler:0000000000000000 TIM4_IRQHandler
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:328    .text.TIM4_IRQHandler:000000000000000c $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:333    .text.USART1_IRQHandler:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:339    .text.USART1_IRQHandler:0000000000000000 USART1_IRQHandler
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccK4WO0P.s:359    .text.USART1_IRQHandler:000000000000000c $d
 
 UNDEFINED SYMBOLS
 HAL_DMA_IRQHandler

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 1
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 1
   30:Core/Src/spi.c **** 
   31:Core/Src/spi.c **** /* SPI2 init function */
   32:Core/Src/spi.c **** void MX_SPI2_Init(void)
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 2
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s 			page 2
 
 
   33:Core/Src/spi.c **** {
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 1
   64 001e C361     		str	r3, [r0, #28]
   50:Core/Src/spi.c ****   hspi2.Init.FirstBit = SPI_FIRSTBIT_MSB;
   65              		.loc 1 50 3 is_stmt 1 view .LVU17
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 3
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s 			page 3
 
 
   66              		.loc 1 50 23 is_stmt 0 view .LVU18
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 1
  109              	.LVL2:
  110              	.LFB575:
   63:Core/Src/spi.c **** 
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 4
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s 			page 4
 
 
   64:Core/Src/spi.c **** void HAL_SPI_MspInit(SPI_HandleTypeDef* spiHandle)
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 1
   87:Core/Src/spi.c ****     GPIO_InitStruct.Pin = GPIO_PIN_14;
   88:Core/Src/spi.c ****     GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   89:Core/Src/spi.c ****     GPIO_InitStruct.Pull = GPIO_NOPULL;
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 5
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s 			page 5
 
 
   90:Core/Src/spi.c ****     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 1
  155              		.loc 1 74 5 is_stmt 1 view .LVU40
  156              	.LBB2:
   74:Core/Src/spi.c **** 
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 6
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s 			page 6
 
 
  157              		.loc 1 74 5 view .LVU41
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 1
  195              		.loc 1 84 27 is_stmt 0 view .LVU57
  196 004e 0323     		movs	r3, #3
  197 0050 0593     		str	r3, [sp, #20]
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 7
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s 			page 7
 
 
   85:Core/Src/spi.c **** 
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 1
  235 007a 8023     		movs	r3, #128
  236 007c C360     		str	r3, [r0, #12]
   98:Core/Src/spi.c ****     hdma_spi2_rx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 8
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s 			page 8
 
 
  237              		.loc 1 98 5 is_stmt 1 view .LVU75
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 1
  272              		.loc 1 112 5 is_stmt 1 view .LVU94
  112:Core/Src/spi.c ****     hdma_spi2_tx.Init.MemInc = DMA_MINC_ENABLE;
  273              		.loc 1 112 33 is_stmt 0 view .LVU95
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 9
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s 			page 9
 
 
  274 009c 0023     		movs	r3, #0
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 1
  310 00ba FFF7FEFF 		bl	Error_Handler
  311              	.LVL10:
  312 00be E5E7     		b	.L9
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 10
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s 			page 10
 
 
  313              	.L14:
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 1
  137:Core/Src/spi.c **** 
  138:Core/Src/spi.c ****   /* USER CODE END SPI2_MspDeInit 0 */
  139:Core/Src/spi.c ****     /* Peripheral clock disable */
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 11
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s 			page 11
 
 
  140:Core/Src/spi.c ****     __HAL_RCC_SPI2_CLK_DISABLE();
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 1
  399      00000000 
  399      00000000 
  399      00000000 
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 12
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s 			page 12
 
 
  399      00000000 
@@ -693,26 +693,26 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 1
  424              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h"
  425              		.file 11 "Core/Inc/spi.h"
  426              		.file 12 "Core/Inc/main.h"
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s 			page 13
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s 			page 13
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 spi.c
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s:19     .text.MX_SPI2_Init:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s:25     .text.MX_SPI2_Init:0000000000000000 MX_SPI2_Init
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s:96     .text.MX_SPI2_Init:0000000000000038 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s:412    .bss.hspi2:0000000000000000 hspi2
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s:102    .text.HAL_SPI_MspInit:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s:108    .text.HAL_SPI_MspInit:0000000000000000 HAL_SPI_MspInit
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s:321    .text.HAL_SPI_MspInit:00000000000000c8 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s:405    .bss.hdma_spi2_rx:0000000000000000 hdma_spi2_rx
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s:398    .bss.hdma_spi2_tx:0000000000000000 hdma_spi2_tx
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s:331    .text.HAL_SPI_MspDeInit:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s:337    .text.HAL_SPI_MspDeInit:0000000000000000 HAL_SPI_MspDeInit
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s:387    .text.HAL_SPI_MspDeInit:0000000000000030 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s:395    .bss.hdma_spi2_tx:0000000000000000 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s:402    .bss.hdma_spi2_rx:0000000000000000 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczamuih.s:409    .bss.hspi2:0000000000000000 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s:19     .text.MX_SPI2_Init:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s:25     .text.MX_SPI2_Init:0000000000000000 MX_SPI2_Init
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s:96     .text.MX_SPI2_Init:0000000000000038 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s:412    .bss.hspi2:0000000000000000 hspi2
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s:102    .text.HAL_SPI_MspInit:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s:108    .text.HAL_SPI_MspInit:0000000000000000 HAL_SPI_MspInit
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s:321    .text.HAL_SPI_MspInit:00000000000000c8 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s:405    .bss.hdma_spi2_rx:0000000000000000 hdma_spi2_rx
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s:398    .bss.hdma_spi2_tx:0000000000000000 hdma_spi2_tx
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s:331    .text.HAL_SPI_MspDeInit:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s:337    .text.HAL_SPI_MspDeInit:0000000000000000 HAL_SPI_MspDeInit
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s:387    .text.HAL_SPI_MspDeInit:0000000000000030 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s:395    .bss.hdma_spi2_tx:0000000000000000 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s:402    .bss.hdma_spi2_rx:0000000000000000 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccEDajXK.s:409    .bss.hspi2:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 HAL_SPI_Init

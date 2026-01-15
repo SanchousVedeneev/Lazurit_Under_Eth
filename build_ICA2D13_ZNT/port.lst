@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
   31:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 
   32:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** /* Scheduler includes. */
   33:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** #include "FreeRTOS.h"
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 2
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 2
 
 
   34:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** #include "task.h"
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
   88:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** occurred while the SysTick counter is stopped during tickless idle
   89:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** calculations. */
   90:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** #define portMISSED_COUNTS_FACTOR			( 45UL )
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 3
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 3
 
 
   91:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  145:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c ****  */
  146:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** #if( configUSE_TICKLESS_IDLE == 1 )
  147:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 	static uint32_t xMaximumPossibleSuppressedTicks = 0;
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 4
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 4
 
 
  148:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** #endif /* configUSE_TICKLESS_IDLE */
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  194:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** volatile uint32_t ulDummy = 0UL;
   34              		.loc 1 194 1 view .LVU1
   35              		.loc 1 194 19 is_stmt 0 view .LVU2
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 5
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 5
 
 
   36 0002 0023     		movs	r3, #0
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
   36:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** /*-----------------------------------------------------------
   37:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h ****  * Port specific definitions.
   38:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h ****  *
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 6
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 6
 
 
   39:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h ****  * The settings in this file configure FreeRTOS correctly for the
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
   93:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** #define portYIELD_FROM_ISR( x ) portEND_SWITCHING_ISR( x )
   94:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** /*-----------------------------------------------------------*/
   95:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 7
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 7
 
 
   96:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** /* Critical section management. */
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  150:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 
  151:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** #endif /* configUSE_PORT_OPTIMISED_TASK_SELECTION */
  152:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 8
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 8
 
 
  153:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** /*-----------------------------------------------------------*/
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
   58              	@ 0 "" 2
   59              	.LVL0:
   60              		.thumb
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 9
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 9
 
 
   61              		.syntax unified
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  100              	.LCFI1:
  101              		.cfi_def_cfa_offset 0
  102              		@ sp needed
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 10
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 10
 
 
  103 003a 7047     		bx	lr
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  134 0012 BFF36F8F 	 isb					
  135 0016 00DF     	 svc 0					
  136 0018 00BF     	 nop					
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 11
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 11
 
 
  137              	
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  182:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 	*pxTopOfStack = ( StackType_t ) portTASK_RETURN_ADDRESS;	/* LR */
  173              		.loc 1 182 2 is_stmt 1 view .LVU31
  174              	.LVL5:
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 12
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 12
 
 
  183:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 	pxTopOfStack -= 5;	/* R12, R3, R2 and R1. */
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  219 0004 0868     		ldr r0, [r1]					
  220 0006 B0E8F00F 		ldmia r0!, {r4-r11}				
  221 000a 80F30988 		msr psp, r0						
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 13
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 13
 
 
  222 000e BFF36F8F 		isb								
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  282:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 		ucMaxPriorityValue = *pucFirstUserPriorityRegister;
  283:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 
  284:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 		/* Use the same mask on the maximum system call priority. */
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 14
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 14
 
 
  285:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 		ucMaxSysCallPriority = configMAX_SYSCALL_INTERRUPT_PRIORITY & ucMaxPriorityValue;
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  339:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 	/* Should never get here as the tasks will now be executing!  Call the task
  340:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 	exit error function to prevent compiler warnings about a static function
  341:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 	not being called in the case that the application writer overrides this
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 15
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 15
 
 
  342:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 	functionality by defining configTASK_RETURN_ADDRESS.  Call
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  358:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** }
  283              		.loc 1 358 1 is_stmt 0 view .LVU54
  284 001c 7047     		bx	lr
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 16
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 16
 
 
  285              	.L17:
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  367:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 	assert() if it is being called from an interrupt context.  Only API
  368:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 	functions that end in "FromISR" can be used in an interrupt.  Only assert if
  369:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 	the critical nesting count is 1 to protect against recursive calls if the
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 17
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 17
 
 
  370:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 	assert function also uses a critical section. */
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  373              		.cfi_endproc
  374              	.LFE10:
  376              		.section	.text.vPortExitCritical,"ax",%progbits
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 18
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 18
 
 
  377              		.align	1
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  424 001a 034A     		ldr	r2, .L28
  425 001c 1360     		str	r3, [r2]
  382:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 	if( uxCriticalNesting == 0 )
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 19
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 19
 
 
  426              		.loc 1 382 2 is_stmt 1 discriminator 2 view .LVU85
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  444              		.loc 2 229 2 is_stmt 0 view .LVU90
  445              	.LBE40:
  446              	.LBE39:
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 20
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 20
 
 
  385:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 	}
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  494 003a BFF36F8F 		isb									
  495 003e 7047     		bx r14								
  496              											
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 21
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 21
 
 
  497              		.align 4							
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  519              		@ frame_needed = 0, uses_anonymous_args = 0
  520 0000 08B5     		push	{r3, lr}
  521              	.LCFI2:
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 22
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 22
 
 
  522              		.cfi_def_cfa_offset 8
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  558              	.LBB43:
  559              	.LBI43:
  227:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** {
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 23
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 23
 
 
  560              		.loc 2 227 30 view .LVU106
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  471:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 			ulReloadValue -= ulStoppedTimerCompensation;
  472:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 		}
  473:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 24
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 24
 
 
  474:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 		/* Enter a critical section but don't use the taskENTER_CRITICAL()
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  528:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 			__disable_interrupt() call above. */
  529:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 			__asm volatile( "cpsie i" ::: "memory" );
  530:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 			__asm volatile( "dsb" );
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 25
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 25
 
 
  531:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 			__asm volatile( "isb" );
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  585:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 				ticks). */
  586:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 				ulCompletedSysTickDecrements = ( xExpectedIdleTime * ulTimerCountsForOneTick ) - portNVIC_SYSTI
  587:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 26
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 26
 
 
  588:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 				/* How many complete tick periods passed while the processor
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  599              		.loc 1 630 37 is_stmt 0 view .LVU114
  600 0008 9361     		str	r3, [r2, #24]
  631:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 27
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 27
 
 
  632:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 	/* Configure SysTick to interrupt at the requested rate. */
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  265:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 		volatile uint8_t * const pucFirstUserPriorityRegister = ( volatile uint8_t * const ) ( portNVIC_I
  650              		.loc 1 265 3 view .LVU125
  266:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 		volatile uint8_t ucMaxPriorityValue;
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 28
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 28
 
 
  651              		.loc 1 266 3 view .LVU126
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  292:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 			ucMaxPriorityValue <<= ( uint8_t ) 0x01;
  688              		.loc 1 292 22 is_stmt 0 view .LVU144
  689 002c 224A     		ldr	r2, .L43+8
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 29
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 29
 
 
  690 002e 1368     		ldr	r3, [r2]
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  310:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 		}
  733              		.loc 1 310 4 is_stmt 1 discriminator 2 view .LVU156
  310:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 		}
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 30
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 30
 
 
  734              		.loc 1 310 4 discriminator 2 view .LVU157
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  773              		.loc 1 337 2 is_stmt 1 discriminator 2 view .LVU172
  774 009e FFF7FEFF 		bl	prvPortStartFirstTask
  775              	.LVL20:
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 31
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 31
 
 
  345:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 	prvTaskExitError();
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  817              		.syntax unified
  818              	@ 646 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c" 1
  819 0000 EFF30583 		mrs r3, ipsr
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 32
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 32
 
 
  820              	@ 0 "" 2
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  843              	.LBB48:
  844              	.LBI48:
  191:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** {
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 33
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 33
 
 
  845              		.loc 2 191 30 view .LVU189
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  880              	.LBI50:
  191:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** {
  881              		.loc 2 191 30 view .LVU198
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 34
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 34
 
 
  882              	.LBB51:
@@ -2035,55 +2035,55 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 1
  936              		.file 5 "Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h"
  937              		.file 6 "Core/Inc/FreeRTOSConfig.h"
  938              		.file 7 "Middlewares/Third_Party/FreeRTOS/Source/include/task.h"
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s 			page 35
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s 			page 35
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 port.c
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:19     .text.prvTaskExitError:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:24     .text.prvTaskExitError:0000000000000000 prvTaskExitError
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:107    .text.prvTaskExitError:000000000000003c $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:930    .data.uxCriticalNesting:0000000000000000 uxCriticalNesting
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:112    .text.prvPortStartFirstTask:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:117    .text.prvPortStartFirstTask:0000000000000000 prvPortStartFirstTask
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:146    .text.pxPortInitialiseStack:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:152    .text.pxPortInitialiseStack:0000000000000000 pxPortInitialiseStack
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:196    .text.pxPortInitialiseStack:0000000000000020 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:201    .text.SVC_Handler:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:207    .text.SVC_Handler:0000000000000000 SVC_Handler
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:229    .text.SVC_Handler:0000000000000020 pxCurrentTCBConst2
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:229    .text.SVC_Handler:0000000000000020 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:239    .text.vPortEndScheduler:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:245    .text.vPortEndScheduler:0000000000000000 vPortEndScheduler
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:288    .text.vPortEndScheduler:0000000000000020 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:293    .text.vPortEnterCritical:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:299    .text.vPortEnterCritical:0000000000000000 vPortEnterCritical
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:372    .text.vPortEnterCritical:0000000000000040 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:377    .text.vPortExitCritical:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:383    .text.vPortExitCritical:0000000000000000 vPortExitCritical
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:452    .text.vPortExitCritical:0000000000000028 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:457    .text.PendSV_Handler:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:463    .text.PendSV_Handler:0000000000000000 PendSV_Handler
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:498    .text.PendSV_Handler:0000000000000040 pxCurrentTCBConst
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:498    .text.PendSV_Handler:0000000000000040 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:508    .text.SysTick_Handler:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:514    .text.SysTick_Handler:0000000000000000 SysTick_Handler
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:580    .text.vPortSetupTimerInterrupt:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:586    .text.vPortSetupTimerInterrupt:0000000000000000 vPortSetupTimerInterrupt
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:621    .text.vPortSetupTimerInterrupt:0000000000000020 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:627    .text.xPortStartScheduler:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:633    .text.xPortStartScheduler:0000000000000000 xPortStartScheduler
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:793    .text.xPortStartScheduler:00000000000000b0 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:924    .bss.ucMaxSysCallPriority:0000000000000000 ucMaxSysCallPriority
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:919    .bss.ulMaxPRIGROUPValue:0000000000000000 ulMaxPRIGROUPValue
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:801    .text.vPortValidateInterruptPriority:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:807    .text.vPortValidateInterruptPriority:0000000000000000 vPortValidateInterruptPriority
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:909    .text.vPortValidateInterruptPriority:0000000000000050 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:916    .bss.ulMaxPRIGROUPValue:0000000000000000 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:925    .bss.ucMaxSysCallPriority:0000000000000000 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:927    .data.uxCriticalNesting:0000000000000000 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:145    .text.prvPortStartFirstTask:000000000000001a $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccJi8G9q.s:2633   .text.prvPortStartFirstTask:000000000000001c $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:19     .text.prvTaskExitError:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:24     .text.prvTaskExitError:0000000000000000 prvTaskExitError
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:107    .text.prvTaskExitError:000000000000003c $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:930    .data.uxCriticalNesting:0000000000000000 uxCriticalNesting
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:112    .text.prvPortStartFirstTask:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:117    .text.prvPortStartFirstTask:0000000000000000 prvPortStartFirstTask
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:146    .text.pxPortInitialiseStack:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:152    .text.pxPortInitialiseStack:0000000000000000 pxPortInitialiseStack
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:196    .text.pxPortInitialiseStack:0000000000000020 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:201    .text.SVC_Handler:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:207    .text.SVC_Handler:0000000000000000 SVC_Handler
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:229    .text.SVC_Handler:0000000000000020 pxCurrentTCBConst2
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:229    .text.SVC_Handler:0000000000000020 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:239    .text.vPortEndScheduler:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:245    .text.vPortEndScheduler:0000000000000000 vPortEndScheduler
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:288    .text.vPortEndScheduler:0000000000000020 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:293    .text.vPortEnterCritical:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:299    .text.vPortEnterCritical:0000000000000000 vPortEnterCritical
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:372    .text.vPortEnterCritical:0000000000000040 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:377    .text.vPortExitCritical:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:383    .text.vPortExitCritical:0000000000000000 vPortExitCritical
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:452    .text.vPortExitCritical:0000000000000028 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:457    .text.PendSV_Handler:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:463    .text.PendSV_Handler:0000000000000000 PendSV_Handler
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:498    .text.PendSV_Handler:0000000000000040 pxCurrentTCBConst
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:498    .text.PendSV_Handler:0000000000000040 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:508    .text.SysTick_Handler:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:514    .text.SysTick_Handler:0000000000000000 SysTick_Handler
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:580    .text.vPortSetupTimerInterrupt:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:586    .text.vPortSetupTimerInterrupt:0000000000000000 vPortSetupTimerInterrupt
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:621    .text.vPortSetupTimerInterrupt:0000000000000020 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:627    .text.xPortStartScheduler:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:633    .text.xPortStartScheduler:0000000000000000 xPortStartScheduler
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:793    .text.xPortStartScheduler:00000000000000b0 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:924    .bss.ucMaxSysCallPriority:0000000000000000 ucMaxSysCallPriority
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:919    .bss.ulMaxPRIGROUPValue:0000000000000000 ulMaxPRIGROUPValue
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:801    .text.vPortValidateInterruptPriority:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:807    .text.vPortValidateInterruptPriority:0000000000000000 vPortValidateInterruptPriority
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:909    .text.vPortValidateInterruptPriority:0000000000000050 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:916    .bss.ulMaxPRIGROUPValue:0000000000000000 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:925    .bss.ucMaxSysCallPriority:0000000000000000 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:927    .data.uxCriticalNesting:0000000000000000 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:145    .text.prvPortStartFirstTask:000000000000001a $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccCx2m4S.s:2633   .text.prvPortStartFirstTask:000000000000001c $d
 
 UNDEFINED SYMBOLS
 pxCurrentTCB

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccuolCOT.s 			page 1
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cch054Ik.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -18,125 +18,14 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccuolCOT.s 			page 1
   15              	.Ltext0:
   16              		.cfi_sections	.debug_frame
   17              		.file 1 "Drivers/BSP/BSP_ICA2D13.c"
-  18              		.section	.text.bsp_set_led1_rg,"ax",%progbits
+  18              		.section	.text.bsp_init,"ax",%progbits
   19              		.align	1
-  20              		.syntax unified
-  21              		.thumb
-  22              		.thumb_func
-  24              	bsp_set_led1_rg:
-  25              	.LVL0:
+  20              		.global	bsp_init
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  25              	bsp_init:
   26              	.LFB574:
-  27              		.file 2 "Drivers/BSP/BSP_ICA2D13.h"
-   1:Drivers/BSP/BSP_ICA2D13.h **** #ifndef _BSP_ICA2D13_H_
-   2:Drivers/BSP/BSP_ICA2D13.h **** #define _BSP_ICA2D13_H_
-   3:Drivers/BSP/BSP_ICA2D13.h **** 
-   4:Drivers/BSP/BSP_ICA2D13.h **** #include "main.h"
-   5:Drivers/BSP/BSP_ICA2D13.h **** 
-   6:Drivers/BSP/BSP_ICA2D13.h **** void bsp_init();
-   7:Drivers/BSP/BSP_ICA2D13.h **** 
-   8:Drivers/BSP/BSP_ICA2D13.h **** 
-   9:Drivers/BSP/BSP_ICA2D13.h **** //----------------------- LED 1 Red & Green
-  10:Drivers/BSP/BSP_ICA2D13.h **** #define BSP_LED1_G_TIM                          TIM2
-  11:Drivers/BSP/BSP_ICA2D13.h **** #define BSP_LED1_R_TIM                          TIM3
-  12:Drivers/BSP/BSP_ICA2D13.h **** #define BSP_LED1_G_TIM_CHANNEL                  (LL_TIM_CHANNEL_CH2)
-  13:Drivers/BSP/BSP_ICA2D13.h **** #define BSP_LED1_R_TIM_CHANNEL                  (LL_TIM_CHANNEL_CH1)
-  14:Drivers/BSP/BSP_ICA2D13.h **** #define BSP_LED1_G_TIM_CHANNEL_CCR              BSP_LED1_G_TIM->CCR2
-  15:Drivers/BSP/BSP_ICA2D13.h **** #define BSP_LED1_R_TIM_CHANNEL_CCR              BSP_LED1_R_TIM->CCR1
-  16:Drivers/BSP/BSP_ICA2D13.h **** #define BSP_LED1_RG_TIM_PERIOD                  TIM_LED_PERIOD
-  17:Drivers/BSP/BSP_ICA2D13.h **** 
-  18:Drivers/BSP/BSP_ICA2D13.h **** #define BSP_LED1_RG_TIM_START()                 LL_TIM_EnableCounter(BSP_LED1_G_TIM);\
-  19:Drivers/BSP/BSP_ICA2D13.h ****                                                 LL_TIM_EnableCounter(BSP_LED1_R_TIM);\
-  20:Drivers/BSP/BSP_ICA2D13.h ****                                                 (LL_TIM_CC_EnableChannel(BSP_LED1_G_TIM,  BSP_LED1_
-  21:Drivers/BSP/BSP_ICA2D13.h ****                                                 (LL_TIM_CC_EnableChannel(BSP_LED1_R_TIM,  BSP_LED1_
-  22:Drivers/BSP/BSP_ICA2D13.h **** 
-  23:Drivers/BSP/BSP_ICA2D13.h **** #define BSP_LED1_RG_SET_PWM(X)                  LED1_G_TIM_CHANNEL_CCR(BSP_LED1_G_TIM,X);\
-  24:Drivers/BSP/BSP_ICA2D13.h ****                                                 LED1_R_TIM_CHANNEL_CCR(BSP_LED1_R_TIM,X);
-  25:Drivers/BSP/BSP_ICA2D13.h **** 
-  26:Drivers/BSP/BSP_ICA2D13.h **** 
-  27:Drivers/BSP/BSP_ICA2D13.h **** __STATIC_INLINE void bsp_set_led1_rg(int32_t r, int32_t g){
-  28              		.loc 2 27 59 view -0
-  29              		.cfi_startproc
-  30              		@ args = 0, pretend = 0, frame = 0
-  31              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccuolCOT.s 			page 2
-
-
-  32              		@ link register save eliminated.
-  28:Drivers/BSP/BSP_ICA2D13.h ****     if(r > BSP_LED1_RG_TIM_PERIOD) r = BSP_LED1_RG_TIM_PERIOD;
-  33              		.loc 2 28 5 view .LVU1
-  34              		.loc 2 28 7 is_stmt 0 view .LVU2
-  35 0000 B0F57A7F 		cmp	r0, #1000
-  36 0004 03DA     		bge	.L4
-  29:Drivers/BSP/BSP_ICA2D13.h ****     else if (r < 0 ) r = 0;
-  37              		.loc 2 29 10 is_stmt 1 view .LVU3
-  38              		.loc 2 29 13 is_stmt 0 view .LVU4
-  39 0006 0028     		cmp	r0, #0
-  40 0008 03DA     		bge	.L2
-  41              		.loc 2 29 24 view .LVU5
-  42 000a 0020     		movs	r0, #0
-  43              	.LVL1:
-  44              		.loc 2 29 24 view .LVU6
-  45 000c 01E0     		b	.L2
-  46              	.LVL2:
-  47              	.L4:
-  28:Drivers/BSP/BSP_ICA2D13.h ****     if(r > BSP_LED1_RG_TIM_PERIOD) r = BSP_LED1_RG_TIM_PERIOD;
-  48              		.loc 2 28 38 view .LVU7
-  49 000e 40F2E730 		movw	r0, #999
-  50              	.LVL3:
-  51              	.L2:
-  30:Drivers/BSP/BSP_ICA2D13.h ****     BSP_LED1_R_TIM_CHANNEL_CCR = r;
-  52              		.loc 2 30 5 is_stmt 1 view .LVU8
-  53              		.loc 2 30 32 is_stmt 0 view .LVU9
-  54 0012 074B     		ldr	r3, .L8
-  55 0014 5863     		str	r0, [r3, #52]
-  31:Drivers/BSP/BSP_ICA2D13.h **** 
-  32:Drivers/BSP/BSP_ICA2D13.h ****     if(g > BSP_LED1_RG_TIM_PERIOD) g = BSP_LED1_RG_TIM_PERIOD;
-  56              		.loc 2 32 5 is_stmt 1 view .LVU10
-  57              		.loc 2 32 7 is_stmt 0 view .LVU11
-  58 0016 B1F57A7F 		cmp	r1, #1000
-  59 001a 03DA     		bge	.L6
-  33:Drivers/BSP/BSP_ICA2D13.h ****     else if (g < 0 ) g = 0;
-  60              		.loc 2 33 10 is_stmt 1 view .LVU12
-  61              		.loc 2 33 13 is_stmt 0 view .LVU13
-  62 001c 0029     		cmp	r1, #0
-  63 001e 03DA     		bge	.L3
-  64              		.loc 2 33 24 view .LVU14
-  65 0020 0021     		movs	r1, #0
-  66              	.LVL4:
-  67              		.loc 2 33 24 view .LVU15
-  68 0022 01E0     		b	.L3
-  69              	.LVL5:
-  70              	.L6:
-  32:Drivers/BSP/BSP_ICA2D13.h ****     else if (g < 0 ) g = 0;
-  71              		.loc 2 32 38 view .LVU16
-  72 0024 40F2E731 		movw	r1, #999
-  73              	.LVL6:
-  74              	.L3:
-  34:Drivers/BSP/BSP_ICA2D13.h ****     BSP_LED1_G_TIM_CHANNEL_CCR = g;
-  75              		.loc 2 34 5 is_stmt 1 view .LVU17
-  76              		.loc 2 34 32 is_stmt 0 view .LVU18
-  77 0028 4FF08043 		mov	r3, #1073741824
-  78 002c 9963     		str	r1, [r3, #56]
-  35:Drivers/BSP/BSP_ICA2D13.h **** }
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccuolCOT.s 			page 3
-
-
-  79              		.loc 2 35 1 view .LVU19
-  80 002e 7047     		bx	lr
-  81              	.L9:
-  82              		.align	2
-  83              	.L8:
-  84 0030 00040040 		.word	1073742848
-  85              		.cfi_endproc
-  86              	.LFE574:
-  88              		.section	.text.bsp_init,"ax",%progbits
-  89              		.align	1
-  90              		.global	bsp_init
-  91              		.syntax unified
-  92              		.thumb
-  93              		.thumb_func
-  95              	bsp_init:
-  96              	.LFB576:
    1:Drivers/BSP/BSP_ICA2D13.c **** 
    2:Drivers/BSP/BSP_ICA2D13.c **** #include "BSP_ICA2D13.h"
    3:Drivers/BSP/BSP_ICA2D13.c **** 
@@ -146,256 +35,33 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccuolCOT.s 			page 1
    7:Drivers/BSP/BSP_ICA2D13.c **** 
    8:Drivers/BSP/BSP_ICA2D13.c **** void bsp_init()
    9:Drivers/BSP/BSP_ICA2D13.c **** {
-  97              		.loc 1 9 1 is_stmt 1 view -0
-  98              		.cfi_startproc
-  99              		@ args = 0, pretend = 0, frame = 0
- 100              		@ frame_needed = 0, uses_anonymous_args = 0
- 101              		@ link register save eliminated.
+  27              		.loc 1 9 1 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
   10:Drivers/BSP/BSP_ICA2D13.c **** //   USART1->RTOR |= 10 << USART_RTOR_RTO_Pos;
   11:Drivers/BSP/BSP_ICA2D13.c **** //   huart3.Instance->CR1 |= USART_CR1_RTOIE;
   12:Drivers/BSP/BSP_ICA2D13.c **** //   huart3.Instance->CR2 |= USART_CR2_RTOEN;
   13:Drivers/BSP/BSP_ICA2D13.c **** //   HAL_DMA_Start(huart3.hdmarx, (uint32_t)&huart3.Instance->RDR, (uint32_t)modbusStruct._BuferRxT
   14:Drivers/BSP/BSP_ICA2D13.c **** //   huart3.Instance->CR3 |= USART_CR3_DMAR;
   15:Drivers/BSP/BSP_ICA2D13.c **** }
- 102              		.loc 1 15 1 view .LVU21
- 103 0000 7047     		bx	lr
- 104              		.cfi_endproc
- 105              	.LFE576:
- 107              		.section	.text.bsp_led1_rg_incDec,"ax",%progbits
- 108              		.align	1
- 109              		.global	bsp_led1_rg_incDec
- 110              		.syntax unified
- 111              		.thumb
- 112              		.thumb_func
- 114              	bsp_led1_rg_incDec:
- 115              	.LVL7:
- 116              	.LFB577:
-  16:Drivers/BSP/BSP_ICA2D13.c **** 
-  17:Drivers/BSP/BSP_ICA2D13.c **** __INLINE void bsp_led1_rg_incDec(int32_t inc)
-  18:Drivers/BSP/BSP_ICA2D13.c **** {
- 117              		.loc 1 18 1 view -0
- 118              		.cfi_startproc
- 119              		@ args = 0, pretend = 0, frame = 0
- 120              		@ frame_needed = 0, uses_anonymous_args = 0
- 121              		@ link register save eliminated.
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccuolCOT.s 			page 4
-
-
-  19:Drivers/BSP/BSP_ICA2D13.c ****     static int8_t dir = 1;
- 122              		.loc 1 19 5 view .LVU23
-  20:Drivers/BSP/BSP_ICA2D13.c ****     BSP_LED1_G_TIM_CHANNEL_CCR += dir*inc;
- 123              		.loc 1 20 5 view .LVU24
- 124 0000 4FF08043 		mov	r3, #1073741824
- 125 0004 996B     		ldr	r1, [r3, #56]
- 126              		.loc 1 20 38 is_stmt 0 view .LVU25
- 127 0006 154A     		ldr	r2, .L15
- 128 0008 92F90020 		ldrsb	r2, [r2]
- 129              		.loc 1 20 32 view .LVU26
- 130 000c 00FB0211 		mla	r1, r0, r2, r1
- 131 0010 9963     		str	r1, [r3, #56]
-  21:Drivers/BSP/BSP_ICA2D13.c ****     BSP_LED1_R_TIM_CHANNEL_CCR = BSP_LED1_G_TIM_CHANNEL_CCR;
- 132              		.loc 1 21 5 is_stmt 1 view .LVU27
- 133              		.loc 1 21 34 is_stmt 0 view .LVU28
- 134 0012 986B     		ldr	r0, [r3, #56]
- 135              	.LVL8:
- 136              		.loc 1 21 32 view .LVU29
- 137 0014 1249     		ldr	r1, .L15+4
- 138 0016 4863     		str	r0, [r1, #52]
-  22:Drivers/BSP/BSP_ICA2D13.c **** 
-  23:Drivers/BSP/BSP_ICA2D13.c ****     if(BSP_LED1_G_TIM_CHANNEL_CCR >= BSP_LED1_RG_TIM_PERIOD){
- 139              		.loc 1 23 5 is_stmt 1 view .LVU30
- 140              		.loc 1 23 8 is_stmt 0 view .LVU31
- 141 0018 996B     		ldr	r1, [r3, #56]
- 142              		.loc 1 23 7 view .LVU32
- 143 001a 40F2E633 		movw	r3, #998
- 144 001e 9942     		cmp	r1, r3
- 145 0020 08D9     		bls	.L12
-  24:Drivers/BSP/BSP_ICA2D13.c ****         BSP_LED1_G_TIM_CHANNEL_CCR = BSP_LED1_RG_TIM_PERIOD;
- 146              		.loc 1 24 9 is_stmt 1 view .LVU33
- 147              		.loc 1 24 36 is_stmt 0 view .LVU34
- 148 0022 4FF08043 		mov	r3, #1073741824
- 149 0026 40F2E731 		movw	r1, #999
- 150 002a 9963     		str	r1, [r3, #56]
-  25:Drivers/BSP/BSP_ICA2D13.c ****         dir*=-1;
- 151              		.loc 1 25 9 is_stmt 1 view .LVU35
- 152              		.loc 1 25 12 is_stmt 0 view .LVU36
- 153 002c 5242     		rsbs	r2, r2, #0
- 154 002e 0B4B     		ldr	r3, .L15
- 155 0030 1A70     		strb	r2, [r3]
- 156 0032 7047     		bx	lr
- 157              	.L12:
-  26:Drivers/BSP/BSP_ICA2D13.c ****     }else if ((BSP_LED1_G_TIM_CHANNEL_CCR == 0) || (BSP_LED1_G_TIM_CHANNEL_CCR > BSP_LED1_RG_TIM_PE
- 158              		.loc 1 26 11 is_stmt 1 view .LVU37
- 159              		.loc 1 26 16 is_stmt 0 view .LVU38
- 160 0034 4FF08043 		mov	r3, #1073741824
- 161 0038 9B6B     		ldr	r3, [r3, #56]
- 162              		.loc 1 26 14 view .LVU39
- 163 003a 33B1     		cbz	r3, .L14
- 164              		.loc 1 26 53 discriminator 1 view .LVU40
- 165 003c 4FF08043 		mov	r3, #1073741824
- 166 0040 996B     		ldr	r1, [r3, #56]
- 167              		.loc 1 26 49 discriminator 1 view .LVU41
- 168 0042 40F2E633 		movw	r3, #998
- 169 0046 9942     		cmp	r1, r3
- 170 0048 06D9     		bls	.L11
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccuolCOT.s 			page 5
-
-
- 171              	.L14:
-  27:Drivers/BSP/BSP_ICA2D13.c ****                 dir*=-1;
- 172              		.loc 1 27 17 is_stmt 1 view .LVU42
- 173              		.loc 1 27 20 is_stmt 0 view .LVU43
- 174 004a 5242     		rsbs	r2, r2, #0
- 175 004c 034B     		ldr	r3, .L15
- 176 004e 1A70     		strb	r2, [r3]
-  28:Drivers/BSP/BSP_ICA2D13.c ****         BSP_LED1_G_TIM_CHANNEL_CCR = 0;
- 177              		.loc 1 28 9 is_stmt 1 view .LVU44
- 178              		.loc 1 28 36 is_stmt 0 view .LVU45
- 179 0050 4FF08043 		mov	r3, #1073741824
- 180 0054 0022     		movs	r2, #0
- 181 0056 9A63     		str	r2, [r3, #56]
- 182              	.L11:
-  29:Drivers/BSP/BSP_ICA2D13.c ****     }
-  30:Drivers/BSP/BSP_ICA2D13.c **** }
- 183              		.loc 1 30 1 view .LVU46
- 184 0058 7047     		bx	lr
- 185              	.L16:
- 186 005a 00BF     		.align	2
- 187              	.L15:
- 188 005c 00000000 		.word	dir.1
- 189 0060 00040040 		.word	1073742848
- 190              		.cfi_endproc
- 191              	.LFE577:
- 193              		.section	.text.bsp_led1_rg_incDecInv,"ax",%progbits
- 194              		.align	1
- 195              		.global	bsp_led1_rg_incDecInv
- 196              		.syntax unified
- 197              		.thumb
- 198              		.thumb_func
- 200              	bsp_led1_rg_incDecInv:
- 201              	.LVL9:
- 202              	.LFB578:
-  31:Drivers/BSP/BSP_ICA2D13.c **** 
-  32:Drivers/BSP/BSP_ICA2D13.c **** __INLINE void bsp_led1_rg_incDecInv(int32_t inc)
-  33:Drivers/BSP/BSP_ICA2D13.c **** {
- 203              		.loc 1 33 1 is_stmt 1 view -0
- 204              		.cfi_startproc
- 205              		@ args = 0, pretend = 0, frame = 0
- 206              		@ frame_needed = 0, uses_anonymous_args = 0
- 207              		.loc 1 33 1 is_stmt 0 view .LVU48
- 208 0000 08B5     		push	{r3, lr}
- 209              	.LCFI0:
- 210              		.cfi_def_cfa_offset 8
- 211              		.cfi_offset 3, -8
- 212              		.cfi_offset 14, -4
-  34:Drivers/BSP/BSP_ICA2D13.c ****     static int8_t dir = 1;
- 213              		.loc 1 34 5 is_stmt 1 view .LVU49
-  35:Drivers/BSP/BSP_ICA2D13.c ****     if (BSP_LED1_R_TIM_CHANNEL_CCR == 0)
- 214              		.loc 1 35 5 view .LVU50
- 215              		.loc 1 35 9 is_stmt 0 view .LVU51
- 216 0002 0F4B     		ldr	r3, .L21
- 217 0004 5B6B     		ldr	r3, [r3, #52]
- 218              		.loc 1 35 8 view .LVU52
- 219 0006 83B9     		cbnz	r3, .L18
-  36:Drivers/BSP/BSP_ICA2D13.c ****     {
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccuolCOT.s 			page 6
-
-
-  37:Drivers/BSP/BSP_ICA2D13.c ****         dir *= -1;
- 220              		.loc 1 37 9 is_stmt 1 view .LVU53
- 221              		.loc 1 37 13 is_stmt 0 view .LVU54
- 222 0008 0E4A     		ldr	r2, .L21+4
- 223 000a 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
- 224 000c 5B42     		rsbs	r3, r3, #0
- 225 000e 1370     		strb	r3, [r2]
- 226              	.L19:
-  38:Drivers/BSP/BSP_ICA2D13.c ****     }
-  39:Drivers/BSP/BSP_ICA2D13.c ****     else if (BSP_LED1_R_TIM_CHANNEL_CCR == BSP_LED1_RG_TIM_PERIOD)
-  40:Drivers/BSP/BSP_ICA2D13.c ****     {
-  41:Drivers/BSP/BSP_ICA2D13.c ****         dir *= -1;
-  42:Drivers/BSP/BSP_ICA2D13.c ****     }
-  43:Drivers/BSP/BSP_ICA2D13.c ****     int32_t ccr = BSP_LED1_R_TIM_CHANNEL_CCR + dir * inc;
- 227              		.loc 1 43 5 is_stmt 1 view .LVU55
- 228              		.loc 1 43 19 is_stmt 0 view .LVU56
- 229 0010 0B4B     		ldr	r3, .L21
- 230 0012 5B6B     		ldr	r3, [r3, #52]
- 231              		.loc 1 43 52 view .LVU57
- 232 0014 0B4A     		ldr	r2, .L21+4
- 233 0016 92F90020 		ldrsb	r2, [r2]
- 234              		.loc 1 43 46 view .LVU58
- 235 001a 00FB0230 		mla	r0, r0, r2, r3
- 236              	.LVL10:
-  44:Drivers/BSP/BSP_ICA2D13.c ****     bsp_set_led1_rg(ccr, BSP_LED1_RG_TIM_PERIOD - ccr);
- 237              		.loc 1 44 5 is_stmt 1 view .LVU59
- 238 001e C0F57971 		rsb	r1, r0, #996
- 239 0022 0331     		adds	r1, r1, #3
- 240 0024 FFF7FEFF 		bl	bsp_set_led1_rg
- 241              	.LVL11:
-  45:Drivers/BSP/BSP_ICA2D13.c **** }
- 242              		.loc 1 45 1 is_stmt 0 view .LVU60
- 243 0028 08BD     		pop	{r3, pc}
- 244              	.LVL12:
- 245              	.L18:
-  39:Drivers/BSP/BSP_ICA2D13.c ****     {
- 246              		.loc 1 39 10 is_stmt 1 view .LVU61
-  39:Drivers/BSP/BSP_ICA2D13.c ****     {
- 247              		.loc 1 39 14 is_stmt 0 view .LVU62
- 248 002a 054B     		ldr	r3, .L21
- 249 002c 5A6B     		ldr	r2, [r3, #52]
-  39:Drivers/BSP/BSP_ICA2D13.c ****     {
- 250              		.loc 1 39 13 view .LVU63
- 251 002e 40F2E733 		movw	r3, #999
- 252 0032 9A42     		cmp	r2, r3
- 253 0034 ECD1     		bne	.L19
-  41:Drivers/BSP/BSP_ICA2D13.c ****     }
- 254              		.loc 1 41 9 is_stmt 1 view .LVU64
-  41:Drivers/BSP/BSP_ICA2D13.c ****     }
- 255              		.loc 1 41 13 is_stmt 0 view .LVU65
- 256 0036 034A     		ldr	r2, .L21+4
- 257 0038 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
- 258 003a 5B42     		rsbs	r3, r3, #0
- 259 003c 1370     		strb	r3, [r2]
- 260 003e E7E7     		b	.L19
- 261              	.L22:
- 262              		.align	2
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccuolCOT.s 			page 7
-
-
- 263              	.L21:
- 264 0040 00040040 		.word	1073742848
- 265 0044 00000000 		.word	dir.0
- 266              		.cfi_endproc
- 267              	.LFE578:
- 269              		.section	.data.dir.0,"aw"
- 272              	dir.0:
- 273 0000 01       		.byte	1
- 274              		.section	.data.dir.1,"aw"
- 277              	dir.1:
- 278 0000 01       		.byte	1
- 279              		.text
- 280              	.Letext0:
- 281              		.file 3 "c:\\vscode\\vscodestmtools\\arm-none-eabi-gcc\\12.2.1-1.2.1\\.content\\arm-none-eabi\\inc
- 282              		.file 4 "c:\\vscode\\vscodestmtools\\arm-none-eabi-gcc\\12.2.1-1.2.1\\.content\\arm-none-eabi\\inc
- 283              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
- 284              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h"
- 285              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h"
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccuolCOT.s 			page 8
+  32              		.loc 1 15 1 view .LVU1
+  33 0000 7047     		bx	lr
+  34              		.cfi_endproc
+  35              	.LFE574:
+  37              		.text
+  38              	.Letext0:
+  39              		.file 2 "c:\\vscode\\vscodestmtools\\arm-none-eabi-gcc\\12.2.1-1.2.1\\.content\\arm-none-eabi\\inc
+  40              		.file 3 "c:\\vscode\\vscodestmtools\\arm-none-eabi-gcc\\12.2.1-1.2.1\\.content\\arm-none-eabi\\inc
+  41              		.file 4 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h"
+  42              		.file 5 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h"
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cch054Ik.s 			page 2
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 BSP_ICA2D13.c
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccuolCOT.s:19     .text.bsp_set_led1_rg:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccuolCOT.s:24     .text.bsp_set_led1_rg:0000000000000000 bsp_set_led1_rg
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccuolCOT.s:84     .text.bsp_set_led1_rg:0000000000000030 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccuolCOT.s:89     .text.bsp_init:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccuolCOT.s:95     .text.bsp_init:0000000000000000 bsp_init
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccuolCOT.s:108    .text.bsp_led1_rg_incDec:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccuolCOT.s:114    .text.bsp_led1_rg_incDec:0000000000000000 bsp_led1_rg_incDec
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccuolCOT.s:188    .text.bsp_led1_rg_incDec:000000000000005c $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccuolCOT.s:277    .data.dir.1:0000000000000000 dir.1
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccuolCOT.s:194    .text.bsp_led1_rg_incDecInv:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccuolCOT.s:200    .text.bsp_led1_rg_incDecInv:0000000000000000 bsp_led1_rg_incDecInv
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccuolCOT.s:264    .text.bsp_led1_rg_incDecInv:0000000000000040 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccuolCOT.s:272    .data.dir.0:0000000000000000 dir.0
+C:\Users\VIDCOM~1\AppData\Local\Temp\cch054Ik.s:19     .text.bsp_init:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\cch054Ik.s:25     .text.bsp_init:0000000000000000 bsp_init
 
 NO UNDEFINED SYMBOLS

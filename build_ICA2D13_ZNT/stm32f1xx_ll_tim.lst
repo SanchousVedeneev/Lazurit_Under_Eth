@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
   30:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** 
   31:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** /** @addtogroup STM32F1xx_LL_Driver
   32:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   * @{
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 2
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 2
 
 
   33:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   */
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
   87:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****                                         || ((__VALUE__) == LL_TIM_IC_FILTER_FDIV1_N4) \
   88:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****                                         || ((__VALUE__) == LL_TIM_IC_FILTER_FDIV1_N8) \
   89:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****                                         || ((__VALUE__) == LL_TIM_IC_FILTER_FDIV2_N6) \
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 3
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 3
 
 
   90:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****                                         || ((__VALUE__) == LL_TIM_IC_FILTER_FDIV2_N8) \
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  144:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** static ErrorStatus IC1Config(TIM_TypeDef *TIMx, LL_TIM_IC_InitTypeDef *TIM_ICInitStruct);
  145:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** static ErrorStatus IC2Config(TIM_TypeDef *TIMx, LL_TIM_IC_InitTypeDef *TIM_ICInitStruct);
  146:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** static ErrorStatus IC3Config(TIM_TypeDef *TIMx, LL_TIM_IC_InitTypeDef *TIM_ICInitStruct);
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 4
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 4
 
 
  147:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** static ErrorStatus IC4Config(TIM_TypeDef *TIMx, LL_TIM_IC_InitTypeDef *TIM_ICInitStruct);
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  201:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** #if defined(TIM5)
  202:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   else if (TIMx == TIM5)
  203:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   {
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 5
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 5
 
 
  204:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****     LL_APB1_GRP1_ForceReset(LL_APB1_GRP1_PERIPH_TIM5);
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  258:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   else if (TIMx == TIM13)
  259:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   {
  260:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****     LL_APB1_GRP1_ForceReset(LL_APB1_GRP1_PERIPH_TIM13);
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 6
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 6
 
 
  261:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****     LL_APB1_GRP1_ReleaseReset(LL_APB1_GRP1_PERIPH_TIM13);
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  315:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** 
  316:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** /**
  317:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   * @brief  Configure the TIMx time base unit.
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 7
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 7
 
 
  318:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   * @param  TIMx Timer Instance
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  372:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   *         structure to their default values.
  373:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   * @param  TIM_OC_InitStruct pointer to a @ref LL_TIM_OC_InitTypeDef structure
  374:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   *         (the output channel configuration data structure)
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 8
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 8
 
 
  375:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   * @retval None
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  429:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** /**
  430:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   * @brief  Set the fields of the TIMx input channel configuration data
  431:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   *         structure to their default values.
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 9
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 9
 
 
  432:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   * @param  TIM_ICInitStruct pointer to a @ref LL_TIM_IC_InitTypeDef structure (the input channel c
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  486:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   * @param  TIM_EncoderInitStruct pointer to a @ref LL_TIM_ENCODER_InitTypeDef structure (encoder i
  487:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   *         configuration data structure)
  488:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   * @retval None
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 10
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 10
 
 
  489:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   */
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  543:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   tmpccmr1 |= (uint32_t)(TIM_EncoderInitStruct->IC1Prescaler >> 16U);
  544:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** 
  545:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   /* Configure TI2 */
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 11
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 11
 
 
  546:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   tmpccmr1 &= (uint32_t)~(TIM_CCMR1_CC2S | TIM_CCMR1_IC2F  | TIM_CCMR1_IC2PSC);
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  600:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   * @retval An ErrorStatus enumeration value:
  601:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   *          - SUCCESS: TIMx registers are de-initialized
  602:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   *          - ERROR: not applicable
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 12
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 12
 
 
  603:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   */
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  657:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** 
  658:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   /* Write to TIMx CR2 */
  659:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   LL_TIM_WriteReg(TIMx, CR2, tmpcr2);
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 13
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 13
 
 
  660:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** 
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  714:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   assert_param(IS_TIM_BREAK_INSTANCE(TIMx));
  715:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   assert_param(IS_LL_TIM_OSSR_STATE(TIM_BDTRInitStruct->OSSRState));
  716:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   assert_param(IS_LL_TIM_OSSI_STATE(TIM_BDTRInitStruct->OSSIState));
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 14
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 14
 
 
  717:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   assert_param(IS_LL_TIM_LOCK_LEVEL(TIM_BDTRInitStruct->LockLevel));
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
   36              		.cfi_offset 4, -8
   37              		.cfi_offset 5, -4
  762:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   uint32_t tmpccmr1;
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 15
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 15
 
 
   38              		.loc 1 762 3 is_stmt 1 view .LVU2
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
   64              		.loc 1 790 3 view .LVU19
   65 0010 22F07302 		bic	r2, r2, #115
   66              	.LVL4:
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 16
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 16
 
 
   67              		.loc 1 790 3 is_stmt 0 view .LVU20
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  819:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   /* Write to TIMx CCMR1 */
  820:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   LL_TIM_WriteReg(TIMx, CCMR1, tmpccmr1);
   93              		.loc 1 820 3 view .LVU28
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 17
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 17
 
 
   94 0030 8261     		str	r2, [r0, #24]
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
   45:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
   46:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** static const uint8_t OFFSET_TAB_CCMRx[] =
   47:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** {
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 18
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 18
 
 
   48:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   0x00U,   /* 0: TIMx_CH1  */
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  102:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
  103:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** 
  104:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** /* Private constants ---------------------------------------------------------*/
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 19
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 19
 
 
  105:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** /** @defgroup TIM_LL_Private_Constants TIM Private Constants
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  159:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** #define TIM_CALC_DTS(__TIMCLK__, __CKD__)                                                        \
  160:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   (((__CKD__) == LL_TIM_CLOCKDIVISION_DIV1) ? ((uint64_t)1000000000000U/(__TIMCLK__))         : \
  161:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****    ((__CKD__) == LL_TIM_CLOCKDIVISION_DIV2) ? ((uint64_t)1000000000000U/((__TIMCLK__) >> 1U)) : \
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 20
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 20
 
 
  162:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****    ((uint64_t)1000000000000U/((__TIMCLK__) >> 2U)))
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  216:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** 
  217:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****                                    This feature can be modified afterwards using unitary function
  218:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****                                    @ref LL_TIM_SetRepetitionCounter().*/
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 21
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 21
 
 
  219:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** } LL_TIM_InitTypeDef;
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  273:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****                                @ref LL_TIM_OC_SetIdleState().*/
  274:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** } LL_TIM_OC_InitTypeDef;
  275:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** 
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 22
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 22
 
 
  276:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** /**
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  330:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****                                  @ref LL_TIM_IC_SetActiveInput().*/
  331:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** 
  332:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   uint32_t IC1Prescaler;    /*!< Specifies the TI1 input prescaler value.
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 23
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 23
 
 
  333:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****                                  This parameter can be a value of @ref TIM_LL_EC_ICPSC.
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  387:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****                                     This feature can be modified afterwards using unitary function
  388:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****                                     @ref LL_TIM_IC_SetPrescaler().*/
  389:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** 
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 24
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 24
 
 
  390:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   uint32_t IC1Filter;          /*!< Specifies the TI1 input filter.
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  444:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** 
  445:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   uint16_t BreakState;           /*!< Specifies whether the TIM Break input is enabled or not.
  446:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****                                       This parameter can be a value of @ref TIM_LL_EC_BREAK_ENABLE
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 25
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 25
 
 
  447:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** 
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  501:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
  502:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** 
  503:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** #if defined(USE_FULL_LL_DRIVER)
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 26
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 26
 
 
  504:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** /** @defgroup TIM_LL_EC_BREAK_ENABLE Break Enable
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  558:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @{
  559:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
  560:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** #define LL_TIM_COUNTERMODE_UP                  0x00000000U          /*!<Counter used as upcounter *
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 27
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 27
 
 
  561:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** #define LL_TIM_COUNTERMODE_DOWN                TIM_CR1_DIR          /*!< Counter used as downcounte
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  615:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
  616:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** 
  617:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** /** @defgroup TIM_LL_EC_CHANNEL Channel
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 28
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 28
 
 
  618:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @{
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  672:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @}
  673:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
  674:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** 
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 29
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 29
 
 
  675:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** 
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  729:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** /** @defgroup TIM_LL_EC_CLOCKSOURCE Clock Source
  730:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @{
  731:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 30
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 30
 
 
  732:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** #define LL_TIM_CLOCKSOURCE_INTERNAL            0x00000000U                                         
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  786:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** #define LL_TIM_TS_ETRF                         (TIM_SMCR_TS_2 | TIM_SMCR_TS_1 | TIM_SMCR_TS_0)     
  787:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** /**
  788:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @}
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 31
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 31
 
 
  789:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  843:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** 
  844:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** 
  845:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** 
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 32
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 32
 
 
  846:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** 
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  900:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** #define LL_TIM_DMABURST_LENGTH_7TRANSFERS      (TIM_DCR_DBL_2 | TIM_DCR_DBL_1)                     
  901:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** #define LL_TIM_DMABURST_LENGTH_8TRANSFERS      (TIM_DCR_DBL_2 | TIM_DCR_DBL_1 | TIM_DCR_DBL_0)     
  902:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** #define LL_TIM_DMABURST_LENGTH_9TRANSFERS      TIM_DCR_DBL_3                                       
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 33
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 33
 
 
  903:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** #define LL_TIM_DMABURST_LENGTH_10TRANSFERS     (TIM_DCR_DBL_3 | TIM_DCR_DBL_0)                     
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  957:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @param  __CKD__ This parameter can be one of the following values:
  958:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_CLOCKDIVISION_DIV1
  959:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_CLOCKDIVISION_DIV2
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 34
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 34
 
 
  960:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_CLOCKDIVISION_DIV4
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 1014:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         (when the timer operates in one pulse mode).
 1015:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @note ex: @ref __LL_TIM_CALC_PULSE (1000000, @ref LL_TIM_GetPrescaler (), 10, 20);
 1016:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @param  __TIMCLK__ timer input clock frequency (in Hz)
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 35
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 35
 
 
 1017:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @param  __PSC__ prescaler
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 1071:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @param  TIMx Timer instance
 1072:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @retval None
 1073:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 36
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 36
 
 
 1074:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** __STATIC_INLINE void LL_TIM_DisableCounter(TIM_TypeDef *TIMx)
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 1128:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *        - Setting the UG bit
 1129:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *        - Update generation through the slave mode controller
 1130:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @note Update event source set to LL_TIM_UPDATESOURCE_COUNTER: only counter
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 37
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 37
 
 
 1131:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *       overflow/underflow generates an update interrupt or DMA request if enabled.
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 1185:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @brief  Set the timer counter counting mode.
 1186:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @note Macro IS_TIM_COUNTER_MODE_SELECT_INSTANCE(TIMx) can be used to
 1187:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *       check whether or not the counter mode selection feature is supported
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 38
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 38
 
 
 1188:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *       by a timer instance.
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 1242:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
 1243:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** __STATIC_INLINE void LL_TIM_EnableARRPreload(TIM_TypeDef *TIMx)
 1244:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** {
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 39
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 39
 
 
 1245:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   SET_BIT(TIMx->CR1, TIM_CR1_ARPE);
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 1299:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_CLOCKDIVISION_DIV2
 1300:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_CLOCKDIVISION_DIV4
 1301:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 40
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 40
 
 
 1302:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** __STATIC_INLINE uint32_t LL_TIM_GetClockDivision(TIM_TypeDef *TIMx)
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 1356:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   WRITE_REG(TIMx->PSC, Prescaler);
 1357:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** }
 1358:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** 
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 41
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 41
 
 
 1359:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** /**
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 1413:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @rmtoll RCR          REP           LL_TIM_GetRepetitionCounter
 1414:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @param  TIMx Timer instance
 1415:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @retval Repetition counter value
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 42
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 42
 
 
 1416:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 1470:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** {
 1471:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   MODIFY_REG(TIMx->CR2, TIM_CR2_CCUS, CCUpdateSource);
 1472:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** }
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 43
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 43
 
 
 1473:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** 
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 1527:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         CCER         CC3NE         LL_TIM_CC_EnableChannel\n
 1528:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         CCER         CC4E          LL_TIM_CC_EnableChannel
 1529:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @param  TIMx Timer instance
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 44
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 44
 
 
 1530:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @param  Channels This parameter can be a combination of the following values:
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 1584:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_CHANNEL_CH2N
 1585:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_CHANNEL_CH3
 1586:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_CHANNEL_CH3N
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 45
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 45
 
 
 1587:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_CHANNEL_CH4
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 1641:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @rmtoll CCMR1        OC1M          LL_TIM_OC_SetMode\n
 1642:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         CCMR1        OC2M          LL_TIM_OC_SetMode\n
 1643:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         CCMR2        OC3M          LL_TIM_OC_SetMode\n
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 46
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 46
 
 
 1644:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         CCMR2        OC4M          LL_TIM_OC_SetMode
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 1698:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** /**
 1699:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @brief  Set the polarity of an output channel.
 1700:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @rmtoll CCER         CC1P          LL_TIM_OC_SetPolarity\n
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 47
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 47
 
 
 1701:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         CCER         CC1NP         LL_TIM_OC_SetPolarity\n
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 1755:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** /**
 1756:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @brief  Set the IDLE state of an output channel
 1757:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @note This function is significant only for the timer instances
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 48
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 48
 
 
 1758:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *       supporting the break feature. Macro IS_TIM_BREAK_INSTANCE(TIMx)
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 1812:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   uint8_t iChannel = TIM_GET_CHANNEL_INDEX(Channel);
 1813:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   return (READ_BIT(TIMx->CR2, (TIM_CR2_OIS1 << SHIFT_TAB_OISx[iChannel])) >> SHIFT_TAB_OISx[iChanne
 1814:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** }
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 49
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 49
 
 
 1815:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** 
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 1869:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_CHANNEL_CH1
 1870:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_CHANNEL_CH2
 1871:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_CHANNEL_CH3
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 50
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 50
 
 
 1872:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_CHANNEL_CH4
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 1926:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @brief  Indicates whether compare register (TIMx_CCRx) preload is enabled for the output channe
 1927:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @rmtoll CCMR1        OC1PE          LL_TIM_OC_IsEnabledPreload\n
 1928:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         CCMR1        OC2PE          LL_TIM_OC_IsEnabledPreload\n
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 51
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 51
 
 
 1929:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         CCMR2        OC3PE          LL_TIM_OC_IsEnabledPreload\n
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 1983:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_CHANNEL_CH3
 1984:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_CHANNEL_CH4
 1985:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @retval None
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 52
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 52
 
 
 1986:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 2040:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @rmtoll CCR1         CCR1          LL_TIM_OC_SetCompareCH1
 2041:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @param  TIMx Timer instance
 2042:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @param  CompareValue between Min_Data=0 and Max_Data=65535
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 53
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 53
 
 
 2043:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @retval None
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  139 0048 23F00403 		bic	r3, r3, #4
  140              	.LVL17:
  807:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** 
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 54
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 54
 
 
  141              		.loc 1 807 5 is_stmt 0 view .LVU43
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  180              		@ args = 0, pretend = 0, frame = 0
  181              		@ frame_needed = 0, uses_anonymous_args = 0
  182              		@ link register save eliminated.
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 55
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 55
 
 
  183              		.loc 1 840 1 is_stmt 0 view .LVU51
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  864:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** 
  865:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   /* Reset Capture/Compare selection Bits */
  866:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   CLEAR_BIT(tmpccmr1, TIM_CCMR1_CC2S);
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 56
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 56
 
 
  214              		.loc 1 866 3 is_stmt 1 view .LVU68
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  892:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****     MODIFY_REG(tmpcr2, TIM_CR2_OIS2N, TIM_OCInitStruct->OCNIdleState << 3U);
  893:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   }
  894:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** 
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 57
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 57
 
 
  895:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   /* Write to TIMx CR2 */
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  269              		.cfi_remember_state
  270              		.cfi_restore 5
  271              		.cfi_restore 4
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 58
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 58
 
 
  272              		.cfi_def_cfa_offset 0
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  313 006c E2E7     		b	.L8
  314              	.L12:
  315 006e 00BF     		.align	2
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 59
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 59
 
 
  316              	.L11:
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  931:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** 
  932:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   /* Disable the Channel 3: Reset the CC3E Bit */
  933:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   CLEAR_BIT(TIMx->CCER, TIM_CCER_CC3E);
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 60
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 60
 
 
  350              		.loc 1 933 3 view .LVU113
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  383              	.LVL54:
  384              		.loc 1 954 3 is_stmt 0 view .LVU126
  385 0026 4D68     		ldr	r5, [r1, #4]
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 61
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 61
 
 
  386              		.loc 1 954 3 view .LVU127
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 2071:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @retval None
 2072:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
 2073:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** __STATIC_INLINE void LL_TIM_OC_SetCompareCH3(TIM_TypeDef *TIMx, uint32_t CompareValue)
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 62
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 62
 
 
  404              		.loc 2 2073 22 view .LVU133
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  444              		.loc 1 965 5 is_stmt 0 view .LVU146
  445 0050 8D68     		ldr	r5, [r1, #8]
  965:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** 
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 63
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 63
 
 
  446              		.loc 1 965 5 view .LVU147
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  485              		@ frame_needed = 0, uses_anonymous_args = 0
  486              		@ link register save eliminated.
  487              		.loc 1 998 1 is_stmt 0 view .LVU155
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 64
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 64
 
 
  488 0000 30B4     		push	{r4, r5}
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 1023:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   /* Reset Capture/Compare selection Bits */
 1024:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   CLEAR_BIT(tmpccmr2, TIM_CCMR2_CC4S);
  518              		.loc 1 1024 3 is_stmt 1 view .LVU172
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 65
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 65
 
 
 1025:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** 
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  549              		.loc 1 1048 3 view .LVU183
  550 0036 C261     		str	r2, [r0, #28]
 1049:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** 
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 66
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 66
 
 
 1050:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   /* Set the Capture Compare Register value */
@@ -3958,7 +3958,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  583              		.cfi_restore_state
 1037:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****     assert_param(IS_LL_TIM_OCIDLESTATE(TIM_OCInitStruct->OCIdleState));
  584              		.loc 1 1037 5 is_stmt 1 view .LVU193
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 67
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 67
 
 
 1038:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** 
@@ -4018,7 +4018,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  622              		.loc 1 1072 3 view .LVU201
 1073:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   assert_param(IS_LL_TIM_ACTIVEINPUT(TIM_ICInitStruct->ICActiveInput));
  623              		.loc 1 1073 3 view .LVU202
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 68
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 68
 
 
 1074:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   assert_param(IS_LL_TIM_ICPSC(TIM_ICInitStruct->ICPrescaler));
@@ -4078,7 +4078,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  660              	.LFE271:
  662              		.section	.text.IC2Config,"ax",%progbits
  663              		.align	1
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 69
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 69
 
 
  664              		.syntax unified
@@ -4138,7 +4138,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  696 0012 CC68     		ldr	r4, [r1, #12]
  697 0014 2243     		orrs	r2, r2, r4
  698 0016 8C68     		ldr	r4, [r1, #8]
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 70
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 70
 
 
  699 0018 2243     		orrs	r2, r2, r4
@@ -4198,7 +4198,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  734              		@ frame_needed = 0, uses_anonymous_args = 0
  735              		@ link register save eliminated.
  736              		.loc 1 1135 1 is_stmt 0 view .LVU229
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 71
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 71
 
 
  737 0000 10B4     		push	{r4}
@@ -4258,7 +4258,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 1157:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** }
  770              		.loc 1 1157 1 is_stmt 0 view .LVU241
  771 0032 0020     		movs	r0, #0
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 72
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 72
 
 
  772              	.LVL91:
@@ -4318,7 +4318,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  808 0002 036A     		ldr	r3, [r0, #32]
  809              		.loc 1 1177 14 view .LVU252
  810 0004 23F48053 		bic	r3, r3, #4096
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 73
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 73
 
 
  811 0008 0362     		str	r3, [r0, #32]
@@ -4378,7 +4378,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  853              		.cfi_startproc
  854              		@ args = 0, pretend = 0, frame = 0
  855              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 74
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 74
 
 
  856              		@ link register save eliminated.
@@ -4438,7 +4438,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
    7:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   @verbatim
    8:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****                       ##### RCC Limitations #####
    9:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   ==============================================================================
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 75
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 75
 
 
   10:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****     [..]
@@ -4498,7 +4498,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
   64:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** #endif /* RCC_AHBRSTR_OTGFSRST || RCC_AHBRSTR_ETHMACRST */
   65:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** 
   66:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** /* Private macros ------------------------------------------------------------*/
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 76
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 76
 
 
   67:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** 
@@ -4558,7 +4558,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  121:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** #if defined(I2C2)
  122:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_I2C2           RCC_APB1ENR_I2C2EN
  123:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** #endif /*I2C2*/
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 77
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 77
 
 
  124:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_PWR            RCC_APB1ENR_PWREN
@@ -4618,7 +4618,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  178:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** #define LL_APB2_GRP1_PERIPH_ADC2           RCC_APB2ENR_ADC2EN
  179:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** #endif /*ADC2*/
  180:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** #if defined(ADC3)
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 78
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 78
 
 
  181:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** #define LL_APB2_GRP1_PERIPH_ADC3           RCC_APB2ENR_ADC3EN
@@ -4678,7 +4678,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  235:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** 
  236:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** /** @defgroup BUS_LL_EF_AHB1 AHB1
  237:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   * @{
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 79
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 79
 
 
  238:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   */
@@ -4738,7 +4738,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  292:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_CRC
  293:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMA1
  294:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMA2 (*)
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 80
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 80
 
 
  295:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_ETHMAC (*)
@@ -4798,7 +4798,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  349:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   * @rmtoll AHBRSTR      ETHMACRST     LL_AHB1_GRP1_ForceReset\n
  350:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         AHBRSTR      OTGFSRST      LL_AHB1_GRP1_ForceReset
  351:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   * @param  Periphs This parameter can be a combination of the following values:
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 81
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 81
 
 
  352:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_ALL
@@ -4858,7 +4858,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  406:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         APB1ENR      TIM3EN        LL_APB1_GRP1_EnableClock\n
  407:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         APB1ENR      TIM4EN        LL_APB1_GRP1_EnableClock\n
  408:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         APB1ENR      TIM5EN        LL_APB1_GRP1_EnableClock\n
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 82
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 82
 
 
  409:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         APB1ENR      TIM6EN        LL_APB1_GRP1_EnableClock\n
@@ -4918,7 +4918,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  463:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         APB1ENR      I2C1EN        LL_APB1_GRP1_IsEnabledClock\n
  464:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         APB1ENR      I2C2EN        LL_APB1_GRP1_IsEnabledClock\n
  465:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         APB1ENR      PWREN         LL_APB1_GRP1_IsEnabledClock\n
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 83
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 83
 
 
  466:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         APB1ENR      SPI2EN        LL_APB1_GRP1_IsEnabledClock\n
@@ -4978,7 +4978,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  520:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   * @rmtoll APB1ENR      BKPEN         LL_APB1_GRP1_DisableClock\n
  521:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         APB1ENR      CAN1EN        LL_APB1_GRP1_DisableClock\n
  522:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         APB1ENR      CAN2EN        LL_APB1_GRP1_DisableClock\n
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 84
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 84
 
 
  523:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         APB1ENR      CECEN         LL_APB1_GRP1_DisableClock\n
@@ -5038,7 +5038,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  577:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   CLEAR_BIT(RCC->APB1ENR, Periphs);
  578:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** }
  579:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** 
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 85
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 85
 
 
  580:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** /**
@@ -5098,7 +5098,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  634:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *
  635:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         (*) value not defined in all devices.
  636:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   * @retval None
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 86
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 86
 
 
  637:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** */
@@ -5158,7 +5158,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  676:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         @arg @ref LL_APB1_GRP1_PERIPH_DAC1 (*)
  677:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         @arg @ref LL_APB1_GRP1_PERIPH_I2C1
  678:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         @arg @ref LL_APB1_GRP1_PERIPH_I2C2 (*)
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 87
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 87
 
 
  679:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         @arg @ref LL_APB1_GRP1_PERIPH_PWR
@@ -5218,7 +5218,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  708:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   */
  709:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** 
  710:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** /** @defgroup BUS_LL_EF_APB2 APB2
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 88
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 88
 
 
  711:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   * @{
@@ -5278,7 +5278,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  765:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   __IO uint32_t tmpreg;
  766:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   SET_BIT(RCC->APB2ENR, Periphs);
  767:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   /* Delay after an RCC peripheral clock enabling */
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 89
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 89
 
 
  768:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   tmpreg = READ_BIT(RCC->APB2ENR, Periphs);
@@ -5338,7 +5338,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  822:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** {
  823:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   return (READ_BIT(RCC->APB2ENR, Periphs) == Periphs);
  824:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** }
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 90
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 90
 
 
  825:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** 
@@ -5398,7 +5398,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  879:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** 
  880:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** /**
  881:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   * @brief  Force APB2 peripherals reset.
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 91
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 91
 
 
  882:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   * @rmtoll APB2RSTR     ADC1RST       LL_APB2_GRP1_ForceReset\n
@@ -5458,7 +5458,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  930 0032 03F56443 		add	r3, r3, #58368
  931 0036 DA68     		ldr	r2, [r3, #12]
  932 0038 42F40062 		orr	r2, r2, #2048
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 92
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 92
 
 
  933 003c DA60     		str	r2, [r3, #12]
@@ -5518,7 +5518,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  978:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         @arg @ref LL_APB2_GRP1_PERIPH_TIM8 (*)
  979:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         @arg @ref LL_APB2_GRP1_PERIPH_TIM9 (*)
  980:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *         @arg @ref LL_APB2_GRP1_PERIPH_USART1
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 93
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 93
 
 
  981:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h ****   *
@@ -5578,7 +5578,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  703:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** }
  980              		.loc 3 703 3 view .LVU298
  981 0056 1A69     		ldr	r2, [r3, #16]
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 94
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 94
 
 
  982 0058 22F00202 		bic	r2, r2, #2
@@ -5638,7 +5638,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  1025              	.LVL107:
  1026              	.LBB69:
  1027              	.LBB68:
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 95
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 95
 
 
  704:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h **** 
@@ -5698,7 +5698,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  1072              		.loc 1 313 37 is_stmt 0 view .LVU321
  1073 000e 0361     		str	r3, [r0, #16]
  314:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** 
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 96
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 96
 
 
  1074              		.loc 1 314 1 view .LVU322
@@ -5758,7 +5758,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  1118              	.L47:
  339:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   }
  1119              		.loc 1 339 5 is_stmt 1 view .LVU335
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 97
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 97
 
 
  1120 001e 23F07003 		bic	r3, r3, #112
@@ -5818,7 +5818,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  1162 004e C362     		str	r3, [r0, #44]
  1163              	.LVL116:
 1381:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** }
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 98
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 98
 
 
  1164              		.loc 2 1381 3 is_stmt 0 view .LVU348
@@ -5878,7 +5878,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 2109:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @rmtoll CCR2         CCR2          LL_TIM_OC_GetCompareCH2
 2110:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @param  TIMx Timer instance
 2111:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @retval CompareValue (between Min_Data=0 and Max_Data=65535)
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 99
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 99
 
 
 2112:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
@@ -5938,7 +5938,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 2166:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         CCER         CC1NP         LL_TIM_IC_Config\n
 2167:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         CCER         CC2P          LL_TIM_IC_Config\n
 2168:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         CCER         CC2NP         LL_TIM_IC_Config\n
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 100
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 100
 
 
 2169:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         CCER         CC3P          LL_TIM_IC_Config\n
@@ -5998,7 +5998,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 2223:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @rmtoll CCMR1        CC1S          LL_TIM_IC_GetActiveInput\n
 2224:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         CCMR1        CC2S          LL_TIM_IC_GetActiveInput\n
 2225:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         CCMR2        CC3S          LL_TIM_IC_GetActiveInput\n
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 101
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 101
 
 
 2226:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         CCMR2        CC4S          LL_TIM_IC_GetActiveInput
@@ -6058,7 +6058,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 2280:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_CHANNEL_CH2
 2281:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_CHANNEL_CH3
 2282:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_CHANNEL_CH4
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 102
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 102
 
 
 2283:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @retval Returned value can be one of the following values:
@@ -6118,7 +6118,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 2337:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         CCMR1        IC2F          LL_TIM_IC_GetFilter\n
 2338:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         CCMR2        IC3F          LL_TIM_IC_GetFilter\n
 2339:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         CCMR2        IC4F          LL_TIM_IC_GetFilter
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 103
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 103
 
 
 2340:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @param  TIMx Timer instance
@@ -6178,7 +6178,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 2394:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   MODIFY_REG(TIMx->CCER, ((TIM_CCER_CC1NP | TIM_CCER_CC1P) << SHIFT_TAB_CCxP[iChannel]),
 2395:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****              ICPolarity << SHIFT_TAB_CCxP[iChannel]);
 2396:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** }
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 104
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 104
 
 
 2397:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** 
@@ -6238,7 +6238,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 2451:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @brief  Indicates whether the TIMx_CH1, CH2 and CH3 pins are connectected to the TI1 input.
 2452:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @note Macro IS_TIM_XOR_INSTANCE(TIMx) can be used to check whether or not
 2453:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * a timer instance provides an XOR input.
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 105
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 105
 
 
 2454:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @rmtoll CR2          TI1S          LL_TIM_IC_IsEnabledXORCombination
@@ -6298,7 +6298,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 2508:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @retval CapturedValue (between Min_Data=0 and Max_Data=65535)
 2509:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
 2510:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** __STATIC_INLINE uint32_t LL_TIM_IC_GetCaptureCH4(TIM_TypeDef *TIMx)
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 106
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 106
 
 
 2511:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** {
@@ -6358,7 +6358,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 2565:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *       the external clock is applied is selected by calling the @ref LL_TIM_SetTriggerInput()
 2566:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *       function. This timer input must be configured by calling
 2567:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *       the @ref LL_TIM_IC_Config() function.
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 107
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 107
 
 
 2568:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @note Macro IS_TIM_CLOCKSOURCE_ETRMODE1_INSTANCE(TIMx) can be used to check
@@ -6418,7 +6418,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 2622:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_TRGO_OC2REF
 2623:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_TRGO_OC3REF
 2624:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_TRGO_OC4REF
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 108
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 108
 
 
 2625:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @retval None
@@ -6478,7 +6478,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 2679:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
 2680:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** __STATIC_INLINE void LL_TIM_EnableMasterSlaveMode(TIM_TypeDef *TIMx)
 2681:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** {
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 109
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 109
 
 
 2682:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   SET_BIT(TIMx->SMCR, TIM_SMCR_MSM);
@@ -6538,7 +6538,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 2736:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_ETR_FILTER_FDIV8_N6
 2737:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_ETR_FILTER_FDIV8_N8
 2738:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_ETR_FILTER_FDIV16_N5
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 110
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 110
 
 
 2739:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_ETR_FILTER_FDIV16_N6
@@ -6598,7 +6598,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 2793:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** /**
 2794:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @brief  Configure the break input.
 2795:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @note Macro IS_TIM_BREAK_INSTANCE(TIMx) can be used to check whether or not
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 111
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 111
 
 
 2796:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *       a timer instance provides a break input.
@@ -6658,7 +6658,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 2850:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @rmtoll BDTR         AOE           LL_TIM_DisableAutomaticOutput
 2851:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @param  TIMx Timer instance
 2852:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @retval None
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 112
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 112
 
 
 2853:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
@@ -6718,7 +6718,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 2907:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @param  TIMx Timer instance
 2908:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @retval State of bit (1 or 0).
 2909:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 113
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 113
 
 
 2910:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** __STATIC_INLINE uint32_t LL_TIM_IsEnabledAllOutputs(TIM_TypeDef *TIMx)
@@ -6778,7 +6778,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 2964:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_DMABURST_LENGTH_16TRANSFERS
 2965:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_DMABURST_LENGTH_17TRANSFERS
 2966:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   *         @arg @ref LL_TIM_DMABURST_LENGTH_18TRANSFERS
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 114
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 114
 
 
 2967:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @retval None
@@ -6838,7 +6838,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 3021:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @rmtoll SR           CC1IF         LL_TIM_IsActiveFlag_CC1
 3022:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @param  TIMx Timer instance
 3023:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @retval State of bit (1 or 0).
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 115
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 115
 
 
 3024:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
@@ -6898,7 +6898,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 3078:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @retval None
 3079:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
 3080:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** __STATIC_INLINE void LL_TIM_ClearFlag_CC4(TIM_TypeDef *TIMx)
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 116
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 116
 
 
 3081:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** {
@@ -6958,7 +6958,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 3135:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** __STATIC_INLINE uint32_t LL_TIM_IsActiveFlag_TRIG(TIM_TypeDef *TIMx)
 3136:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** {
 3137:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   return ((READ_BIT(TIMx->SR, TIM_SR_TIF) == (TIM_SR_TIF)) ? 1UL : 0UL);
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 117
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 117
 
 
 3138:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** }
@@ -7018,7 +7018,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 3192:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** {
 3193:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   WRITE_REG(TIMx->SR, ~(TIM_SR_CC2OF));
 3194:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** }
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 118
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 118
 
 
 3195:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** 
@@ -7078,7 +7078,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 3249:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** __STATIC_INLINE uint32_t LL_TIM_IsActiveFlag_CC4OVR(TIM_TypeDef *TIMx)
 3250:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** {
 3251:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   return ((READ_BIT(TIMx->SR, TIM_SR_CC4OF) == (TIM_SR_CC4OF)) ? 1UL : 0UL);
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 119
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 119
 
 
 3252:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** }
@@ -7138,7 +7138,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 3306:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @brief  Disable capture/compare 1  interrupt (CC1IE).
 3307:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @rmtoll DIER         CC1IE         LL_TIM_DisableIT_CC1
 3308:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @param  TIMx Timer instance
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 120
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 120
 
 
 3309:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @retval None
@@ -7198,7 +7198,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 3363:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @param  TIMx Timer instance
 3364:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @retval None
 3365:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 121
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 121
 
 
 3366:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** __STATIC_INLINE void LL_TIM_EnableIT_CC3(TIM_TypeDef *TIMx)
@@ -7258,7 +7258,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 3420:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
 3421:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** __STATIC_INLINE uint32_t LL_TIM_IsEnabledIT_CC4(TIM_TypeDef *TIMx)
 3422:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** {
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 122
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 122
 
 
 3423:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   return ((READ_BIT(TIMx->DIER, TIM_DIER_CC4IE) == (TIM_DIER_CC4IE)) ? 1UL : 0UL);
@@ -7318,7 +7318,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 3477:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** {
 3478:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   CLEAR_BIT(TIMx->DIER, TIM_DIER_TIE);
 3479:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** }
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 123
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 123
 
 
 3480:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** 
@@ -7378,7 +7378,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 3534:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @rmtoll DIER         UDE           LL_TIM_EnableDMAReq_UPDATE
 3535:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @param  TIMx Timer instance
 3536:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @retval None
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 124
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 124
 
 
 3537:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
@@ -7438,7 +7438,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 3591:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @retval State of bit (1 or 0).
 3592:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
 3593:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** __STATIC_INLINE uint32_t LL_TIM_IsEnabledDMAReq_CC1(TIM_TypeDef *TIMx)
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 125
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 125
 
 
 3594:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** {
@@ -7498,7 +7498,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 3648:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** __STATIC_INLINE void LL_TIM_DisableDMAReq_CC3(TIM_TypeDef *TIMx)
 3649:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** {
 3650:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   CLEAR_BIT(TIMx->DIER, TIM_DIER_CC3DE);
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 126
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 126
 
 
 3651:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** }
@@ -7558,7 +7558,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 3705:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   SET_BIT(TIMx->DIER, TIM_DIER_COMDE);
 3706:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** }
 3707:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** 
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 127
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 127
 
 
 3708:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** /**
@@ -7618,7 +7618,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
 3762:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** 
 3763:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h **** /**
 3764:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   * @}
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 128
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 128
 
 
 3765:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h ****   */
@@ -7678,7 +7678,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  1224              	.LBE77:
  1225              	.LBE76:
  1226              		.cfi_endproc
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 129
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 129
 
 
  1227              	.LFE256:
@@ -7738,7 +7738,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  387:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** }
  1267              		.loc 1 387 35 is_stmt 0 view .LVU383
  1268 0010 C361     		str	r3, [r0, #28]
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 130
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 130
 
 
  388:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** 
@@ -7798,7 +7798,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  1316              	.LVL129:
  408:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   {
  1317              		.loc 1 408 3 view .LVU393
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 131
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 131
 
 
  1318 001e 06E0     		b	.L61
@@ -7858,7 +7858,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  1360              		.global	LL_TIM_IC_StructInit
  1361              		.syntax unified
  1362              		.thumb
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 132
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 132
 
 
  1363              		.thumb_func
@@ -7918,7 +7918,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  1408              	.LCFI21:
  1409              		.cfi_def_cfa_offset 8
  1410              		.cfi_offset 3, -8
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 133
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 133
 
 
  1411              		.cfi_offset 14, -4
@@ -7978,7 +7978,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  1453              	.L72:
  481:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** }
  1454              		.loc 1 481 3 is_stmt 1 view .LVU431
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 134
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 134
 
 
  482:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** 
@@ -8038,7 +8038,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  495:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   TIM_EncoderInitStruct->IC1Prescaler   = LL_TIM_ICPSC_DIV1;
  1499              		.loc 1 495 3 is_stmt 1 view .LVU444
  495:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   TIM_EncoderInitStruct->IC1Prescaler   = LL_TIM_ICPSC_DIV1;
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 135
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 135
 
 
  1500              		.loc 1 495 41 is_stmt 0 view .LVU445
@@ -8098,7 +8098,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  1541              		.loc 1 514 1 is_stmt 0 view .LVU460
  1542 0000 10B4     		push	{r4}
  1543              	.LCFI22:
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 136
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 136
 
 
  1544              		.cfi_def_cfa_offset 4
@@ -8158,7 +8158,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  1576              		.loc 1 541 3 is_stmt 1 view .LVU482
  541:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   tmpccmr1 |= (uint32_t)(TIM_EncoderInitStruct->IC1Filter >> 16U);
  1577              		.loc 1 541 64 is_stmt 0 view .LVU483
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 137
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 137
 
 
  1578 0012 4B89     		ldrh	r3, [r1, #10]
@@ -8218,7 +8218,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  1614 0030 43EA1223 		orr	r3, r3, r2, lsr #8
  1615              	.LVL163:
  552:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   tmpccer |= (uint32_t)(TIM_EncoderInitStruct->IC1Polarity);
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 138
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 138
 
 
  1616              		.loc 1 552 3 is_stmt 1 view .LVU502
@@ -8278,7 +8278,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  1655 0054 8361     		str	r3, [r0, #24]
  564:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** 
  1656              		.loc 1 564 3 view .LVU518
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 139
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 139
 
 
  1657 0056 0262     		str	r2, [r0, #32]
@@ -8338,7 +8338,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  1700 000a 7047     		bx	lr
  1701              		.cfi_endproc
  1702              	.LFE263:
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 140
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 140
 
 
  1704              		.section	.text.LL_TIM_HALLSENSOR_Init,"ax",%progbits
@@ -8398,7 +8398,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  1743              		.loc 1 624 3 is_stmt 1 view .LVU547
  624:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** 
  1744              		.loc 1 624 12 is_stmt 0 view .LVU548
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 141
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 141
 
 
  1745 000c 8369     		ldr	r3, [r0, #24]
@@ -8458,7 +8458,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  1780              		.loc 1 646 12 view .LVU567
  1781 002a 4CEA030C 		orr	ip, ip, r3
  1782              	.LVL183:
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 142
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 142
 
 
  647:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** 
@@ -8518,7 +8518,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  671:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c **** 
  1819              		.loc 1 671 3 view .LVU586
  1820 0052 CB68     		ldr	r3, [r1, #12]
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 143
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 143
 
 
  1821              	.LVL190:
@@ -8578,7 +8578,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  687:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   TIM_BDTRInitStruct->LockLevel       = LL_TIM_LOCKLEVEL_OFF;
  1867              		.loc 1 687 3 is_stmt 1 view .LVU597
  687:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   TIM_BDTRInitStruct->LockLevel       = LL_TIM_LOCKLEVEL_OFF;
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 144
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 144
 
 
  1868              		.loc 1 687 39 is_stmt 0 view .LVU598
@@ -8638,7 +8638,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  1908              		.loc 1 716 3 view .LVU614
  717:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   assert_param(IS_LL_TIM_BREAK_STATE(TIM_BDTRInitStruct->BreakState));
  1909              		.loc 1 717 3 view .LVU615
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 145
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 145
 
 
  718:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   assert_param(IS_LL_TIM_BREAK_POLARITY(TIM_BDTRInitStruct->BreakPolarity));
@@ -8698,7 +8698,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  1948              		.loc 1 731 3 is_stmt 1 view .LVU631
  1949 001e 23F40053 		bic	r3, r3, #8192
  1950              	.LVL207:
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 146
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 146
 
 
  731:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c ****   MODIFY_REG(tmpbdtr, TIM_BDTR_AOE, TIM_BDTRInitStruct->AutomaticOutput);
@@ -8741,58 +8741,58 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 1
  1980              		.file 5 "c:\\vscode\\vscodestmtools\\arm-none-eabi-gcc\\12.2.1-1.2.1\\.content\\arm-none-eabi\\inc
  1981              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
  1982              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h"
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s 			page 147
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s 			page 147
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32f1xx_ll_tim.c
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:19     .text.OC1Config:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:24     .text.OC1Config:0000000000000000 OC1Config
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:165    .text.OC1Config:0000000000000068 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:170    .text.OC2Config:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:175    .text.OC2Config:0000000000000000 OC2Config
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:317    .text.OC2Config:0000000000000070 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:322    .text.OC3Config:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:327    .text.OC3Config:0000000000000000 OC3Config
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:469    .text.OC3Config:000000000000006c $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:474    .text.OC4Config:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:479    .text.OC4Config:0000000000000000 OC4Config
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:598    .text.OC4Config:0000000000000050 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:603    .text.IC1Config:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:608    .text.IC1Config:0000000000000000 IC1Config
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:663    .text.IC2Config:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:668    .text.IC2Config:0000000000000000 IC2Config
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:723    .text.IC3Config:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:728    .text.IC3Config:0000000000000000 IC3Config
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:783    .text.IC4Config:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:788    .text.IC4Config:0000000000000000 IC4Config
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:843    .text.LL_TIM_DeInit:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:849    .text.LL_TIM_DeInit:0000000000000000 LL_TIM_DeInit
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1033   .text.LL_TIM_DeInit:000000000000007c $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1043   .text.LL_TIM_StructInit:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1049   .text.LL_TIM_StructInit:0000000000000000 LL_TIM_StructInit
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1080   .text.LL_TIM_Init:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1086   .text.LL_TIM_Init:0000000000000000 LL_TIM_Init
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1223   .text.LL_TIM_Init:000000000000006c $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1230   .text.LL_TIM_OC_StructInit:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1236   .text.LL_TIM_OC_StructInit:0000000000000000 LL_TIM_OC_StructInit
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1275   .text.LL_TIM_OC_Init:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1281   .text.LL_TIM_OC_Init:0000000000000000 LL_TIM_OC_Init
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1359   .text.LL_TIM_IC_StructInit:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1365   .text.LL_TIM_IC_StructInit:0000000000000000 LL_TIM_IC_StructInit
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1393   .text.LL_TIM_IC_Init:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1399   .text.LL_TIM_IC_Init:0000000000000000 LL_TIM_IC_Init
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1477   .text.LL_TIM_ENCODER_StructInit:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1483   .text.LL_TIM_ENCODER_StructInit:0000000000000000 LL_TIM_ENCODER_StructInit
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1527   .text.LL_TIM_ENCODER_Init:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1533   .text.LL_TIM_ENCODER_Init:0000000000000000 LL_TIM_ENCODER_Init
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1672   .text.LL_TIM_HALLSENSOR_StructInit:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1678   .text.LL_TIM_HALLSENSOR_StructInit:0000000000000000 LL_TIM_HALLSENSOR_StructInit
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1705   .text.LL_TIM_HALLSENSOR_Init:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1711   .text.LL_TIM_HALLSENSOR_Init:0000000000000000 LL_TIM_HALLSENSOR_Init
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1849   .text.LL_TIM_BDTR_StructInit:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1855   .text.LL_TIM_BDTR_StructInit:0000000000000000 LL_TIM_BDTR_StructInit
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1891   .text.LL_TIM_BDTR_Init:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\ccdqOktB.s:1897   .text.LL_TIM_BDTR_Init:0000000000000000 LL_TIM_BDTR_Init
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:19     .text.OC1Config:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:24     .text.OC1Config:0000000000000000 OC1Config
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:165    .text.OC1Config:0000000000000068 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:170    .text.OC2Config:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:175    .text.OC2Config:0000000000000000 OC2Config
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:317    .text.OC2Config:0000000000000070 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:322    .text.OC3Config:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:327    .text.OC3Config:0000000000000000 OC3Config
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:469    .text.OC3Config:000000000000006c $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:474    .text.OC4Config:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:479    .text.OC4Config:0000000000000000 OC4Config
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:598    .text.OC4Config:0000000000000050 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:603    .text.IC1Config:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:608    .text.IC1Config:0000000000000000 IC1Config
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:663    .text.IC2Config:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:668    .text.IC2Config:0000000000000000 IC2Config
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:723    .text.IC3Config:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:728    .text.IC3Config:0000000000000000 IC3Config
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:783    .text.IC4Config:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:788    .text.IC4Config:0000000000000000 IC4Config
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:843    .text.LL_TIM_DeInit:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:849    .text.LL_TIM_DeInit:0000000000000000 LL_TIM_DeInit
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1033   .text.LL_TIM_DeInit:000000000000007c $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1043   .text.LL_TIM_StructInit:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1049   .text.LL_TIM_StructInit:0000000000000000 LL_TIM_StructInit
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1080   .text.LL_TIM_Init:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1086   .text.LL_TIM_Init:0000000000000000 LL_TIM_Init
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1223   .text.LL_TIM_Init:000000000000006c $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1230   .text.LL_TIM_OC_StructInit:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1236   .text.LL_TIM_OC_StructInit:0000000000000000 LL_TIM_OC_StructInit
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1275   .text.LL_TIM_OC_Init:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1281   .text.LL_TIM_OC_Init:0000000000000000 LL_TIM_OC_Init
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1359   .text.LL_TIM_IC_StructInit:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1365   .text.LL_TIM_IC_StructInit:0000000000000000 LL_TIM_IC_StructInit
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1393   .text.LL_TIM_IC_Init:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1399   .text.LL_TIM_IC_Init:0000000000000000 LL_TIM_IC_Init
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1477   .text.LL_TIM_ENCODER_StructInit:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1483   .text.LL_TIM_ENCODER_StructInit:0000000000000000 LL_TIM_ENCODER_StructInit
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1527   .text.LL_TIM_ENCODER_Init:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1533   .text.LL_TIM_ENCODER_Init:0000000000000000 LL_TIM_ENCODER_Init
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1672   .text.LL_TIM_HALLSENSOR_StructInit:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1678   .text.LL_TIM_HALLSENSOR_StructInit:0000000000000000 LL_TIM_HALLSENSOR_StructInit
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1705   .text.LL_TIM_HALLSENSOR_Init:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1711   .text.LL_TIM_HALLSENSOR_Init:0000000000000000 LL_TIM_HALLSENSOR_Init
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1849   .text.LL_TIM_BDTR_StructInit:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1855   .text.LL_TIM_BDTR_StructInit:0000000000000000 LL_TIM_BDTR_StructInit
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1891   .text.LL_TIM_BDTR_Init:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccIEnLr3.s:1897   .text.LL_TIM_BDTR_Init:0000000000000000 LL_TIM_BDTR_Init
 
 NO UNDEFINED SYMBOLS

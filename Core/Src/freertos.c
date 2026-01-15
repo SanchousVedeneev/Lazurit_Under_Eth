@@ -49,32 +49,32 @@ int32_t cbckModbusTcpServer(Eth_t_SocTcp* socket);
 #define MODBUS_TCP_SERVER_SOC_CNT (4)
 Eth_t_SocTcp tcpModbusSocket[MODBUS_TCP_SERVER_SOC_CNT];
 uint8_t modbusBufRxTxTCP[MODBUS_SS_BUF_CNT];
-uint8_t modbusBufRxTxRtu485[50];
-#define MODBUS_TABLE_HOLDING_QUANT (MBP_reg_4 - MBP_reg_0 + 1)
+#define MODBUS_TABLE_HOLDING_QUANT (MBP_reg_6 - MBP_reg_1 + 1)
 uint16_t modbusHoldingBuf[MODBUS_TABLE_HOLDING_QUANT];
 
 
-#define MDB_RTU_SLACE_ID (1)
-#define MDB_RTU_FUNCTION (4)
-#define MDB_RTU_REG_ADRES (1)
-#define MDB_RTU_REG_QANT (5)
+uint8_t modbusBufTxRtu485[30];
+uint8_t modbusBufRxRtu485[30];
+uint8_t mdb_wait_rx_flag = 0;
 
-#define MDB_RTU_COUNT_RX (5+(MDB_RTU_REG_QANT*2))
-
-
-
-uint8_t mdb_buf[50];
 uint16_t mdb_1 = 0;
 uint16_t mdb_2 = 0;
 uint16_t mdb_3 = 0;
 uint16_t mdb_4 = 0;
 uint16_t mdb_5 = 0;
+uint16_t mdb_err_cnt = 0;
+
+enum userFlag
+{
+  flagReset = 0,
+  flagSet   = 1
+};
 
 //--ModbusSS
 ModbusSS_table_t modbusTableHolding1 = {
   .buf = (uint8_t*)modbusHoldingBuf,
   .quantity = MODBUS_TABLE_HOLDING_QUANT,
-  .regNo = MBP_reg_0,
+  .regNo = MBP_reg_1,
   .type = ModbusSS_Holding
 };
 
@@ -90,18 +90,7 @@ ModbusSS_t modbusSS_tcp = {
     .tables = modbusTables,
     .tablesCount = 1};
 
-ModbusSS_t modbusSS_rtu_rs485 = {
-    .bufRxTx = modbusBufRxTxRtu485,
-    .cbHoldingRequest = modbusHoldingReq,
-    .rtuTcp = MODBUS_SS_RTU,
-    .slaveId = 1,
-    .tables = modbusTables,
-    .tablesCount = 1};
-
 /*---------------------MODBUS END------------------------*/
-
-
-
 
 /* USER CODE END PD */
 
@@ -112,13 +101,6 @@ ModbusSS_t modbusSS_rtu_rs485 = {
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-osThreadId_t taskLedHandle;
-const osThreadAttr_t taskLed_attributes = {
-  .name = "taskLed",
-  .stack_size = 256 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
-};
-
 osThreadId_t taskNetHandle;
 const osThreadAttr_t taskNet_attributes = {
   .name = "taskNet",
@@ -144,12 +126,10 @@ const osThreadAttr_t defaultTask_attributes = {
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
-void taskLedEntry(void *argument);
 void taskNetEntry(void *argument);
 void taskMdbEntry(void *argument);
 
 __STATIC_INLINE uint16_t _Crc16_mdb(uint8_t *pcBlock, uint16_t len);
-
 
 /* USER CODE END FunctionPrototypes */
 
@@ -188,7 +168,6 @@ void MX_FREERTOS_Init(void) {
   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
-  taskLedHandle = osThreadNew(taskLedEntry, NULL, &taskLed_attributes);
   taskNetHandle = osThreadNew(taskNetEntry, NULL, &taskNet_attributes);
   taskMdbHandle = osThreadNew(taskMdbEntry, NULL, &taskMdb_attributes);
 
@@ -237,55 +216,6 @@ void StartDefaultTask(void *argument)
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
-
-void taskLedEntry(void *argument)
-{
-  /* USER CODE BEGIN taskLedEntry */
-
-  BSP_LED1_RG_TIM_START();
- 
-  /* Infinite loop */
-
-  for(;;)
-  {
-    bsp_led1_rg_incDecInv(1);
-    osDelay(1);
-  }
-  /* USER CODE END taskLedEntry */
-}
-
-void taskMdbEntry(void *argument)
-{
-  /* USER CODE BEGIN taskMdbEntry */
-
-  /* Infinite loop */
-
-  for (;;)
-  {
-    static uint16_t mdb_req_time = 0;
-    static uint16_t crc = 0;
-    osDelay(1);
-    if (mdb_req_time++ > 1000)
-    {
-
-      modbusBufRxTxRtu485[0] = MDB_RTU_SLACE_ID;
-      modbusBufRxTxRtu485[1] = MDB_RTU_FUNCTION;
-      modbusBufRxTxRtu485[2] = 0x00;
-      modbusBufRxTxRtu485[3] = MDB_RTU_REG_ADRES;
-      modbusBufRxTxRtu485[4] = 0x00;
-      modbusBufRxTxRtu485[5] = MDB_RTU_REG_QANT;
-
-      crc = _Crc16_mdb(modbusBufRxTxRtu485, 6);
-      modbusBufRxTxRtu485[6] = (uint8_t)crc;
-      modbusBufRxTxRtu485[7] = (uint8_t)(crc >> 8);
-
-      HAL_UART_Transmit_IT(&huart1, modbusBufRxTxRtu485, 8);
-      // BSP_LED2_G_TOGGLE();
-      mdb_req_time = 0;
-    }
-  }
-  /* USER CODE END taskMdbEntry */
-}
 
 //---------------------------------- NETWORK 
 void taskNetEntry(void *argument)
@@ -338,6 +268,7 @@ int32_t cbckModbusTcpServer(Eth_t_SocTcp* socket){
 
 void modbusHoldingReq(ModbusSS_table_t* table, uint16_t reg, uint16_t quantity){
 
+  BSP_LED1_TOGGLE();
   if (table == &modbusTableHolding1)
   {
     for (int r = reg; r < reg + quantity; r++)
@@ -345,24 +276,28 @@ void modbusHoldingReq(ModbusSS_table_t* table, uint16_t reg, uint16_t quantity){
       asm("NOP");
       switch (r)
       {
-      case MBP_reg_0:
+      case MBP_reg_1:
         ModbusSS_SetWord(table, r, mdb_1);
         asm("NOP");
         break;
-      case MBP_reg_1:
+      case MBP_reg_2:
         ModbusSS_SetWord(table, r, mdb_2);
         asm("NOP");
         break;
-      case MBP_reg_2:
+      case MBP_reg_3:
         ModbusSS_SetWord(table, r, mdb_3);
         asm("NOP");
         break;
-      case MBP_reg_3:
+      case MBP_reg_4:
         ModbusSS_SetWord(table, r, mdb_4);
         asm("NOP");
         break;
-      case MBP_reg_4:
+      case MBP_reg_5:
         ModbusSS_SetWord(table, r, mdb_5);
+        asm("NOP");
+        break;
+      case MBP_reg_6:
+        ModbusSS_SetWord(table, r, mdb_err_cnt);
         asm("NOP");
         break;
       default:
@@ -371,41 +306,96 @@ void modbusHoldingReq(ModbusSS_table_t* table, uint16_t reg, uint16_t quantity){
     }
   }
 }
+//---------------------------------- NETWORK END
 
+//---------------------------------- MODBUS RTU 
+#define MDB_RTU_TX_SLACE_ID (1)
+#define MDB_RTU_TX_FUNCTION (4)
+#define MDB_RTU_TX_REG_ADRES (1)
+#define MDB_RTU_TX_REG_QANT (5)
+#define MDB_RTU_TX_COUNT_BYTE (8)
+
+#define MDB_RTU_RX_COUNT_BYTE (5+(MDB_RTU_TX_REG_QANT*2))
+
+#define MDB_RTU_TX_SCAN_RATE (250)
+#define MDB_RTU_RX_RESPONS_TIMEOUT (2000)
+
+void taskMdbEntry(void *argument)
+{
+  /* USER CODE BEGIN taskMdbEntry */
+
+  /* Infinite loop */
+
+  for (;;)
+  {
+    static uint16_t mdb_req_time = 0;
+    static uint16_t mdb_respons_timeout = 0;
+    static uint16_t crc = 0;
+    osDelay(1);
+
+    if (mdb_wait_rx_flag == flagSet)
+    {
+      if (mdb_respons_timeout++ > MDB_RTU_RX_RESPONS_TIMEOUT)
+      {
+        mdb_wait_rx_flag = flagReset;
+        HAL_UART_AbortReceive_IT(&huart1);
+        mdb_respons_timeout = 0;
+        mdb_err_cnt++;
+      }
+    }
+    else if (mdb_req_time++ > MDB_RTU_TX_SCAN_RATE)
+    {
+
+      modbusBufTxRtu485[0] = MDB_RTU_TX_SLACE_ID;
+      modbusBufTxRtu485[1] = MDB_RTU_TX_FUNCTION;
+      modbusBufTxRtu485[2] = 0x00;
+      modbusBufTxRtu485[3] = MDB_RTU_TX_REG_ADRES;
+      modbusBufTxRtu485[4] = 0x00;
+      modbusBufTxRtu485[5] = MDB_RTU_TX_REG_QANT;
+
+      crc = _Crc16_mdb(modbusBufTxRtu485, 6);
+      modbusBufTxRtu485[6] = (uint8_t)crc;
+      modbusBufTxRtu485[7] = (uint8_t)(crc >> 8);
+
+      mdb_wait_rx_flag = flagSet;
+      mdb_respons_timeout = 0;
+      if (HAL_UART_Transmit(&huart1, modbusBufTxRtu485, MDB_RTU_TX_COUNT_BYTE, 2) == HAL_OK)
+      {
+        BSP_LED3_TOGGLE();
+        HAL_UART_Receive_IT(&huart1, modbusBufRxRtu485, MDB_RTU_RX_COUNT_BYTE);
+      }
+      mdb_req_time = 0;
+    }
+  }
+  /* USER CODE END taskMdbEntry */
+}
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-  for (uint8_t i = 0; i < (MDB_RTU_COUNT_RX-1); i++)
-  {
-    mdb_buf[i] = modbusBufRxTxRtu485[i+1];
-  }
-  mdb_buf[MDB_RTU_COUNT_RX-1] = modbusBufRxTxRtu485[0];
+  mdb_1 = 0;
+  mdb_2 = 0;
+  mdb_3 = 0;
+  mdb_4 = 0;
+  mdb_5 = 0;
 
-  mdb_1 = mdb_buf[3]<<8;
-  mdb_1 = mdb_buf[4];
+  mdb_1 |= modbusBufRxRtu485[3]<<8;
+  mdb_1 |= modbusBufRxRtu485[4];
 
-  mdb_2 = mdb_buf[5]<<8;
-  mdb_2 = mdb_buf[6];
+  mdb_2 |= modbusBufRxRtu485[5]<<8;
+  mdb_2 |= modbusBufRxRtu485[6];
 
-  mdb_3 = mdb_buf[7]<<8;
-  mdb_3 = mdb_buf[8];
+  mdb_3 |= modbusBufRxRtu485[7]<<8;
+  mdb_3 |= modbusBufRxRtu485[8];
 
-  mdb_4 = mdb_buf[9]<<8;
-  mdb_4 = mdb_buf[10];
+  mdb_4 |= modbusBufRxRtu485[9]<<8;
+  mdb_4 |= modbusBufRxRtu485[10];
   
-  mdb_5 = mdb_buf[11]<<8;
-  mdb_5 = mdb_buf[12];
+  mdb_5 |= modbusBufRxRtu485[11]<<8;
+  mdb_5 |= modbusBufRxRtu485[12];
 
   asm("NOP");
-  BSP_LED2_G_TOGGLE();
+  mdb_wait_rx_flag = flagReset;
 }
-
-void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
-{
-  asm("NOP");
-  HAL_UART_Receive_IT(&huart1, modbusBufRxTxRtu485, MDB_RTU_COUNT_RX);
-}
-
 
 __STATIC_INLINE uint16_t _Crc16_mdb(uint8_t *pcBlock, uint16_t len)
 {
@@ -426,50 +416,6 @@ __STATIC_INLINE uint16_t _Crc16_mdb(uint8_t *pcBlock, uint16_t len)
         }
     return w;
 }
-
-// void USART1_IRQHandler(void)
-// {
-//   // RX READY
-//   if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE))
-//   {
-//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_IDLE);
-//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_RXNE);
-//     asm("NOP");
-
-//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_ORE); // OVERRUN
-//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_FE);  // OVERRUN
-//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_PE);  // OVERRUN
-//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_TXE); // OVERRUN
-//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_NE);  // OVERRUN
-
-//     for (uint8_t i = 0; i < MODBUS_TABLE_HOLDING_QUANT; i++)
-//     {
-//       mdb_buf[i] = modbusBufRxTxRtu485[i];
-//     }
-//     BSP_LED2_G_TOGGLE();
-//   }
-//   else if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_RXNE))
-//   {
-//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_RXNE);
-//   }
-//   // TRANSFER COMPLETE
-//   else if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_TC))
-//   {
-//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_TC);
-//     asm("NOP");
-//     HAL_UART_Receive_IT(&huart1, modbusBufRxTxRtu485, 12);
-//   }
-//   else
-//   {
-//     // Error_Handler();
-//     // NVIC_SystemReset();
-//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_CTS);  // OVERRUN
-//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_LBD);  // OVERRUN
-//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_TC);   // OVERRUN
-//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_IDLE); // OVERRUN
-//     asm("NOP");
-//   }
-// }
 
 /* USER CODE END Application */
 

@@ -86,12 +86,10 @@ void mainSysTicCallBack();
 #define W5500_RST_EXTI_IRQn EXTI9_5_IRQn
 #define USB_ReNum_Pin LL_GPIO_PIN_10
 #define USB_ReNum_GPIO_Port GPIOA
-#define OD_LED2G_Pin LL_GPIO_PIN_15
-#define OD_LED2G_GPIO_Port GPIOA
-#define OD_LED1G_Pin LL_GPIO_PIN_3
-#define OD_LED1G_GPIO_Port GPIOB
-#define OD_LED1R_Pin LL_GPIO_PIN_4
-#define OD_LED1R_GPIO_Port GPIOB
+#define LED3_Pin LL_GPIO_PIN_15
+#define LED3_GPIO_Port GPIOA
+#define LED1_Pin LL_GPIO_PIN_4
+#define LED1_GPIO_Port GPIOB
 #define UART_RTU_TX_Pin LL_GPIO_PIN_6
 #define UART_RTU_TX_GPIO_Port GPIOB
 #define UART_RTU_RX_Pin LL_GPIO_PIN_7

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
   29:Core/Src/main.c **** /* USER CODE BEGIN Includes */
   30:Core/Src/main.c **** // #include "net.h"
   31:Core/Src/main.c **** // #include "enc28j60.h"
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 2
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 2
 
 
   32:Core/Src/main.c **** 
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
   86:Core/Src/main.c ****   /* USER CODE BEGIN 1 */
   87:Core/Src/main.c **** 
   88:Core/Src/main.c ****   /* USER CODE END 1 */
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 3
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 3
 
 
   89:Core/Src/main.c **** 
@@ -143,134 +143,133 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
  108:Core/Src/main.c ****   MX_DMA_Init();
  109:Core/Src/main.c ****   MX_SPI2_Init();
  110:Core/Src/main.c ****   MX_TIM2_Init();
- 111:Core/Src/main.c ****   MX_TIM3_Init();
- 112:Core/Src/main.c ****   MX_USART1_UART_Init();
- 113:Core/Src/main.c ****   /* USER CODE BEGIN 2 */
- 114:Core/Src/main.c ****   
- 115:Core/Src/main.c ****   //LL_GPIO_SetOutputPin(O_D_Led_GPIO_Port, O_D_Led_Pin);
- 116:Core/Src/main.c **** 
- 117:Core/Src/main.c ****   MAIN_DBG_MCU_START();
- 118:Core/Src/main.c ****   LL_GPIO_SetOutputPin(USB_ReNum_GPIO_Port,USB_ReNum_Pin);
+ 111:Core/Src/main.c ****   MX_USART1_UART_Init();
+ 112:Core/Src/main.c ****   /* USER CODE BEGIN 2 */
+ 113:Core/Src/main.c ****   
+ 114:Core/Src/main.c ****   //LL_GPIO_SetOutputPin(O_D_Led_GPIO_Port, O_D_Led_Pin);
+ 115:Core/Src/main.c **** 
+ 116:Core/Src/main.c ****   MAIN_DBG_MCU_START();
+ 117:Core/Src/main.c ****   LL_GPIO_SetOutputPin(USB_ReNum_GPIO_Port,USB_ReNum_Pin);
+ 118:Core/Src/main.c **** 
  119:Core/Src/main.c **** 
- 120:Core/Src/main.c **** 
- 121:Core/Src/main.c ****   // char buf[20];
- 122:Core/Src/main.c ****   // __IO char *token = strtok(buf, "&");
- 123:Core/Src/main.c ****   // asm("NOP");
- 124:Core/Src/main.c ****   // if(token != NULL){
- 125:Core/Src/main.c ****   //   asm("NOP");
- 126:Core/Src/main.c ****   // }
- 127:Core/Src/main.c ****   /* USER CODE END 2 */
- 128:Core/Src/main.c **** 
- 129:Core/Src/main.c ****   /* Init scheduler */
- 130:Core/Src/main.c ****   osKernelInitialize();  /* Call init function for freertos objects (in freertos.c) */
- 131:Core/Src/main.c ****   MX_FREERTOS_Init();
- 132:Core/Src/main.c **** 
- 133:Core/Src/main.c ****   /* Start scheduler */
- 134:Core/Src/main.c ****   osKernelStart();
- 135:Core/Src/main.c **** 
- 136:Core/Src/main.c ****   /* We should never get here as control is now taken by the scheduler */
- 137:Core/Src/main.c ****   /* Infinite loop */
- 138:Core/Src/main.c ****   /* USER CODE BEGIN WHILE */
- 139:Core/Src/main.c ****   while (1)
- 140:Core/Src/main.c ****   {
- 141:Core/Src/main.c **** 
- 142:Core/Src/main.c ****     // controlStateDHCP = DHCP_run();
- 143:Core/Src/main.c ****     // switch (controlStateDHCP) {
- 144:Core/Src/main.c ****     //         case DHCP_IP_ASSIGN:
- 145:Core/Src/main.c ****     //             // usb_send_message("IP assigned\n");
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 4
+ 120:Core/Src/main.c ****   // char buf[20];
+ 121:Core/Src/main.c ****   // __IO char *token = strtok(buf, "&");
+ 122:Core/Src/main.c ****   // asm("NOP");
+ 123:Core/Src/main.c ****   // if(token != NULL){
+ 124:Core/Src/main.c ****   //   asm("NOP");
+ 125:Core/Src/main.c ****   // }
+ 126:Core/Src/main.c ****   /* USER CODE END 2 */
+ 127:Core/Src/main.c **** 
+ 128:Core/Src/main.c ****   /* Init scheduler */
+ 129:Core/Src/main.c ****   osKernelInitialize();  /* Call init function for freertos objects (in freertos.c) */
+ 130:Core/Src/main.c ****   MX_FREERTOS_Init();
+ 131:Core/Src/main.c **** 
+ 132:Core/Src/main.c ****   /* Start scheduler */
+ 133:Core/Src/main.c ****   osKernelStart();
+ 134:Core/Src/main.c **** 
+ 135:Core/Src/main.c ****   /* We should never get here as control is now taken by the scheduler */
+ 136:Core/Src/main.c ****   /* Infinite loop */
+ 137:Core/Src/main.c ****   /* USER CODE BEGIN WHILE */
+ 138:Core/Src/main.c ****   while (1)
+ 139:Core/Src/main.c ****   {
+ 140:Core/Src/main.c **** 
+ 141:Core/Src/main.c ****     // controlStateDHCP = DHCP_run();
+ 142:Core/Src/main.c ****     // switch (controlStateDHCP) {
+ 143:Core/Src/main.c ****     //         case DHCP_IP_ASSIGN:
+ 144:Core/Src/main.c ****     //             // usb_send_message("IP assigned\n");
+ 145:Core/Src/main.c ****     //             wizchip_getnetinfo(&netInfoCheck);
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 4
 
 
- 146:Core/Src/main.c ****     //             wizchip_getnetinfo(&netInfoCheck);
- 147:Core/Src/main.c ****     //             asm("NOP");
- 148:Core/Src/main.c ****     //             break;
- 149:Core/Src/main.c ****     //         case DHCP_IP_CHANGED:
- 150:Core/Src/main.c ****     //             // usb_send_message("IP changed\n");
- 151:Core/Src/main.c ****     //             asm("NOP");
- 152:Core/Src/main.c ****     //             break;
- 153:Core/Src/main.c ****     //         case DHCP_IP_LEASED:
- 154:Core/Src/main.c ****     //             // run_user_applications = true;
- 155:Core/Src/main.c ****     //             wizchip_getnetinfo(&netInfoCheck);
- 156:Core/Src/main.c ****     //             asm("NOP");
- 157:Core/Src/main.c ****     //             break;
- 158:Core/Src/main.c ****     //         case DHCP_FAILED:
- 159:Core/Src/main.c ****     //             // usb_send_message("DHCP failed\n");
- 160:Core/Src/main.c ****     //             asm("NOP");
- 161:Core/Src/main.c ****     //             break;
- 162:Core/Src/main.c ****     //         default:
- 163:Core/Src/main.c ****     //             break;
- 164:Core/Src/main.c ****     //     }
- 165:Core/Src/main.c **** 
- 166:Core/Src/main.c **** 	  HAL_Delay(1);
- 167:Core/Src/main.c **** 	  // LL_GPIO_TogglePin(O_D_Led_GPIO_Port, O_D_Led_Pin);
- 168:Core/Src/main.c **** 
- 169:Core/Src/main.c ****     /* USER CODE END WHILE */
- 170:Core/Src/main.c **** 
- 171:Core/Src/main.c ****     /* USER CODE BEGIN 3 */
- 172:Core/Src/main.c ****   }
- 173:Core/Src/main.c ****   /* USER CODE END 3 */
- 174:Core/Src/main.c **** }
- 175:Core/Src/main.c **** 
- 176:Core/Src/main.c **** /**
- 177:Core/Src/main.c ****   * @brief System Clock Configuration
- 178:Core/Src/main.c ****   * @retval None
- 179:Core/Src/main.c ****   */
- 180:Core/Src/main.c **** void SystemClock_Config(void)
- 181:Core/Src/main.c **** {
- 182:Core/Src/main.c ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
- 183:Core/Src/main.c ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
- 184:Core/Src/main.c **** 
- 185:Core/Src/main.c ****   /** Initializes the RCC Oscillators according to the specified parameters
- 186:Core/Src/main.c ****   * in the RCC_OscInitTypeDef structure.
- 187:Core/Src/main.c ****   */
- 188:Core/Src/main.c ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
- 189:Core/Src/main.c ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
- 190:Core/Src/main.c ****   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
- 191:Core/Src/main.c ****   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
- 192:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
- 193:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
- 194:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
- 195:Core/Src/main.c ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
- 196:Core/Src/main.c ****   {
- 197:Core/Src/main.c ****     Error_Handler();
- 198:Core/Src/main.c ****   }
- 199:Core/Src/main.c **** 
- 200:Core/Src/main.c ****   /** Initializes the CPU, AHB and APB buses clocks
- 201:Core/Src/main.c ****   */
- 202:Core/Src/main.c ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 5
+ 146:Core/Src/main.c ****     //             asm("NOP");
+ 147:Core/Src/main.c ****     //             break;
+ 148:Core/Src/main.c ****     //         case DHCP_IP_CHANGED:
+ 149:Core/Src/main.c ****     //             // usb_send_message("IP changed\n");
+ 150:Core/Src/main.c ****     //             asm("NOP");
+ 151:Core/Src/main.c ****     //             break;
+ 152:Core/Src/main.c ****     //         case DHCP_IP_LEASED:
+ 153:Core/Src/main.c ****     //             // run_user_applications = true;
+ 154:Core/Src/main.c ****     //             wizchip_getnetinfo(&netInfoCheck);
+ 155:Core/Src/main.c ****     //             asm("NOP");
+ 156:Core/Src/main.c ****     //             break;
+ 157:Core/Src/main.c ****     //         case DHCP_FAILED:
+ 158:Core/Src/main.c ****     //             // usb_send_message("DHCP failed\n");
+ 159:Core/Src/main.c ****     //             asm("NOP");
+ 160:Core/Src/main.c ****     //             break;
+ 161:Core/Src/main.c ****     //         default:
+ 162:Core/Src/main.c ****     //             break;
+ 163:Core/Src/main.c ****     //     }
+ 164:Core/Src/main.c **** 
+ 165:Core/Src/main.c **** 	  HAL_Delay(1);
+ 166:Core/Src/main.c **** 	  // LL_GPIO_TogglePin(O_D_Led_GPIO_Port, O_D_Led_Pin);
+ 167:Core/Src/main.c **** 
+ 168:Core/Src/main.c ****     /* USER CODE END WHILE */
+ 169:Core/Src/main.c **** 
+ 170:Core/Src/main.c ****     /* USER CODE BEGIN 3 */
+ 171:Core/Src/main.c ****   }
+ 172:Core/Src/main.c ****   /* USER CODE END 3 */
+ 173:Core/Src/main.c **** }
+ 174:Core/Src/main.c **** 
+ 175:Core/Src/main.c **** /**
+ 176:Core/Src/main.c ****   * @brief System Clock Configuration
+ 177:Core/Src/main.c ****   * @retval None
+ 178:Core/Src/main.c ****   */
+ 179:Core/Src/main.c **** void SystemClock_Config(void)
+ 180:Core/Src/main.c **** {
+ 181:Core/Src/main.c ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+ 182:Core/Src/main.c ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+ 183:Core/Src/main.c **** 
+ 184:Core/Src/main.c ****   /** Initializes the RCC Oscillators according to the specified parameters
+ 185:Core/Src/main.c ****   * in the RCC_OscInitTypeDef structure.
+ 186:Core/Src/main.c ****   */
+ 187:Core/Src/main.c ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+ 188:Core/Src/main.c ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+ 189:Core/Src/main.c ****   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
+ 190:Core/Src/main.c ****   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+ 191:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+ 192:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+ 193:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
+ 194:Core/Src/main.c ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 195:Core/Src/main.c ****   {
+ 196:Core/Src/main.c ****     Error_Handler();
+ 197:Core/Src/main.c ****   }
+ 198:Core/Src/main.c **** 
+ 199:Core/Src/main.c ****   /** Initializes the CPU, AHB and APB buses clocks
+ 200:Core/Src/main.c ****   */
+ 201:Core/Src/main.c ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+ 202:Core/Src/main.c ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 5
 
 
- 203:Core/Src/main.c ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
- 204:Core/Src/main.c ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
- 205:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
- 206:Core/Src/main.c ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
- 207:Core/Src/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
- 208:Core/Src/main.c **** 
- 209:Core/Src/main.c ****   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
- 210:Core/Src/main.c ****   {
- 211:Core/Src/main.c ****     Error_Handler();
- 212:Core/Src/main.c ****   }
- 213:Core/Src/main.c **** }
- 214:Core/Src/main.c **** 
- 215:Core/Src/main.c **** /* USER CODE BEGIN 4 */
- 216:Core/Src/main.c **** void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
-  28              		.loc 1 216 47 view -0
+ 203:Core/Src/main.c ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+ 204:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 205:Core/Src/main.c ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+ 206:Core/Src/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+ 207:Core/Src/main.c **** 
+ 208:Core/Src/main.c ****   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
+ 209:Core/Src/main.c ****   {
+ 210:Core/Src/main.c ****     Error_Handler();
+ 211:Core/Src/main.c ****   }
+ 212:Core/Src/main.c **** }
+ 213:Core/Src/main.c **** 
+ 214:Core/Src/main.c **** /* USER CODE BEGIN 4 */
+ 215:Core/Src/main.c **** void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
+  28              		.loc 1 215 47 view -0
   29              		.cfi_startproc
   30              		@ args = 0, pretend = 0, frame = 0
   31              		@ frame_needed = 0, uses_anonymous_args = 0
   32              		@ link register save eliminated.
- 217:Core/Src/main.c **** 
- 218:Core/Src/main.c ****   //LL_GPIO_TogglePin(O_D_Led_GPIO_Port, O_D_Led_Pin);
- 219:Core/Src/main.c **** 
- 220:Core/Src/main.c ****   asm("NOP");
-  33              		.loc 1 220 3 view .LVU1
+ 216:Core/Src/main.c **** 
+ 217:Core/Src/main.c ****   //LL_GPIO_TogglePin(O_D_Led_GPIO_Port, O_D_Led_Pin);
+ 218:Core/Src/main.c **** 
+ 219:Core/Src/main.c ****   asm("NOP");
+  33              		.loc 1 219 3 view .LVU1
   34              		.syntax unified
-  35              	@ 220 "Core/Src/main.c" 1
+  35              	@ 219 "Core/Src/main.c" 1
   36 0000 00BF     		NOP
   37              	@ 0 "" 2
- 221:Core/Src/main.c **** }
-  38              		.loc 1 221 1 is_stmt 0 view .LVU2
+ 220:Core/Src/main.c **** }
+  38              		.loc 1 220 1 is_stmt 0 view .LVU2
   39              		.thumb
   40              		.syntax unified
   41 0002 7047     		bx	lr
@@ -284,39 +283,39 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
   50              		.thumb_func
   52              	mainSysTicCallBack:
   53              	.LFB581:
+ 221:Core/Src/main.c **** 
  222:Core/Src/main.c **** 
  223:Core/Src/main.c **** 
- 224:Core/Src/main.c **** 
- 225:Core/Src/main.c **** #define ETH_DHCP_CHECK_TIME (1000)
- 226:Core/Src/main.c **** #define LED_DHCP_BLINK_TIME (200)
- 227:Core/Src/main.c **** 
- 228:Core/Src/main.c **** void mainSysTicCallBack(){
-  54              		.loc 1 228 26 is_stmt 1 view -0
+ 224:Core/Src/main.c **** #define ETH_DHCP_CHECK_TIME (1000)
+ 225:Core/Src/main.c **** #define LED_DHCP_BLINK_TIME (200)
+ 226:Core/Src/main.c **** 
+ 227:Core/Src/main.c **** void mainSysTicCallBack(){
+  54              		.loc 1 227 26 is_stmt 1 view -0
   55              		.cfi_startproc
   56              		@ args = 0, pretend = 0, frame = 0
   57              		@ frame_needed = 0, uses_anonymous_args = 0
   58              		@ link register save eliminated.
+ 228:Core/Src/main.c **** 
  229:Core/Src/main.c **** 
- 230:Core/Src/main.c **** 
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 6
+ 230:Core/Src/main.c ****     //LL_GPIO_TogglePin(O_D_Led_GPIO_Port, O_D_Led_Pin);
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 6
 
 
- 231:Core/Src/main.c ****     //LL_GPIO_TogglePin(O_D_Led_GPIO_Port, O_D_Led_Pin);
- 232:Core/Src/main.c **** 
- 233:Core/Src/main.c ****   //   if (((timLedDHCP++ % LED_DHCP_BLINK_TIME) == 0) &&
- 234:Core/Src/main.c ****   //     timLedDHCP <= LED_DHCP_BLINK_TIME * (controlStateDHCP +1) * 2)
- 235:Core/Src/main.c ****   // {
- 236:Core/Src/main.c ****   //     HAL_GPIO_TogglePin(O_D_Led_GPIO_Port, O_D_Led_Pin);
- 237:Core/Src/main.c ****   // }
- 238:Core/Src/main.c ****   // else if (timLedDHCP > LED_DHCP_BLINK_TIME * DHCP_STOPPED * 4)
- 239:Core/Src/main.c ****   // {
- 240:Core/Src/main.c ****   //   timLedDHCP = 0;
- 241:Core/Src/main.c ****   // }
+ 231:Core/Src/main.c **** 
+ 232:Core/Src/main.c ****   //   if (((timLedDHCP++ % LED_DHCP_BLINK_TIME) == 0) &&
+ 233:Core/Src/main.c ****   //     timLedDHCP <= LED_DHCP_BLINK_TIME * (controlStateDHCP +1) * 2)
+ 234:Core/Src/main.c ****   // {
+ 235:Core/Src/main.c ****   //     HAL_GPIO_TogglePin(O_D_Led_GPIO_Port, O_D_Led_Pin);
+ 236:Core/Src/main.c ****   // }
+ 237:Core/Src/main.c ****   // else if (timLedDHCP > LED_DHCP_BLINK_TIME * DHCP_STOPPED * 4)
+ 238:Core/Src/main.c ****   // {
+ 239:Core/Src/main.c ****   //   timLedDHCP = 0;
+ 240:Core/Src/main.c ****   // }
+ 241:Core/Src/main.c **** 
  242:Core/Src/main.c **** 
  243:Core/Src/main.c **** 
- 244:Core/Src/main.c **** 
- 245:Core/Src/main.c **** }
-  59              		.loc 1 245 1 view .LVU4
+ 244:Core/Src/main.c **** }
+  59              		.loc 1 244 1 view .LVU4
   60 0000 7047     		bx	lr
   61              		.cfi_endproc
   62              	.LFE581:
@@ -329,61 +328,61 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
   71              	HAL_TIM_PeriodElapsedCallback:
   72              	.LVL1:
   73              	.LFB582:
+ 245:Core/Src/main.c **** 
  246:Core/Src/main.c **** 
- 247:Core/Src/main.c **** 
- 248:Core/Src/main.c **** /* USER CODE END 4 */
- 249:Core/Src/main.c **** 
- 250:Core/Src/main.c **** /**
- 251:Core/Src/main.c ****   * @brief  Period elapsed callback in non blocking mode
- 252:Core/Src/main.c ****   * @note   This function is called  when TIM4 interrupt took place, inside
- 253:Core/Src/main.c ****   * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
- 254:Core/Src/main.c ****   * a global variable "uwTick" used as application time base.
- 255:Core/Src/main.c ****   * @param  htim : TIM handle
- 256:Core/Src/main.c ****   * @retval None
- 257:Core/Src/main.c ****   */
- 258:Core/Src/main.c **** void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
- 259:Core/Src/main.c **** {
-  74              		.loc 1 259 1 view -0
+ 247:Core/Src/main.c **** /* USER CODE END 4 */
+ 248:Core/Src/main.c **** 
+ 249:Core/Src/main.c **** /**
+ 250:Core/Src/main.c ****   * @brief  Period elapsed callback in non blocking mode
+ 251:Core/Src/main.c ****   * @note   This function is called  when TIM4 interrupt took place, inside
+ 252:Core/Src/main.c ****   * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+ 253:Core/Src/main.c ****   * a global variable "uwTick" used as application time base.
+ 254:Core/Src/main.c ****   * @param  htim : TIM handle
+ 255:Core/Src/main.c ****   * @retval None
+ 256:Core/Src/main.c ****   */
+ 257:Core/Src/main.c **** void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+ 258:Core/Src/main.c **** {
+  74              		.loc 1 258 1 view -0
   75              		.cfi_startproc
   76              		@ args = 0, pretend = 0, frame = 0
   77              		@ frame_needed = 0, uses_anonymous_args = 0
-  78              		.loc 1 259 1 is_stmt 0 view .LVU6
+  78              		.loc 1 258 1 is_stmt 0 view .LVU6
   79 0000 08B5     		push	{r3, lr}
   80              	.LCFI0:
   81              		.cfi_def_cfa_offset 8
   82              		.cfi_offset 3, -8
   83              		.cfi_offset 14, -4
- 260:Core/Src/main.c ****   /* USER CODE BEGIN Callback 0 */
- 261:Core/Src/main.c **** 
- 262:Core/Src/main.c ****   /* USER CODE END Callback 0 */
- 263:Core/Src/main.c ****   if (htim->Instance == TIM4) {
-  84              		.loc 1 263 3 is_stmt 1 view .LVU7
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 7
+ 259:Core/Src/main.c ****   /* USER CODE BEGIN Callback 0 */
+ 260:Core/Src/main.c **** 
+ 261:Core/Src/main.c ****   /* USER CODE END Callback 0 */
+ 262:Core/Src/main.c ****   if (htim->Instance == TIM4) {
+  84              		.loc 1 262 3 is_stmt 1 view .LVU7
+  85              		.loc 1 262 11 is_stmt 0 view .LVU8
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 7
 
 
-  85              		.loc 1 263 11 is_stmt 0 view .LVU8
   86 0002 0268     		ldr	r2, [r0]
-  87              		.loc 1 263 6 view .LVU9
+  87              		.loc 1 262 6 view .LVU9
   88 0004 034B     		ldr	r3, .L7
   89 0006 9A42     		cmp	r2, r3
   90 0008 00D0     		beq	.L6
   91              	.LVL2:
   92              	.L3:
- 264:Core/Src/main.c ****     HAL_IncTick();
- 265:Core/Src/main.c ****   }
- 266:Core/Src/main.c ****   /* USER CODE BEGIN Callback 1 */
- 267:Core/Src/main.c **** 
- 268:Core/Src/main.c ****   /* USER CODE END Callback 1 */
- 269:Core/Src/main.c **** }
-  93              		.loc 1 269 1 view .LVU10
+ 263:Core/Src/main.c ****     HAL_IncTick();
+ 264:Core/Src/main.c ****   }
+ 265:Core/Src/main.c ****   /* USER CODE BEGIN Callback 1 */
+ 266:Core/Src/main.c **** 
+ 267:Core/Src/main.c ****   /* USER CODE END Callback 1 */
+ 268:Core/Src/main.c **** }
+  93              		.loc 1 268 1 view .LVU10
   94 000a 08BD     		pop	{r3, pc}
   95              	.LVL3:
   96              	.L6:
- 264:Core/Src/main.c ****     HAL_IncTick();
-  97              		.loc 1 264 5 is_stmt 1 view .LVU11
+ 263:Core/Src/main.c ****     HAL_IncTick();
+  97              		.loc 1 263 5 is_stmt 1 view .LVU11
   98 000c FFF7FEFF 		bl	HAL_IncTick
   99              	.LVL4:
- 100              		.loc 1 269 1 is_stmt 0 view .LVU12
+ 100              		.loc 1 268 1 is_stmt 0 view .LVU12
  101 0010 FBE7     		b	.L3
  102              	.L8:
  103 0012 00BF     		.align	2
@@ -399,14 +398,14 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
  114              		.thumb_func
  116              	Error_Handler:
  117              	.LFB583:
- 270:Core/Src/main.c **** 
- 271:Core/Src/main.c **** /**
- 272:Core/Src/main.c ****   * @brief  This function is executed in case of error occurrence.
- 273:Core/Src/main.c ****   * @retval None
- 274:Core/Src/main.c ****   */
- 275:Core/Src/main.c **** void Error_Handler(void)
- 276:Core/Src/main.c **** {
- 118              		.loc 1 276 1 is_stmt 1 view -0
+ 269:Core/Src/main.c **** 
+ 270:Core/Src/main.c **** /**
+ 271:Core/Src/main.c ****   * @brief  This function is executed in case of error occurrence.
+ 272:Core/Src/main.c ****   * @retval None
+ 273:Core/Src/main.c ****   */
+ 274:Core/Src/main.c **** void Error_Handler(void)
+ 275:Core/Src/main.c **** {
+ 118              		.loc 1 275 1 is_stmt 1 view -0
  119              		.cfi_startproc
  120              		@ Volatile: function does not return.
  121              		@ args = 0, pretend = 0, frame = 0
@@ -417,22 +416,22 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
  126              		.cfi_offset 3, -8
  127              		.cfi_offset 14, -4
  128              	.L10:
- 277:Core/Src/main.c ****   /* USER CODE BEGIN Error_Handler_Debug */
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 8
+ 276:Core/Src/main.c ****   /* USER CODE BEGIN Error_Handler_Debug */
+ 277:Core/Src/main.c ****   /* User can add his own implementation to report the HAL error return state */
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 8
 
 
- 278:Core/Src/main.c ****   /* User can add his own implementation to report the HAL error return state */
- 279:Core/Src/main.c ****   //__disable_irq();
- 280:Core/Src/main.c ****   while (1)
- 129              		.loc 1 280 3 discriminator 1 view .LVU14
- 281:Core/Src/main.c ****   {
- 282:Core/Src/main.c ****     HAL_Delay(100);
- 130              		.loc 1 282 5 discriminator 1 view .LVU15
+ 278:Core/Src/main.c ****   //__disable_irq();
+ 279:Core/Src/main.c ****   while (1)
+ 129              		.loc 1 279 3 discriminator 1 view .LVU14
+ 280:Core/Src/main.c ****   {
+ 281:Core/Src/main.c ****     HAL_Delay(100);
+ 130              		.loc 1 281 5 discriminator 1 view .LVU15
  131 0002 6420     		movs	r0, #100
  132 0004 FFF7FEFF 		bl	HAL_Delay
  133              	.LVL5:
- 280:Core/Src/main.c ****   {
- 134              		.loc 1 280 9 discriminator 1 view .LVU16
+ 279:Core/Src/main.c ****   {
+ 134              		.loc 1 279 9 discriminator 1 view .LVU16
  135 0008 FBE7     		b	.L10
  136              		.cfi_endproc
  137              	.LFE583:
@@ -444,8 +443,8 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
  144              		.thumb_func
  146              	SystemClock_Config:
  147              	.LFB579:
- 181:Core/Src/main.c ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
- 148              		.loc 1 181 1 view -0
+ 180:Core/Src/main.c ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+ 148              		.loc 1 180 1 view -0
  149              		.cfi_startproc
  150              		@ args = 0, pretend = 0, frame = 64
  151              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -456,118 +455,118 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
  156 0002 91B0     		sub	sp, sp, #68
  157              	.LCFI3:
  158              		.cfi_def_cfa_offset 72
- 182:Core/Src/main.c ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
- 159              		.loc 1 182 3 view .LVU18
- 182:Core/Src/main.c ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
- 160              		.loc 1 182 22 is_stmt 0 view .LVU19
+ 181:Core/Src/main.c ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+ 159              		.loc 1 181 3 view .LVU18
+ 181:Core/Src/main.c ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+ 160              		.loc 1 181 22 is_stmt 0 view .LVU19
  161 0004 2822     		movs	r2, #40
  162 0006 0021     		movs	r1, #0
  163 0008 06A8     		add	r0, sp, #24
  164 000a FFF7FEFF 		bl	memset
  165              	.LVL6:
- 183:Core/Src/main.c **** 
- 166              		.loc 1 183 3 is_stmt 1 view .LVU20
- 183:Core/Src/main.c **** 
- 167              		.loc 1 183 22 is_stmt 0 view .LVU21
+ 182:Core/Src/main.c **** 
+ 166              		.loc 1 182 3 is_stmt 1 view .LVU20
+ 182:Core/Src/main.c **** 
+ 167              		.loc 1 182 22 is_stmt 0 view .LVU21
  168 000e 0023     		movs	r3, #0
  169 0010 0193     		str	r3, [sp, #4]
  170 0012 0293     		str	r3, [sp, #8]
  171 0014 0393     		str	r3, [sp, #12]
  172 0016 0493     		str	r3, [sp, #16]
  173 0018 0593     		str	r3, [sp, #20]
- 188:Core/Src/main.c ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
- 174              		.loc 1 188 3 is_stmt 1 view .LVU22
- 188:Core/Src/main.c ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 9
+ 187:Core/Src/main.c ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+ 174              		.loc 1 187 3 is_stmt 1 view .LVU22
+ 187:Core/Src/main.c ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+ 175              		.loc 1 187 36 is_stmt 0 view .LVU23
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 9
 
 
- 175              		.loc 1 188 36 is_stmt 0 view .LVU23
  176 001a 0122     		movs	r2, #1
  177 001c 0692     		str	r2, [sp, #24]
- 189:Core/Src/main.c ****   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
- 178              		.loc 1 189 3 is_stmt 1 view .LVU24
- 189:Core/Src/main.c ****   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
- 179              		.loc 1 189 30 is_stmt 0 view .LVU25
+ 188:Core/Src/main.c ****   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
+ 178              		.loc 1 188 3 is_stmt 1 view .LVU24
+ 188:Core/Src/main.c ****   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
+ 179              		.loc 1 188 30 is_stmt 0 view .LVU25
  180 001e 4FF48033 		mov	r3, #65536
  181 0022 0793     		str	r3, [sp, #28]
- 190:Core/Src/main.c ****   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
- 182              		.loc 1 190 3 is_stmt 1 view .LVU26
- 191:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
- 183              		.loc 1 191 3 view .LVU27
- 191:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
- 184              		.loc 1 191 30 is_stmt 0 view .LVU28
+ 189:Core/Src/main.c ****   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+ 182              		.loc 1 189 3 is_stmt 1 view .LVU26
+ 190:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+ 183              		.loc 1 190 3 view .LVU27
+ 190:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+ 184              		.loc 1 190 30 is_stmt 0 view .LVU28
  185 0024 0A92     		str	r2, [sp, #40]
- 192:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
- 186              		.loc 1 192 3 is_stmt 1 view .LVU29
- 192:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
- 187              		.loc 1 192 34 is_stmt 0 view .LVU30
+ 191:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+ 186              		.loc 1 191 3 is_stmt 1 view .LVU29
+ 191:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+ 187              		.loc 1 191 34 is_stmt 0 view .LVU30
  188 0026 0222     		movs	r2, #2
  189 0028 0D92     		str	r2, [sp, #52]
- 193:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
- 190              		.loc 1 193 3 is_stmt 1 view .LVU31
- 193:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
- 191              		.loc 1 193 35 is_stmt 0 view .LVU32
+ 192:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
+ 190              		.loc 1 192 3 is_stmt 1 view .LVU31
+ 192:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
+ 191              		.loc 1 192 35 is_stmt 0 view .LVU32
  192 002a 0E93     		str	r3, [sp, #56]
- 194:Core/Src/main.c ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
- 193              		.loc 1 194 3 is_stmt 1 view .LVU33
- 194:Core/Src/main.c ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
- 194              		.loc 1 194 32 is_stmt 0 view .LVU34
+ 193:Core/Src/main.c ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 193              		.loc 1 193 3 is_stmt 1 view .LVU33
+ 193:Core/Src/main.c ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 194              		.loc 1 193 32 is_stmt 0 view .LVU34
  195 002c 4FF4E013 		mov	r3, #1835008
  196 0030 0F93     		str	r3, [sp, #60]
- 195:Core/Src/main.c ****   {
- 197              		.loc 1 195 3 is_stmt 1 view .LVU35
- 195:Core/Src/main.c ****   {
- 198              		.loc 1 195 7 is_stmt 0 view .LVU36
+ 194:Core/Src/main.c ****   {
+ 197              		.loc 1 194 3 is_stmt 1 view .LVU35
+ 194:Core/Src/main.c ****   {
+ 198              		.loc 1 194 7 is_stmt 0 view .LVU36
  199 0032 06A8     		add	r0, sp, #24
  200 0034 FFF7FEFF 		bl	HAL_RCC_OscConfig
  201              	.LVL7:
- 195:Core/Src/main.c ****   {
- 202              		.loc 1 195 6 view .LVU37
+ 194:Core/Src/main.c ****   {
+ 202              		.loc 1 194 6 view .LVU37
  203 0038 80B9     		cbnz	r0, .L16
- 202:Core/Src/main.c ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
- 204              		.loc 1 202 3 is_stmt 1 view .LVU38
- 202:Core/Src/main.c ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
- 205              		.loc 1 202 31 is_stmt 0 view .LVU39
+ 201:Core/Src/main.c ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+ 204              		.loc 1 201 3 is_stmt 1 view .LVU38
+ 201:Core/Src/main.c ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+ 205              		.loc 1 201 31 is_stmt 0 view .LVU39
  206 003a 0F23     		movs	r3, #15
  207 003c 0193     		str	r3, [sp, #4]
- 204:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
- 208              		.loc 1 204 3 is_stmt 1 view .LVU40
- 204:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
- 209              		.loc 1 204 34 is_stmt 0 view .LVU41
+ 203:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 208              		.loc 1 203 3 is_stmt 1 view .LVU40
+ 203:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 209              		.loc 1 203 34 is_stmt 0 view .LVU41
  210 003e 0221     		movs	r1, #2
  211 0040 0291     		str	r1, [sp, #8]
- 205:Core/Src/main.c ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
- 212              		.loc 1 205 3 is_stmt 1 view .LVU42
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 10
+ 204:Core/Src/main.c ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+ 212              		.loc 1 204 3 is_stmt 1 view .LVU42
+ 204:Core/Src/main.c ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 10
 
 
- 205:Core/Src/main.c ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
- 213              		.loc 1 205 35 is_stmt 0 view .LVU43
+ 213              		.loc 1 204 35 is_stmt 0 view .LVU43
  214 0042 0023     		movs	r3, #0
  215 0044 0393     		str	r3, [sp, #12]
- 206:Core/Src/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
- 216              		.loc 1 206 3 is_stmt 1 view .LVU44
- 206:Core/Src/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
- 217              		.loc 1 206 36 is_stmt 0 view .LVU45
+ 205:Core/Src/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+ 216              		.loc 1 205 3 is_stmt 1 view .LVU44
+ 205:Core/Src/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+ 217              		.loc 1 205 36 is_stmt 0 view .LVU45
  218 0046 4FF48062 		mov	r2, #1024
  219 004a 0492     		str	r2, [sp, #16]
- 207:Core/Src/main.c **** 
- 220              		.loc 1 207 3 is_stmt 1 view .LVU46
- 207:Core/Src/main.c **** 
- 221              		.loc 1 207 36 is_stmt 0 view .LVU47
+ 206:Core/Src/main.c **** 
+ 220              		.loc 1 206 3 is_stmt 1 view .LVU46
+ 206:Core/Src/main.c **** 
+ 221              		.loc 1 206 36 is_stmt 0 view .LVU47
  222 004c 0593     		str	r3, [sp, #20]
- 209:Core/Src/main.c ****   {
- 223              		.loc 1 209 3 is_stmt 1 view .LVU48
- 209:Core/Src/main.c ****   {
- 224              		.loc 1 209 7 is_stmt 0 view .LVU49
+ 208:Core/Src/main.c ****   {
+ 223              		.loc 1 208 3 is_stmt 1 view .LVU48
+ 208:Core/Src/main.c ****   {
+ 224              		.loc 1 208 7 is_stmt 0 view .LVU49
  225 004e 01A8     		add	r0, sp, #4
  226 0050 FFF7FEFF 		bl	HAL_RCC_ClockConfig
  227              	.LVL8:
- 209:Core/Src/main.c ****   {
- 228              		.loc 1 209 6 view .LVU50
+ 208:Core/Src/main.c ****   {
+ 228              		.loc 1 208 6 view .LVU50
  229 0054 20B9     		cbnz	r0, .L17
- 213:Core/Src/main.c **** 
- 230              		.loc 1 213 1 view .LVU51
+ 212:Core/Src/main.c **** 
+ 230              		.loc 1 212 1 view .LVU51
  231 0056 11B0     		add	sp, sp, #68
  232              	.LCFI4:
  233              		.cfi_remember_state
@@ -577,13 +576,13 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
  237              	.L16:
  238              	.LCFI5:
  239              		.cfi_restore_state
- 197:Core/Src/main.c ****   }
- 240              		.loc 1 197 5 is_stmt 1 view .LVU52
+ 196:Core/Src/main.c ****   }
+ 240              		.loc 1 196 5 is_stmt 1 view .LVU52
  241 005c FFF7FEFF 		bl	Error_Handler
  242              	.LVL9:
  243              	.L17:
- 211:Core/Src/main.c ****   }
- 244              		.loc 1 211 5 view .LVU53
+ 210:Core/Src/main.c ****   }
+ 244              		.loc 1 210 5 view .LVU53
  245 0060 FFF7FEFF 		bl	Error_Handler
  246              	.LVL10:
  247              		.cfi_endproc
@@ -598,10 +597,10 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
  258              	.LFB578:
   85:Core/Src/main.c ****   /* USER CODE BEGIN 1 */
  259              		.loc 1 85 1 view -0
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 11
-
-
  260              		.cfi_startproc
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 11
+
+
  261              		@ Volatile: function does not return.
  262              		@ args = 0, pretend = 0, frame = 0
  263              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -630,42 +629,38 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
  281              		.loc 1 109 3 view .LVU59
  282 0012 FFF7FEFF 		bl	MX_SPI2_Init
  283              	.LVL15:
- 110:Core/Src/main.c ****   MX_TIM3_Init();
+ 110:Core/Src/main.c ****   MX_USART1_UART_Init();
  284              		.loc 1 110 3 view .LVU60
  285 0016 FFF7FEFF 		bl	MX_TIM2_Init
  286              	.LVL16:
- 111:Core/Src/main.c ****   MX_USART1_UART_Init();
+ 111:Core/Src/main.c ****   /* USER CODE BEGIN 2 */
  287              		.loc 1 111 3 view .LVU61
- 288 001a FFF7FEFF 		bl	MX_TIM3_Init
+ 288 001a FFF7FEFF 		bl	MX_USART1_UART_Init
  289              	.LVL17:
- 112:Core/Src/main.c ****   /* USER CODE BEGIN 2 */
- 290              		.loc 1 112 3 view .LVU62
- 291 001e FFF7FEFF 		bl	MX_USART1_UART_Init
- 292              	.LVL18:
- 117:Core/Src/main.c ****   LL_GPIO_SetOutputPin(USB_ReNum_GPIO_Port,USB_ReNum_Pin);
- 293              		.loc 1 117 3 view .LVU63
- 294 0022 094A     		ldr	r2, .L21
- 295 0024 1368     		ldr	r3, [r2]
- 296 0026 43F00103 		orr	r3, r3, #1
- 297 002a 1360     		str	r3, [r2]
- 118:Core/Src/main.c **** 
- 298              		.loc 1 118 3 view .LVU64
- 299              	.LVL19:
- 300              	.LBB4:
- 301              	.LBI4:
- 302              		.file 2 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h"
+ 116:Core/Src/main.c ****   LL_GPIO_SetOutputPin(USB_ReNum_GPIO_Port,USB_ReNum_Pin);
+ 290              		.loc 1 116 3 view .LVU62
+ 291 001e 094A     		ldr	r2, .L21
+ 292 0020 1368     		ldr	r3, [r2]
+ 293 0022 43F00103 		orr	r3, r3, #1
+ 294 0026 1360     		str	r3, [r2]
+ 117:Core/Src/main.c **** 
+ 295              		.loc 1 117 3 view .LVU63
+ 296              	.LVL18:
+ 297              	.LBB4:
+ 298              	.LBI4:
+ 299              		.file 2 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h"
    1:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
    2:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   ******************************************************************************
    3:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @file    stm32f1xx_ll_gpio.h
    4:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @author  MCD Application Team
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 12
-
-
    5:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief   Header file of GPIO LL module.
    6:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   ******************************************************************************
    7:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @attention
    8:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *
    9:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 12
+
+
   10:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * All rights reserved.</center></h2>
   11:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *
   12:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * This software component is licensed by ST under BSD 3-Clause license,
@@ -718,14 +713,14 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
   59:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
   60:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
   61:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 13
-
-
   62:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @}
   63:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
   64:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #endif /*USE_FULL_LL_DRIVER*/
   65:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
   66:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /* Exported types ------------------------------------------------------------*/
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 13
+
+
   67:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #if defined(USE_FULL_LL_DRIVER)
   68:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /** @defgroup GPIO_LL_ES_INIT GPIO Exported Init structures
   69:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @{
@@ -778,14 +773,14 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
  116:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_2                    ((GPIO_BSRR_BS2  << GPIO_PIN_MASK_POS) | 0x00000004U)  /*!
  117:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_3                    ((GPIO_BSRR_BS3  << GPIO_PIN_MASK_POS) | 0x00000008U)  /*!
  118:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_4                    ((GPIO_BSRR_BS4  << GPIO_PIN_MASK_POS) | 0x00000010U)  /*!
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 14
-
-
  119:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_5                    ((GPIO_BSRR_BS5  << GPIO_PIN_MASK_POS) | 0x00000020U)  /*!
  120:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_6                    ((GPIO_BSRR_BS6  << GPIO_PIN_MASK_POS) | 0x00000040U)  /*!
  121:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_7                    ((GPIO_BSRR_BS7  << GPIO_PIN_MASK_POS) | 0x00000080U)  /*!
  122:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_8                    ((GPIO_BSRR_BS8  << GPIO_PIN_MASK_POS) | 0x04000001U)  /*!
  123:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_9                    ((GPIO_BSRR_BS9  << GPIO_PIN_MASK_POS) | 0x04000002U)  /*!
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 14
+
+
  124:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_10                   ((GPIO_BSRR_BS10 << GPIO_PIN_MASK_POS) | 0x04000004U)  /*!
  125:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_11                   ((GPIO_BSRR_BS11 << GPIO_PIN_MASK_POS) | 0x04000008U)  /*!
  126:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_12                   ((GPIO_BSRR_BS12 << GPIO_PIN_MASK_POS) | 0x04000010U)  /*!
@@ -838,14 +833,14 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
  173:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_SPEED_FREQ_HIGH          LL_GPIO_MODE_OUTPUT_50MHz   /*!< Select I/O high output sp
  174:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
  175:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /** @defgroup GPIO_LL_EC_PULL Pull Up Pull Down
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 15
-
-
  176:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @{
  177:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
  178:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PULL_DOWN                0x00000000U    /*!< Select I/O pull down */
  179:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PULL_UP                  GPIO_ODR_ODR0  /*!< Select I/O pull up */
  180:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 15
+
+
  181:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
  182:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @}
  183:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
@@ -898,14 +893,14 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
  230:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_PORTD            3U   /*!< EXTI PORT D */
  231:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_PORTE            4U   /*!< EXTI PORT E */
  232:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_PORTF            5U   /*!< EXTI PORT F */
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 16
-
-
  233:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_PORTG            6U   /*!< EXTI PORT G */
  234:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
  235:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @}
  236:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
  237:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 16
+
+
  238:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /** @defgroup GPIO_LL_EC_EXTI_LINE GPIO EXTI LINE
  239:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @{
  240:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
@@ -958,14 +953,14 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
  287:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @retval Register value
  288:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
  289:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_ReadReg(__INSTANCE__, __REG__) READ_REG(__INSTANCE__->__REG__)
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 17
-
-
  290:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
  291:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @}
  292:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
  293:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
  294:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 17
+
+
  295:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @}
  296:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
  297:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
@@ -1018,14 +1013,14 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
  344:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   register uint32_t *pReg = (uint32_t *)((uint32_t)((uint32_t)(&GPIOx->CRL) + (Pin >> 24)));
  345:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   MODIFY_REG(*pReg, ((GPIO_CRL_CNF0 | GPIO_CRL_MODE0) << (POSITION_VAL(Pin) * 4U)), (Mode << (POSIT
  346:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** }
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 18
-
-
  347:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
  348:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
  349:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief  Return gpio mode for a dedicated pin on dedicated port.
  350:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @note   I/O mode can be Analog, Floating input, Input with pull-up/pull-down, General purpose O
  351:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         Alternate function Output.
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 18
+
+
  352:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
  353:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll CRL        CNFy         LL_GPIO_GetPinMode
  354:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll CRL        MODEy        LL_GPIO_GetPinMode
@@ -1078,14 +1073,14 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
  401:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
  402:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
  403:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 19
-
-
  404:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
  405:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
  406:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
  407:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
  408:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 19
+
+
  409:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
  410:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
  411:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
@@ -1138,14 +1133,14 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
  458:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_GetPinSpeed(GPIO_TypeDef *GPIOx, uint32_t Pin)
  459:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
  460:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   register uint32_t *pReg = (uint32_t *)((uint32_t)((uint32_t)(&GPIOx->CRL) + (Pin >> 24)));
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 20
-
-
  461:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   return (READ_BIT(*pReg, (GPIO_CRL_MODE0 << (POSITION_VAL(Pin) * 4U))) >> (POSITION_VAL(Pin) * 4U)
  462:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** }
  463:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
  464:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
  465:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief  Configure gpio output type for several pins on dedicated port.
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 20
+
+
  466:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @note   Output type as to be set when gpio pin is in output or
  467:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         alternate modes. Possible type are Push-pull or Open-drain.
  468:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll CRL       MODEy           LL_GPIO_SetPinOutputType
@@ -1198,14 +1193,14 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
  515:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
  516:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
  517:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 21
-
-
  518:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
  519:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
  520:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
  521:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
  522:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 21
+
+
  523:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
  524:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
  525:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
@@ -1258,14 +1253,14 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
  572:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
  573:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll ODR        ODR         LL_GPIO_GetPinPull
  574:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 22
-
-
  575:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
  576:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
  577:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
  578:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
  579:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 22
+
+
  580:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
  581:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
  582:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
@@ -1318,14 +1313,14 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
  629:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
  630:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** __STATIC_INLINE void LL_GPIO_LockPin(GPIO_TypeDef *GPIOx, uint32_t PinMask)
  631:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 23
-
-
  632:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   __IO uint32_t temp;
  633:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   WRITE_REG(GPIOx->LCKR, GPIO_LCKR_LCKK | ((PinMask >> GPIO_PIN_MASK_POS) & 0x0000FFFFU));
  634:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   WRITE_REG(GPIOx->LCKR, ((PinMask >> GPIO_PIN_MASK_POS) & 0x0000FFFFU));
  635:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   WRITE_REG(GPIOx->LCKR, GPIO_LCKR_LCKK | ((PinMask >> GPIO_PIN_MASK_POS) & 0x0000FFFFU));
  636:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   temp = READ_REG(GPIOx->LCKR);
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 23
+
+
  637:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   (void) temp;
  638:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** }
  639:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
@@ -1378,14 +1373,14 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
  686:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
  687:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
  688:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 24
-
-
  689:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief  Return full input data register value for a dedicated port.
  690:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll IDR          IDy           LL_GPIO_ReadInputPort
  691:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
  692:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @retval Input data register value of port
  693:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 24
+
+
  694:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_ReadInputPort(GPIO_TypeDef *GPIOx)
  695:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
  696:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   return (READ_REG(GPIOx->IDR));
@@ -1438,14 +1433,14 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
  743:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
  744:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @retval Output data register value of port
  745:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 25
-
-
  746:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_ReadOutputPort(GPIO_TypeDef *GPIOx)
  747:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
  748:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   return (uint32_t)(READ_REG(GPIOx->ODR));
  749:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** }
  750:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 25
+
+
  751:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
  752:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief  Return if input data level for several pins of dedicated port is high or low.
  753:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll ODR          ODy           LL_GPIO_IsOutputPinSet
@@ -1498,96 +1493,96 @@ ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 1
  800:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
  801:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
  802:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @retval None
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 26
-
-
  803:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
  804:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** __STATIC_INLINE void LL_GPIO_SetOutputPin(GPIO_TypeDef *GPIOx, uint32_t PinMask)
- 303              		.loc 2 804 22 view .LVU65
- 304              	.LBB5:
+ 300              		.loc 2 804 22 view .LVU64
+ 301              	.LBB5:
  805:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 26
+
+
  806:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   WRITE_REG(GPIOx->BSRR, (PinMask >> GPIO_PIN_MASK_POS) & 0x0000FFFFU);
- 305              		.loc 2 806 3 view .LVU66
- 306 002c 074B     		ldr	r3, .L21+4
- 307 002e 4FF48062 		mov	r2, #1024
- 308 0032 1A61     		str	r2, [r3, #16]
- 309              	.LVL20:
- 310              		.loc 2 806 3 is_stmt 0 view .LVU67
- 311              	.LBE5:
- 312              	.LBE4:
- 130:Core/Src/main.c ****   MX_FREERTOS_Init();
- 313              		.loc 1 130 3 is_stmt 1 view .LVU68
- 314 0034 FFF7FEFF 		bl	osKernelInitialize
+ 302              		.loc 2 806 3 view .LVU65
+ 303 0028 074B     		ldr	r3, .L21+4
+ 304 002a 4FF48062 		mov	r2, #1024
+ 305 002e 1A61     		str	r2, [r3, #16]
+ 306              	.LVL19:
+ 307              		.loc 2 806 3 is_stmt 0 view .LVU66
+ 308              	.LBE5:
+ 309              	.LBE4:
+ 129:Core/Src/main.c ****   MX_FREERTOS_Init();
+ 310              		.loc 1 129 3 is_stmt 1 view .LVU67
+ 311 0030 FFF7FEFF 		bl	osKernelInitialize
+ 312              	.LVL20:
+ 130:Core/Src/main.c **** 
+ 313              		.loc 1 130 3 view .LVU68
+ 314 0034 FFF7FEFF 		bl	MX_FREERTOS_Init
  315              	.LVL21:
- 131:Core/Src/main.c **** 
- 316              		.loc 1 131 3 view .LVU69
- 317 0038 FFF7FEFF 		bl	MX_FREERTOS_Init
+ 133:Core/Src/main.c **** 
+ 316              		.loc 1 133 3 view .LVU69
+ 317 0038 FFF7FEFF 		bl	osKernelStart
  318              	.LVL22:
- 134:Core/Src/main.c **** 
- 319              		.loc 1 134 3 view .LVU70
- 320 003c FFF7FEFF 		bl	osKernelStart
- 321              	.LVL23:
- 322              	.L19:
- 139:Core/Src/main.c ****   {
- 323              		.loc 1 139 3 discriminator 1 view .LVU71
- 166:Core/Src/main.c **** 	  // LL_GPIO_TogglePin(O_D_Led_GPIO_Port, O_D_Led_Pin);
- 324              		.loc 1 166 4 discriminator 1 view .LVU72
- 325 0040 0120     		movs	r0, #1
- 326 0042 FFF7FEFF 		bl	HAL_Delay
- 327              	.LVL24:
- 139:Core/Src/main.c ****   {
- 328              		.loc 1 139 9 discriminator 1 view .LVU73
- 329 0046 FBE7     		b	.L19
- 330              	.L22:
- 331              		.align	2
- 332              	.L21:
- 333 0048 001000E0 		.word	-536866816
- 334 004c 00080140 		.word	1073809408
- 335              		.cfi_endproc
- 336              	.LFE578:
- 338              		.text
- 339              	.Letext0:
- 340              		.file 3 "c:\\vscode\\vscodestmtools\\arm-none-eabi-gcc\\12.2.1-1.2.1\\.content\\arm-none-eabi\\inc
- 341              		.file 4 "c:\\vscode\\vscodestmtools\\arm-none-eabi-gcc\\12.2.1-1.2.1\\.content\\arm-none-eabi\\inc
- 342              		.file 5 "Drivers/CMSIS/Include/core_cm3.h"
- 343              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
- 344              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
- 345              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h"
- 346              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h"
- 347              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
- 348              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
- 349              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h"
- 350              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h"
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 27
+ 319              	.L19:
+ 138:Core/Src/main.c ****   {
+ 320              		.loc 1 138 3 discriminator 1 view .LVU70
+ 165:Core/Src/main.c **** 	  // LL_GPIO_TogglePin(O_D_Led_GPIO_Port, O_D_Led_Pin);
+ 321              		.loc 1 165 4 discriminator 1 view .LVU71
+ 322 003c 0120     		movs	r0, #1
+ 323 003e FFF7FEFF 		bl	HAL_Delay
+ 324              	.LVL23:
+ 138:Core/Src/main.c ****   {
+ 325              		.loc 1 138 9 discriminator 1 view .LVU72
+ 326 0042 FBE7     		b	.L19
+ 327              	.L22:
+ 328              		.align	2
+ 329              	.L21:
+ 330 0044 001000E0 		.word	-536866816
+ 331 0048 00080140 		.word	1073809408
+ 332              		.cfi_endproc
+ 333              	.LFE578:
+ 335              		.text
+ 336              	.Letext0:
+ 337              		.file 3 "c:\\vscode\\vscodestmtools\\arm-none-eabi-gcc\\12.2.1-1.2.1\\.content\\arm-none-eabi\\inc
+ 338              		.file 4 "c:\\vscode\\vscodestmtools\\arm-none-eabi-gcc\\12.2.1-1.2.1\\.content\\arm-none-eabi\\inc
+ 339              		.file 5 "Drivers/CMSIS/Include/core_cm3.h"
+ 340              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 341              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 342              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h"
+ 343              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h"
+ 344              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 345              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
+ 346              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h"
+ 347              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h"
+ 348              		.file 14 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h"
+ 349              		.file 15 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 350              		.file 16 "Core/Inc/usart.h"
+ 351              		.file 17 "Core/Inc/tim.h"
+ 352              		.file 18 "Core/Inc/spi.h"
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 27
 
 
- 351              		.file 14 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h"
- 352              		.file 15 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
- 353              		.file 16 "Core/Inc/usart.h"
- 354              		.file 17 "Core/Inc/tim.h"
- 355              		.file 18 "Core/Inc/spi.h"
- 356              		.file 19 "Core/Inc/dma.h"
- 357              		.file 20 "Core/Inc/gpio.h"
- 358              		.file 21 "<built-in>"
-ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s 			page 28
+ 353              		.file 19 "Core/Inc/dma.h"
+ 354              		.file 20 "Core/Inc/gpio.h"
+ 355              		.file 21 "<built-in>"
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s 			page 28
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s:19     .text.HAL_GPIO_EXTI_Callback:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s:25     .text.HAL_GPIO_EXTI_Callback:0000000000000000 HAL_GPIO_EXTI_Callback
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s:46     .text.mainSysTicCallBack:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s:52     .text.mainSysTicCallBack:0000000000000000 mainSysTicCallBack
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s:65     .text.HAL_TIM_PeriodElapsedCallback:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s:71     .text.HAL_TIM_PeriodElapsedCallback:0000000000000000 HAL_TIM_PeriodElapsedCallback
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s:105    .text.HAL_TIM_PeriodElapsedCallback:0000000000000014 $d
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s:110    .text.Error_Handler:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s:116    .text.Error_Handler:0000000000000000 Error_Handler
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s:140    .text.SystemClock_Config:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s:146    .text.SystemClock_Config:0000000000000000 SystemClock_Config
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s:251    .text.main:0000000000000000 $t
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s:257    .text.main:0000000000000000 main
-C:\Users\VIDCOM~1\AppData\Local\Temp\cczyeGif.s:333    .text.main:0000000000000048 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s:19     .text.HAL_GPIO_EXTI_Callback:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s:25     .text.HAL_GPIO_EXTI_Callback:0000000000000000 HAL_GPIO_EXTI_Callback
+C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s:46     .text.mainSysTicCallBack:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s:52     .text.mainSysTicCallBack:0000000000000000 mainSysTicCallBack
+C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s:65     .text.HAL_TIM_PeriodElapsedCallback:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s:71     .text.HAL_TIM_PeriodElapsedCallback:0000000000000000 HAL_TIM_PeriodElapsedCallback
+C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s:105    .text.HAL_TIM_PeriodElapsedCallback:0000000000000014 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s:110    .text.Error_Handler:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s:116    .text.Error_Handler:0000000000000000 Error_Handler
+C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s:140    .text.SystemClock_Config:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s:146    .text.SystemClock_Config:0000000000000000 SystemClock_Config
+C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s:251    .text.main:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s:257    .text.main:0000000000000000 main
+C:\Users\VIDCOM~1\AppData\Local\Temp\cc8C1cHI.s:330    .text.main:0000000000000044 $d
 
 UNDEFINED SYMBOLS
 HAL_IncTick
@@ -1600,7 +1595,6 @@ MX_GPIO_Init
 MX_DMA_Init
 MX_SPI2_Init
 MX_TIM2_Init
-MX_TIM3_Init
 MX_USART1_UART_Init
 osKernelInitialize
 MX_FREERTOS_Init
