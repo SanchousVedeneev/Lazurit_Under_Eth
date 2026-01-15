@@ -9,14 +9,6 @@ typedef enum{
     MBP_reg_2,
     MBP_reg_3,
     MBP_reg_4,
-    MBP_reg_5,
-    MBP_reg_6,
-    MBP_reg_7,
-    MBP_reg_8,
-    MBP_reg_9,
-    MBP_reg_10,
-    MBP_reg_11,
-    MBP_reg_12
 }ModbusProtocol_enum_t;
 
 #endif
