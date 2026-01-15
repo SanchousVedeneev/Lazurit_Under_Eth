@@ -1,0 +1,1222 @@
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"ModbusSS.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.file 1 "Drivers/ModbusSS/ModbusSS.c"
+  18              		.section	.text.getTable,"ax",%progbits
+  19              		.align	1
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	getTable:
+  25              	.LVL0:
+  26              	.LFB577:
+   1:Drivers/ModbusSS/ModbusSS.c **** 
+   2:Drivers/ModbusSS/ModbusSS.c **** #include "ModbusSS.h"
+   3:Drivers/ModbusSS/ModbusSS.c **** 
+   4:Drivers/ModbusSS/ModbusSS.c **** __STATIC_INLINE uint16_t _Crc16(uint8_t *pcBlock, uint16_t len);
+   5:Drivers/ModbusSS/ModbusSS.c **** __STATIC_INLINE ModbusSS_table_t *getTable(ModbusSS_t *core, uint8_t f, uint16_t r, uint16_t q);
+   6:Drivers/ModbusSS/ModbusSS.c **** 
+   7:Drivers/ModbusSS/ModbusSS.c **** #define GET_DATA(buf, idx) *(buf + idx)
+   8:Drivers/ModbusSS/ModbusSS.c **** #define WRITE_DATA(buf, idx, value) (*(buf + idx) = value)
+   9:Drivers/ModbusSS/ModbusSS.c **** #define GET_WORD(buf, idx) (((uint16_t) * (buf + idx + 1)) | (((uint16_t) * (buf + idx)) << 8))
+  10:Drivers/ModbusSS/ModbusSS.c **** #define WRITE_WORD(buf, idx, word) (*((uint16_t *)(buf) + idx) = (((word) >> 8) | (word) << 8))
+  11:Drivers/ModbusSS/ModbusSS.c **** 
+  12:Drivers/ModbusSS/ModbusSS.c **** #define MB_ECODE_IN_RANGE (2)
+  13:Drivers/ModbusSS/ModbusSS.c **** #define MODBUS_TCP_BUF_OFFSET (6)
+  14:Drivers/ModbusSS/ModbusSS.c **** #define MB_POS_SLAVE_ID (0)
+  15:Drivers/ModbusSS/ModbusSS.c **** #define MB_POS_FUNC (1)
+  16:Drivers/ModbusSS/ModbusSS.c **** #define MB_POS_REG (2)
+  17:Drivers/ModbusSS/ModbusSS.c **** #define MB_POS_ECODE (2)
+  18:Drivers/ModbusSS/ModbusSS.c **** #define MB_POS_BYTE_CNT (2)
+  19:Drivers/ModbusSS/ModbusSS.c **** #define MB_POS_DATA (3)
+  20:Drivers/ModbusSS/ModbusSS.c **** #define MB_POS_QUANTITY (4)
+  21:Drivers/ModbusSS/ModbusSS.c **** 
+  22:Drivers/ModbusSS/ModbusSS.c **** #define MB_ERR_FUNC  (0x01)
+  23:Drivers/ModbusSS/ModbusSS.c **** #define MB_ERR_RANGE (0x02)
+  24:Drivers/ModbusSS/ModbusSS.c **** 
+  25:Drivers/ModbusSS/ModbusSS.c **** int32_t ModbusSS_ParseRxData(ModbusSS_t *mbCore)
+  26:Drivers/ModbusSS/ModbusSS.c **** {
+  27:Drivers/ModbusSS/ModbusSS.c ****     int32_t retLenError = -1;
+  28:Drivers/ModbusSS/ModbusSS.c **** #ifdef MODBUS_SS_STATIC
+  29:Drivers/ModbusSS/ModbusSS.c ****     if (mbCore == NULL)
+  30:Drivers/ModbusSS/ModbusSS.c ****     {
+  31:Drivers/ModbusSS/ModbusSS.c ****         return retLenError;
+  32:Drivers/ModbusSS/ModbusSS.c ****     }
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s 			page 2
+
+
+  33:Drivers/ModbusSS/ModbusSS.c **** #else
+  34:Drivers/ModbusSS/ModbusSS.c ****     if ((mbCore == NULL) || mbCore->bufRxTx == NULL)
+  35:Drivers/ModbusSS/ModbusSS.c ****     {
+  36:Drivers/ModbusSS/ModbusSS.c ****         return retLenError;
+  37:Drivers/ModbusSS/ModbusSS.c ****     }
+  38:Drivers/ModbusSS/ModbusSS.c **** #endif
+  39:Drivers/ModbusSS/ModbusSS.c ****     uint8_t* buf = mbCore->bufRxTx;
+  40:Drivers/ModbusSS/ModbusSS.c ****     if (mbCore->rtuTcp == MODBUS_SS_TCP)
+  41:Drivers/ModbusSS/ModbusSS.c ****     {
+  42:Drivers/ModbusSS/ModbusSS.c ****         buf += MODBUS_TCP_BUF_OFFSET;
+  43:Drivers/ModbusSS/ModbusSS.c ****     }
+  44:Drivers/ModbusSS/ModbusSS.c ****     // Slave Id check
+  45:Drivers/ModbusSS/ModbusSS.c ****     if (mbCore->slaveId != GET_DATA(buf, MB_POS_SLAVE_ID))
+  46:Drivers/ModbusSS/ModbusSS.c ****     {
+  47:Drivers/ModbusSS/ModbusSS.c ****         return retLenError;
+  48:Drivers/ModbusSS/ModbusSS.c ****     }
+  49:Drivers/ModbusSS/ModbusSS.c **** 
+  50:Drivers/ModbusSS/ModbusSS.c ****     // get func
+  51:Drivers/ModbusSS/ModbusSS.c ****     uint8_t func = GET_DATA(buf, MB_POS_FUNC);
+  52:Drivers/ModbusSS/ModbusSS.c **** 
+  53:Drivers/ModbusSS/ModbusSS.c ****     // get req len
+  54:Drivers/ModbusSS/ModbusSS.c ****     uint16_t reqLen = 0;
+  55:Drivers/ModbusSS/ModbusSS.c ****     if (func >= 0x01 && func <= 0x06)
+  56:Drivers/ModbusSS/ModbusSS.c ****         reqLen = 6;
+  57:Drivers/ModbusSS/ModbusSS.c ****     else if (func == 0x0F || func == 0x10)
+  58:Drivers/ModbusSS/ModbusSS.c ****     {
+  59:Drivers/ModbusSS/ModbusSS.c ****         reqLen = 7 + *(buf + 6);
+  60:Drivers/ModbusSS/ModbusSS.c ****     }
+  61:Drivers/ModbusSS/ModbusSS.c ****     else
+  62:Drivers/ModbusSS/ModbusSS.c ****     {
+  63:Drivers/ModbusSS/ModbusSS.c ****         return retLenError;
+  64:Drivers/ModbusSS/ModbusSS.c ****     }
+  65:Drivers/ModbusSS/ModbusSS.c **** 
+  66:Drivers/ModbusSS/ModbusSS.c ****     // check Crc
+  67:Drivers/ModbusSS/ModbusSS.c ****     if (mbCore->rtuTcp == MODBUS_SS_RTU)
+  68:Drivers/ModbusSS/ModbusSS.c ****     {
+  69:Drivers/ModbusSS/ModbusSS.c ****         uint16_t readCrc = GET_DATA(buf, reqLen);
+  70:Drivers/ModbusSS/ModbusSS.c ****         uint16_t getCrc = _Crc16(buf, reqLen);
+  71:Drivers/ModbusSS/ModbusSS.c ****         if (readCrc != getCrc)
+  72:Drivers/ModbusSS/ModbusSS.c ****         {
+  73:Drivers/ModbusSS/ModbusSS.c ****             return retLenError;
+  74:Drivers/ModbusSS/ModbusSS.c ****         }
+  75:Drivers/ModbusSS/ModbusSS.c ****     }
+  76:Drivers/ModbusSS/ModbusSS.c **** 
+  77:Drivers/ModbusSS/ModbusSS.c ****     // cb new req
+  78:Drivers/ModbusSS/ModbusSS.c ****     if (mbCore->cbNewRequest != NULL)
+  79:Drivers/ModbusSS/ModbusSS.c ****         mbCore->cbNewRequest();
+  80:Drivers/ModbusSS/ModbusSS.c **** 
+  81:Drivers/ModbusSS/ModbusSS.c ****     switch (func)
+  82:Drivers/ModbusSS/ModbusSS.c ****     {
+  83:Drivers/ModbusSS/ModbusSS.c ****     case 0x03:
+  84:Drivers/ModbusSS/ModbusSS.c ****     {
+  85:Drivers/ModbusSS/ModbusSS.c ****         uint16_t r = GET_WORD(buf, MB_POS_REG);
+  86:Drivers/ModbusSS/ModbusSS.c ****         uint16_t q = GET_WORD(buf, MB_POS_QUANTITY);
+  87:Drivers/ModbusSS/ModbusSS.c ****         ModbusSS_table_t *table = getTable(mbCore, func, r, q);
+  88:Drivers/ModbusSS/ModbusSS.c ****         if (table == NULL)
+  89:Drivers/ModbusSS/ModbusSS.c ****         {
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s 			page 3
+
+
+  90:Drivers/ModbusSS/ModbusSS.c ****             WRITE_WORD(buf + 1, 0, (func | 0x80)<<8 | MB_ERR_RANGE);
+  91:Drivers/ModbusSS/ModbusSS.c ****             retLenError = 3;
+  92:Drivers/ModbusSS/ModbusSS.c ****         }
+  93:Drivers/ModbusSS/ModbusSS.c ****         else
+  94:Drivers/ModbusSS/ModbusSS.c ****         {
+  95:Drivers/ModbusSS/ModbusSS.c ****             *(buf + MB_POS_BYTE_CNT) = (uint8_t)q * 2;
+  96:Drivers/ModbusSS/ModbusSS.c ****             if (mbCore->cbHoldingRequest != NULL)
+  97:Drivers/ModbusSS/ModbusSS.c ****                 mbCore->cbHoldingRequest(table, r, q);
+  98:Drivers/ModbusSS/ModbusSS.c ****             for (int i = 0; i < q; i++)
+  99:Drivers/ModbusSS/ModbusSS.c ****             {
+ 100:Drivers/ModbusSS/ModbusSS.c ****                 WRITE_WORD(buf + 3, i, ModbusSS_GetWord(table, r + i));
+ 101:Drivers/ModbusSS/ModbusSS.c ****             }
+ 102:Drivers/ModbusSS/ModbusSS.c ****             retLenError = q * 2 + 3;
+ 103:Drivers/ModbusSS/ModbusSS.c ****         }
+ 104:Drivers/ModbusSS/ModbusSS.c ****     }
+ 105:Drivers/ModbusSS/ModbusSS.c ****     break;
+ 106:Drivers/ModbusSS/ModbusSS.c ****     case 0x06:
+ 107:Drivers/ModbusSS/ModbusSS.c ****     {
+ 108:Drivers/ModbusSS/ModbusSS.c ****         uint16_t r = GET_WORD(buf, MB_POS_REG);
+ 109:Drivers/ModbusSS/ModbusSS.c ****         ModbusSS_table_t *table = getTable(mbCore, func, r, 1);
+ 110:Drivers/ModbusSS/ModbusSS.c ****         if (table == NULL)
+ 111:Drivers/ModbusSS/ModbusSS.c ****         {
+ 112:Drivers/ModbusSS/ModbusSS.c ****             WRITE_WORD(buf, MB_POS_FUNC, func | 0x80 | MB_ERR_RANGE << 8);
+ 113:Drivers/ModbusSS/ModbusSS.c ****             retLenError = 3;
+ 114:Drivers/ModbusSS/ModbusSS.c ****         }
+ 115:Drivers/ModbusSS/ModbusSS.c ****         else
+ 116:Drivers/ModbusSS/ModbusSS.c ****         {
+ 117:Drivers/ModbusSS/ModbusSS.c ****             ModbusSS_SetWord(table,r,GET_WORD(buf,4));
+ 118:Drivers/ModbusSS/ModbusSS.c ****             if (mbCore->cbHoldingUpdate != NULL)
+ 119:Drivers/ModbusSS/ModbusSS.c ****                 mbCore->cbHoldingUpdate(table, r, 1);
+ 120:Drivers/ModbusSS/ModbusSS.c ****             retLenError = reqLen;
+ 121:Drivers/ModbusSS/ModbusSS.c ****         }
+ 122:Drivers/ModbusSS/ModbusSS.c ****     }
+ 123:Drivers/ModbusSS/ModbusSS.c ****     break;
+ 124:Drivers/ModbusSS/ModbusSS.c ****     default:
+ 125:Drivers/ModbusSS/ModbusSS.c ****         WRITE_WORD(buf, MB_POS_FUNC, func | 0x80 | MB_ERR_FUNC << 8);
+ 126:Drivers/ModbusSS/ModbusSS.c ****         retLenError = 3;
+ 127:Drivers/ModbusSS/ModbusSS.c ****         break;
+ 128:Drivers/ModbusSS/ModbusSS.c ****     }
+ 129:Drivers/ModbusSS/ModbusSS.c **** 
+ 130:Drivers/ModbusSS/ModbusSS.c ****     if (mbCore->rtuTcp == MODBUS_SS_TCP)
+ 131:Drivers/ModbusSS/ModbusSS.c ****     {
+ 132:Drivers/ModbusSS/ModbusSS.c ****         WRITE_WORD(buf, -1, retLenError);
+ 133:Drivers/ModbusSS/ModbusSS.c ****         retLenError += MODBUS_TCP_BUF_OFFSET;
+ 134:Drivers/ModbusSS/ModbusSS.c ****     }
+ 135:Drivers/ModbusSS/ModbusSS.c ****     else
+ 136:Drivers/ModbusSS/ModbusSS.c ****     {
+ 137:Drivers/ModbusSS/ModbusSS.c ****         uint16_t crc = _Crc16(buf, retLenError);
+ 138:Drivers/ModbusSS/ModbusSS.c ****         // WRITE_REG()
+ 139:Drivers/ModbusSS/ModbusSS.c ****     }
+ 140:Drivers/ModbusSS/ModbusSS.c ****     return retLenError;
+ 141:Drivers/ModbusSS/ModbusSS.c **** }
+ 142:Drivers/ModbusSS/ModbusSS.c **** 
+ 143:Drivers/ModbusSS/ModbusSS.c **** __INLINE uint16_t ModbusSS_GetWord(ModbusSS_table_t *table, uint16_t regNo)
+ 144:Drivers/ModbusSS/ModbusSS.c **** {
+ 145:Drivers/ModbusSS/ModbusSS.c ****     uint16_t idx = regNo - table->regNo;
+ 146:Drivers/ModbusSS/ModbusSS.c ****     return *((uint16_t*)table->buf + idx);
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s 			page 4
+
+
+ 147:Drivers/ModbusSS/ModbusSS.c **** }
+ 148:Drivers/ModbusSS/ModbusSS.c **** 
+ 149:Drivers/ModbusSS/ModbusSS.c **** void ModbusSS_SetWord(ModbusSS_table_t *table, uint16_t regNo, uint16_t value)
+ 150:Drivers/ModbusSS/ModbusSS.c **** {
+ 151:Drivers/ModbusSS/ModbusSS.c ****     // if(regNo < table->regNo || (regNo >= table->regNo + table->quantity)){
+ 152:Drivers/ModbusSS/ModbusSS.c ****     //     return 0;
+ 153:Drivers/ModbusSS/ModbusSS.c ****     // }
+ 154:Drivers/ModbusSS/ModbusSS.c ****     *((uint16_t*)table->buf + regNo - table->regNo) = value;
+ 155:Drivers/ModbusSS/ModbusSS.c **** }
+ 156:Drivers/ModbusSS/ModbusSS.c **** 
+ 157:Drivers/ModbusSS/ModbusSS.c **** __STATIC_INLINE ModbusSS_table_t *getTable(ModbusSS_t *core, uint8_t f, uint16_t r, uint16_t q)
+ 158:Drivers/ModbusSS/ModbusSS.c **** {
+  27              		.loc 1 158 1 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		.loc 1 158 1 is_stmt 0 view .LVU1
+  32 0000 70B5     		push	{r4, r5, r6, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 16
+  35              		.cfi_offset 4, -16
+  36              		.cfi_offset 5, -12
+  37              		.cfi_offset 6, -8
+  38              		.cfi_offset 14, -4
+  39 0002 0446     		mov	r4, r0
+ 159:Drivers/ModbusSS/ModbusSS.c **** 
+ 160:Drivers/ModbusSS/ModbusSS.c ****     for (int i = 0; i < core->tablesCount; i++)
+  40              		.loc 1 160 5 is_stmt 1 view .LVU2
+  41              	.LBB11:
+  42              		.loc 1 160 10 view .LVU3
+  43              	.LVL1:
+  44              		.loc 1 160 14 is_stmt 0 view .LVU4
+  45 0004 4FF0000E 		mov	lr, #0
+  46              		.loc 1 160 5 view .LVU5
+  47 0008 14E0     		b	.L2
+  48              	.LVL2:
+  49              	.L9:
+  50              	.LBB12:
+ 161:Drivers/ModbusSS/ModbusSS.c ****     {
+ 162:Drivers/ModbusSS/ModbusSS.c ****         ModbusSS_table_t *table = core->tables[i];
+ 163:Drivers/ModbusSS/ModbusSS.c ****         if (table == NULL)
+ 164:Drivers/ModbusSS/ModbusSS.c ****             return NULL;
+ 165:Drivers/ModbusSS/ModbusSS.c ****         if (r < table->regNo || r + q - 1 > table->regNo + table->quantity - 1)
+ 166:Drivers/ModbusSS/ModbusSS.c ****         {
+ 167:Drivers/ModbusSS/ModbusSS.c ****             continue;
+ 168:Drivers/ModbusSS/ModbusSS.c ****         }
+ 169:Drivers/ModbusSS/ModbusSS.c ****         switch (table->type)
+ 170:Drivers/ModbusSS/ModbusSS.c ****         {
+ 171:Drivers/ModbusSS/ModbusSS.c ****         case ModbusSS_Holding:
+ 172:Drivers/ModbusSS/ModbusSS.c ****             if((f!=0x03)&&(f!=0x06)&&(f!=0x10)) continue;
+  51              		.loc 1 172 13 is_stmt 1 view .LVU6
+  52              		.loc 1 172 15 is_stmt 0 view .LVU7
+  53 000a 0329     		cmp	r1, #3
+  54 000c 06D0     		beq	.L1
+  55              		.loc 1 172 25 discriminator 1 view .LVU8
+  56 000e 0629     		cmp	r1, #6
+  57 0010 04D0     		beq	.L1
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s 			page 5
+
+
+  58              		.loc 1 172 36 discriminator 2 view .LVU9
+  59 0012 1029     		cmp	r1, #16
+  60 0014 02D0     		beq	.L1
+  61 0016 0BE0     		b	.L4
+  62              	.L8:
+ 173:Drivers/ModbusSS/ModbusSS.c ****             break;
+ 174:Drivers/ModbusSS/ModbusSS.c ****         case ModbusSS_Input:
+ 175:Drivers/ModbusSS/ModbusSS.c ****             if(f!=0x04) continue;
+  63              		.loc 1 175 13 is_stmt 1 view .LVU10
+  64              		.loc 1 175 15 is_stmt 0 view .LVU11
+  65 0018 0429     		cmp	r1, #4
+  66 001a 09D1     		bne	.L4
+  67              	.LVL3:
+  68              	.L1:
+  69              		.loc 1 175 15 view .LVU12
+  70              	.LBE12:
+  71              	.LBE11:
+ 176:Drivers/ModbusSS/ModbusSS.c ****             break;
+ 177:Drivers/ModbusSS/ModbusSS.c ****         case ModbusSS_Coils:
+ 178:Drivers/ModbusSS/ModbusSS.c ****             if((f!=0x01)&&(f!=0x05)&&(f!=0x0F)) continue;
+ 179:Drivers/ModbusSS/ModbusSS.c ****             break;
+ 180:Drivers/ModbusSS/ModbusSS.c ****         case ModbusSS_DI:
+ 181:Drivers/ModbusSS/ModbusSS.c ****             if(f!=0x02) continue;
+ 182:Drivers/ModbusSS/ModbusSS.c ****             break;
+ 183:Drivers/ModbusSS/ModbusSS.c ****         default:
+ 184:Drivers/ModbusSS/ModbusSS.c ****             continue;
+ 185:Drivers/ModbusSS/ModbusSS.c ****             break;
+ 186:Drivers/ModbusSS/ModbusSS.c ****         }
+ 187:Drivers/ModbusSS/ModbusSS.c **** 
+ 188:Drivers/ModbusSS/ModbusSS.c ****         return table;
+ 189:Drivers/ModbusSS/ModbusSS.c ****     }
+ 190:Drivers/ModbusSS/ModbusSS.c ****     return NULL;
+ 191:Drivers/ModbusSS/ModbusSS.c **** }
+  72              		.loc 1 191 1 view .LVU13
+  73 001c 70BD     		pop	{r4, r5, r6, pc}
+  74              	.LVL4:
+  75              	.L7:
+  76              	.LBB15:
+  77              	.LBB13:
+ 178:Drivers/ModbusSS/ModbusSS.c ****             break;
+  78              		.loc 1 178 13 is_stmt 1 view .LVU14
+ 178:Drivers/ModbusSS/ModbusSS.c ****             break;
+  79              		.loc 1 178 15 is_stmt 0 view .LVU15
+  80 001e 0129     		cmp	r1, #1
+  81 0020 FCD0     		beq	.L1
+ 178:Drivers/ModbusSS/ModbusSS.c ****             break;
+  82              		.loc 1 178 25 discriminator 1 view .LVU16
+  83 0022 0529     		cmp	r1, #5
+  84 0024 FAD0     		beq	.L1
+ 178:Drivers/ModbusSS/ModbusSS.c ****             break;
+  85              		.loc 1 178 36 discriminator 2 view .LVU17
+  86 0026 0F29     		cmp	r1, #15
+  87 0028 F8D0     		beq	.L1
+  88 002a 01E0     		b	.L4
+  89              	.L5:
+ 181:Drivers/ModbusSS/ModbusSS.c ****             break;
+  90              		.loc 1 181 13 is_stmt 1 view .LVU18
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s 			page 6
+
+
+ 181:Drivers/ModbusSS/ModbusSS.c ****             break;
+  91              		.loc 1 181 15 is_stmt 0 view .LVU19
+  92 002c 0229     		cmp	r1, #2
+  93 002e F5D0     		beq	.L1
+  94              	.L4:
+  95              	.LBE13:
+ 160:Drivers/ModbusSS/ModbusSS.c ****     {
+  96              		.loc 1 160 45 is_stmt 1 discriminator 2 view .LVU20
+  97 0030 0EF1010E 		add	lr, lr, #1
+  98              	.LVL5:
+  99              	.L2:
+ 160:Drivers/ModbusSS/ModbusSS.c ****     {
+ 100              		.loc 1 160 23 discriminator 1 view .LVU21
+ 160:Drivers/ModbusSS/ModbusSS.c ****     {
+ 101              		.loc 1 160 29 is_stmt 0 discriminator 1 view .LVU22
+ 102 0034 207F     		ldrb	r0, [r4, #28]	@ zero_extendqisi2
+ 160:Drivers/ModbusSS/ModbusSS.c ****     {
+ 103              		.loc 1 160 23 discriminator 1 view .LVU23
+ 104 0036 7045     		cmp	r0, lr
+ 105 0038 1CDD     		ble	.L13
+ 106              	.LBB14:
+ 162:Drivers/ModbusSS/ModbusSS.c ****         if (table == NULL)
+ 107              		.loc 1 162 9 is_stmt 1 view .LVU24
+ 162:Drivers/ModbusSS/ModbusSS.c ****         if (table == NULL)
+ 108              		.loc 1 162 39 is_stmt 0 view .LVU25
+ 109 003a A069     		ldr	r0, [r4, #24]
+ 162:Drivers/ModbusSS/ModbusSS.c ****         if (table == NULL)
+ 110              		.loc 1 162 27 view .LVU26
+ 111 003c 50F82E00 		ldr	r0, [r0, lr, lsl #2]
+ 112              	.LVL6:
+ 163:Drivers/ModbusSS/ModbusSS.c ****             return NULL;
+ 113              		.loc 1 163 9 is_stmt 1 view .LVU27
+ 163:Drivers/ModbusSS/ModbusSS.c ****             return NULL;
+ 114              		.loc 1 163 12 is_stmt 0 view .LVU28
+ 115 0040 0028     		cmp	r0, #0
+ 116 0042 EBD0     		beq	.L1
+ 165:Drivers/ModbusSS/ModbusSS.c ****         {
+ 117              		.loc 1 165 9 is_stmt 1 view .LVU29
+ 165:Drivers/ModbusSS/ModbusSS.c ****         {
+ 118              		.loc 1 165 22 is_stmt 0 view .LVU30
+ 119 0044 B0F800C0 		ldrh	ip, [r0]
+ 165:Drivers/ModbusSS/ModbusSS.c ****         {
+ 120              		.loc 1 165 12 view .LVU31
+ 121 0048 9445     		cmp	ip, r2
+ 122 004a F1D8     		bhi	.L4
+ 165:Drivers/ModbusSS/ModbusSS.c ****         {
+ 123              		.loc 1 165 35 discriminator 2 view .LVU32
+ 124 004c D518     		adds	r5, r2, r3
+ 165:Drivers/ModbusSS/ModbusSS.c ****         {
+ 125              		.loc 1 165 65 discriminator 2 view .LVU33
+ 126 004e 4688     		ldrh	r6, [r0, #2]
+ 165:Drivers/ModbusSS/ModbusSS.c ****         {
+ 127              		.loc 1 165 58 discriminator 2 view .LVU34
+ 128 0050 B444     		add	ip, ip, r6
+ 165:Drivers/ModbusSS/ModbusSS.c ****         {
+ 129              		.loc 1 165 30 discriminator 2 view .LVU35
+ 130 0052 6545     		cmp	r5, ip
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s 			page 7
+
+
+ 131 0054 ECDC     		bgt	.L4
+ 169:Drivers/ModbusSS/ModbusSS.c ****         {
+ 132              		.loc 1 169 9 is_stmt 1 view .LVU36
+ 169:Drivers/ModbusSS/ModbusSS.c ****         {
+ 133              		.loc 1 169 22 is_stmt 0 view .LVU37
+ 134 0056 0579     		ldrb	r5, [r0, #4]	@ zero_extendqisi2
+ 169:Drivers/ModbusSS/ModbusSS.c ****         {
+ 135              		.loc 1 169 9 view .LVU38
+ 136 0058 032D     		cmp	r5, #3
+ 137 005a E9D8     		bhi	.L4
+ 138 005c 01A6     		adr	r6, .L6
+ 139 005e 56F825F0 		ldr	pc, [r6, r5, lsl #2]
+ 140 0062 00BF     		.p2align 2
+ 141              	.L6:
+ 142 0064 0B000000 		.word	.L9+1
+ 143 0068 19000000 		.word	.L8+1
+ 144 006c 1F000000 		.word	.L7+1
+ 145 0070 2D000000 		.word	.L5+1
+ 146              	.LVL7:
+ 147              		.p2align 1
+ 148              	.L13:
+ 169:Drivers/ModbusSS/ModbusSS.c ****         {
+ 149              		.loc 1 169 9 view .LVU39
+ 150              	.LBE14:
+ 151              	.LBE15:
+ 190:Drivers/ModbusSS/ModbusSS.c **** }
+ 152              		.loc 1 190 12 view .LVU40
+ 153 0074 0020     		movs	r0, #0
+ 154 0076 D1E7     		b	.L1
+ 155              		.cfi_endproc
+ 156              	.LFE577:
+ 158              		.section	.text._Crc16,"ax",%progbits
+ 159              		.align	1
+ 160              		.syntax unified
+ 161              		.thumb
+ 162              		.thumb_func
+ 164              	_Crc16:
+ 165              	.LVL8:
+ 166              	.LFB578:
+ 192:Drivers/ModbusSS/ModbusSS.c **** 
+ 193:Drivers/ModbusSS/ModbusSS.c **** __STATIC_INLINE uint16_t _Crc16(uint8_t *pcBlock, uint16_t len)
+ 194:Drivers/ModbusSS/ModbusSS.c **** {
+ 167              		.loc 1 194 1 is_stmt 1 view -0
+ 168              		.cfi_startproc
+ 169              		@ args = 0, pretend = 0, frame = 0
+ 170              		@ frame_needed = 0, uses_anonymous_args = 0
+ 171              		@ link register save eliminated.
+ 195:Drivers/ModbusSS/ModbusSS.c ****     uint16_t w = 0;
+ 172              		.loc 1 195 5 view .LVU42
+ 196:Drivers/ModbusSS/ModbusSS.c ****     uint8_t shift_cnt;
+ 173              		.loc 1 196 5 view .LVU43
+ 197:Drivers/ModbusSS/ModbusSS.c **** 
+ 198:Drivers/ModbusSS/ModbusSS.c ****     if (pcBlock)
+ 174              		.loc 1 198 5 view .LVU44
+ 175              		.loc 1 198 8 is_stmt 0 view .LVU45
+ 176 0000 8446     		mov	ip, r0
+ 177 0002 10B1     		cbz	r0, .L23
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s 			page 8
+
+
+ 199:Drivers/ModbusSS/ModbusSS.c ****     {
+ 200:Drivers/ModbusSS/ModbusSS.c ****         w = 0xffffU;
+ 178              		.loc 1 200 11 view .LVU46
+ 179 0004 4FF6FF70 		movw	r0, #65535
+ 180              	.LVL9:
+ 181              		.loc 1 200 11 view .LVU47
+ 182 0008 0FE0     		b	.L15
+ 183              	.LVL10:
+ 184              	.L23:
+ 185              		.loc 1 200 11 view .LVU48
+ 186 000a 7047     		bx	lr
+ 187              	.LVL11:
+ 188              	.L18:
+ 201:Drivers/ModbusSS/ModbusSS.c ****         for (; len > 0; len--)
+ 202:Drivers/ModbusSS/ModbusSS.c ****         {
+ 203:Drivers/ModbusSS/ModbusSS.c ****             w = (uint16_t)((w / 256U) * 256U + ((w % 256U) ^ (*pcBlock++)));
+ 204:Drivers/ModbusSS/ModbusSS.c ****             for (shift_cnt = 0; shift_cnt < 8; shift_cnt++)
+ 205:Drivers/ModbusSS/ModbusSS.c ****             {
+ 206:Drivers/ModbusSS/ModbusSS.c ****                 if ((w & 0x1) == 1)
+ 207:Drivers/ModbusSS/ModbusSS.c ****                     w = (uint16_t)((w >> 1) ^ 0xa001U);
+ 208:Drivers/ModbusSS/ModbusSS.c ****                 else
+ 209:Drivers/ModbusSS/ModbusSS.c ****                     w >>= 1;
+ 189              		.loc 1 209 21 is_stmt 1 view .LVU49
+ 190              		.loc 1 209 23 is_stmt 0 view .LVU50
+ 191 000c 4008     		lsrs	r0, r0, #1
+ 192              	.LVL12:
+ 193              	.L19:
+ 204:Drivers/ModbusSS/ModbusSS.c ****             {
+ 194              		.loc 1 204 57 is_stmt 1 discriminator 2 view .LVU51
+ 195 000e 0133     		adds	r3, r3, #1
+ 196              	.LVL13:
+ 204:Drivers/ModbusSS/ModbusSS.c ****             {
+ 197              		.loc 1 204 57 is_stmt 0 discriminator 2 view .LVU52
+ 198 0010 DBB2     		uxtb	r3, r3
+ 199              	.LVL14:
+ 200              	.L17:
+ 204:Drivers/ModbusSS/ModbusSS.c ****             {
+ 201              		.loc 1 204 43 is_stmt 1 discriminator 1 view .LVU53
+ 202 0012 072B     		cmp	r3, #7
+ 203 0014 07D8     		bhi	.L24
+ 206:Drivers/ModbusSS/ModbusSS.c ****                     w = (uint16_t)((w >> 1) ^ 0xa001U);
+ 204              		.loc 1 206 17 view .LVU54
+ 206:Drivers/ModbusSS/ModbusSS.c ****                     w = (uint16_t)((w >> 1) ^ 0xa001U);
+ 205              		.loc 1 206 20 is_stmt 0 view .LVU55
+ 206 0016 10F0010F 		tst	r0, #1
+ 207 001a F7D0     		beq	.L18
+ 207:Drivers/ModbusSS/ModbusSS.c ****                 else
+ 208              		.loc 1 207 21 is_stmt 1 view .LVU56
+ 207:Drivers/ModbusSS/ModbusSS.c ****                 else
+ 209              		.loc 1 207 23 is_stmt 0 view .LVU57
+ 210 001c 4AF20102 		movw	r2, #40961
+ 211 0020 82EA5000 		eor	r0, r2, r0, lsr #1
+ 212              	.LVL15:
+ 207:Drivers/ModbusSS/ModbusSS.c ****                 else
+ 213              		.loc 1 207 23 view .LVU58
+ 214 0024 F3E7     		b	.L19
+ 215              	.L24:
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s 			page 9
+
+
+ 201:Drivers/ModbusSS/ModbusSS.c ****         {
+ 216              		.loc 1 201 28 is_stmt 1 view .LVU59
+ 217 0026 0139     		subs	r1, r1, #1
+ 218              	.LVL16:
+ 201:Drivers/ModbusSS/ModbusSS.c ****         {
+ 219              		.loc 1 201 28 is_stmt 0 view .LVU60
+ 220 0028 89B2     		uxth	r1, r1
+ 221              	.LVL17:
+ 222              	.L15:
+ 201:Drivers/ModbusSS/ModbusSS.c ****         {
+ 223              		.loc 1 201 20 is_stmt 1 discriminator 1 view .LVU61
+ 224 002a 49B1     		cbz	r1, .L25
+ 203:Drivers/ModbusSS/ModbusSS.c ****             for (shift_cnt = 0; shift_cnt < 8; shift_cnt++)
+ 225              		.loc 1 203 13 view .LVU62
+ 203:Drivers/ModbusSS/ModbusSS.c ****             for (shift_cnt = 0; shift_cnt < 8; shift_cnt++)
+ 226              		.loc 1 203 39 is_stmt 0 view .LVU63
+ 227 002c 00F47F43 		and	r3, r0, #65280
+ 228              	.LVL18:
+ 203:Drivers/ModbusSS/ModbusSS.c ****             for (shift_cnt = 0; shift_cnt < 8; shift_cnt++)
+ 229              		.loc 1 203 63 view .LVU64
+ 230 0030 1CF8012B 		ldrb	r2, [ip], #1	@ zero_extendqisi2
+ 231              	.LVL19:
+ 203:Drivers/ModbusSS/ModbusSS.c ****             for (shift_cnt = 0; shift_cnt < 8; shift_cnt++)
+ 232              		.loc 1 203 60 view .LVU65
+ 233 0034 C0B2     		uxtb	r0, r0
+ 234              	.LVL20:
+ 203:Drivers/ModbusSS/ModbusSS.c ****             for (shift_cnt = 0; shift_cnt < 8; shift_cnt++)
+ 235              		.loc 1 203 60 view .LVU66
+ 236 0036 4240     		eors	r2, r2, r0
+ 203:Drivers/ModbusSS/ModbusSS.c ****             for (shift_cnt = 0; shift_cnt < 8; shift_cnt++)
+ 237              		.loc 1 203 15 view .LVU67
+ 238 0038 1344     		add	r3, r3, r2
+ 239 003a 98B2     		uxth	r0, r3
+ 240              	.LVL21:
+ 204:Drivers/ModbusSS/ModbusSS.c ****             {
+ 241              		.loc 1 204 13 is_stmt 1 view .LVU68
+ 204:Drivers/ModbusSS/ModbusSS.c ****             {
+ 242              		.loc 1 204 28 is_stmt 0 view .LVU69
+ 243 003c 0023     		movs	r3, #0
+ 204:Drivers/ModbusSS/ModbusSS.c ****             {
+ 244              		.loc 1 204 13 view .LVU70
+ 245 003e E8E7     		b	.L17
+ 246              	.LVL22:
+ 247              	.L25:
+ 210:Drivers/ModbusSS/ModbusSS.c ****             }
+ 211:Drivers/ModbusSS/ModbusSS.c ****         }
+ 212:Drivers/ModbusSS/ModbusSS.c ****     }
+ 213:Drivers/ModbusSS/ModbusSS.c ****     return w;
+ 248              		.loc 1 213 5 is_stmt 1 view .LVU71
+ 214:Drivers/ModbusSS/ModbusSS.c **** }...
+ 249              		.loc 1 214 1 is_stmt 0 view .LVU72
+ 250 0040 7047     		bx	lr
+ 251              		.cfi_endproc
+ 252              	.LFE578:
+ 254              		.section	.text.ModbusSS_GetWord,"ax",%progbits
+ 255              		.align	1
+ 256              		.global	ModbusSS_GetWord
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s 			page 10
+
+
+ 257              		.syntax unified
+ 258              		.thumb
+ 259              		.thumb_func
+ 261              	ModbusSS_GetWord:
+ 262              	.LVL23:
+ 263              	.LFB575:
+ 144:Drivers/ModbusSS/ModbusSS.c **** {
+ 264              		.loc 1 144 1 is_stmt 1 view -0
+ 265              		.cfi_startproc
+ 266              		@ args = 0, pretend = 0, frame = 0
+ 267              		@ frame_needed = 0, uses_anonymous_args = 0
+ 268              		@ link register save eliminated.
+ 145:Drivers/ModbusSS/ModbusSS.c ****     uint16_t idx = regNo - table->regNo;
+ 269              		.loc 1 145 5 view .LVU74
+ 145:Drivers/ModbusSS/ModbusSS.c ****     uint16_t idx = regNo - table->regNo;
+ 270              		.loc 1 145 33 is_stmt 0 view .LVU75
+ 271 0000 0388     		ldrh	r3, [r0]
+ 145:Drivers/ModbusSS/ModbusSS.c ****     uint16_t idx = regNo - table->regNo;
+ 272              		.loc 1 145 14 view .LVU76
+ 273 0002 C91A     		subs	r1, r1, r3
+ 274              	.LVL24:
+ 145:Drivers/ModbusSS/ModbusSS.c ****     uint16_t idx = regNo - table->regNo;
+ 275              		.loc 1 145 14 view .LVU77
+ 276 0004 89B2     		uxth	r1, r1
+ 277              	.LVL25:
+ 146:Drivers/ModbusSS/ModbusSS.c ****     return *((uint16_t*)table->buf + idx);
+ 278              		.loc 1 146 5 is_stmt 1 view .LVU78
+ 146:Drivers/ModbusSS/ModbusSS.c ****     return *((uint16_t*)table->buf + idx);
+ 279              		.loc 1 146 30 is_stmt 0 view .LVU79
+ 280 0006 8368     		ldr	r3, [r0, #8]
+ 147:Drivers/ModbusSS/ModbusSS.c **** }
+ 281              		.loc 1 147 1 view .LVU80
+ 282 0008 33F81100 		ldrh	r0, [r3, r1, lsl #1]
+ 283              	.LVL26:
+ 147:Drivers/ModbusSS/ModbusSS.c **** }
+ 284              		.loc 1 147 1 view .LVU81
+ 285 000c 7047     		bx	lr
+ 286              		.cfi_endproc
+ 287              	.LFE575:
+ 289              		.section	.text.ModbusSS_SetWord,"ax",%progbits
+ 290              		.align	1
+ 291              		.global	ModbusSS_SetWord
+ 292              		.syntax unified
+ 293              		.thumb
+ 294              		.thumb_func
+ 296              	ModbusSS_SetWord:
+ 297              	.LVL27:
+ 298              	.LFB576:
+ 150:Drivers/ModbusSS/ModbusSS.c **** {
+ 299              		.loc 1 150 1 is_stmt 1 view -0
+ 300              		.cfi_startproc
+ 301              		@ args = 0, pretend = 0, frame = 0
+ 302              		@ frame_needed = 0, uses_anonymous_args = 0
+ 303              		@ link register save eliminated.
+ 154:Drivers/ModbusSS/ModbusSS.c ****     *((uint16_t*)table->buf + regNo - table->regNo) = value;
+ 304              		.loc 1 154 5 view .LVU83
+ 154:Drivers/ModbusSS/ModbusSS.c ****     *((uint16_t*)table->buf + regNo - table->regNo) = value;
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s 			page 11
+
+
+ 305              		.loc 1 154 23 is_stmt 0 view .LVU84
+ 306 0000 8368     		ldr	r3, [r0, #8]
+ 154:Drivers/ModbusSS/ModbusSS.c ****     *((uint16_t*)table->buf + regNo - table->regNo) = value;
+ 307              		.loc 1 154 44 view .LVU85
+ 308 0002 0088     		ldrh	r0, [r0]
+ 309              	.LVL28:
+ 154:Drivers/ModbusSS/ModbusSS.c ****     *((uint16_t*)table->buf + regNo - table->regNo) = value;
+ 310              		.loc 1 154 37 view .LVU86
+ 311 0004 091A     		subs	r1, r1, r0
+ 312              	.LVL29:
+ 154:Drivers/ModbusSS/ModbusSS.c ****     *((uint16_t*)table->buf + regNo - table->regNo) = value;
+ 313              		.loc 1 154 53 view .LVU87
+ 314 0006 23F81120 		strh	r2, [r3, r1, lsl #1]	@ movhi
+ 155:Drivers/ModbusSS/ModbusSS.c **** }
+ 315              		.loc 1 155 1 view .LVU88
+ 316 000a 7047     		bx	lr
+ 317              		.cfi_endproc
+ 318              	.LFE576:
+ 320              		.section	.text.ModbusSS_ParseRxData,"ax",%progbits
+ 321              		.align	1
+ 322              		.global	ModbusSS_ParseRxData
+ 323              		.syntax unified
+ 324              		.thumb
+ 325              		.thumb_func
+ 327              	ModbusSS_ParseRxData:
+ 328              	.LVL30:
+ 329              	.LFB574:
+  26:Drivers/ModbusSS/ModbusSS.c **** {
+ 330              		.loc 1 26 1 is_stmt 1 view -0
+ 331              		.cfi_startproc
+ 332              		@ args = 0, pretend = 0, frame = 0
+ 333              		@ frame_needed = 0, uses_anonymous_args = 0
+  27:Drivers/ModbusSS/ModbusSS.c ****     int32_t retLenError = -1;
+ 334              		.loc 1 27 5 view .LVU90
+  34:Drivers/ModbusSS/ModbusSS.c ****     if ((mbCore == NULL) || mbCore->bufRxTx == NULL)
+ 335              		.loc 1 34 5 view .LVU91
+  34:Drivers/ModbusSS/ModbusSS.c ****     if ((mbCore == NULL) || mbCore->bufRxTx == NULL)
+ 336              		.loc 1 34 8 is_stmt 0 view .LVU92
+ 337 0000 0028     		cmp	r0, #0
+ 338 0002 00F0A780 		beq	.L44
+  26:Drivers/ModbusSS/ModbusSS.c **** {
+ 339              		.loc 1 26 1 discriminator 1 view .LVU93
+ 340 0006 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+ 341              	.LCFI1:
+ 342              		.cfi_def_cfa_offset 32
+ 343              		.cfi_offset 4, -32
+ 344              		.cfi_offset 5, -28
+ 345              		.cfi_offset 6, -24
+ 346              		.cfi_offset 7, -20
+ 347              		.cfi_offset 8, -16
+ 348              		.cfi_offset 9, -12
+ 349              		.cfi_offset 10, -8
+ 350              		.cfi_offset 14, -4
+ 351 000a 0646     		mov	r6, r0
+  34:Drivers/ModbusSS/ModbusSS.c ****     if ((mbCore == NULL) || mbCore->bufRxTx == NULL)
+ 352              		.loc 1 34 35 discriminator 1 view .LVU94
+ 353 000c 4569     		ldr	r5, [r0, #20]
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s 			page 12
+
+
+  34:Drivers/ModbusSS/ModbusSS.c ****     if ((mbCore == NULL) || mbCore->bufRxTx == NULL)
+ 354              		.loc 1 34 26 discriminator 1 view .LVU95
+ 355 000e 002D     		cmp	r5, #0
+ 356 0010 00F0A380 		beq	.L45
+  39:Drivers/ModbusSS/ModbusSS.c ****     uint8_t* buf = mbCore->bufRxTx;
+ 357              		.loc 1 39 5 is_stmt 1 view .LVU96
+ 358              	.LVL31:
+  40:Drivers/ModbusSS/ModbusSS.c ****     if (mbCore->rtuTcp == MODBUS_SS_TCP)
+ 359              		.loc 1 40 5 view .LVU97
+  40:Drivers/ModbusSS/ModbusSS.c ****     if (mbCore->rtuTcp == MODBUS_SS_TCP)
+ 360              		.loc 1 40 15 is_stmt 0 view .LVU98
+ 361 0014 027C     		ldrb	r2, [r0, #16]	@ zero_extendqisi2
+  40:Drivers/ModbusSS/ModbusSS.c ****     if (mbCore->rtuTcp == MODBUS_SS_TCP)
+ 362              		.loc 1 40 8 view .LVU99
+ 363 0016 012A     		cmp	r2, #1
+ 364 0018 14D0     		beq	.L55
+ 365              	.L30:
+  45:Drivers/ModbusSS/ModbusSS.c ****     if (mbCore->slaveId != GET_DATA(buf, MB_POS_SLAVE_ID))
+ 366              		.loc 1 45 5 is_stmt 1 view .LVU100
+  45:Drivers/ModbusSS/ModbusSS.c ****     if (mbCore->slaveId != GET_DATA(buf, MB_POS_SLAVE_ID))
+ 367              		.loc 1 45 15 is_stmt 0 view .LVU101
+ 368 001a 717F     		ldrb	r1, [r6, #29]	@ zero_extendqisi2
+  45:Drivers/ModbusSS/ModbusSS.c ****     if (mbCore->slaveId != GET_DATA(buf, MB_POS_SLAVE_ID))
+ 369              		.loc 1 45 28 view .LVU102
+ 370 001c 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+  45:Drivers/ModbusSS/ModbusSS.c ****     if (mbCore->slaveId != GET_DATA(buf, MB_POS_SLAVE_ID))
+ 371              		.loc 1 45 8 view .LVU103
+ 372 001e 9942     		cmp	r1, r3
+ 373 0020 40F09E80 		bne	.L46
+  51:Drivers/ModbusSS/ModbusSS.c ****     uint8_t func = GET_DATA(buf, MB_POS_FUNC);
+ 374              		.loc 1 51 5 is_stmt 1 view .LVU104
+  51:Drivers/ModbusSS/ModbusSS.c ****     uint8_t func = GET_DATA(buf, MB_POS_FUNC);
+ 375              		.loc 1 51 13 is_stmt 0 view .LVU105
+ 376 0024 95F80190 		ldrb	r9, [r5, #1]	@ zero_extendqisi2
+ 377              	.LVL32:
+  54:Drivers/ModbusSS/ModbusSS.c ****     uint16_t reqLen = 0;
+ 378              		.loc 1 54 5 is_stmt 1 view .LVU106
+  55:Drivers/ModbusSS/ModbusSS.c ****     if (func >= 0x01 && func <= 0x06)
+ 379              		.loc 1 55 5 view .LVU107
+  55:Drivers/ModbusSS/ModbusSS.c ****     if (func >= 0x01 && func <= 0x06)
+ 380              		.loc 1 55 22 is_stmt 0 view .LVU108
+ 381 0028 09F1FF33 		add	r3, r9, #-1
+ 382 002c DBB2     		uxtb	r3, r3
+  55:Drivers/ModbusSS/ModbusSS.c ****     if (func >= 0x01 && func <= 0x06)
+ 383              		.loc 1 55 8 view .LVU109
+ 384 002e 052B     		cmp	r3, #5
+ 385 0030 0AD9     		bls	.L47
+  57:Drivers/ModbusSS/ModbusSS.c ****     else if (func == 0x0F || func == 0x10)
+ 386              		.loc 1 57 10 is_stmt 1 view .LVU110
+  57:Drivers/ModbusSS/ModbusSS.c ****     else if (func == 0x0F || func == 0x10)
+ 387              		.loc 1 57 27 is_stmt 0 view .LVU111
+ 388 0032 A9F10F03 		sub	r3, r9, #15
+ 389 0036 DBB2     		uxtb	r3, r3
+  57:Drivers/ModbusSS/ModbusSS.c ****     else if (func == 0x0F || func == 0x10)
+ 390              		.loc 1 57 13 view .LVU112
+ 391 0038 012B     		cmp	r3, #1
+ 392 003a 00F29480 		bhi	.L48
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s 			page 13
+
+
+  59:Drivers/ModbusSS/ModbusSS.c ****         reqLen = 7 + *(buf + 6);
+ 393              		.loc 1 59 9 is_stmt 1 view .LVU113
+  59:Drivers/ModbusSS/ModbusSS.c ****         reqLen = 7 + *(buf + 6);
+ 394              		.loc 1 59 22 is_stmt 0 view .LVU114
+ 395 003e A879     		ldrb	r0, [r5, #6]	@ zero_extendqisi2
+ 396              	.LVL33:
+  59:Drivers/ModbusSS/ModbusSS.c ****         reqLen = 7 + *(buf + 6);
+ 397              		.loc 1 59 16 view .LVU115
+ 398 0040 C41D     		adds	r4, r0, #7
+ 399              	.LVL34:
+  59:Drivers/ModbusSS/ModbusSS.c ****         reqLen = 7 + *(buf + 6);
+ 400              		.loc 1 59 16 view .LVU116
+ 401 0042 02E0     		b	.L31
+ 402              	.LVL35:
+ 403              	.L55:
+  42:Drivers/ModbusSS/ModbusSS.c ****         buf += MODBUS_TCP_BUF_OFFSET;
+ 404              		.loc 1 42 9 is_stmt 1 view .LVU117
+  42:Drivers/ModbusSS/ModbusSS.c ****         buf += MODBUS_TCP_BUF_OFFSET;
+ 405              		.loc 1 42 13 is_stmt 0 view .LVU118
+ 406 0044 0635     		adds	r5, r5, #6
+ 407              	.LVL36:
+  42:Drivers/ModbusSS/ModbusSS.c ****         buf += MODBUS_TCP_BUF_OFFSET;
+ 408              		.loc 1 42 13 view .LVU119
+ 409 0046 E8E7     		b	.L30
+ 410              	.LVL37:
+ 411              	.L47:
+  56:Drivers/ModbusSS/ModbusSS.c ****         reqLen = 6;
+ 412              		.loc 1 56 16 view .LVU120
+ 413 0048 0624     		movs	r4, #6
+ 414              	.LVL38:
+ 415              	.L31:
+  67:Drivers/ModbusSS/ModbusSS.c ****     if (mbCore->rtuTcp == MODBUS_SS_RTU)
+ 416              		.loc 1 67 5 is_stmt 1 view .LVU121
+  67:Drivers/ModbusSS/ModbusSS.c ****     if (mbCore->rtuTcp == MODBUS_SS_RTU)
+ 417              		.loc 1 67 8 is_stmt 0 view .LVU122
+ 418 004a 3AB9     		cbnz	r2, .L32
+ 419              	.LBB16:
+  69:Drivers/ModbusSS/ModbusSS.c ****         uint16_t readCrc = GET_DATA(buf, reqLen);
+ 420              		.loc 1 69 9 is_stmt 1 view .LVU123
+  69:Drivers/ModbusSS/ModbusSS.c ****         uint16_t readCrc = GET_DATA(buf, reqLen);
+ 421              		.loc 1 69 28 is_stmt 0 view .LVU124
+ 422 004c 2F5D     		ldrb	r7, [r5, r4]	@ zero_extendqisi2
+ 423              	.LVL39:
+  70:Drivers/ModbusSS/ModbusSS.c ****         uint16_t getCrc = _Crc16(buf, reqLen);
+ 424              		.loc 1 70 9 is_stmt 1 view .LVU125
+  70:Drivers/ModbusSS/ModbusSS.c ****         uint16_t getCrc = _Crc16(buf, reqLen);
+ 425              		.loc 1 70 27 is_stmt 0 view .LVU126
+ 426 004e 2146     		mov	r1, r4
+ 427 0050 2846     		mov	r0, r5
+ 428 0052 FFF7FEFF 		bl	_Crc16
+ 429              	.LVL40:
+  71:Drivers/ModbusSS/ModbusSS.c ****         if (readCrc != getCrc)
+ 430              		.loc 1 71 9 is_stmt 1 view .LVU127
+  71:Drivers/ModbusSS/ModbusSS.c ****         if (readCrc != getCrc)
+ 431              		.loc 1 71 12 is_stmt 0 view .LVU128
+ 432 0056 8742     		cmp	r7, r0
+ 433 0058 40F08880 		bne	.L49
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s 			page 14
+
+
+ 434              	.LVL41:
+ 435              	.L32:
+  71:Drivers/ModbusSS/ModbusSS.c ****         if (readCrc != getCrc)
+ 436              		.loc 1 71 12 view .LVU129
+ 437              	.LBE16:
+  78:Drivers/ModbusSS/ModbusSS.c ****     if (mbCore->cbNewRequest != NULL)
+ 438              		.loc 1 78 5 is_stmt 1 view .LVU130
+  78:Drivers/ModbusSS/ModbusSS.c ****     if (mbCore->cbNewRequest != NULL)
+ 439              		.loc 1 78 15 is_stmt 0 view .LVU131
+ 440 005c 7368     		ldr	r3, [r6, #4]
+  78:Drivers/ModbusSS/ModbusSS.c ****     if (mbCore->cbNewRequest != NULL)
+ 441              		.loc 1 78 8 view .LVU132
+ 442 005e 03B1     		cbz	r3, .L33
+  79:Drivers/ModbusSS/ModbusSS.c ****         mbCore->cbNewRequest();
+ 443              		.loc 1 79 9 is_stmt 1 view .LVU133
+ 444 0060 9847     		blx	r3
+ 445              	.LVL42:
+ 446              	.L33:
+  81:Drivers/ModbusSS/ModbusSS.c ****     switch (func)
+ 447              		.loc 1 81 5 view .LVU134
+ 448 0062 B9F1030F 		cmp	r9, #3
+ 449 0066 10D0     		beq	.L34
+ 450 0068 B9F1060F 		cmp	r9, #6
+ 451 006c 46D0     		beq	.L35
+ 125:Drivers/ModbusSS/ModbusSS.c ****         WRITE_WORD(buf, MB_POS_FUNC, func | 0x80 | MB_ERR_FUNC << 8);
+ 452              		.loc 1 125 9 view .LVU135
+ 453 006e 49F08009 		orr	r9, r9, #128
+ 454              	.LVL43:
+ 125:Drivers/ModbusSS/ModbusSS.c ****         WRITE_WORD(buf, MB_POS_FUNC, func | 0x80 | MB_ERR_FUNC << 8);
+ 455              		.loc 1 125 9 is_stmt 0 view .LVU136
+ 456 0072 4FEA0929 		lsl	r9, r9, #8
+ 457 0076 49F00109 		orr	r9, r9, #1
+ 458 007a A5F80290 		strh	r9, [r5, #2]	@ movhi
+ 126:Drivers/ModbusSS/ModbusSS.c ****         retLenError = 3;
+ 459              		.loc 1 126 9 is_stmt 1 view .LVU137
+ 460              	.LVL44:
+ 127:Drivers/ModbusSS/ModbusSS.c ****         break;
+ 461              		.loc 1 127 9 view .LVU138
+ 126:Drivers/ModbusSS/ModbusSS.c ****         retLenError = 3;
+ 462              		.loc 1 126 21 is_stmt 0 view .LVU139
+ 463 007e 0320     		movs	r0, #3
+ 464              	.LVL45:
+ 465              	.L38:
+ 130:Drivers/ModbusSS/ModbusSS.c ****     if (mbCore->rtuTcp == MODBUS_SS_TCP)
+ 466              		.loc 1 130 5 is_stmt 1 view .LVU140
+ 130:Drivers/ModbusSS/ModbusSS.c ****     if (mbCore->rtuTcp == MODBUS_SS_TCP)
+ 467              		.loc 1 130 15 is_stmt 0 view .LVU141
+ 468 0080 337C     		ldrb	r3, [r6, #16]	@ zero_extendqisi2
+ 130:Drivers/ModbusSS/ModbusSS.c ****     if (mbCore->rtuTcp == MODBUS_SS_TCP)
+ 469              		.loc 1 130 8 view .LVU142
+ 470 0082 012B     		cmp	r3, #1
+ 471 0084 5FD0     		beq	.L56
+ 472              	.LVL46:
+ 473              	.L28:
+ 141:Drivers/ModbusSS/ModbusSS.c **** }
+ 474              		.loc 1 141 1 view .LVU143
+ 475 0086 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s 			page 15
+
+
+ 476              	.LVL47:
+ 477              	.L34:
+ 478              	.LBB17:
+  85:Drivers/ModbusSS/ModbusSS.c ****         uint16_t r = GET_WORD(buf, MB_POS_REG);
+ 479              		.loc 1 85 9 is_stmt 1 view .LVU144
+  85:Drivers/ModbusSS/ModbusSS.c ****         uint16_t r = GET_WORD(buf, MB_POS_REG);
+ 480              		.loc 1 85 22 is_stmt 0 view .LVU145
+ 481 008a 95F80380 		ldrb	r8, [r5, #3]	@ zero_extendqisi2
+ 482 008e AB78     		ldrb	r3, [r5, #2]	@ zero_extendqisi2
+  85:Drivers/ModbusSS/ModbusSS.c ****         uint16_t r = GET_WORD(buf, MB_POS_REG);
+ 483              		.loc 1 85 18 view .LVU146
+ 484 0090 48EA0328 		orr	r8, r8, r3, lsl #8
+ 485              	.LVL48:
+  86:Drivers/ModbusSS/ModbusSS.c ****         uint16_t q = GET_WORD(buf, MB_POS_QUANTITY);
+ 486              		.loc 1 86 9 is_stmt 1 view .LVU147
+  86:Drivers/ModbusSS/ModbusSS.c ****         uint16_t q = GET_WORD(buf, MB_POS_QUANTITY);
+ 487              		.loc 1 86 22 is_stmt 0 view .LVU148
+ 488 0094 6C79     		ldrb	r4, [r5, #5]	@ zero_extendqisi2
+ 489              	.LVL49:
+  86:Drivers/ModbusSS/ModbusSS.c ****         uint16_t q = GET_WORD(buf, MB_POS_QUANTITY);
+ 490              		.loc 1 86 22 view .LVU149
+ 491 0096 2B79     		ldrb	r3, [r5, #4]	@ zero_extendqisi2
+ 492 0098 44EA0324 		orr	r4, r4, r3, lsl #8
+ 493 009c 0FFA84FA 		sxth	r10, r4
+ 494              	.LVL50:
+  87:Drivers/ModbusSS/ModbusSS.c ****         ModbusSS_table_t *table = getTable(mbCore, func, r, q);
+ 495              		.loc 1 87 9 is_stmt 1 view .LVU150
+  87:Drivers/ModbusSS/ModbusSS.c ****         ModbusSS_table_t *table = getTable(mbCore, func, r, q);
+ 496              		.loc 1 87 35 is_stmt 0 view .LVU151
+ 497 00a0 2346     		mov	r3, r4
+ 498 00a2 4246     		mov	r2, r8
+ 499 00a4 4946     		mov	r1, r9
+ 500 00a6 3046     		mov	r0, r6
+ 501 00a8 FFF7FEFF 		bl	getTable
+ 502              	.LVL51:
+  88:Drivers/ModbusSS/ModbusSS.c ****         if (table == NULL)
+ 503              		.loc 1 88 9 is_stmt 1 view .LVU152
+  88:Drivers/ModbusSS/ModbusSS.c ****         if (table == NULL)
+ 504              		.loc 1 88 12 is_stmt 0 view .LVU153
+ 505 00ac 0746     		mov	r7, r0
+ 506 00ae 50B1     		cbz	r0, .L57
+  95:Drivers/ModbusSS/ModbusSS.c ****             *(buf + MB_POS_BYTE_CNT) = (uint8_t)q * 2;
+ 507              		.loc 1 95 13 is_stmt 1 view .LVU154
+  95:Drivers/ModbusSS/ModbusSS.c ****             *(buf + MB_POS_BYTE_CNT) = (uint8_t)q * 2;
+ 508              		.loc 1 95 38 is_stmt 0 view .LVU155
+ 509 00b0 4FEA4A0A 		lsl	r10, r10, #1
+ 510 00b4 85F802A0 		strb	r10, [r5, #2]
+  96:Drivers/ModbusSS/ModbusSS.c ****             if (mbCore->cbHoldingRequest != NULL)
+ 511              		.loc 1 96 13 is_stmt 1 view .LVU156
+  96:Drivers/ModbusSS/ModbusSS.c ****             if (mbCore->cbHoldingRequest != NULL)
+ 512              		.loc 1 96 23 is_stmt 0 view .LVU157
+ 513 00b8 F368     		ldr	r3, [r6, #12]
+  96:Drivers/ModbusSS/ModbusSS.c ****             if (mbCore->cbHoldingRequest != NULL)
+ 514              		.loc 1 96 16 view .LVU158
+ 515 00ba 13B1     		cbz	r3, .L39
+  97:Drivers/ModbusSS/ModbusSS.c ****                 mbCore->cbHoldingRequest(table, r, q);
+ 516              		.loc 1 97 17 is_stmt 1 view .LVU159
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s 			page 16
+
+
+ 517 00bc 2246     		mov	r2, r4
+ 518 00be 4146     		mov	r1, r8
+ 519 00c0 9847     		blx	r3
+ 520              	.LVL52:
+ 521              	.L39:
+  97:Drivers/ModbusSS/ModbusSS.c ****                 mbCore->cbHoldingRequest(table, r, q);
+ 522              		.loc 1 97 17 is_stmt 0 view .LVU160
+ 523              	.LBE17:
+  56:Drivers/ModbusSS/ModbusSS.c ****         reqLen = 6;
+ 524              		.loc 1 56 16 discriminator 1 view .LVU161
+ 525 00c2 0023     		movs	r3, #0
+ 526 00c4 15E0     		b	.L40
+ 527              	.LVL53:
+ 528              	.L57:
+ 529              	.LBB21:
+  90:Drivers/ModbusSS/ModbusSS.c ****             WRITE_WORD(buf + 1, 0, (func | 0x80)<<8 | MB_ERR_RANGE);
+ 530              		.loc 1 90 13 is_stmt 1 view .LVU162
+ 531 00c6 49F42079 		orr	r9, r9, #640
+ 532              	.LVL54:
+  90:Drivers/ModbusSS/ModbusSS.c ****             WRITE_WORD(buf + 1, 0, (func | 0x80)<<8 | MB_ERR_RANGE);
+ 533              		.loc 1 90 13 is_stmt 0 view .LVU163
+ 534 00ca A5F80190 		strh	r9, [r5, #1]	@ movhi
+  91:Drivers/ModbusSS/ModbusSS.c ****             retLenError = 3;
+ 535              		.loc 1 91 13 is_stmt 1 view .LVU164
+ 536              	.LVL55:
+  91:Drivers/ModbusSS/ModbusSS.c ****             retLenError = 3;
+ 537              		.loc 1 91 25 is_stmt 0 view .LVU165
+ 538 00ce 0320     		movs	r0, #3
+ 539              	.LVL56:
+  91:Drivers/ModbusSS/ModbusSS.c ****             retLenError = 3;
+ 540              		.loc 1 91 25 view .LVU166
+ 541 00d0 D6E7     		b	.L38
+ 542              	.LVL57:
+ 543              	.L41:
+ 544              	.LBB18:
+ 100:Drivers/ModbusSS/ModbusSS.c ****                 WRITE_WORD(buf + 3, i, ModbusSS_GetWord(table, r + i));
+ 545              		.loc 1 100 17 is_stmt 1 discriminator 3 view .LVU167
+ 546 00d2 08EB0301 		add	r1, r8, r3
+ 547 00d6 89B2     		uxth	r1, r1
+ 548              	.LVL58:
+ 549              	.LBB19:
+ 550              	.LBI19:
+ 143:Drivers/ModbusSS/ModbusSS.c **** __INLINE uint16_t ModbusSS_GetWord(ModbusSS_table_t *table, uint16_t regNo)
+ 551              		.loc 1 143 19 discriminator 3 view .LVU168
+ 552              	.LBB20:
+ 145:Drivers/ModbusSS/ModbusSS.c ****     uint16_t idx = regNo - table->regNo;
+ 553              		.loc 1 145 5 discriminator 3 view .LVU169
+ 145:Drivers/ModbusSS/ModbusSS.c ****     uint16_t idx = regNo - table->regNo;
+ 554              		.loc 1 145 33 is_stmt 0 discriminator 3 view .LVU170
+ 555 00d8 3A88     		ldrh	r2, [r7]
+ 145:Drivers/ModbusSS/ModbusSS.c ****     uint16_t idx = regNo - table->regNo;
+ 556              		.loc 1 145 14 discriminator 3 view .LVU171
+ 557 00da 891A     		subs	r1, r1, r2
+ 558              	.LVL59:
+ 145:Drivers/ModbusSS/ModbusSS.c ****     uint16_t idx = regNo - table->regNo;
+ 559              		.loc 1 145 14 discriminator 3 view .LVU172
+ 560 00dc 89B2     		uxth	r1, r1
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s 			page 17
+
+
+ 561              	.LVL60:
+ 146:Drivers/ModbusSS/ModbusSS.c ****     return *((uint16_t*)table->buf + idx);
+ 562              		.loc 1 146 5 is_stmt 1 discriminator 3 view .LVU173
+ 146:Drivers/ModbusSS/ModbusSS.c ****     return *((uint16_t*)table->buf + idx);
+ 563              		.loc 1 146 30 is_stmt 0 discriminator 3 view .LVU174
+ 564 00de BA68     		ldr	r2, [r7, #8]
+ 146:Drivers/ModbusSS/ModbusSS.c ****     return *((uint16_t*)table->buf + idx);
+ 565              		.loc 1 146 12 discriminator 3 view .LVU175
+ 566 00e0 32F81100 		ldrh	r0, [r2, r1, lsl #1]
+ 567              	.LVL61:
+ 146:Drivers/ModbusSS/ModbusSS.c ****     return *((uint16_t*)table->buf + idx);
+ 568              		.loc 1 146 12 discriminator 3 view .LVU176
+ 569              	.LBE20:
+ 570              	.LBE19:
+ 100:Drivers/ModbusSS/ModbusSS.c ****                 WRITE_WORD(buf + 3, i, ModbusSS_GetWord(table, r + i));
+ 571              		.loc 1 100 17 discriminator 3 view .LVU177
+ 572 00e4 5A00     		lsls	r2, r3, #1
+ 573 00e6 0332     		adds	r2, r2, #3
+ 574 00e8 010A     		lsrs	r1, r0, #8
+ 575 00ea 41EA0021 		orr	r1, r1, r0, lsl #8
+ 576 00ee A952     		strh	r1, [r5, r2]	@ movhi
+  98:Drivers/ModbusSS/ModbusSS.c ****             for (int i = 0; i < q; i++)
+ 577              		.loc 1 98 37 is_stmt 1 discriminator 3 view .LVU178
+ 578 00f0 0133     		adds	r3, r3, #1
+ 579              	.LVL62:
+ 580              	.L40:
+  98:Drivers/ModbusSS/ModbusSS.c ****             for (int i = 0; i < q; i++)
+ 581              		.loc 1 98 31 discriminator 1 view .LVU179
+ 582 00f2 9C42     		cmp	r4, r3
+ 583 00f4 EDDC     		bgt	.L41
+ 584              	.LBE18:
+ 102:Drivers/ModbusSS/ModbusSS.c ****             retLenError = q * 2 + 3;
+ 585              		.loc 1 102 13 view .LVU180
+ 102:Drivers/ModbusSS/ModbusSS.c ****             retLenError = q * 2 + 3;
+ 586              		.loc 1 102 29 is_stmt 0 view .LVU181
+ 587 00f6 6000     		lsls	r0, r4, #1
+ 102:Drivers/ModbusSS/ModbusSS.c ****             retLenError = q * 2 + 3;
+ 588              		.loc 1 102 25 view .LVU182
+ 589 00f8 0330     		adds	r0, r0, #3
+ 590              	.LVL63:
+ 102:Drivers/ModbusSS/ModbusSS.c ****             retLenError = q * 2 + 3;
+ 591              		.loc 1 102 25 view .LVU183
+ 592 00fa C1E7     		b	.L38
+ 593              	.LVL64:
+ 594              	.L35:
+ 102:Drivers/ModbusSS/ModbusSS.c ****             retLenError = q * 2 + 3;
+ 595              		.loc 1 102 25 view .LVU184
+ 596              	.LBE21:
+ 597              	.LBB22:
+ 108:Drivers/ModbusSS/ModbusSS.c ****         uint16_t r = GET_WORD(buf, MB_POS_REG);
+ 598              		.loc 1 108 9 is_stmt 1 view .LVU185
+ 108:Drivers/ModbusSS/ModbusSS.c ****         uint16_t r = GET_WORD(buf, MB_POS_REG);
+ 599              		.loc 1 108 22 is_stmt 0 view .LVU186
+ 600 00fc EF78     		ldrb	r7, [r5, #3]	@ zero_extendqisi2
+ 601 00fe AB78     		ldrb	r3, [r5, #2]	@ zero_extendqisi2
+ 108:Drivers/ModbusSS/ModbusSS.c ****         uint16_t r = GET_WORD(buf, MB_POS_REG);
+ 602              		.loc 1 108 18 view .LVU187
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s 			page 18
+
+
+ 603 0100 47EA0327 		orr	r7, r7, r3, lsl #8
+ 604              	.LVL65:
+ 109:Drivers/ModbusSS/ModbusSS.c ****         ModbusSS_table_t *table = getTable(mbCore, func, r, 1);
+ 605              		.loc 1 109 9 is_stmt 1 view .LVU188
+ 109:Drivers/ModbusSS/ModbusSS.c ****         ModbusSS_table_t *table = getTable(mbCore, func, r, 1);
+ 606              		.loc 1 109 35 is_stmt 0 view .LVU189
+ 607 0104 0123     		movs	r3, #1
+ 608 0106 3A46     		mov	r2, r7
+ 609 0108 4946     		mov	r1, r9
+ 610 010a 3046     		mov	r0, r6
+ 611 010c FFF7FEFF 		bl	getTable
+ 612              	.LVL66:
+ 110:Drivers/ModbusSS/ModbusSS.c ****         if (table == NULL)
+ 613              		.loc 1 110 9 is_stmt 1 view .LVU190
+ 110:Drivers/ModbusSS/ModbusSS.c ****         if (table == NULL)
+ 614              		.loc 1 110 12 is_stmt 0 view .LVU191
+ 615 0110 8046     		mov	r8, r0
+ 616 0112 70B1     		cbz	r0, .L58
+ 117:Drivers/ModbusSS/ModbusSS.c ****             ModbusSS_SetWord(table,r,GET_WORD(buf,4));
+ 617              		.loc 1 117 13 is_stmt 1 view .LVU192
+ 117:Drivers/ModbusSS/ModbusSS.c ****             ModbusSS_SetWord(table,r,GET_WORD(buf,4));
+ 618              		.loc 1 117 38 is_stmt 0 view .LVU193
+ 619 0114 6B79     		ldrb	r3, [r5, #5]	@ zero_extendqisi2
+ 620 0116 2A79     		ldrb	r2, [r5, #4]	@ zero_extendqisi2
+ 117:Drivers/ModbusSS/ModbusSS.c ****             ModbusSS_SetWord(table,r,GET_WORD(buf,4));
+ 621              		.loc 1 117 13 view .LVU194
+ 622 0118 43EA0222 		orr	r2, r3, r2, lsl #8
+ 623 011c 3946     		mov	r1, r7
+ 624 011e FFF7FEFF 		bl	ModbusSS_SetWord
+ 625              	.LVL67:
+ 118:Drivers/ModbusSS/ModbusSS.c ****             if (mbCore->cbHoldingUpdate != NULL)
+ 626              		.loc 1 118 13 is_stmt 1 view .LVU195
+ 118:Drivers/ModbusSS/ModbusSS.c ****             if (mbCore->cbHoldingUpdate != NULL)
+ 627              		.loc 1 118 23 is_stmt 0 view .LVU196
+ 628 0122 B368     		ldr	r3, [r6, #8]
+ 118:Drivers/ModbusSS/ModbusSS.c ****             if (mbCore->cbHoldingUpdate != NULL)
+ 629              		.loc 1 118 16 view .LVU197
+ 630 0124 1BB1     		cbz	r3, .L43
+ 119:Drivers/ModbusSS/ModbusSS.c ****                 mbCore->cbHoldingUpdate(table, r, 1);
+ 631              		.loc 1 119 17 is_stmt 1 view .LVU198
+ 632 0126 0122     		movs	r2, #1
+ 633 0128 3946     		mov	r1, r7
+ 634 012a 4046     		mov	r0, r8
+ 635 012c 9847     		blx	r3
+ 636              	.LVL68:
+ 637              	.L43:
+ 120:Drivers/ModbusSS/ModbusSS.c ****             retLenError = reqLen;
+ 638              		.loc 1 120 13 view .LVU199
+ 120:Drivers/ModbusSS/ModbusSS.c ****             retLenError = reqLen;
+ 639              		.loc 1 120 25 is_stmt 0 view .LVU200
+ 640 012e 2046     		mov	r0, r4
+ 641              	.LVL69:
+ 120:Drivers/ModbusSS/ModbusSS.c ****             retLenError = reqLen;
+ 642              		.loc 1 120 25 view .LVU201
+ 643 0130 A6E7     		b	.L38
+ 644              	.LVL70:
+ 645              	.L58:
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s 			page 19
+
+
+ 112:Drivers/ModbusSS/ModbusSS.c ****             WRITE_WORD(buf, MB_POS_FUNC, func | 0x80 | MB_ERR_RANGE << 8);
+ 646              		.loc 1 112 13 is_stmt 1 view .LVU202
+ 647 0132 49F08009 		orr	r9, r9, #128
+ 648              	.LVL71:
+ 112:Drivers/ModbusSS/ModbusSS.c ****             WRITE_WORD(buf, MB_POS_FUNC, func | 0x80 | MB_ERR_RANGE << 8);
+ 649              		.loc 1 112 13 is_stmt 0 view .LVU203
+ 650 0136 4FEA0929 		lsl	r9, r9, #8
+ 651 013a 49F00209 		orr	r9, r9, #2
+ 652 013e A5F80290 		strh	r9, [r5, #2]	@ movhi
+ 113:Drivers/ModbusSS/ModbusSS.c ****             retLenError = 3;
+ 653              		.loc 1 113 13 is_stmt 1 view .LVU204
+ 654              	.LVL72:
+ 113:Drivers/ModbusSS/ModbusSS.c ****             retLenError = 3;
+ 655              		.loc 1 113 25 is_stmt 0 view .LVU205
+ 656 0142 0320     		movs	r0, #3
+ 657              	.LVL73:
+ 113:Drivers/ModbusSS/ModbusSS.c ****             retLenError = 3;
+ 658              		.loc 1 113 25 view .LVU206
+ 659 0144 9CE7     		b	.L38
+ 660              	.LVL74:
+ 661              	.L56:
+ 113:Drivers/ModbusSS/ModbusSS.c ****             retLenError = 3;
+ 662              		.loc 1 113 25 view .LVU207
+ 663              	.LBE22:
+ 132:Drivers/ModbusSS/ModbusSS.c ****         WRITE_WORD(buf, -1, retLenError);
+ 664              		.loc 1 132 9 is_stmt 1 view .LVU208
+ 665 0146 0302     		lsls	r3, r0, #8
+ 666 0148 43EA2023 		orr	r3, r3, r0, asr #8
+ 667 014c 25F8023C 		strh	r3, [r5, #-2]	@ movhi
+ 133:Drivers/ModbusSS/ModbusSS.c ****         retLenError += MODBUS_TCP_BUF_OFFSET;
+ 668              		.loc 1 133 9 view .LVU209
+ 133:Drivers/ModbusSS/ModbusSS.c ****         retLenError += MODBUS_TCP_BUF_OFFSET;
+ 669              		.loc 1 133 21 is_stmt 0 view .LVU210
+ 670 0150 0630     		adds	r0, r0, #6
+ 671              	.LVL75:
+ 133:Drivers/ModbusSS/ModbusSS.c ****         retLenError += MODBUS_TCP_BUF_OFFSET;
+ 672              		.loc 1 133 21 view .LVU211
+ 673 0152 98E7     		b	.L28
+ 674              	.LVL76:
+ 675              	.L44:
+ 676              	.LCFI2:
+ 677              		.cfi_def_cfa_offset 0
+ 678              		.cfi_restore 4
+ 679              		.cfi_restore 5
+ 680              		.cfi_restore 6
+ 681              		.cfi_restore 7
+ 682              		.cfi_restore 8
+ 683              		.cfi_restore 9
+ 684              		.cfi_restore 10
+ 685              		.cfi_restore 14
+  36:Drivers/ModbusSS/ModbusSS.c ****         return retLenError;
+ 686              		.loc 1 36 16 view .LVU212
+ 687 0154 4FF0FF30 		mov	r0, #-1
+ 688              	.LVL77:
+ 141:Drivers/ModbusSS/ModbusSS.c **** }
+ 689              		.loc 1 141 1 view .LVU213
+ 690 0158 7047     		bx	lr
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s 			page 20
+
+
+ 691              	.LVL78:
+ 692              	.L45:
+ 693              	.LCFI3:
+ 694              		.cfi_def_cfa_offset 32
+ 695              		.cfi_offset 4, -32
+ 696              		.cfi_offset 5, -28
+ 697              		.cfi_offset 6, -24
+ 698              		.cfi_offset 7, -20
+ 699              		.cfi_offset 8, -16
+ 700              		.cfi_offset 9, -12
+ 701              		.cfi_offset 10, -8
+ 702              		.cfi_offset 14, -4
+  36:Drivers/ModbusSS/ModbusSS.c ****         return retLenError;
+ 703              		.loc 1 36 16 view .LVU214
+ 704 015a 4FF0FF30 		mov	r0, #-1
+ 705              	.LVL79:
+  36:Drivers/ModbusSS/ModbusSS.c ****         return retLenError;
+ 706              		.loc 1 36 16 view .LVU215
+ 707 015e 92E7     		b	.L28
+ 708              	.LVL80:
+ 709              	.L46:
+  47:Drivers/ModbusSS/ModbusSS.c ****         return retLenError;
+ 710              		.loc 1 47 16 view .LVU216
+ 711 0160 4FF0FF30 		mov	r0, #-1
+ 712              	.LVL81:
+  47:Drivers/ModbusSS/ModbusSS.c ****         return retLenError;
+ 713              		.loc 1 47 16 view .LVU217
+ 714 0164 8FE7     		b	.L28
+ 715              	.LVL82:
+ 716              	.L48:
+  63:Drivers/ModbusSS/ModbusSS.c ****         return retLenError;
+ 717              		.loc 1 63 16 view .LVU218
+ 718 0166 4FF0FF30 		mov	r0, #-1
+ 719              	.LVL83:
+  63:Drivers/ModbusSS/ModbusSS.c ****         return retLenError;
+ 720              		.loc 1 63 16 view .LVU219
+ 721 016a 8CE7     		b	.L28
+ 722              	.LVL84:
+ 723              	.L49:
+ 724              	.LBB23:
+  73:Drivers/ModbusSS/ModbusSS.c ****             return retLenError;
+ 725              		.loc 1 73 20 view .LVU220
+ 726 016c 4FF0FF30 		mov	r0, #-1
+ 727              	.LVL85:
+  73:Drivers/ModbusSS/ModbusSS.c ****             return retLenError;
+ 728              		.loc 1 73 20 view .LVU221
+ 729 0170 89E7     		b	.L28
+ 730              	.LBE23:
+ 731              		.cfi_endproc
+ 732              	.LFE574:
+ 734              		.text
+ 735              	.Letext0:
+ 736              		.file 2 "c:\\vscode\\vscodestmtools\\arm-none-eabi-gcc\\12.2.1-1.2.1\\.content\\arm-none-eabi\\inc
+ 737              		.file 3 "c:\\vscode\\vscodestmtools\\arm-none-eabi-gcc\\12.2.1-1.2.1\\.content\\arm-none-eabi\\inc
+ 738              		.file 4 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h"
+ 739              		.file 5 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h"
+ 740              		.file 6 "Drivers/ModbusSS/ModbusSS.h"
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s 			page 21
+
+
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s 			page 22
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 ModbusSS.c
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s:19     .text.getTable:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s:24     .text.getTable:0000000000000000 getTable
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s:142    .text.getTable:0000000000000064 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s:147    .text.getTable:0000000000000074 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s:159    .text._Crc16:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s:164    .text._Crc16:0000000000000000 _Crc16
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s:255    .text.ModbusSS_GetWord:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s:261    .text.ModbusSS_GetWord:0000000000000000 ModbusSS_GetWord
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s:290    .text.ModbusSS_SetWord:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s:296    .text.ModbusSS_SetWord:0000000000000000 ModbusSS_SetWord
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s:321    .text.ModbusSS_ParseRxData:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccm65AA6.s:327    .text.ModbusSS_ParseRxData:0000000000000000 ModbusSS_ParseRxData
+
+NO UNDEFINED SYMBOLS

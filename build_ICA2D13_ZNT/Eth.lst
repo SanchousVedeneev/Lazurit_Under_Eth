@@ -1,0 +1,2941 @@
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"Eth.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.file 1 "Drivers/Ethernet/Eth.c"
+  18              		.section	.text.cs_sel,"ax",%progbits
+  19              		.align	1
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	cs_sel:
+  25              	.LFB579:
+   1:Drivers/Ethernet/Eth.c **** 
+   2:Drivers/Ethernet/Eth.c **** #include "Eth.h"
+   3:Drivers/Ethernet/Eth.c **** 
+   4:Drivers/Ethernet/Eth.c **** #include "spi.h"
+   5:Drivers/Ethernet/Eth.c **** #include "wizchip_conf.h"
+   6:Drivers/Ethernet/Eth.c **** #include "socket.h"
+   7:Drivers/Ethernet/Eth.c **** 
+   8:Drivers/Ethernet/Eth.c **** #include "string.h"
+   9:Drivers/Ethernet/Eth.c **** 
+  10:Drivers/Ethernet/Eth.c **** 
+  11:Drivers/Ethernet/Eth.c **** 
+  12:Drivers/Ethernet/Eth.c **** 
+  13:Drivers/Ethernet/Eth.c **** #ifdef ETH_USE_DHCP
+  14:Drivers/Ethernet/Eth.c **** #include "dhcp.h"
+  15:Drivers/Ethernet/Eth.c **** #endif
+  16:Drivers/Ethernet/Eth.c **** 
+  17:Drivers/Ethernet/Eth.c **** //-----------------------------------  FUNC
+  18:Drivers/Ethernet/Eth.c **** static void cs_sel();
+  19:Drivers/Ethernet/Eth.c **** static void cs_desel();
+  20:Drivers/Ethernet/Eth.c **** static uint8_t spi_rb(void);
+  21:Drivers/Ethernet/Eth.c **** static void spi_wb(uint8_t b);
+  22:Drivers/Ethernet/Eth.c **** static void spi_rb_burst(uint8_t *buf, uint16_t len);
+  23:Drivers/Ethernet/Eth.c **** static void spi_wb_burst(uint8_t *buf, uint16_t len);
+  24:Drivers/Ethernet/Eth.c **** void eth_dhcp_ip_assign();
+  25:Drivers/Ethernet/Eth.c **** void eth_dhcp_ip_conflict();
+  26:Drivers/Ethernet/Eth.c **** 
+  27:Drivers/Ethernet/Eth.c **** 
+  28:Drivers/Ethernet/Eth.c **** //-----------------------------------  FUNC END
+  29:Drivers/Ethernet/Eth.c **** 
+  30:Drivers/Ethernet/Eth.c **** 
+  31:Drivers/Ethernet/Eth.c **** wiz_NetInfo netInfo = {
+  32:Drivers/Ethernet/Eth.c ****     .ip = ETH_IP,
+  33:Drivers/Ethernet/Eth.c ****     .sn = ETH_MASK,
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 2
+
+
+  34:Drivers/Ethernet/Eth.c ****     .gw = ETH_GTW
+  35:Drivers/Ethernet/Eth.c **** };
+  36:Drivers/Ethernet/Eth.c **** 
+  37:Drivers/Ethernet/Eth.c **** #ifdef ETH_USE_DHCP
+  38:Drivers/Ethernet/Eth.c **** #define ETH_DHCP_TASK_MS (100)
+  39:Drivers/Ethernet/Eth.c **** #define ETH_DHCP_TIME_MS (1000)
+  40:Drivers/Ethernet/Eth.c **** uint8_t dhcpBuf[1024];
+  41:Drivers/Ethernet/Eth.c **** #endif
+  42:Drivers/Ethernet/Eth.c **** 
+  43:Drivers/Ethernet/Eth.c **** #ifdef ETH_USE_UDP_FINDER
+  44:Drivers/Ethernet/Eth.c **** uint8_t udpBufRx[ETH_UDP_BUF_RX_SIZE];
+  45:Drivers/Ethernet/Eth.c **** uint8_t udpBufTx[ETH_UDP_BUF_TX_SIZE];
+  46:Drivers/Ethernet/Eth.c **** #endif
+  47:Drivers/Ethernet/Eth.c **** 
+  48:Drivers/Ethernet/Eth.c **** // Init
+  49:Drivers/Ethernet/Eth.c **** uint8_t Eth_f_Init()
+  50:Drivers/Ethernet/Eth.c **** {
+  51:Drivers/Ethernet/Eth.c ****     wiz_NetInfo netInfoCheck;
+  52:Drivers/Ethernet/Eth.c ****     
+  53:Drivers/Ethernet/Eth.c ****     reg_wizchip_cs_cbfunc(cs_sel, cs_desel);
+  54:Drivers/Ethernet/Eth.c ****     reg_wizchip_spi_cbfunc(spi_rb, spi_wb);
+  55:Drivers/Ethernet/Eth.c ****     reg_wizchip_spiburst_cbfunc(spi_rb_burst, spi_wb_burst);
+  56:Drivers/Ethernet/Eth.c **** 
+  57:Drivers/Ethernet/Eth.c ****     uint8_t bufSize[] = {2, 2, 2, 2, 2, 2, 2, 2};
+  58:Drivers/Ethernet/Eth.c ****     wizchip_init(bufSize, bufSize);
+  59:Drivers/Ethernet/Eth.c **** 
+  60:Drivers/Ethernet/Eth.c ****     wizchip_setinterruptmask(IK_SOCK_ALL);
+  61:Drivers/Ethernet/Eth.c **** 
+  62:Drivers/Ethernet/Eth.c ****     Eth_f_GetMacFromUID(netInfo.mac);
+  63:Drivers/Ethernet/Eth.c **** 
+  64:Drivers/Ethernet/Eth.c ****     setSHAR(netInfo.mac);
+  65:Drivers/Ethernet/Eth.c ****     getSHAR(netInfoCheck.mac);
+  66:Drivers/Ethernet/Eth.c **** 
+  67:Drivers/Ethernet/Eth.c ****     // check if MAC is set
+  68:Drivers/Ethernet/Eth.c ****     for (uint8_t i = 0; i < 6; i++)
+  69:Drivers/Ethernet/Eth.c ****     {
+  70:Drivers/Ethernet/Eth.c ****         if (*(netInfo.mac + i) != *(netInfoCheck.mac + i))
+  71:Drivers/Ethernet/Eth.c ****             return RESET; //
+  72:Drivers/Ethernet/Eth.c ****     }
+  73:Drivers/Ethernet/Eth.c **** 
+  74:Drivers/Ethernet/Eth.c ****     setRTR(2000); // 200 мсек
+  75:Drivers/Ethernet/Eth.c ****     setRCR(3);  // 3 повтора
+  76:Drivers/Ethernet/Eth.c **** 
+  77:Drivers/Ethernet/Eth.c **** #ifdef ETH_USE_DHCP
+  78:Drivers/Ethernet/Eth.c ****     reg_dhcp_cbfunc(
+  79:Drivers/Ethernet/Eth.c ****         eth_dhcp_ip_assign,
+  80:Drivers/Ethernet/Eth.c ****         eth_dhcp_ip_assign,
+  81:Drivers/Ethernet/Eth.c ****         eth_dhcp_ip_conflict);
+  82:Drivers/Ethernet/Eth.c ****     DHCP_init(ETH_SOC_DHCP, dhcpBuf);
+  83:Drivers/Ethernet/Eth.c **** #else
+  84:Drivers/Ethernet/Eth.c ****     setGAR(netInfo.gw);
+  85:Drivers/Ethernet/Eth.c ****     setSUBR(netInfo.sn);
+  86:Drivers/Ethernet/Eth.c ****     setSIPR(netInfo.ip);
+  87:Drivers/Ethernet/Eth.c **** #endif
+  88:Drivers/Ethernet/Eth.c **** 
+  89:Drivers/Ethernet/Eth.c ****     //int8_t errCode = SOCK_OK;
+  90:Drivers/Ethernet/Eth.c **** 
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 3
+
+
+  91:Drivers/Ethernet/Eth.c **** #ifdef ETH_USE_UDP_FINDER
+  92:Drivers/Ethernet/Eth.c ****     errCode = socket(ETH_SOC_UDP, Sn_MR_UDP, ETH_UDP_PORT, SF_IO_NONBLOCK);
+  93:Drivers/Ethernet/Eth.c ****     if (errCode != SOCK_OK)
+  94:Drivers/Ethernet/Eth.c ****     {
+  95:Drivers/Ethernet/Eth.c ****         return RESET;
+  96:Drivers/Ethernet/Eth.c ****     }
+  97:Drivers/Ethernet/Eth.c **** #endif
+  98:Drivers/Ethernet/Eth.c **** 
+  99:Drivers/Ethernet/Eth.c ****     // // SF_TCP_NODELAY
+ 100:Drivers/Ethernet/Eth.c ****     // errCode = socket(ETH_SOC_TCP, Sn_MR_TCP, ETH_TCP_PORT, SF_IO_NONBLOCK);
+ 101:Drivers/Ethernet/Eth.c ****     // if (errCode != SOCK_BUSY)
+ 102:Drivers/Ethernet/Eth.c ****     // {
+ 103:Drivers/Ethernet/Eth.c ****     //     return RESET;
+ 104:Drivers/Ethernet/Eth.c ****     // }
+ 105:Drivers/Ethernet/Eth.c ****     // errCode = listen(ETH_SOC_TCP);
+ 106:Drivers/Ethernet/Eth.c ****     // if(errCode != SOCK_OK){
+ 107:Drivers/Ethernet/Eth.c ****     //    return RESET; 
+ 108:Drivers/Ethernet/Eth.c ****     // }
+ 109:Drivers/Ethernet/Eth.c **** 
+ 110:Drivers/Ethernet/Eth.c **** #ifdef ETH_USE_UDP_FINDER
+ 111:Drivers/Ethernet/Eth.c ****     udpBufTx[0] = (uint8_t)ETH_UDP_MSG_SEND_ID;
+ 112:Drivers/Ethernet/Eth.c ****     udpBufTx[1] = (uint8_t)(ETH_UDP_MSG_SEND_ID >> 8);
+ 113:Drivers/Ethernet/Eth.c ****     memcpy(udpBufTx + 2, (uint8_t *)UID_BASE, 12);
+ 114:Drivers/Ethernet/Eth.c ****     asm("NOP");
+ 115:Drivers/Ethernet/Eth.c ****     uint8_t destIp[4] = ETH_IP_BROADCAST;
+ 116:Drivers/Ethernet/Eth.c ****     if (sendto(ETH_SOC_UDP, udpBufTx, 14, destIp, ETH_UDP_PORT) < SOCK_OK)
+ 117:Drivers/Ethernet/Eth.c ****     {
+ 118:Drivers/Ethernet/Eth.c ****         Error_Handler();
+ 119:Drivers/Ethernet/Eth.c ****     }
+ 120:Drivers/Ethernet/Eth.c **** #endif
+ 121:Drivers/Ethernet/Eth.c **** 
+ 122:Drivers/Ethernet/Eth.c ****     return SET;
+ 123:Drivers/Ethernet/Eth.c **** }
+ 124:Drivers/Ethernet/Eth.c **** 
+ 125:Drivers/Ethernet/Eth.c **** 
+ 126:Drivers/Ethernet/Eth.c **** __STATIC_INLINE int32_t Eth_f_recv(Eth_t_SocTcp *socketObj)
+ 127:Drivers/Ethernet/Eth.c **** {
+ 128:Drivers/Ethernet/Eth.c ****     __IO int32_t ret = 0;
+ 129:Drivers/Ethernet/Eth.c ****     __IO uint16_t size = 0;
+ 130:Drivers/Ethernet/Eth.c ****     // get the size of recv data in recv buffer
+ 131:Drivers/Ethernet/Eth.c ****     if ((size = getSn_RX_RSR(socketObj->hwSocNum)) == 0) return 0;
+ 132:Drivers/Ethernet/Eth.c ****     
+ 133:Drivers/Ethernet/Eth.c ****     // recv data
+ 134:Drivers/Ethernet/Eth.c ****     ret = recv(socketObj->hwSocNum, socketObj->bufRx, socketObj->bufRxLen);
+ 135:Drivers/Ethernet/Eth.c ****     if ((ret <= 0) || (ret != size))
+ 136:Drivers/Ethernet/Eth.c ****     {
+ 137:Drivers/Ethernet/Eth.c ****         // printf("%d:recv fail\r\n", sn);
+ 138:Drivers/Ethernet/Eth.c ****         if ((ret = disconnect(socketObj->hwSocNum)) != SOCK_OK)
+ 139:Drivers/Ethernet/Eth.c ****         {
+ 140:Drivers/Ethernet/Eth.c ****             // printf("%d:disconnect fail\r\n", sn);
+ 141:Drivers/Ethernet/Eth.c ****             asm("NOP");
+ 142:Drivers/Ethernet/Eth.c ****             return ret;
+ 143:Drivers/Ethernet/Eth.c ****         }
+ 144:Drivers/Ethernet/Eth.c ****         asm("NOP");
+ 145:Drivers/Ethernet/Eth.c ****         return 0;
+ 146:Drivers/Ethernet/Eth.c ****     }
+ 147:Drivers/Ethernet/Eth.c **** 
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 4
+
+
+ 148:Drivers/Ethernet/Eth.c ****     return ret;
+ 149:Drivers/Ethernet/Eth.c **** }
+ 150:Drivers/Ethernet/Eth.c **** 
+ 151:Drivers/Ethernet/Eth.c **** __STATIC_INLINE int32_t Eth_f_send(Eth_t_SocTcp *socketObj/*, uint16_t size*/)
+ 152:Drivers/Ethernet/Eth.c **** {
+ 153:Drivers/Ethernet/Eth.c ****     __IO int32_t ret = 0;
+ 154:Drivers/Ethernet/Eth.c ****     if(socketObj->txFrameSize > socketObj->bufTxLen) return 0;
+ 155:Drivers/Ethernet/Eth.c **** 
+ 156:Drivers/Ethernet/Eth.c **** 
+ 157:Drivers/Ethernet/Eth.c ****     //wait until 
+ 158:Drivers/Ethernet/Eth.c ****     while(getSn_TX_FSR(socketObj->hwSocNum) < socketObj->txFrameSize){
+ 159:Drivers/Ethernet/Eth.c ****         asm("NOP");
+ 160:Drivers/Ethernet/Eth.c ****     }
+ 161:Drivers/Ethernet/Eth.c **** 
+ 162:Drivers/Ethernet/Eth.c ****     ret = send(socketObj->hwSocNum, socketObj->bufTx, socketObj->txFrameSize);
+ 163:Drivers/Ethernet/Eth.c ****     if (ret <= 0)
+ 164:Drivers/Ethernet/Eth.c ****     {
+ 165:Drivers/Ethernet/Eth.c ****         // printf("%d:send fail\r\n", sn);
+ 166:Drivers/Ethernet/Eth.c ****         // close the socket
+ 167:Drivers/Ethernet/Eth.c ****         if ((ret = disconnect(socketObj->hwSocNum)) != SOCK_OK){
+ 168:Drivers/Ethernet/Eth.c ****             // printf("%d:disconnect fail\r\n", sn);
+ 169:Drivers/Ethernet/Eth.c ****             asm("NOP");
+ 170:Drivers/Ethernet/Eth.c ****             return ret;
+ 171:Drivers/Ethernet/Eth.c ****         }
+ 172:Drivers/Ethernet/Eth.c ****         asm("NOP");
+ 173:Drivers/Ethernet/Eth.c ****         return 0;
+ 174:Drivers/Ethernet/Eth.c ****     }
+ 175:Drivers/Ethernet/Eth.c **** 
+ 176:Drivers/Ethernet/Eth.c ****     if(ret != socketObj->txFrameSize){
+ 177:Drivers/Ethernet/Eth.c ****         return 0;
+ 178:Drivers/Ethernet/Eth.c ****     }
+ 179:Drivers/Ethernet/Eth.c **** 
+ 180:Drivers/Ethernet/Eth.c ****     if (socketObj->txTotalSize >= socketObj->txFrameSize)
+ 181:Drivers/Ethernet/Eth.c ****     {
+ 182:Drivers/Ethernet/Eth.c ****         socketObj->txTotalSize -= socketObj->txFrameSize;
+ 183:Drivers/Ethernet/Eth.c ****     }
+ 184:Drivers/Ethernet/Eth.c ****     else
+ 185:Drivers/Ethernet/Eth.c ****     {
+ 186:Drivers/Ethernet/Eth.c ****         socketObj->txTotalSize = 0;
+ 187:Drivers/Ethernet/Eth.c ****     }
+ 188:Drivers/Ethernet/Eth.c ****     socketObj->txFrameSize = 0;
+ 189:Drivers/Ethernet/Eth.c ****     return ret;
+ 190:Drivers/Ethernet/Eth.c **** }
+ 191:Drivers/Ethernet/Eth.c **** 
+ 192:Drivers/Ethernet/Eth.c **** //------------------------------ HttpServer
+ 193:Drivers/Ethernet/Eth.c **** int32_t Eth_f_runTcpSrv(Eth_t_SocTcp *socketObj)
+ 194:Drivers/Ethernet/Eth.c **** {
+ 195:Drivers/Ethernet/Eth.c ****     __IO int32_t ret;
+ 196:Drivers/Ethernet/Eth.c ****     // uint8_t dest_ip[4];
+ 197:Drivers/Ethernet/Eth.c ****     // uint16_t dest_port;
+ 198:Drivers/Ethernet/Eth.c ****     __IO uint16_t size = 0;
+ 199:Drivers/Ethernet/Eth.c **** 
+ 200:Drivers/Ethernet/Eth.c ****     // Socket Status Transitions
+ 201:Drivers/Ethernet/Eth.c ****     // Check the W5500 Socket n status register (Sn_SR, The 'Sn_SR' controlled by Sn_CR command or 
+ 202:Drivers/Ethernet/Eth.c ****     switch (getSn_SR(socketObj->hwSocNum))
+ 203:Drivers/Ethernet/Eth.c ****     {
+ 204:Drivers/Ethernet/Eth.c **** 
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 5
+
+
+ 205:Drivers/Ethernet/Eth.c ****     case SOCK_CLOSED:
+ 206:Drivers/Ethernet/Eth.c ****     {
+ 207:Drivers/Ethernet/Eth.c ****         /* open socket */
+ 208:Drivers/Ethernet/Eth.c ****         // printf("TCP server start\r\n");
+ 209:Drivers/Ethernet/Eth.c ****         if ((ret = socket(socketObj->hwSocNum, Sn_MR_TCP, socketObj->port, 0x00)) != socketObj->hwS
+ 210:Drivers/Ethernet/Eth.c ****         {
+ 211:Drivers/Ethernet/Eth.c ****             // printf("socket %d open fail\r\n", sn);
+ 212:Drivers/Ethernet/Eth.c ****             asm("NOP");
+ 213:Drivers/Ethernet/Eth.c ****             return ret;
+ 214:Drivers/Ethernet/Eth.c ****         }
+ 215:Drivers/Ethernet/Eth.c ****         // printf("socket %d open success\r\n", sn);
+ 216:Drivers/Ethernet/Eth.c ****     }
+ 217:Drivers/Ethernet/Eth.c ****     break;
+ 218:Drivers/Ethernet/Eth.c **** 
+ 219:Drivers/Ethernet/Eth.c ****     case SOCK_INIT:
+ 220:Drivers/Ethernet/Eth.c ****     {
+ 221:Drivers/Ethernet/Eth.c ****         /* waiting for a client to connect */
+ 222:Drivers/Ethernet/Eth.c ****         // printf("listen %d port...\r\n", port);
+ 223:Drivers/Ethernet/Eth.c ****         if ((ret = listen(socketObj->hwSocNum)) != SOCK_OK)
+ 224:Drivers/Ethernet/Eth.c ****         {
+ 225:Drivers/Ethernet/Eth.c ****             // printf("%d:listen fail\r\n", sn);
+ 226:Drivers/Ethernet/Eth.c ****             asm("NOP");
+ 227:Drivers/Ethernet/Eth.c ****             return ret;
+ 228:Drivers/Ethernet/Eth.c ****         }
+ 229:Drivers/Ethernet/Eth.c ****         // printf("%d:listen success\r\n", sn);
+ 230:Drivers/Ethernet/Eth.c ****     }
+ 231:Drivers/Ethernet/Eth.c ****     break;
+ 232:Drivers/Ethernet/Eth.c **** 
+ 233:Drivers/Ethernet/Eth.c ****     case SOCK_ESTABLISHED:
+ 234:Drivers/Ethernet/Eth.c ****     {
+ 235:Drivers/Ethernet/Eth.c ****         /* socket has been established */
+ 236:Drivers/Ethernet/Eth.c ****         if (getSn_IR(socketObj->hwSocNum) & Sn_IR_CON)
+ 237:Drivers/Ethernet/Eth.c ****         {
+ 238:Drivers/Ethernet/Eth.c ****             // getSn_DIPR(ethServer->socNum, dest_ip);
+ 239:Drivers/Ethernet/Eth.c ****             // dest_port = getSn_DPORT(ethServer->socNum);
+ 240:Drivers/Ethernet/Eth.c ****             // printf("%d:a client connect success, %d.%d.%d.%d:%d\r\n", sn, dest_ip[0], dest_ip[1]
+ 241:Drivers/Ethernet/Eth.c ****             setSn_IR(socketObj->hwSocNum, Sn_IR_CON);
+ 242:Drivers/Ethernet/Eth.c ****         }
+ 243:Drivers/Ethernet/Eth.c **** 
+ 244:Drivers/Ethernet/Eth.c ****         switch (socketObj->exchangeState)
+ 245:Drivers/Ethernet/Eth.c ****         {
+ 246:Drivers/Ethernet/Eth.c ****         case state_idle:
+ 247:Drivers/Ethernet/Eth.c ****         {
+ 248:Drivers/Ethernet/Eth.c ****             // get the size of recv data in recv buffer
+ 249:Drivers/Ethernet/Eth.c ****             if ((size = Eth_f_recv(socketObj)) > 0)
+ 250:Drivers/Ethernet/Eth.c ****             {
+ 251:Drivers/Ethernet/Eth.c ****                 if (socketObj->echoMode)
+ 252:Drivers/Ethernet/Eth.c ****                 {
+ 253:Drivers/Ethernet/Eth.c ****                     memcpy(socketObj->bufTx, socketObj->bufRx, size);
+ 254:Drivers/Ethernet/Eth.c ****                     socketObj->txFrameSize = size;
+ 255:Drivers/Ethernet/Eth.c ****                     if (Eth_f_send(socketObj) == size)
+ 256:Drivers/Ethernet/Eth.c ****                     {
+ 257:Drivers/Ethernet/Eth.c ****                         
+ 258:Drivers/Ethernet/Eth.c ****                     }
+ 259:Drivers/Ethernet/Eth.c ****                     break;
+ 260:Drivers/Ethernet/Eth.c ****                 }
+ 261:Drivers/Ethernet/Eth.c **** 
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 6
+
+
+ 262:Drivers/Ethernet/Eth.c ****                 if (socketObj->cbfunc_pendingData != NULL)
+ 263:Drivers/Ethernet/Eth.c ****                 {
+ 264:Drivers/Ethernet/Eth.c ****                     size = socketObj->cbfunc_pendingData(socketObj);
+ 265:Drivers/Ethernet/Eth.c ****                 }
+ 266:Drivers/Ethernet/Eth.c **** 
+ 267:Drivers/Ethernet/Eth.c ****                 if ((socketObj->exchangeState == state_res_inProc))
+ 268:Drivers/Ethernet/Eth.c ****                 {
+ 269:Drivers/Ethernet/Eth.c ****                     // if (socketObj->cbfunc_sendData == NULL)
+ 270:Drivers/Ethernet/Eth.c ****                     // {
+ 271:Drivers/Ethernet/Eth.c ****                     //     break;
+ 272:Drivers/Ethernet/Eth.c ****                     // }
+ 273:Drivers/Ethernet/Eth.c **** 
+ 274:Drivers/Ethernet/Eth.c ****                     ///*size = */socketObj->cbfunc_sendData(socketObj);
+ 275:Drivers/Ethernet/Eth.c ****                     // socketObj->txFrameSize = size;
+ 276:Drivers/Ethernet/Eth.c ****                     size = socketObj->txFrameSize;
+ 277:Drivers/Ethernet/Eth.c ****                     if (Eth_f_send(socketObj) == size)
+ 278:Drivers/Ethernet/Eth.c ****                     {
+ 279:Drivers/Ethernet/Eth.c ****                         if (socketObj->txTotalSize == 0)
+ 280:Drivers/Ethernet/Eth.c ****                             socketObj->exchangeState = state_idle;
+ 281:Drivers/Ethernet/Eth.c ****                     }
+ 282:Drivers/Ethernet/Eth.c ****                 }
+ 283:Drivers/Ethernet/Eth.c ****             }
+ 284:Drivers/Ethernet/Eth.c ****         }
+ 285:Drivers/Ethernet/Eth.c ****         break;
+ 286:Drivers/Ethernet/Eth.c ****         case state_res_inProc:
+ 287:Drivers/Ethernet/Eth.c ****         {
+ 288:Drivers/Ethernet/Eth.c ****             if (socketObj->cbfunc_sendData == NULL)
+ 289:Drivers/Ethernet/Eth.c ****             {
+ 290:Drivers/Ethernet/Eth.c ****                 break;
+ 291:Drivers/Ethernet/Eth.c ****             }
+ 292:Drivers/Ethernet/Eth.c **** 
+ 293:Drivers/Ethernet/Eth.c ****             /*size = */socketObj->cbfunc_sendData(socketObj);
+ 294:Drivers/Ethernet/Eth.c ****             size = socketObj->txFrameSize;
+ 295:Drivers/Ethernet/Eth.c ****             if (Eth_f_send(socketObj) == size)
+ 296:Drivers/Ethernet/Eth.c ****             {
+ 297:Drivers/Ethernet/Eth.c ****                 if (socketObj->txTotalSize == 0)
+ 298:Drivers/Ethernet/Eth.c ****                     socketObj->exchangeState = state_idle;
+ 299:Drivers/Ethernet/Eth.c ****             }
+ 300:Drivers/Ethernet/Eth.c ****         }
+ 301:Drivers/Ethernet/Eth.c ****         break;
+ 302:Drivers/Ethernet/Eth.c ****         case state_close:
+ 303:Drivers/Ethernet/Eth.c ****         {
+ 304:Drivers/Ethernet/Eth.c ****             if ((ret = disconnect(socketObj->hwSocNum)) != SOCK_OK)
+ 305:Drivers/Ethernet/Eth.c ****             {
+ 306:Drivers/Ethernet/Eth.c ****                 asm("NOP");
+ 307:Drivers/Ethernet/Eth.c ****                 return ret;
+ 308:Drivers/Ethernet/Eth.c ****             }
+ 309:Drivers/Ethernet/Eth.c ****             socketObj->exchangeState = state_idle;
+ 310:Drivers/Ethernet/Eth.c ****         }
+ 311:Drivers/Ethernet/Eth.c ****             /* code */
+ 312:Drivers/Ethernet/Eth.c ****             break;
+ 313:Drivers/Ethernet/Eth.c ****         default:
+ 314:Drivers/Ethernet/Eth.c ****             break;
+ 315:Drivers/Ethernet/Eth.c ****         }
+ 316:Drivers/Ethernet/Eth.c ****         // send resp data ?
+ 317:Drivers/Ethernet/Eth.c ****     }
+ 318:Drivers/Ethernet/Eth.c ****     break;
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 7
+
+
+ 319:Drivers/Ethernet/Eth.c **** 
+ 320:Drivers/Ethernet/Eth.c ****     case SOCK_CLOSE_WAIT:
+ 321:Drivers/Ethernet/Eth.c ****         /* closing the socket */
+ 322:Drivers/Ethernet/Eth.c ****         if ((ret = disconnect(socketObj->hwSocNum)) != SOCK_OK)
+ 323:Drivers/Ethernet/Eth.c ****         {
+ 324:Drivers/Ethernet/Eth.c ****             // printf("%d:disconnect fail\r\n", sn);
+ 325:Drivers/Ethernet/Eth.c ****             asm("NOP");
+ 326:Drivers/Ethernet/Eth.c ****             return ret;
+ 327:Drivers/Ethernet/Eth.c ****         }
+ 328:Drivers/Ethernet/Eth.c ****         // printf("%d: socket is closed\r\n", sn);
+ 329:Drivers/Ethernet/Eth.c ****         break;
+ 330:Drivers/Ethernet/Eth.c ****     break;
+ 331:Drivers/Ethernet/Eth.c ****     default:
+ 332:Drivers/Ethernet/Eth.c ****         break;
+ 333:Drivers/Ethernet/Eth.c ****     }
+ 334:Drivers/Ethernet/Eth.c ****     asm("NOP");
+ 335:Drivers/Ethernet/Eth.c ****     return SOCK_OK;
+ 336:Drivers/Ethernet/Eth.c **** }
+ 337:Drivers/Ethernet/Eth.c **** //------------------------------ HttpServer END
+ 338:Drivers/Ethernet/Eth.c **** 
+ 339:Drivers/Ethernet/Eth.c **** 
+ 340:Drivers/Ethernet/Eth.c **** 
+ 341:Drivers/Ethernet/Eth.c **** 
+ 342:Drivers/Ethernet/Eth.c **** #ifdef ETH_USE_DHCP
+ 343:Drivers/Ethernet/Eth.c **** void eth_dhcp_ip_assign(){
+ 344:Drivers/Ethernet/Eth.c ****   LL_GPIO_TogglePin(O_D_Led_GPIO_Port, O_D_Led_Pin);
+ 345:Drivers/Ethernet/Eth.c **** 
+ 346:Drivers/Ethernet/Eth.c ****     
+ 347:Drivers/Ethernet/Eth.c **** }
+ 348:Drivers/Ethernet/Eth.c **** 
+ 349:Drivers/Ethernet/Eth.c **** void eth_dhcp_ip_conflict(){
+ 350:Drivers/Ethernet/Eth.c ****     Error_Handler();
+ 351:Drivers/Ethernet/Eth.c **** }
+ 352:Drivers/Ethernet/Eth.c **** #endif
+ 353:Drivers/Ethernet/Eth.c **** 
+ 354:Drivers/Ethernet/Eth.c **** 
+ 355:Drivers/Ethernet/Eth.c **** uint8_t Eth_f_GetMacFromUID(uint8_t *mac)
+ 356:Drivers/Ethernet/Eth.c **** {
+ 357:Drivers/Ethernet/Eth.c ****     *(mac + 0) = 0x00;
+ 358:Drivers/Ethernet/Eth.c ****     *(mac + 1) = 0x80;
+ 359:Drivers/Ethernet/Eth.c ****     *(mac + 2) = 0xE1;
+ 360:Drivers/Ethernet/Eth.c ****     *(mac + 3) = (uint8_t)(HAL_GetUIDw0());  // byte 0
+ 361:Drivers/Ethernet/Eth.c ****     *(mac + 4) = (uint8_t)(HAL_GetUIDw0()>>16);  // byte 2
+ 362:Drivers/Ethernet/Eth.c ****     *(mac + 5) = (uint8_t)(HAL_GetUIDw1());  // byte 4
+ 363:Drivers/Ethernet/Eth.c ****     return SET;
+ 364:Drivers/Ethernet/Eth.c **** }
+ 365:Drivers/Ethernet/Eth.c **** 
+ 366:Drivers/Ethernet/Eth.c **** 
+ 367:Drivers/Ethernet/Eth.c **** 
+ 368:Drivers/Ethernet/Eth.c **** //------------------------------SPI FUNC-----------------------------------
+ 369:Drivers/Ethernet/Eth.c **** static void cs_sel()
+ 370:Drivers/Ethernet/Eth.c **** {
+  26              		.loc 1 370 1 view -0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              		@ link register save eliminated.
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 8
+
+
+ 371:Drivers/Ethernet/Eth.c ****     LL_GPIO_ResetOutputPin(W5500_CS_GPIO_Port, W5500_CS_Pin); // CS Н�?ЗК�?Й
+  31              		.loc 1 371 5 view .LVU1
+  32              	.LVL0:
+  33              	.LBB6:
+  34              	.LBI6:
+  35              		.file 2 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h"
+   1:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+   2:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   ******************************************************************************
+   3:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @file    stm32f1xx_ll_gpio.h
+   4:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @author  MCD Application Team
+   5:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief   Header file of GPIO LL module.
+   6:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   ******************************************************************************
+   7:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @attention
+   8:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *
+   9:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
+  10:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * All rights reserved.</center></h2>
+  11:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *
+  12:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * This software component is licensed by ST under BSD 3-Clause license,
+  13:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * the "License"; You may not use this file except in compliance with the
+  14:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * License. You may obtain a copy of the License at:
+  15:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *                        opensource.org/licenses/BSD-3-Clause
+  16:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *
+  17:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   ******************************************************************************
+  18:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+  19:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+  20:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /* Define to prevent recursive inclusion -------------------------------------*/
+  21:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #ifndef STM32F1xx_LL_GPIO_H
+  22:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define STM32F1xx_LL_GPIO_H
+  23:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+  24:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #ifdef __cplusplus
+  25:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** extern "C" {
+  26:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #endif
+  27:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+  28:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /* Includes ------------------------------------------------------------------*/
+  29:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #include "stm32f1xx.h"
+  30:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+  31:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /** @addtogroup STM32F1xx_LL_Driver
+  32:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @{
+  33:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+  34:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+  35:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #if defined (GPIOA) || defined (GPIOB) || defined (GPIOC) || defined (GPIOD) || defined (GPIOE) || 
+  36:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+  37:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /** @defgroup GPIO_LL GPIO
+  38:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @{
+  39:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+  40:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+  41:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /* Private types -------------------------------------------------------------*/
+  42:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /* Private variables ---------------------------------------------------------*/
+  43:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /* Private constants ---------------------------------------------------------*/
+  44:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+  45:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /** @defgroup GPIO_LL_Private_Constants GPIO Private Constants
+  46:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @{
+  47:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+  48:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /* Defines used for Pin Mask Initialization */
+  49:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define GPIO_PIN_MASK_POS   8U
+  50:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define GPIO_PIN_NB         16U
+  51:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 9
+
+
+  52:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @}
+  53:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+  54:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+  55:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /* Private macros ------------------------------------------------------------*/
+  56:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #if defined(USE_FULL_LL_DRIVER)
+  57:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /** @defgroup GPIO_LL_Private_Macros GPIO Private Macros
+  58:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @{
+  59:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+  60:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+  61:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+  62:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @}
+  63:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+  64:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #endif /*USE_FULL_LL_DRIVER*/
+  65:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+  66:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /* Exported types ------------------------------------------------------------*/
+  67:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #if defined(USE_FULL_LL_DRIVER)
+  68:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /** @defgroup GPIO_LL_ES_INIT GPIO Exported Init structures
+  69:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @{
+  70:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+  71:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+  72:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+  73:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief LL GPIO Init Structure definition
+  74:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+  75:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** typedef struct
+  76:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
+  77:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   uint32_t Pin;          /*!< Specifies the GPIO pins to be configured.
+  78:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****                               This parameter can be any value of @ref GPIO_LL_EC_PIN */
+  79:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+  80:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   uint32_t Mode;         /*!< Specifies the operating mode for the selected pins.
+  81:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****                               This parameter can be a value of @ref GPIO_LL_EC_MODE.
+  82:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+  83:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****                               GPIO HW configuration can be modified afterwards using unitary functi
+  84:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+  85:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   uint32_t Speed;        /*!< Specifies the speed for the selected pins.
+  86:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****                               This parameter can be a value of @ref GPIO_LL_EC_SPEED.
+  87:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+  88:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****                               GPIO HW configuration can be modified afterwards using unitary functi
+  89:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+  90:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   uint32_t OutputType;   /*!< Specifies the operating output type for the selected pins.
+  91:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****                               This parameter can be a value of @ref GPIO_LL_EC_OUTPUT.
+  92:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+  93:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****                               GPIO HW configuration can be modified afterwards using unitary functi
+  94:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+  95:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   uint32_t Pull;         /*!< Specifies the operating Pull-up/Pull down for the selected pins.
+  96:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****                               This parameter can be a value of @ref GPIO_LL_EC_PULL.
+  97:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+  98:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****                               GPIO HW configuration can be modified afterwards using unitary functi
+  99:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** } LL_GPIO_InitTypeDef;
+ 100:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 101:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 102:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @}
+ 103:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 104:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #endif /* USE_FULL_LL_DRIVER */
+ 105:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 106:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /* Exported constants --------------------------------------------------------*/
+ 107:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /** @defgroup GPIO_LL_Exported_Constants GPIO Exported Constants
+ 108:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @{
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 10
+
+
+ 109:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 110:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 111:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /** @defgroup GPIO_LL_EC_PIN PIN
+ 112:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @{
+ 113:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 114:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_0                    ((GPIO_BSRR_BS0  << GPIO_PIN_MASK_POS) | 0x00000001U)  /*!
+ 115:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_1                    ((GPIO_BSRR_BS1  << GPIO_PIN_MASK_POS) | 0x00000002U)  /*!
+ 116:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_2                    ((GPIO_BSRR_BS2  << GPIO_PIN_MASK_POS) | 0x00000004U)  /*!
+ 117:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_3                    ((GPIO_BSRR_BS3  << GPIO_PIN_MASK_POS) | 0x00000008U)  /*!
+ 118:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_4                    ((GPIO_BSRR_BS4  << GPIO_PIN_MASK_POS) | 0x00000010U)  /*!
+ 119:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_5                    ((GPIO_BSRR_BS5  << GPIO_PIN_MASK_POS) | 0x00000020U)  /*!
+ 120:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_6                    ((GPIO_BSRR_BS6  << GPIO_PIN_MASK_POS) | 0x00000040U)  /*!
+ 121:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_7                    ((GPIO_BSRR_BS7  << GPIO_PIN_MASK_POS) | 0x00000080U)  /*!
+ 122:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_8                    ((GPIO_BSRR_BS8  << GPIO_PIN_MASK_POS) | 0x04000001U)  /*!
+ 123:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_9                    ((GPIO_BSRR_BS9  << GPIO_PIN_MASK_POS) | 0x04000002U)  /*!
+ 124:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_10                   ((GPIO_BSRR_BS10 << GPIO_PIN_MASK_POS) | 0x04000004U)  /*!
+ 125:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_11                   ((GPIO_BSRR_BS11 << GPIO_PIN_MASK_POS) | 0x04000008U)  /*!
+ 126:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_12                   ((GPIO_BSRR_BS12 << GPIO_PIN_MASK_POS) | 0x04000010U)  /*!
+ 127:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_13                   ((GPIO_BSRR_BS13 << GPIO_PIN_MASK_POS) | 0x04000020U)  /*!
+ 128:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_14                   ((GPIO_BSRR_BS14 << GPIO_PIN_MASK_POS) | 0x04000040U)  /*!
+ 129:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_15                   ((GPIO_BSRR_BS15 << GPIO_PIN_MASK_POS) | 0x04000080U)  /*!
+ 130:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PIN_ALL                  (LL_GPIO_PIN_0  | LL_GPIO_PIN_1  | LL_GPIO_PIN_2  | \
+ 131:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****                                           LL_GPIO_PIN_3  | LL_GPIO_PIN_4  | LL_GPIO_PIN_5  | \
+ 132:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****                                           LL_GPIO_PIN_6  | LL_GPIO_PIN_7  | LL_GPIO_PIN_8  | \
+ 133:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****                                           LL_GPIO_PIN_9  | LL_GPIO_PIN_10 | LL_GPIO_PIN_11 | \
+ 134:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****                                           LL_GPIO_PIN_12 | LL_GPIO_PIN_13 | LL_GPIO_PIN_14 | \
+ 135:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****                                           LL_GPIO_PIN_15)                                      /*!<
+ 136:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 137:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @}
+ 138:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 139:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 140:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /** @defgroup GPIO_LL_EC_MODE Mode
+ 141:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @{
+ 142:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 143:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_MODE_ANALOG              0x00000000U       /*!< Select analog mode */
+ 144:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_MODE_FLOATING            GPIO_CRL_CNF0_0   /*!< Select floating mode */
+ 145:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_MODE_INPUT               GPIO_CRL_CNF0_1   /*!< Select input mode */
+ 146:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_MODE_OUTPUT              GPIO_CRL_MODE0_0  /*!< Select general purpose output mode 
+ 147:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_MODE_ALTERNATE           (GPIO_CRL_CNF0_1 | GPIO_CRL_MODE0_0) /*!< Select alternate
+ 148:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 149:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @}
+ 150:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 151:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 152:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /** @defgroup GPIO_LL_EC_OUTPUT Output Type
+ 153:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @{
+ 154:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 155:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_OUTPUT_PUSHPULL          0x00000000U                /*!< Select push-pull as output
+ 156:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_OUTPUT_OPENDRAIN         GPIO_CRL_CNF0_0            /*!< Select open-drain as outpu
+ 157:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 158:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @}
+ 159:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 160:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 161:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /** @defgroup GPIO_LL_EC_SPEED Output Speed
+ 162:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @{
+ 163:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 164:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_MODE_OUTPUT_10MHz        GPIO_CRL_MODE0_0            /*!< Select Output mode, max s
+ 165:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_MODE_OUTPUT_2MHz         GPIO_CRL_MODE0_1            /*!< Select Output mode, max s
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 11
+
+
+ 166:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_MODE_OUTPUT_50MHz        GPIO_CRL_MODE0              /*!< Select Output mode, max s
+ 167:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 168:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @}
+ 169:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 170:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 171:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_SPEED_FREQ_LOW           LL_GPIO_MODE_OUTPUT_2MHz    /*!< Select I/O low output spe
+ 172:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_SPEED_FREQ_MEDIUM        LL_GPIO_MODE_OUTPUT_10MHz   /*!< Select I/O medium output 
+ 173:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_SPEED_FREQ_HIGH          LL_GPIO_MODE_OUTPUT_50MHz   /*!< Select I/O high output sp
+ 174:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 175:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /** @defgroup GPIO_LL_EC_PULL Pull Up Pull Down
+ 176:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @{
+ 177:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 178:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PULL_DOWN                0x00000000U    /*!< Select I/O pull down */
+ 179:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_PULL_UP                  GPIO_ODR_ODR0  /*!< Select I/O pull up */
+ 180:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 181:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 182:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @}
+ 183:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 184:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 185:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /** @defgroup GPIO_LL_EVENTOUT_PIN EVENTOUT Pin
+ 186:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @{
+ 187:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 188:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 189:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EVENTOUT_PIN_0        AFIO_EVCR_PIN_PX0   /*!< EVENTOUT on pin 0 */
+ 190:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EVENTOUT_PIN_1        AFIO_EVCR_PIN_PX1   /*!< EVENTOUT on pin 1 */
+ 191:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EVENTOUT_PIN_2        AFIO_EVCR_PIN_PX2   /*!< EVENTOUT on pin 2 */
+ 192:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EVENTOUT_PIN_3        AFIO_EVCR_PIN_PX3   /*!< EVENTOUT on pin 3 */
+ 193:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EVENTOUT_PIN_4        AFIO_EVCR_PIN_PX4   /*!< EVENTOUT on pin 4 */
+ 194:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EVENTOUT_PIN_5        AFIO_EVCR_PIN_PX5   /*!< EVENTOUT on pin 5 */
+ 195:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EVENTOUT_PIN_6        AFIO_EVCR_PIN_PX6   /*!< EVENTOUT on pin 6 */
+ 196:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EVENTOUT_PIN_7        AFIO_EVCR_PIN_PX7   /*!< EVENTOUT on pin 7 */
+ 197:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EVENTOUT_PIN_8        AFIO_EVCR_PIN_PX8   /*!< EVENTOUT on pin 8 */
+ 198:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EVENTOUT_PIN_9        AFIO_EVCR_PIN_PX9   /*!< EVENTOUT on pin 9 */
+ 199:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EVENTOUT_PIN_10       AFIO_EVCR_PIN_PX10  /*!< EVENTOUT on pin 10 */
+ 200:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EVENTOUT_PIN_11       AFIO_EVCR_PIN_PX11  /*!< EVENTOUT on pin 11 */
+ 201:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EVENTOUT_PIN_12       AFIO_EVCR_PIN_PX12  /*!< EVENTOUT on pin 12 */
+ 202:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EVENTOUT_PIN_13       AFIO_EVCR_PIN_PX13  /*!< EVENTOUT on pin 13 */
+ 203:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EVENTOUT_PIN_14       AFIO_EVCR_PIN_PX14  /*!< EVENTOUT on pin 14 */
+ 204:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EVENTOUT_PIN_15       AFIO_EVCR_PIN_PX15  /*!< EVENTOUT on pin 15 */
+ 205:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 206:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 207:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @}
+ 208:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 209:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 210:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /** @defgroup GPIO_LL_EVENTOUT_PORT EVENTOUT Port
+ 211:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @{
+ 212:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 213:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 214:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EVENTOUT_PORT_A       AFIO_EVCR_PORT_PA  /*!< EVENTOUT on port A */
+ 215:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EVENTOUT_PORT_B       AFIO_EVCR_PORT_PB  /*!< EVENTOUT on port B */
+ 216:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EVENTOUT_PORT_C       AFIO_EVCR_PORT_PC  /*!< EVENTOUT on port C */
+ 217:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EVENTOUT_PORT_D       AFIO_EVCR_PORT_PD  /*!< EVENTOUT on port D */
+ 218:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EVENTOUT_PORT_E       AFIO_EVCR_PORT_PE  /*!< EVENTOUT on port E */
+ 219:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 220:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 221:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @}
+ 222:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 12
+
+
+ 223:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 224:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /** @defgroup GPIO_LL_EC_EXTI_PORT GPIO EXTI PORT
+ 225:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @{
+ 226:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 227:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_PORTA            0U   /*!< EXTI PORT A */
+ 228:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_PORTB            1U   /*!< EXTI PORT B */
+ 229:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_PORTC            2U   /*!< EXTI PORT C */
+ 230:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_PORTD            3U   /*!< EXTI PORT D */
+ 231:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_PORTE            4U   /*!< EXTI PORT E */
+ 232:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_PORTF            5U   /*!< EXTI PORT F */
+ 233:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_PORTG            6U   /*!< EXTI PORT G */
+ 234:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 235:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @}
+ 236:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 237:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 238:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /** @defgroup GPIO_LL_EC_EXTI_LINE GPIO EXTI LINE
+ 239:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @{
+ 240:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 241:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_LINE0            (0x000FU << 16U | 0U)  /*!< EXTI_POSITION_0  | EXTICR[0] *
+ 242:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_LINE1            (0x00F0U << 16U | 0U)  /*!< EXTI_POSITION_4  | EXTICR[0] *
+ 243:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_LINE2            (0x0F00U << 16U | 0U)  /*!< EXTI_POSITION_8  | EXTICR[0] *
+ 244:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_LINE3            (0xF000U << 16U | 0U)  /*!< EXTI_POSITION_12 | EXTICR[0] *
+ 245:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_LINE4            (0x000FU << 16U | 1U)  /*!< EXTI_POSITION_0  | EXTICR[1] *
+ 246:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_LINE5            (0x00F0U << 16U | 1U)  /*!< EXTI_POSITION_4  | EXTICR[1] *
+ 247:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_LINE6            (0x0F00U << 16U | 1U)  /*!< EXTI_POSITION_8  | EXTICR[1] *
+ 248:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_LINE7            (0xF000U << 16U | 1U)  /*!< EXTI_POSITION_12 | EXTICR[1] *
+ 249:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_LINE8            (0x000FU << 16U | 2U)  /*!< EXTI_POSITION_0  | EXTICR[2] *
+ 250:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_LINE9            (0x00F0U << 16U | 2U)  /*!< EXTI_POSITION_4  | EXTICR[2] *
+ 251:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_LINE10           (0x0F00U << 16U | 2U)  /*!< EXTI_POSITION_8  | EXTICR[2] *
+ 252:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_LINE11           (0xF000U << 16U | 2U)  /*!< EXTI_POSITION_12 | EXTICR[2] *
+ 253:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_LINE12           (0x000FU << 16U | 3U)  /*!< EXTI_POSITION_0  | EXTICR[3] *
+ 254:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_LINE13           (0x00F0U << 16U | 3U)  /*!< EXTI_POSITION_4  | EXTICR[3] *
+ 255:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_LINE14           (0x0F00U << 16U | 3U)  /*!< EXTI_POSITION_8  | EXTICR[3] *
+ 256:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_AF_EXTI_LINE15           (0xF000U << 16U | 3U)  /*!< EXTI_POSITION_12 | EXTICR[3] *
+ 257:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 258:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @}
+ 259:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 260:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 261:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 262:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @}
+ 263:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 264:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 265:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /* Exported macro ------------------------------------------------------------*/
+ 266:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /** @defgroup GPIO_LL_Exported_Macros GPIO Exported Macros
+ 267:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @{
+ 268:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 269:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 270:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /** @defgroup GPIO_LL_EM_WRITE_READ Common Write and read registers Macros
+ 271:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @{
+ 272:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 273:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 274:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 275:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief  Write a value in GPIO register
+ 276:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  __INSTANCE__ GPIO Instance
+ 277:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  __REG__ Register to be written
+ 278:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  __VALUE__ Value to be written in the register
+ 279:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @retval None
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 13
+
+
+ 280:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 281:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_WriteReg(__INSTANCE__, __REG__, __VALUE__) WRITE_REG(__INSTANCE__->__REG__, (__VALU
+ 282:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 283:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 284:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief  Read a value in GPIO register
+ 285:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  __INSTANCE__ GPIO Instance
+ 286:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  __REG__ Register to be read
+ 287:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @retval Register value
+ 288:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 289:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** #define LL_GPIO_ReadReg(__INSTANCE__, __REG__) READ_REG(__INSTANCE__->__REG__)
+ 290:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 291:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @}
+ 292:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 293:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 294:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 295:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @}
+ 296:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 297:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 298:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /* Exported functions --------------------------------------------------------*/
+ 299:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /** @defgroup GPIO_LL_Exported_Functions GPIO Exported Functions
+ 300:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @{
+ 301:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 302:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 303:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /** @defgroup GPIO_LL_EF_Port_Configuration Port Configuration
+ 304:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @{
+ 305:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 306:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 307:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 308:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief  Configure gpio mode for a dedicated pin on dedicated port.
+ 309:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @note   I/O mode can be Analog, Floating input, Input with pull-up/pull-down, General purpose O
+ 310:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         Alternate function Output.
+ 311:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
+ 312:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll CRL        CNFy         LL_GPIO_SetPinMode
+ 313:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll CRL        MODEy        LL_GPIO_SetPinMode
+ 314:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll CRH        CNFy         LL_GPIO_SetPinMode
+ 315:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll CRH        MODEy        LL_GPIO_SetPinMode
+ 316:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 317:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
+ 318:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 319:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 320:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 321:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 322:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 323:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 324:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 325:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 326:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 327:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 328:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 329:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 330:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 331:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 332:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 333:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 334:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  Mode This parameter can be one of the following values:
+ 335:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_MODE_ANALOG
+ 336:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_MODE_FLOATING
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 14
+
+
+ 337:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_MODE_INPUT
+ 338:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_MODE_OUTPUT
+ 339:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_MODE_ALTERNATE
+ 340:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @retval None
+ 341:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 342:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** __STATIC_INLINE void LL_GPIO_SetPinMode(GPIO_TypeDef *GPIOx, uint32_t Pin, uint32_t Mode)
+ 343:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
+ 344:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   register uint32_t *pReg = (uint32_t *)((uint32_t)((uint32_t)(&GPIOx->CRL) + (Pin >> 24)));
+ 345:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   MODIFY_REG(*pReg, ((GPIO_CRL_CNF0 | GPIO_CRL_MODE0) << (POSITION_VAL(Pin) * 4U)), (Mode << (POSIT
+ 346:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** }
+ 347:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 348:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 349:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief  Return gpio mode for a dedicated pin on dedicated port.
+ 350:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @note   I/O mode can be Analog, Floating input, Input with pull-up/pull-down, General purpose O
+ 351:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         Alternate function Output.
+ 352:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
+ 353:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll CRL        CNFy         LL_GPIO_GetPinMode
+ 354:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll CRL        MODEy        LL_GPIO_GetPinMode
+ 355:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll CRH        CNFy         LL_GPIO_GetPinMode
+ 356:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll CRH        MODEy        LL_GPIO_GetPinMode
+ 357:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 358:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
+ 359:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 360:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 361:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 362:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 363:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 364:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 365:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 366:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 367:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 368:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 369:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 370:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 371:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 372:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 373:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 374:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 375:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @retval Returned value can be one of the following values:
+ 376:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_MODE_ANALOG
+ 377:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_MODE_FLOATING
+ 378:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_MODE_INPUT
+ 379:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_MODE_OUTPUT
+ 380:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_MODE_ALTERNATE
+ 381:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 382:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_GetPinMode(GPIO_TypeDef *GPIOx, uint32_t Pin)
+ 383:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
+ 384:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   register uint32_t *pReg = (uint32_t *)((uint32_t)((uint32_t)(&GPIOx->CRL) + (Pin >> 24)));
+ 385:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   return (READ_BIT(*pReg, ((GPIO_CRL_CNF0 | GPIO_CRL_MODE0) << (POSITION_VAL(Pin) * 4U))) >> (POSIT
+ 386:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** }
+ 387:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 388:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 389:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief  Configure gpio speed for a dedicated pin on dedicated port.
+ 390:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @note   I/O speed can be Low, Medium or Fast speed.
+ 391:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
+ 392:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @note   Refer to datasheet for frequency specifications and the power
+ 393:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         supply and load conditions for each speed.
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 15
+
+
+ 394:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll CRL      MODEy       LL_GPIO_SetPinSpeed
+ 395:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll CRH      MODEy       LL_GPIO_SetPinSpeed
+ 396:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 397:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
+ 398:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 399:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 400:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 401:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 402:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 403:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 404:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 405:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 406:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 407:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 408:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 409:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 410:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 411:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 412:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 413:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 414:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  Speed This parameter can be one of the following values:
+ 415:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_SPEED_FREQ_LOW
+ 416:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_SPEED_FREQ_MEDIUM
+ 417:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_SPEED_FREQ_HIGH
+ 418:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @retval None
+ 419:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 420:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** __STATIC_INLINE void LL_GPIO_SetPinSpeed(GPIO_TypeDef *GPIOx, uint32_t Pin, uint32_t  Speed)
+ 421:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
+ 422:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   register uint32_t *pReg = (uint32_t *)((uint32_t)((uint32_t)(&GPIOx->CRL) + (Pin >> 24)));
+ 423:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   MODIFY_REG(*pReg, (GPIO_CRL_MODE0 << (POSITION_VAL(Pin) * 4U)),
+ 424:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****              (Speed << (POSITION_VAL(Pin) * 4U)));
+ 425:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** }
+ 426:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 427:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 428:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief  Return gpio speed for a dedicated pin on dedicated port.
+ 429:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @note   I/O speed can be Low, Medium, Fast or High speed.
+ 430:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
+ 431:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @note   Refer to datasheet for frequency specifications and the power
+ 432:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         supply and load conditions for each speed.
+ 433:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll CRL      MODEy       LL_GPIO_GetPinSpeed
+ 434:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll CRH      MODEy       LL_GPIO_GetPinSpeed
+ 435:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 436:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
+ 437:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 438:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 439:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 440:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 441:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 442:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 443:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 444:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 445:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 446:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 447:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 448:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 449:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 450:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 16
+
+
+ 451:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 452:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 453:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @retval Returned value can be one of the following values:
+ 454:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_SPEED_FREQ_LOW
+ 455:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_SPEED_FREQ_MEDIUM
+ 456:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_SPEED_FREQ_HIGH
+ 457:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 458:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_GetPinSpeed(GPIO_TypeDef *GPIOx, uint32_t Pin)
+ 459:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
+ 460:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   register uint32_t *pReg = (uint32_t *)((uint32_t)((uint32_t)(&GPIOx->CRL) + (Pin >> 24)));
+ 461:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   return (READ_BIT(*pReg, (GPIO_CRL_MODE0 << (POSITION_VAL(Pin) * 4U))) >> (POSITION_VAL(Pin) * 4U)
+ 462:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** }
+ 463:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 464:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 465:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief  Configure gpio output type for several pins on dedicated port.
+ 466:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @note   Output type as to be set when gpio pin is in output or
+ 467:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         alternate modes. Possible type are Push-pull or Open-drain.
+ 468:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll CRL       MODEy           LL_GPIO_SetPinOutputType
+ 469:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll CRH       MODEy           LL_GPIO_SetPinOutputType
+ 470:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 471:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  Pin This parameter can be a combination of the following values:
+ 472:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 473:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 474:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 475:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 476:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 477:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 478:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 479:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 480:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 481:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 482:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 483:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 484:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 485:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 486:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 487:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 488:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
+ 489:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  OutputType This parameter can be one of the following values:
+ 490:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_OUTPUT_PUSHPULL
+ 491:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_OUTPUT_OPENDRAIN
+ 492:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @retval None
+ 493:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 494:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** __STATIC_INLINE void LL_GPIO_SetPinOutputType(GPIO_TypeDef *GPIOx, uint32_t Pin, uint32_t OutputTyp
+ 495:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
+ 496:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   register uint32_t *pReg = (uint32_t *)((uint32_t)((uint32_t)(&GPIOx->CRL) + (Pin >> 24)));
+ 497:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   MODIFY_REG(*pReg, (GPIO_CRL_CNF0_0 << (POSITION_VAL(Pin) * 4U)),
+ 498:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****              (OutputType << (POSITION_VAL(Pin) * 4U)));
+ 499:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** }
+ 500:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 501:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 502:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief  Return gpio output type for several pins on dedicated port.
+ 503:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @note   Output type as to be set when gpio pin is in output or
+ 504:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         alternate modes. Possible type are Push-pull or Open-drain.
+ 505:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
+ 506:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll CRL       MODEy       LL_GPIO_GetPinOutputType
+ 507:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll CRH       MODEy       LL_GPIO_GetPinOutputType
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 17
+
+
+ 508:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 509:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
+ 510:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 511:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 512:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 513:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 514:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 515:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 516:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 517:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 518:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 519:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 520:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 521:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 522:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 523:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 524:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 525:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 526:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
+ 527:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @retval Returned value can be one of the following values:
+ 528:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_OUTPUT_PUSHPULL
+ 529:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_OUTPUT_OPENDRAIN
+ 530:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 531:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_GetPinOutputType(GPIO_TypeDef *GPIOx, uint32_t Pin)
+ 532:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
+ 533:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   register uint32_t *pReg = (uint32_t *)((uint32_t)((uint32_t)(&GPIOx->CRL) + (Pin >> 24)));
+ 534:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   return (READ_BIT(*pReg, (GPIO_CRL_CNF0_0 << (POSITION_VAL(Pin) * 4U))) >> (POSITION_VAL(Pin) * 4U
+ 535:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 536:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** }
+ 537:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 538:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 539:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief  Configure gpio pull-up or pull-down for a dedicated pin on a dedicated port.
+ 540:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
+ 541:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll ODR        ODR         LL_GPIO_SetPinPull
+ 542:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 543:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
+ 544:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 545:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 546:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 547:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 548:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 549:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 550:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 551:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 552:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 553:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 554:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 555:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 556:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 557:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 558:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 559:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 560:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  Pull This parameter can be one of the following values:
+ 561:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PULL_DOWN
+ 562:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PULL_UP
+ 563:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @retval None
+ 564:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 18
+
+
+ 565:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** __STATIC_INLINE void LL_GPIO_SetPinPull(GPIO_TypeDef *GPIOx, uint32_t Pin, uint32_t Pull)
+ 566:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
+ 567:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   MODIFY_REG(GPIOx->ODR, (Pin >> GPIO_PIN_MASK_POS), Pull << (POSITION_VAL(Pin >> GPIO_PIN_MASK_POS
+ 568:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** }
+ 569:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 570:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 571:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief  Return gpio pull-up or pull-down for a dedicated pin on a dedicated port
+ 572:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
+ 573:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll ODR        ODR         LL_GPIO_GetPinPull
+ 574:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 575:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
+ 576:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 577:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 578:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 579:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 580:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 581:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 582:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 583:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 584:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 585:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 586:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 587:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 588:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 589:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 590:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 591:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 592:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @retval Returned value can be one of the following values:
+ 593:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PULL_DOWN
+ 594:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PULL_UP
+ 595:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 596:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_GetPinPull(GPIO_TypeDef *GPIOx, uint32_t Pin)
+ 597:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
+ 598:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   return (READ_BIT(GPIOx->ODR, (GPIO_ODR_ODR0 << (POSITION_VAL(Pin >> GPIO_PIN_MASK_POS)))) >> (POS
+ 599:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** }
+ 600:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 601:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 602:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief  Lock configuration of several pins for a dedicated port.
+ 603:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @note   When the lock sequence has been applied on a port bit, the
+ 604:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         value of this port bit can no longer be modified until the
+ 605:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         next reset.
+ 606:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @note   Each lock bit freezes a specific configuration register
+ 607:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         (control and alternate function registers).
+ 608:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll LCKR         LCKK          LL_GPIO_LockPin
+ 609:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 610:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  PinMask This parameter can be a combination of the following values:
+ 611:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 612:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 613:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 614:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 615:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 616:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 617:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 618:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 619:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 620:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 621:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 19
+
+
+ 622:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 623:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 624:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 625:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 626:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 627:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
+ 628:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @retval None
+ 629:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 630:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** __STATIC_INLINE void LL_GPIO_LockPin(GPIO_TypeDef *GPIOx, uint32_t PinMask)
+ 631:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
+ 632:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   __IO uint32_t temp;
+ 633:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   WRITE_REG(GPIOx->LCKR, GPIO_LCKR_LCKK | ((PinMask >> GPIO_PIN_MASK_POS) & 0x0000FFFFU));
+ 634:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   WRITE_REG(GPIOx->LCKR, ((PinMask >> GPIO_PIN_MASK_POS) & 0x0000FFFFU));
+ 635:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   WRITE_REG(GPIOx->LCKR, GPIO_LCKR_LCKK | ((PinMask >> GPIO_PIN_MASK_POS) & 0x0000FFFFU));
+ 636:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   temp = READ_REG(GPIOx->LCKR);
+ 637:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   (void) temp;
+ 638:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** }
+ 639:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 640:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 641:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief  Return 1 if all pins passed as parameter, of a dedicated port, are locked. else Return 
+ 642:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll LCKR         LCKy          LL_GPIO_IsPinLocked
+ 643:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 644:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  PinMask This parameter can be a combination of the following values:
+ 645:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 646:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 647:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 648:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 649:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 650:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 651:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 652:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 653:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 654:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 655:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 656:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 657:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 658:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 659:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 660:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 661:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
+ 662:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @retval State of bit (1 or 0).
+ 663:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 664:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_IsPinLocked(GPIO_TypeDef *GPIOx, uint32_t PinMask)
+ 665:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
+ 666:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   return (READ_BIT(GPIOx->LCKR, ((PinMask >> GPIO_PIN_MASK_POS) & 0x0000FFFFU)) == ((PinMask >> GPI
+ 667:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** }
+ 668:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 669:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 670:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief  Return 1 if one of the pin of a dedicated port is locked. else return 0.
+ 671:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll LCKR         LCKK          LL_GPIO_IsAnyPinLocked
+ 672:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 673:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @retval State of bit (1 or 0).
+ 674:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 675:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_IsAnyPinLocked(GPIO_TypeDef *GPIOx)
+ 676:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
+ 677:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   return (READ_BIT(GPIOx->LCKR, GPIO_LCKR_LCKK) == (GPIO_LCKR_LCKK));
+ 678:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** }
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 20
+
+
+ 679:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 680:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 681:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @}
+ 682:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 683:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 684:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /** @defgroup GPIO_LL_EF_Data_Access Data Access
+ 685:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @{
+ 686:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 687:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 688:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 689:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief  Return full input data register value for a dedicated port.
+ 690:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll IDR          IDy           LL_GPIO_ReadInputPort
+ 691:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 692:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @retval Input data register value of port
+ 693:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 694:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_ReadInputPort(GPIO_TypeDef *GPIOx)
+ 695:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
+ 696:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   return (READ_REG(GPIOx->IDR));
+ 697:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** }
+ 698:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 699:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 700:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief  Return if input data level for several pins of dedicated port is high or low.
+ 701:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll IDR          IDy           LL_GPIO_IsInputPinSet
+ 702:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 703:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  PinMask This parameter can be a combination of the following values:
+ 704:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 705:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 706:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 707:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 708:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 709:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 710:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 711:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 712:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 713:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 714:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 715:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 716:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 717:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 718:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 719:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 720:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
+ 721:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @retval State of bit (1 or 0).
+ 722:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 723:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_IsInputPinSet(GPIO_TypeDef *GPIOx, uint32_t PinMask)
+ 724:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
+ 725:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   return (READ_BIT(GPIOx->IDR, (PinMask >> GPIO_PIN_MASK_POS) & 0x0000FFFFU) == ((PinMask >> GPIO_P
+ 726:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** }
+ 727:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 728:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 729:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief  Write output data register for the port.
+ 730:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll ODR          ODy           LL_GPIO_WriteOutputPort
+ 731:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 732:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  PortValue Level value for each pin of the port
+ 733:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @retval None
+ 734:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 735:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** __STATIC_INLINE void LL_GPIO_WriteOutputPort(GPIO_TypeDef *GPIOx, uint32_t PortValue)
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 21
+
+
+ 736:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
+ 737:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   WRITE_REG(GPIOx->ODR, PortValue);
+ 738:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** }
+ 739:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 740:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 741:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief  Return full output data register value for a dedicated port.
+ 742:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll ODR          ODy           LL_GPIO_ReadOutputPort
+ 743:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 744:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @retval Output data register value of port
+ 745:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 746:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_ReadOutputPort(GPIO_TypeDef *GPIOx)
+ 747:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
+ 748:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   return (uint32_t)(READ_REG(GPIOx->ODR));
+ 749:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** }
+ 750:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 751:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 752:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief  Return if input data level for several pins of dedicated port is high or low.
+ 753:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll ODR          ODy           LL_GPIO_IsOutputPinSet
+ 754:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 755:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  PinMask This parameter can be a combination of the following values:
+ 756:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 757:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 758:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 759:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 760:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 761:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 762:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 763:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 764:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 765:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 766:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 767:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 768:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 769:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 770:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 771:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 772:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
+ 773:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @retval State of bit (1 or 0).
+ 774:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 775:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_IsOutputPinSet(GPIO_TypeDef *GPIOx, uint32_t PinMask)
+ 776:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
+ 777:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   return (READ_BIT(GPIOx->ODR, (PinMask >> GPIO_PIN_MASK_POS) & 0x0000FFFFU) == ((PinMask >> GPIO_P
+ 778:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** }
+ 779:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 780:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 781:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief  Set several pins to high level on dedicated gpio port.
+ 782:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll BSRR         BSy           LL_GPIO_SetOutputPin
+ 783:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 784:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  PinMask This parameter can be a combination of the following values:
+ 785:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 786:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 787:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 788:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 789:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 790:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 791:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 792:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 22
+
+
+ 793:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 794:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 795:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 796:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 797:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 798:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 799:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 800:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 801:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
+ 802:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @retval None
+ 803:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 804:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** __STATIC_INLINE void LL_GPIO_SetOutputPin(GPIO_TypeDef *GPIOx, uint32_t PinMask)
+ 805:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
+ 806:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   WRITE_REG(GPIOx->BSRR, (PinMask >> GPIO_PIN_MASK_POS) & 0x0000FFFFU);
+ 807:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** }
+ 808:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** 
+ 809:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** /**
+ 810:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @brief  Set several pins to low level on dedicated gpio port.
+ 811:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @rmtoll BRR          BRy           LL_GPIO_ResetOutputPin
+ 812:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 813:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @param  PinMask This parameter can be a combination of the following values:
+ 814:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 815:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 816:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 817:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 818:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 819:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 820:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 821:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 822:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 823:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 824:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 825:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 826:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 827:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 828:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 829:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 830:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
+ 831:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   * @retval None
+ 832:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   */
+ 833:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** __STATIC_INLINE void LL_GPIO_ResetOutputPin(GPIO_TypeDef *GPIOx, uint32_t PinMask)
+  36              		.loc 2 833 22 view .LVU2
+  37              	.LBB7:
+ 834:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
+ 835:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h ****   WRITE_REG(GPIOx->BRR, (PinMask >> GPIO_PIN_MASK_POS) & 0x0000FFFFU);
+  38              		.loc 2 835 3 view .LVU3
+  39 0000 024B     		ldr	r3, .L2
+  40 0002 4FF48052 		mov	r2, #4096
+  41 0006 5A61     		str	r2, [r3, #20]
+  42              	.LVL1:
+  43              		.loc 2 835 3 is_stmt 0 view .LVU4
+  44              	.LBE7:
+  45              	.LBE6:
+ 372:Drivers/Ethernet/Eth.c **** }
+  46              		.loc 1 372 1 view .LVU5
+  47 0008 7047     		bx	lr
+  48              	.L3:
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 23
+
+
+  49 000a 00BF     		.align	2
+  50              	.L2:
+  51 000c 000C0140 		.word	1073810432
+  52              		.cfi_endproc
+  53              	.LFE579:
+  55              		.section	.text.cs_desel,"ax",%progbits
+  56              		.align	1
+  57              		.syntax unified
+  58              		.thumb
+  59              		.thumb_func
+  61              	cs_desel:
+  62              	.LFB580:
+ 373:Drivers/Ethernet/Eth.c **** 
+ 374:Drivers/Ethernet/Eth.c **** static void cs_desel()
+ 375:Drivers/Ethernet/Eth.c **** {
+  63              		.loc 1 375 1 is_stmt 1 view -0
+  64              		.cfi_startproc
+  65              		@ args = 0, pretend = 0, frame = 0
+  66              		@ frame_needed = 0, uses_anonymous_args = 0
+  67              		@ link register save eliminated.
+ 376:Drivers/Ethernet/Eth.c ****     LL_GPIO_SetOutputPin(W5500_CS_GPIO_Port, W5500_CS_Pin); // CS ВЫСОК�?Й
+  68              		.loc 1 376 5 view .LVU7
+  69              	.LVL2:
+  70              	.LBB8:
+  71              	.LBI8:
+ 804:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** {
+  72              		.loc 2 804 22 view .LVU8
+  73              	.LBB9:
+ 806:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** }
+  74              		.loc 2 806 3 view .LVU9
+  75 0000 024B     		ldr	r3, .L5
+  76 0002 4FF48052 		mov	r2, #4096
+  77 0006 1A61     		str	r2, [r3, #16]
+  78              	.LVL3:
+ 806:Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h **** }
+  79              		.loc 2 806 3 is_stmt 0 view .LVU10
+  80              	.LBE9:
+  81              	.LBE8:
+ 377:Drivers/Ethernet/Eth.c **** }
+  82              		.loc 1 377 1 view .LVU11
+  83 0008 7047     		bx	lr
+  84              	.L6:
+  85 000a 00BF     		.align	2
+  86              	.L5:
+  87 000c 000C0140 		.word	1073810432
+  88              		.cfi_endproc
+  89              	.LFE580:
+  91              		.section	.text.spi_wb_burst,"ax",%progbits
+  92              		.align	1
+  93              		.syntax unified
+  94              		.thumb
+  95              		.thumb_func
+  97              	spi_wb_burst:
+  98              	.LVL4:
+  99              	.LFB584:
+ 378:Drivers/Ethernet/Eth.c **** 
+ 379:Drivers/Ethernet/Eth.c **** static uint8_t spi_rb(void)
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 24
+
+
+ 380:Drivers/Ethernet/Eth.c **** {
+ 381:Drivers/Ethernet/Eth.c ****     uint8_t rbuf;
+ 382:Drivers/Ethernet/Eth.c **** 
+ 383:Drivers/Ethernet/Eth.c ****     if (HAL_SPI_Receive(&ETH_SPI, &rbuf, 1, HAL_MAX_DELAY) != HAL_OK)
+ 384:Drivers/Ethernet/Eth.c ****     {
+ 385:Drivers/Ethernet/Eth.c ****         Error_Handler();
+ 386:Drivers/Ethernet/Eth.c ****     }
+ 387:Drivers/Ethernet/Eth.c ****     return rbuf;
+ 388:Drivers/Ethernet/Eth.c **** }
+ 389:Drivers/Ethernet/Eth.c **** 
+ 390:Drivers/Ethernet/Eth.c **** static void spi_wb(uint8_t b)
+ 391:Drivers/Ethernet/Eth.c **** {
+ 392:Drivers/Ethernet/Eth.c ****     if (HAL_SPI_Transmit(&ETH_SPI, &b, 1, HAL_MAX_DELAY) != HAL_OK)
+ 393:Drivers/Ethernet/Eth.c ****     {
+ 394:Drivers/Ethernet/Eth.c ****         Error_Handler();
+ 395:Drivers/Ethernet/Eth.c ****     }
+ 396:Drivers/Ethernet/Eth.c **** }
+ 397:Drivers/Ethernet/Eth.c **** 
+ 398:Drivers/Ethernet/Eth.c **** 
+ 399:Drivers/Ethernet/Eth.c **** #define USE_DMA
+ 400:Drivers/Ethernet/Eth.c **** static void spi_rb_burst(uint8_t *buf, uint16_t len)
+ 401:Drivers/Ethernet/Eth.c **** {
+ 402:Drivers/Ethernet/Eth.c **** #ifdef USE_DMA
+ 403:Drivers/Ethernet/Eth.c ****     if (HAL_SPI_Receive_DMA(&ETH_SPI, buf, len) != HAL_OK)
+ 404:Drivers/Ethernet/Eth.c ****     {
+ 405:Drivers/Ethernet/Eth.c ****         Error_Handler();
+ 406:Drivers/Ethernet/Eth.c ****     }
+ 407:Drivers/Ethernet/Eth.c ****     while (HAL_SPI_GetState(&ETH_SPI) == HAL_SPI_STATE_BUSY_RX)
+ 408:Drivers/Ethernet/Eth.c ****         ;
+ 409:Drivers/Ethernet/Eth.c **** #else
+ 410:Drivers/Ethernet/Eth.c ****     HAL_SPI_Receive(&ETH_SPI, buf, len, HAL_MAX_DELAY);
+ 411:Drivers/Ethernet/Eth.c **** #endif
+ 412:Drivers/Ethernet/Eth.c **** }
+ 413:Drivers/Ethernet/Eth.c **** 
+ 414:Drivers/Ethernet/Eth.c **** static void spi_wb_burst(uint8_t *buf, uint16_t len)
+ 415:Drivers/Ethernet/Eth.c **** {
+ 100              		.loc 1 415 1 is_stmt 1 view -0
+ 101              		.cfi_startproc
+ 102              		@ args = 0, pretend = 0, frame = 0
+ 103              		@ frame_needed = 0, uses_anonymous_args = 0
+ 104              		.loc 1 415 1 is_stmt 0 view .LVU13
+ 105 0000 08B5     		push	{r3, lr}
+ 106              	.LCFI0:
+ 107              		.cfi_def_cfa_offset 8
+ 108              		.cfi_offset 3, -8
+ 109              		.cfi_offset 14, -4
+ 110 0002 0A46     		mov	r2, r1
+ 416:Drivers/Ethernet/Eth.c **** #ifdef USE_DMA
+ 417:Drivers/Ethernet/Eth.c ****     if (HAL_SPI_Transmit_DMA(&ETH_SPI, buf, len) != HAL_OK)
+ 111              		.loc 1 417 5 is_stmt 1 view .LVU14
+ 112              		.loc 1 417 9 is_stmt 0 view .LVU15
+ 113 0004 0146     		mov	r1, r0
+ 114              	.LVL5:
+ 115              		.loc 1 417 9 view .LVU16
+ 116 0006 0648     		ldr	r0, .L12
+ 117              	.LVL6:
+ 118              		.loc 1 417 9 view .LVU17
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 25
+
+
+ 119 0008 FFF7FEFF 		bl	HAL_SPI_Transmit_DMA
+ 120              	.LVL7:
+ 121              		.loc 1 417 8 view .LVU18
+ 122 000c 28B9     		cbnz	r0, .L11
+ 123              	.L9:
+ 418:Drivers/Ethernet/Eth.c ****     {
+ 419:Drivers/Ethernet/Eth.c ****         Error_Handler();
+ 420:Drivers/Ethernet/Eth.c ****     }
+ 421:Drivers/Ethernet/Eth.c **** 
+ 422:Drivers/Ethernet/Eth.c ****     while (HAL_SPI_GetState(&ETH_SPI) == HAL_SPI_STATE_BUSY_TX)
+ 124              		.loc 1 422 39 is_stmt 1 discriminator 1 view .LVU19
+ 125              		.loc 1 422 12 is_stmt 0 discriminator 1 view .LVU20
+ 126 000e 0448     		ldr	r0, .L12
+ 127 0010 FFF7FEFF 		bl	HAL_SPI_GetState
+ 128              	.LVL8:
+ 129              		.loc 1 422 39 discriminator 1 view .LVU21
+ 130 0014 0328     		cmp	r0, #3
+ 131 0016 FAD0     		beq	.L9
+ 423:Drivers/Ethernet/Eth.c ****         ;
+ 424:Drivers/Ethernet/Eth.c **** #else
+ 425:Drivers/Ethernet/Eth.c ****     HAL_SPI_Transmit(&ETH_SPI, buf, len, HAL_MAX_DELAY);
+ 426:Drivers/Ethernet/Eth.c **** #endif
+ 427:Drivers/Ethernet/Eth.c **** }
+ 132              		.loc 1 427 1 view .LVU22
+ 133 0018 08BD     		pop	{r3, pc}
+ 134              	.L11:
+ 419:Drivers/Ethernet/Eth.c ****     }
+ 135              		.loc 1 419 9 is_stmt 1 view .LVU23
+ 136 001a FFF7FEFF 		bl	Error_Handler
+ 137              	.LVL9:
+ 138 001e F6E7     		b	.L9
+ 139              	.L13:
+ 140              		.align	2
+ 141              	.L12:
+ 142 0020 00000000 		.word	hspi2
+ 143              		.cfi_endproc
+ 144              	.LFE584:
+ 146              		.section	.text.spi_rb_burst,"ax",%progbits
+ 147              		.align	1
+ 148              		.syntax unified
+ 149              		.thumb
+ 150              		.thumb_func
+ 152              	spi_rb_burst:
+ 153              	.LVL10:
+ 154              	.LFB583:
+ 401:Drivers/Ethernet/Eth.c **** #ifdef USE_DMA
+ 155              		.loc 1 401 1 view -0
+ 156              		.cfi_startproc
+ 157              		@ args = 0, pretend = 0, frame = 0
+ 158              		@ frame_needed = 0, uses_anonymous_args = 0
+ 401:Drivers/Ethernet/Eth.c **** #ifdef USE_DMA
+ 159              		.loc 1 401 1 is_stmt 0 view .LVU25
+ 160 0000 08B5     		push	{r3, lr}
+ 161              	.LCFI1:
+ 162              		.cfi_def_cfa_offset 8
+ 163              		.cfi_offset 3, -8
+ 164              		.cfi_offset 14, -4
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 26
+
+
+ 165 0002 0A46     		mov	r2, r1
+ 403:Drivers/Ethernet/Eth.c ****     {
+ 166              		.loc 1 403 5 is_stmt 1 view .LVU26
+ 403:Drivers/Ethernet/Eth.c ****     {
+ 167              		.loc 1 403 9 is_stmt 0 view .LVU27
+ 168 0004 0146     		mov	r1, r0
+ 169              	.LVL11:
+ 403:Drivers/Ethernet/Eth.c ****     {
+ 170              		.loc 1 403 9 view .LVU28
+ 171 0006 0648     		ldr	r0, .L19
+ 172              	.LVL12:
+ 403:Drivers/Ethernet/Eth.c ****     {
+ 173              		.loc 1 403 9 view .LVU29
+ 174 0008 FFF7FEFF 		bl	HAL_SPI_Receive_DMA
+ 175              	.LVL13:
+ 403:Drivers/Ethernet/Eth.c ****     {
+ 176              		.loc 1 403 8 view .LVU30
+ 177 000c 28B9     		cbnz	r0, .L18
+ 178              	.L16:
+ 407:Drivers/Ethernet/Eth.c ****         ;
+ 179              		.loc 1 407 39 is_stmt 1 discriminator 1 view .LVU31
+ 407:Drivers/Ethernet/Eth.c ****         ;
+ 180              		.loc 1 407 12 is_stmt 0 discriminator 1 view .LVU32
+ 181 000e 0448     		ldr	r0, .L19
+ 182 0010 FFF7FEFF 		bl	HAL_SPI_GetState
+ 183              	.LVL14:
+ 407:Drivers/Ethernet/Eth.c ****         ;
+ 184              		.loc 1 407 39 discriminator 1 view .LVU33
+ 185 0014 0428     		cmp	r0, #4
+ 186 0016 FAD0     		beq	.L16
+ 412:Drivers/Ethernet/Eth.c **** 
+ 187              		.loc 1 412 1 view .LVU34
+ 188 0018 08BD     		pop	{r3, pc}
+ 189              	.L18:
+ 405:Drivers/Ethernet/Eth.c ****     }
+ 190              		.loc 1 405 9 is_stmt 1 view .LVU35
+ 191 001a FFF7FEFF 		bl	Error_Handler
+ 192              	.LVL15:
+ 193 001e F6E7     		b	.L16
+ 194              	.L20:
+ 195              		.align	2
+ 196              	.L19:
+ 197 0020 00000000 		.word	hspi2
+ 198              		.cfi_endproc
+ 199              	.LFE583:
+ 201              		.section	.text.spi_wb,"ax",%progbits
+ 202              		.align	1
+ 203              		.syntax unified
+ 204              		.thumb
+ 205              		.thumb_func
+ 207              	spi_wb:
+ 208              	.LVL16:
+ 209              	.LFB582:
+ 391:Drivers/Ethernet/Eth.c ****     if (HAL_SPI_Transmit(&ETH_SPI, &b, 1, HAL_MAX_DELAY) != HAL_OK)
+ 210              		.loc 1 391 1 view -0
+ 211              		.cfi_startproc
+ 212              		@ args = 0, pretend = 0, frame = 8
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 27
+
+
+ 213              		@ frame_needed = 0, uses_anonymous_args = 0
+ 391:Drivers/Ethernet/Eth.c ****     if (HAL_SPI_Transmit(&ETH_SPI, &b, 1, HAL_MAX_DELAY) != HAL_OK)
+ 214              		.loc 1 391 1 is_stmt 0 view .LVU37
+ 215 0000 00B5     		push	{lr}
+ 216              	.LCFI2:
+ 217              		.cfi_def_cfa_offset 4
+ 218              		.cfi_offset 14, -4
+ 219 0002 83B0     		sub	sp, sp, #12
+ 220              	.LCFI3:
+ 221              		.cfi_def_cfa_offset 16
+ 222 0004 8DF80700 		strb	r0, [sp, #7]
+ 392:Drivers/Ethernet/Eth.c ****     {
+ 223              		.loc 1 392 5 is_stmt 1 view .LVU38
+ 392:Drivers/Ethernet/Eth.c ****     {
+ 224              		.loc 1 392 9 is_stmt 0 view .LVU39
+ 225 0008 4FF0FF33 		mov	r3, #-1
+ 226 000c 0122     		movs	r2, #1
+ 227 000e 0DF10701 		add	r1, sp, #7
+ 228 0012 0548     		ldr	r0, .L25
+ 229              	.LVL17:
+ 392:Drivers/Ethernet/Eth.c ****     {
+ 230              		.loc 1 392 9 view .LVU40
+ 231 0014 FFF7FEFF 		bl	HAL_SPI_Transmit
+ 232              	.LVL18:
+ 392:Drivers/Ethernet/Eth.c ****     {
+ 233              		.loc 1 392 8 view .LVU41
+ 234 0018 10B9     		cbnz	r0, .L24
+ 235              	.L21:
+ 396:Drivers/Ethernet/Eth.c **** 
+ 236              		.loc 1 396 1 view .LVU42
+ 237 001a 03B0     		add	sp, sp, #12
+ 238              	.LCFI4:
+ 239              		.cfi_remember_state
+ 240              		.cfi_def_cfa_offset 4
+ 241              		@ sp needed
+ 242 001c 5DF804FB 		ldr	pc, [sp], #4
+ 243              	.L24:
+ 244              	.LCFI5:
+ 245              		.cfi_restore_state
+ 394:Drivers/Ethernet/Eth.c ****     }
+ 246              		.loc 1 394 9 is_stmt 1 view .LVU43
+ 247 0020 FFF7FEFF 		bl	Error_Handler
+ 248              	.LVL19:
+ 396:Drivers/Ethernet/Eth.c **** 
+ 249              		.loc 1 396 1 is_stmt 0 view .LVU44
+ 250 0024 F9E7     		b	.L21
+ 251              	.L26:
+ 252 0026 00BF     		.align	2
+ 253              	.L25:
+ 254 0028 00000000 		.word	hspi2
+ 255              		.cfi_endproc
+ 256              	.LFE582:
+ 258              		.section	.text.spi_rb,"ax",%progbits
+ 259              		.align	1
+ 260              		.syntax unified
+ 261              		.thumb
+ 262              		.thumb_func
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 28
+
+
+ 264              	spi_rb:
+ 265              	.LFB581:
+ 380:Drivers/Ethernet/Eth.c ****     uint8_t rbuf;
+ 266              		.loc 1 380 1 is_stmt 1 view -0
+ 267              		.cfi_startproc
+ 268              		@ args = 0, pretend = 0, frame = 8
+ 269              		@ frame_needed = 0, uses_anonymous_args = 0
+ 270 0000 00B5     		push	{lr}
+ 271              	.LCFI6:
+ 272              		.cfi_def_cfa_offset 4
+ 273              		.cfi_offset 14, -4
+ 274 0002 83B0     		sub	sp, sp, #12
+ 275              	.LCFI7:
+ 276              		.cfi_def_cfa_offset 16
+ 381:Drivers/Ethernet/Eth.c **** 
+ 277              		.loc 1 381 5 view .LVU46
+ 383:Drivers/Ethernet/Eth.c ****     {
+ 278              		.loc 1 383 5 view .LVU47
+ 383:Drivers/Ethernet/Eth.c ****     {
+ 279              		.loc 1 383 9 is_stmt 0 view .LVU48
+ 280 0004 4FF0FF33 		mov	r3, #-1
+ 281 0008 0122     		movs	r2, #1
+ 282 000a 0DF10701 		add	r1, sp, #7
+ 283 000e 0648     		ldr	r0, .L31
+ 284 0010 FFF7FEFF 		bl	HAL_SPI_Receive
+ 285              	.LVL20:
+ 383:Drivers/Ethernet/Eth.c ****     {
+ 286              		.loc 1 383 8 view .LVU49
+ 287 0014 20B9     		cbnz	r0, .L30
+ 288              	.L28:
+ 387:Drivers/Ethernet/Eth.c **** }
+ 289              		.loc 1 387 5 is_stmt 1 view .LVU50
+ 388:Drivers/Ethernet/Eth.c **** 
+ 290              		.loc 1 388 1 is_stmt 0 view .LVU51
+ 291 0016 9DF80700 		ldrb	r0, [sp, #7]	@ zero_extendqisi2
+ 292 001a 03B0     		add	sp, sp, #12
+ 293              	.LCFI8:
+ 294              		.cfi_remember_state
+ 295              		.cfi_def_cfa_offset 4
+ 296              		@ sp needed
+ 297 001c 5DF804FB 		ldr	pc, [sp], #4
+ 298              	.L30:
+ 299              	.LCFI9:
+ 300              		.cfi_restore_state
+ 385:Drivers/Ethernet/Eth.c ****     }
+ 301              		.loc 1 385 9 is_stmt 1 view .LVU52
+ 302 0020 FFF7FEFF 		bl	Error_Handler
+ 303              	.LVL21:
+ 304 0024 F7E7     		b	.L28
+ 305              	.L32:
+ 306 0026 00BF     		.align	2
+ 307              	.L31:
+ 308 0028 00000000 		.word	hspi2
+ 309              		.cfi_endproc
+ 310              	.LFE581:
+ 312              		.section	.text.Eth_f_recv,"ax",%progbits
+ 313              		.align	1
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 29
+
+
+ 314              		.syntax unified
+ 315              		.thumb
+ 316              		.thumb_func
+ 318              	Eth_f_recv:
+ 319              	.LVL22:
+ 320              	.LFB575:
+ 127:Drivers/Ethernet/Eth.c ****     __IO int32_t ret = 0;
+ 321              		.loc 1 127 1 view -0
+ 322              		.cfi_startproc
+ 323              		@ args = 0, pretend = 0, frame = 8
+ 324              		@ frame_needed = 0, uses_anonymous_args = 0
+ 127:Drivers/Ethernet/Eth.c ****     __IO int32_t ret = 0;
+ 325              		.loc 1 127 1 is_stmt 0 view .LVU54
+ 326 0000 10B5     		push	{r4, lr}
+ 327              	.LCFI10:
+ 328              		.cfi_def_cfa_offset 8
+ 329              		.cfi_offset 4, -8
+ 330              		.cfi_offset 14, -4
+ 331 0002 82B0     		sub	sp, sp, #8
+ 332              	.LCFI11:
+ 333              		.cfi_def_cfa_offset 16
+ 334 0004 0446     		mov	r4, r0
+ 128:Drivers/Ethernet/Eth.c ****     __IO uint16_t size = 0;
+ 335              		.loc 1 128 5 is_stmt 1 view .LVU55
+ 128:Drivers/Ethernet/Eth.c ****     __IO uint16_t size = 0;
+ 336              		.loc 1 128 18 is_stmt 0 view .LVU56
+ 337 0006 0023     		movs	r3, #0
+ 338 0008 0193     		str	r3, [sp, #4]
+ 129:Drivers/Ethernet/Eth.c ****     // get the size of recv data in recv buffer
+ 339              		.loc 1 129 5 is_stmt 1 view .LVU57
+ 129:Drivers/Ethernet/Eth.c ****     // get the size of recv data in recv buffer
+ 340              		.loc 1 129 19 is_stmt 0 view .LVU58
+ 341 000a ADF80230 		strh	r3, [sp, #2]	@ movhi
+ 131:Drivers/Ethernet/Eth.c ****     
+ 342              		.loc 1 131 5 is_stmt 1 view .LVU59
+ 131:Drivers/Ethernet/Eth.c ****     
+ 343              		.loc 1 131 17 is_stmt 0 view .LVU60
+ 344 000e 0078     		ldrb	r0, [r0]	@ zero_extendqisi2
+ 345              	.LVL23:
+ 131:Drivers/Ethernet/Eth.c ****     
+ 346              		.loc 1 131 17 view .LVU61
+ 347 0010 FFF7FEFF 		bl	getSn_RX_RSR
+ 348              	.LVL24:
+ 131:Drivers/Ethernet/Eth.c ****     
+ 349              		.loc 1 131 15 view .LVU62
+ 350 0014 ADF80200 		strh	r0, [sp, #2]	@ movhi
+ 131:Drivers/Ethernet/Eth.c ****     
+ 351              		.loc 1 131 8 view .LVU63
+ 352 0018 10B9     		cbnz	r0, .L40
+ 131:Drivers/Ethernet/Eth.c ****     
+ 353              		.loc 1 131 65 view .LVU64
+ 354 001a 0020     		movs	r0, #0
+ 355              	.L33:
+ 149:Drivers/Ethernet/Eth.c **** 
+ 356              		.loc 1 149 1 view .LVU65
+ 357 001c 02B0     		add	sp, sp, #8
+ 358              	.LCFI12:
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 30
+
+
+ 359              		.cfi_remember_state
+ 360              		.cfi_def_cfa_offset 8
+ 361              		@ sp needed
+ 362 001e 10BD     		pop	{r4, pc}
+ 363              	.LVL25:
+ 364              	.L40:
+ 365              	.LCFI13:
+ 366              		.cfi_restore_state
+ 134:Drivers/Ethernet/Eth.c ****     if ((ret <= 0) || (ret != size))
+ 367              		.loc 1 134 5 is_stmt 1 view .LVU66
+ 134:Drivers/Ethernet/Eth.c ****     if ((ret <= 0) || (ret != size))
+ 368              		.loc 1 134 11 is_stmt 0 view .LVU67
+ 369 0020 2289     		ldrh	r2, [r4, #8]
+ 370 0022 6168     		ldr	r1, [r4, #4]
+ 371 0024 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 372 0026 FFF7FEFF 		bl	recv
+ 373              	.LVL26:
+ 134:Drivers/Ethernet/Eth.c ****     if ((ret <= 0) || (ret != size))
+ 374              		.loc 1 134 9 view .LVU68
+ 375 002a 0190     		str	r0, [sp, #4]
+ 135:Drivers/Ethernet/Eth.c ****     {
+ 376              		.loc 1 135 5 is_stmt 1 view .LVU69
+ 135:Drivers/Ethernet/Eth.c ****     {
+ 377              		.loc 1 135 14 is_stmt 0 view .LVU70
+ 378 002c 019B     		ldr	r3, [sp, #4]
+ 135:Drivers/Ethernet/Eth.c ****     {
+ 379              		.loc 1 135 8 view .LVU71
+ 380 002e 002B     		cmp	r3, #0
+ 381 0030 05DD     		ble	.L35
+ 135:Drivers/Ethernet/Eth.c ****     {
+ 382              		.loc 1 135 28 discriminator 1 view .LVU72
+ 383 0032 BDF80230 		ldrh	r3, [sp, #2]
+ 384 0036 9BB2     		uxth	r3, r3
+ 385 0038 019A     		ldr	r2, [sp, #4]
+ 135:Drivers/Ethernet/Eth.c ****     {
+ 386              		.loc 1 135 20 discriminator 1 view .LVU73
+ 387 003a 9342     		cmp	r3, r2
+ 388 003c 0BD0     		beq	.L36
+ 389              	.L35:
+ 138:Drivers/Ethernet/Eth.c ****         {
+ 390              		.loc 1 138 9 is_stmt 1 view .LVU74
+ 138:Drivers/Ethernet/Eth.c ****         {
+ 391              		.loc 1 138 20 is_stmt 0 view .LVU75
+ 392 003e 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 393 0040 FFF7FEFF 		bl	disconnect
+ 394              	.LVL27:
+ 138:Drivers/Ethernet/Eth.c ****         {
+ 395              		.loc 1 138 18 view .LVU76
+ 396 0044 0190     		str	r0, [sp, #4]
+ 138:Drivers/Ethernet/Eth.c ****         {
+ 397              		.loc 1 138 12 view .LVU77
+ 398 0046 0128     		cmp	r0, #1
+ 399 0048 02D0     		beq	.L37
+ 141:Drivers/Ethernet/Eth.c ****             return ret;
+ 400              		.loc 1 141 13 is_stmt 1 view .LVU78
+ 401              		.syntax unified
+ 402              	@ 141 "Drivers/Ethernet/Eth.c" 1
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 31
+
+
+ 403 004a 00BF     		NOP
+ 404              	@ 0 "" 2
+ 142:Drivers/Ethernet/Eth.c ****         }
+ 405              		.loc 1 142 13 view .LVU79
+ 142:Drivers/Ethernet/Eth.c ****         }
+ 406              		.loc 1 142 20 is_stmt 0 view .LVU80
+ 407              		.thumb
+ 408              		.syntax unified
+ 409 004c 0198     		ldr	r0, [sp, #4]
+ 410 004e E5E7     		b	.L33
+ 411              	.L37:
+ 144:Drivers/Ethernet/Eth.c ****         return 0;
+ 412              		.loc 1 144 9 is_stmt 1 view .LVU81
+ 413              		.syntax unified
+ 414              	@ 144 "Drivers/Ethernet/Eth.c" 1
+ 415 0050 00BF     		NOP
+ 416              	@ 0 "" 2
+ 145:Drivers/Ethernet/Eth.c ****     }
+ 417              		.loc 1 145 9 view .LVU82
+ 145:Drivers/Ethernet/Eth.c ****     }
+ 418              		.loc 1 145 16 is_stmt 0 view .LVU83
+ 419              		.thumb
+ 420              		.syntax unified
+ 421 0052 0020     		movs	r0, #0
+ 422 0054 E2E7     		b	.L33
+ 423              	.L36:
+ 148:Drivers/Ethernet/Eth.c **** }
+ 424              		.loc 1 148 5 is_stmt 1 view .LVU84
+ 148:Drivers/Ethernet/Eth.c **** }
+ 425              		.loc 1 148 12 is_stmt 0 view .LVU85
+ 426 0056 0198     		ldr	r0, [sp, #4]
+ 427 0058 E0E7     		b	.L33
+ 428              		.cfi_endproc
+ 429              	.LFE575:
+ 431              		.section	.text.Eth_f_send,"ax",%progbits
+ 432              		.align	1
+ 433              		.syntax unified
+ 434              		.thumb
+ 435              		.thumb_func
+ 437              	Eth_f_send:
+ 438              	.LVL28:
+ 439              	.LFB576:
+ 152:Drivers/Ethernet/Eth.c ****     __IO int32_t ret = 0;
+ 440              		.loc 1 152 1 is_stmt 1 view -0
+ 441              		.cfi_startproc
+ 442              		@ args = 0, pretend = 0, frame = 8
+ 443              		@ frame_needed = 0, uses_anonymous_args = 0
+ 152:Drivers/Ethernet/Eth.c ****     __IO int32_t ret = 0;
+ 444              		.loc 1 152 1 is_stmt 0 view .LVU87
+ 445 0000 10B5     		push	{r4, lr}
+ 446              	.LCFI14:
+ 447              		.cfi_def_cfa_offset 8
+ 448              		.cfi_offset 4, -8
+ 449              		.cfi_offset 14, -4
+ 450 0002 82B0     		sub	sp, sp, #8
+ 451              	.LCFI15:
+ 452              		.cfi_def_cfa_offset 16
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 32
+
+
+ 453 0004 0446     		mov	r4, r0
+ 153:Drivers/Ethernet/Eth.c ****     if(socketObj->txFrameSize > socketObj->bufTxLen) return 0;
+ 454              		.loc 1 153 5 is_stmt 1 view .LVU88
+ 153:Drivers/Ethernet/Eth.c ****     if(socketObj->txFrameSize > socketObj->bufTxLen) return 0;
+ 455              		.loc 1 153 18 is_stmt 0 view .LVU89
+ 456 0006 0023     		movs	r3, #0
+ 457 0008 0193     		str	r3, [sp, #4]
+ 154:Drivers/Ethernet/Eth.c **** 
+ 458              		.loc 1 154 5 is_stmt 1 view .LVU90
+ 154:Drivers/Ethernet/Eth.c **** 
+ 459              		.loc 1 154 17 is_stmt 0 view .LVU91
+ 460 000a 828A     		ldrh	r2, [r0, #20]
+ 154:Drivers/Ethernet/Eth.c **** 
+ 461              		.loc 1 154 42 view .LVU92
+ 462 000c 038A     		ldrh	r3, [r0, #16]
+ 154:Drivers/Ethernet/Eth.c **** 
+ 463              		.loc 1 154 7 view .LVU93
+ 464 000e 9A42     		cmp	r2, r3
+ 465 0010 03D9     		bls	.L43
+ 154:Drivers/Ethernet/Eth.c **** 
+ 466              		.loc 1 154 61 view .LVU94
+ 467 0012 0020     		movs	r0, #0
+ 468              	.LVL29:
+ 469              	.L41:
+ 190:Drivers/Ethernet/Eth.c **** 
+ 470              		.loc 1 190 1 view .LVU95
+ 471 0014 02B0     		add	sp, sp, #8
+ 472              	.LCFI16:
+ 473              		.cfi_remember_state
+ 474              		.cfi_def_cfa_offset 8
+ 475              		@ sp needed
+ 476 0016 10BD     		pop	{r4, pc}
+ 477              	.LVL30:
+ 478              	.L44:
+ 479              	.LCFI17:
+ 480              		.cfi_restore_state
+ 159:Drivers/Ethernet/Eth.c ****     }
+ 481              		.loc 1 159 9 is_stmt 1 view .LVU96
+ 482              		.syntax unified
+ 483              	@ 159 "Drivers/Ethernet/Eth.c" 1
+ 484 0018 00BF     		NOP
+ 485              	@ 0 "" 2
+ 486              		.thumb
+ 487              		.syntax unified
+ 488              	.L43:
+ 158:Drivers/Ethernet/Eth.c ****         asm("NOP");
+ 489              		.loc 1 158 45 view .LVU97
+ 158:Drivers/Ethernet/Eth.c ****         asm("NOP");
+ 490              		.loc 1 158 11 is_stmt 0 view .LVU98
+ 491 001a 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 492 001c FFF7FEFF 		bl	getSn_TX_FSR
+ 493              	.LVL31:
+ 158:Drivers/Ethernet/Eth.c ****         asm("NOP");
+ 494              		.loc 1 158 56 view .LVU99
+ 495 0020 A28A     		ldrh	r2, [r4, #20]
+ 158:Drivers/Ethernet/Eth.c ****         asm("NOP");
+ 496              		.loc 1 158 45 view .LVU100
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 33
+
+
+ 497 0022 9042     		cmp	r0, r2
+ 498 0024 F8D3     		bcc	.L44
+ 162:Drivers/Ethernet/Eth.c ****     if (ret <= 0)
+ 499              		.loc 1 162 5 is_stmt 1 view .LVU101
+ 162:Drivers/Ethernet/Eth.c ****     if (ret <= 0)
+ 500              		.loc 1 162 11 is_stmt 0 view .LVU102
+ 501 0026 E168     		ldr	r1, [r4, #12]
+ 502 0028 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 503 002a FFF7FEFF 		bl	send
+ 504              	.LVL32:
+ 162:Drivers/Ethernet/Eth.c ****     if (ret <= 0)
+ 505              		.loc 1 162 9 view .LVU103
+ 506 002e 0190     		str	r0, [sp, #4]
+ 163:Drivers/Ethernet/Eth.c ****     {
+ 507              		.loc 1 163 5 is_stmt 1 view .LVU104
+ 163:Drivers/Ethernet/Eth.c ****     {
+ 508              		.loc 1 163 13 is_stmt 0 view .LVU105
+ 509 0030 019B     		ldr	r3, [sp, #4]
+ 163:Drivers/Ethernet/Eth.c ****     {
+ 510              		.loc 1 163 8 view .LVU106
+ 511 0032 002B     		cmp	r3, #0
+ 512 0034 0CDD     		ble	.L52
+ 176:Drivers/Ethernet/Eth.c ****         return 0;
+ 513              		.loc 1 176 5 is_stmt 1 view .LVU107
+ 176:Drivers/Ethernet/Eth.c ****         return 0;
+ 514              		.loc 1 176 24 is_stmt 0 view .LVU108
+ 515 0036 A38A     		ldrh	r3, [r4, #20]
+ 176:Drivers/Ethernet/Eth.c ****         return 0;
+ 516              		.loc 1 176 12 view .LVU109
+ 517 0038 019A     		ldr	r2, [sp, #4]
+ 176:Drivers/Ethernet/Eth.c ****         return 0;
+ 518              		.loc 1 176 7 view .LVU110
+ 519 003a 9342     		cmp	r3, r2
+ 520 003c 17D1     		bne	.L50
+ 180:Drivers/Ethernet/Eth.c ****     {
+ 521              		.loc 1 180 5 is_stmt 1 view .LVU111
+ 180:Drivers/Ethernet/Eth.c ****     {
+ 522              		.loc 1 180 18 is_stmt 0 view .LVU112
+ 523 003e A269     		ldr	r2, [r4, #24]
+ 180:Drivers/Ethernet/Eth.c ****     {
+ 524              		.loc 1 180 8 view .LVU113
+ 525 0040 9A42     		cmp	r2, r3
+ 526 0042 11D3     		bcc	.L47
+ 182:Drivers/Ethernet/Eth.c ****     }
+ 527              		.loc 1 182 9 is_stmt 1 view .LVU114
+ 182:Drivers/Ethernet/Eth.c ****     }
+ 528              		.loc 1 182 32 is_stmt 0 view .LVU115
+ 529 0044 D21A     		subs	r2, r2, r3
+ 530 0046 A261     		str	r2, [r4, #24]
+ 531              	.L48:
+ 188:Drivers/Ethernet/Eth.c ****     return ret;
+ 532              		.loc 1 188 5 is_stmt 1 view .LVU116
+ 188:Drivers/Ethernet/Eth.c ****     return ret;
+ 533              		.loc 1 188 28 is_stmt 0 view .LVU117
+ 534 0048 0023     		movs	r3, #0
+ 535 004a A382     		strh	r3, [r4, #20]	@ movhi
+ 189:Drivers/Ethernet/Eth.c **** }
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 34
+
+
+ 536              		.loc 1 189 5 is_stmt 1 view .LVU118
+ 189:Drivers/Ethernet/Eth.c **** }
+ 537              		.loc 1 189 12 is_stmt 0 view .LVU119
+ 538 004c 0198     		ldr	r0, [sp, #4]
+ 539 004e E1E7     		b	.L41
+ 540              	.L52:
+ 167:Drivers/Ethernet/Eth.c ****             // printf("%d:disconnect fail\r\n", sn);
+ 541              		.loc 1 167 9 is_stmt 1 view .LVU120
+ 167:Drivers/Ethernet/Eth.c ****             // printf("%d:disconnect fail\r\n", sn);
+ 542              		.loc 1 167 20 is_stmt 0 view .LVU121
+ 543 0050 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 544 0052 FFF7FEFF 		bl	disconnect
+ 545              	.LVL33:
+ 167:Drivers/Ethernet/Eth.c ****             // printf("%d:disconnect fail\r\n", sn);
+ 546              		.loc 1 167 18 view .LVU122
+ 547 0056 0190     		str	r0, [sp, #4]
+ 167:Drivers/Ethernet/Eth.c ****             // printf("%d:disconnect fail\r\n", sn);
+ 548              		.loc 1 167 12 view .LVU123
+ 549 0058 0128     		cmp	r0, #1
+ 550 005a 02D0     		beq	.L46
+ 169:Drivers/Ethernet/Eth.c ****             return ret;
+ 551              		.loc 1 169 13 is_stmt 1 view .LVU124
+ 552              		.syntax unified
+ 553              	@ 169 "Drivers/Ethernet/Eth.c" 1
+ 554 005c 00BF     		NOP
+ 555              	@ 0 "" 2
+ 170:Drivers/Ethernet/Eth.c ****         }
+ 556              		.loc 1 170 13 view .LVU125
+ 170:Drivers/Ethernet/Eth.c ****         }
+ 557              		.loc 1 170 20 is_stmt 0 view .LVU126
+ 558              		.thumb
+ 559              		.syntax unified
+ 560 005e 0198     		ldr	r0, [sp, #4]
+ 561 0060 D8E7     		b	.L41
+ 562              	.L46:
+ 172:Drivers/Ethernet/Eth.c ****         return 0;
+ 563              		.loc 1 172 9 is_stmt 1 view .LVU127
+ 564              		.syntax unified
+ 565              	@ 172 "Drivers/Ethernet/Eth.c" 1
+ 566 0062 00BF     		NOP
+ 567              	@ 0 "" 2
+ 173:Drivers/Ethernet/Eth.c ****     }
+ 568              		.loc 1 173 9 view .LVU128
+ 173:Drivers/Ethernet/Eth.c ****     }
+ 569              		.loc 1 173 16 is_stmt 0 view .LVU129
+ 570              		.thumb
+ 571              		.syntax unified
+ 572 0064 0020     		movs	r0, #0
+ 573 0066 D5E7     		b	.L41
+ 574              	.L47:
+ 186:Drivers/Ethernet/Eth.c ****     }
+ 575              		.loc 1 186 9 is_stmt 1 view .LVU130
+ 186:Drivers/Ethernet/Eth.c ****     }
+ 576              		.loc 1 186 32 is_stmt 0 view .LVU131
+ 577 0068 0023     		movs	r3, #0
+ 578 006a A361     		str	r3, [r4, #24]
+ 579 006c ECE7     		b	.L48
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 35
+
+
+ 580              	.L50:
+ 177:Drivers/Ethernet/Eth.c ****     }
+ 581              		.loc 1 177 16 view .LVU132
+ 582 006e 0020     		movs	r0, #0
+ 583 0070 D0E7     		b	.L41
+ 584              		.cfi_endproc
+ 585              	.LFE576:
+ 587              		.section	.text.Eth_f_runTcpSrv,"ax",%progbits
+ 588              		.align	1
+ 589              		.global	Eth_f_runTcpSrv
+ 590              		.syntax unified
+ 591              		.thumb
+ 592              		.thumb_func
+ 594              	Eth_f_runTcpSrv:
+ 595              	.LVL34:
+ 596              	.LFB577:
+ 194:Drivers/Ethernet/Eth.c ****     __IO int32_t ret;
+ 597              		.loc 1 194 1 is_stmt 1 view -0
+ 598              		.cfi_startproc
+ 599              		@ args = 0, pretend = 0, frame = 8
+ 600              		@ frame_needed = 0, uses_anonymous_args = 0
+ 194:Drivers/Ethernet/Eth.c ****     __IO int32_t ret;
+ 601              		.loc 1 194 1 is_stmt 0 view .LVU134
+ 602 0000 10B5     		push	{r4, lr}
+ 603              	.LCFI18:
+ 604              		.cfi_def_cfa_offset 8
+ 605              		.cfi_offset 4, -8
+ 606              		.cfi_offset 14, -4
+ 607 0002 82B0     		sub	sp, sp, #8
+ 608              	.LCFI19:
+ 609              		.cfi_def_cfa_offset 16
+ 610 0004 0446     		mov	r4, r0
+ 195:Drivers/Ethernet/Eth.c ****     // uint8_t dest_ip[4];
+ 611              		.loc 1 195 5 is_stmt 1 view .LVU135
+ 198:Drivers/Ethernet/Eth.c **** 
+ 612              		.loc 1 198 5 view .LVU136
+ 198:Drivers/Ethernet/Eth.c **** 
+ 613              		.loc 1 198 19 is_stmt 0 view .LVU137
+ 614 0006 0023     		movs	r3, #0
+ 615 0008 ADF80230 		strh	r3, [sp, #2]	@ movhi
+ 202:Drivers/Ethernet/Eth.c ****     {
+ 616              		.loc 1 202 5 is_stmt 1 view .LVU138
+ 202:Drivers/Ethernet/Eth.c ****     {
+ 617              		.loc 1 202 13 is_stmt 0 view .LVU139
+ 618 000c 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+ 619 000e 9B00     		lsls	r3, r3, #2
+ 620 0010 0133     		adds	r3, r3, #1
+ 621 0012 DB00     		lsls	r3, r3, #3
+ 622 0014 03F54070 		add	r0, r3, #768
+ 623              	.LVL35:
+ 202:Drivers/Ethernet/Eth.c ****     {
+ 624              		.loc 1 202 13 view .LVU140
+ 625 0018 FFF7FEFF 		bl	WIZCHIP_READ
+ 626              	.LVL36:
+ 202:Drivers/Ethernet/Eth.c ****     {
+ 627              		.loc 1 202 5 view .LVU141
+ 628 001c 1C28     		cmp	r0, #28
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 36
+
+
+ 629 001e 37D8     		bhi	.L54
+ 630 0020 DFE800F0 		tbb	[pc, r0]
+ 631              	.L56:
+ 632 0024 0F       		.byte	(.L59-.L56)/2
+ 633 0025 36       		.byte	(.L54-.L56)/2
+ 634 0026 36       		.byte	(.L54-.L56)/2
+ 635 0027 36       		.byte	(.L54-.L56)/2
+ 636 0028 36       		.byte	(.L54-.L56)/2
+ 637 0029 36       		.byte	(.L54-.L56)/2
+ 638 002a 36       		.byte	(.L54-.L56)/2
+ 639 002b 36       		.byte	(.L54-.L56)/2
+ 640 002c 36       		.byte	(.L54-.L56)/2
+ 641 002d 36       		.byte	(.L54-.L56)/2
+ 642 002e 36       		.byte	(.L54-.L56)/2
+ 643 002f 36       		.byte	(.L54-.L56)/2
+ 644 0030 36       		.byte	(.L54-.L56)/2
+ 645 0031 36       		.byte	(.L54-.L56)/2
+ 646 0032 36       		.byte	(.L54-.L56)/2
+ 647 0033 36       		.byte	(.L54-.L56)/2
+ 648 0034 36       		.byte	(.L54-.L56)/2
+ 649 0035 36       		.byte	(.L54-.L56)/2
+ 650 0036 36       		.byte	(.L54-.L56)/2
+ 651 0037 1C       		.byte	(.L58-.L56)/2
+ 652 0038 36       		.byte	(.L54-.L56)/2
+ 653 0039 36       		.byte	(.L54-.L56)/2
+ 654 003a 36       		.byte	(.L54-.L56)/2
+ 655 003b 25       		.byte	(.L57-.L56)/2
+ 656 003c 36       		.byte	(.L54-.L56)/2
+ 657 003d 36       		.byte	(.L54-.L56)/2
+ 658 003e 36       		.byte	(.L54-.L56)/2
+ 659 003f 36       		.byte	(.L54-.L56)/2
+ 660 0040 99       		.byte	(.L55-.L56)/2
+ 661 0041 00       		.p2align 1
+ 662              	.L59:
+ 209:Drivers/Ethernet/Eth.c ****         {
+ 663              		.loc 1 209 9 is_stmt 1 view .LVU142
+ 209:Drivers/Ethernet/Eth.c ****         {
+ 664              		.loc 1 209 20 is_stmt 0 view .LVU143
+ 665 0042 0023     		movs	r3, #0
+ 666 0044 6288     		ldrh	r2, [r4, #2]
+ 667 0046 0121     		movs	r1, #1
+ 668 0048 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 669 004a FFF7FEFF 		bl	socket
+ 670              	.LVL37:
+ 209:Drivers/Ethernet/Eth.c ****         {
+ 671              		.loc 1 209 18 view .LVU144
+ 672 004e 0190     		str	r0, [sp, #4]
+ 209:Drivers/Ethernet/Eth.c ****         {
+ 673              		.loc 1 209 95 view .LVU145
+ 674 0050 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 209:Drivers/Ethernet/Eth.c ****         {
+ 675              		.loc 1 209 12 view .LVU146
+ 676 0052 9842     		cmp	r0, r3
+ 677 0054 1CD0     		beq	.L54
+ 212:Drivers/Ethernet/Eth.c ****             return ret;
+ 678              		.loc 1 212 13 is_stmt 1 view .LVU147
+ 679              		.syntax unified
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 37
+
+
+ 680              	@ 212 "Drivers/Ethernet/Eth.c" 1
+ 681 0056 00BF     		NOP
+ 682              	@ 0 "" 2
+ 213:Drivers/Ethernet/Eth.c ****         }
+ 683              		.loc 1 213 13 view .LVU148
+ 213:Drivers/Ethernet/Eth.c ****         }
+ 684              		.loc 1 213 20 is_stmt 0 view .LVU149
+ 685              		.thumb
+ 686              		.syntax unified
+ 687 0058 0198     		ldr	r0, [sp, #4]
+ 688 005a 1BE0     		b	.L53
+ 689              	.L58:
+ 223:Drivers/Ethernet/Eth.c ****         {
+ 690              		.loc 1 223 9 is_stmt 1 view .LVU150
+ 223:Drivers/Ethernet/Eth.c ****         {
+ 691              		.loc 1 223 20 is_stmt 0 view .LVU151
+ 692 005c 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 693 005e FFF7FEFF 		bl	listen
+ 694              	.LVL38:
+ 223:Drivers/Ethernet/Eth.c ****         {
+ 695              		.loc 1 223 18 view .LVU152
+ 696 0062 0190     		str	r0, [sp, #4]
+ 223:Drivers/Ethernet/Eth.c ****         {
+ 697              		.loc 1 223 12 view .LVU153
+ 698 0064 0128     		cmp	r0, #1
+ 699 0066 13D0     		beq	.L54
+ 226:Drivers/Ethernet/Eth.c ****             return ret;
+ 700              		.loc 1 226 13 is_stmt 1 view .LVU154
+ 701              		.syntax unified
+ 702              	@ 226 "Drivers/Ethernet/Eth.c" 1
+ 703 0068 00BF     		NOP
+ 704              	@ 0 "" 2
+ 227:Drivers/Ethernet/Eth.c ****         }
+ 705              		.loc 1 227 13 view .LVU155
+ 227:Drivers/Ethernet/Eth.c ****         }
+ 706              		.loc 1 227 20 is_stmt 0 view .LVU156
+ 707              		.thumb
+ 708              		.syntax unified
+ 709 006a 0198     		ldr	r0, [sp, #4]
+ 710 006c 12E0     		b	.L53
+ 711              	.L57:
+ 236:Drivers/Ethernet/Eth.c ****         {
+ 712              		.loc 1 236 9 is_stmt 1 view .LVU157
+ 236:Drivers/Ethernet/Eth.c ****         {
+ 713              		.loc 1 236 13 is_stmt 0 view .LVU158
+ 714 006e 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 715 0070 8000     		lsls	r0, r0, #2
+ 716 0072 0130     		adds	r0, r0, #1
+ 717 0074 C000     		lsls	r0, r0, #3
+ 718 0076 00F50070 		add	r0, r0, #512
+ 719 007a FFF7FEFF 		bl	WIZCHIP_READ
+ 720              	.LVL39:
+ 236:Drivers/Ethernet/Eth.c ****         {
+ 721              		.loc 1 236 12 view .LVU159
+ 722 007e 10F0010F 		tst	r0, #1
+ 723 0082 09D1     		bne	.L69
+ 724              	.L61:
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 38
+
+
+ 244:Drivers/Ethernet/Eth.c ****         {
+ 725              		.loc 1 244 9 is_stmt 1 view .LVU160
+ 244:Drivers/Ethernet/Eth.c ****         {
+ 726              		.loc 1 244 26 is_stmt 0 view .LVU161
+ 727 0084 E37C     		ldrb	r3, [r4, #19]	@ zero_extendqisi2
+ 728 0086 032B     		cmp	r3, #3
+ 729 0088 44D0     		beq	.L62
+ 730 008a 052B     		cmp	r3, #5
+ 731 008c 57D0     		beq	.L63
+ 732 008e 6BB1     		cbz	r3, .L70
+ 733              	.L54:
+ 334:Drivers/Ethernet/Eth.c ****     return SOCK_OK;
+ 734              		.loc 1 334 5 is_stmt 1 view .LVU162
+ 735              		.syntax unified
+ 736              	@ 334 "Drivers/Ethernet/Eth.c" 1
+ 737 0090 00BF     		NOP
+ 738              	@ 0 "" 2
+ 335:Drivers/Ethernet/Eth.c **** }
+ 739              		.loc 1 335 5 view .LVU163
+ 335:Drivers/Ethernet/Eth.c **** }
+ 740              		.loc 1 335 12 is_stmt 0 view .LVU164
+ 741              		.thumb
+ 742              		.syntax unified
+ 743 0092 0120     		movs	r0, #1
+ 744              	.L53:
+ 336:Drivers/Ethernet/Eth.c **** //------------------------------ HttpServer END
+ 745              		.loc 1 336 1 view .LVU165
+ 746 0094 02B0     		add	sp, sp, #8
+ 747              	.LCFI20:
+ 748              		.cfi_remember_state
+ 749              		.cfi_def_cfa_offset 8
+ 750              		@ sp needed
+ 751 0096 10BD     		pop	{r4, pc}
+ 752              	.LVL40:
+ 753              	.L69:
+ 754              	.LCFI21:
+ 755              		.cfi_restore_state
+ 241:Drivers/Ethernet/Eth.c ****         }
+ 756              		.loc 1 241 13 is_stmt 1 view .LVU166
+ 757 0098 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 758 009a 8000     		lsls	r0, r0, #2
+ 759 009c 0130     		adds	r0, r0, #1
+ 760 009e C000     		lsls	r0, r0, #3
+ 761 00a0 0121     		movs	r1, #1
+ 762 00a2 00F50070 		add	r0, r0, #512
+ 763 00a6 FFF7FEFF 		bl	WIZCHIP_WRITE
+ 764              	.LVL41:
+ 765 00aa EBE7     		b	.L61
+ 766              	.L70:
+ 249:Drivers/Ethernet/Eth.c ****             {
+ 767              		.loc 1 249 13 view .LVU167
+ 249:Drivers/Ethernet/Eth.c ****             {
+ 768              		.loc 1 249 25 is_stmt 0 view .LVU168
+ 769 00ac 2046     		mov	r0, r4
+ 770 00ae FFF7FEFF 		bl	Eth_f_recv
+ 771              	.LVL42:
+ 249:Drivers/Ethernet/Eth.c ****             {
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 39
+
+
+ 772              		.loc 1 249 23 view .LVU169
+ 773 00b2 80B2     		uxth	r0, r0
+ 774 00b4 ADF80200 		strh	r0, [sp, #2]	@ movhi
+ 249:Drivers/Ethernet/Eth.c ****             {
+ 775              		.loc 1 249 16 view .LVU170
+ 776 00b8 0028     		cmp	r0, #0
+ 777 00ba E9D0     		beq	.L54
+ 251:Drivers/Ethernet/Eth.c ****                 {
+ 778              		.loc 1 251 17 is_stmt 1 view .LVU171
+ 251:Drivers/Ethernet/Eth.c ****                 {
+ 779              		.loc 1 251 30 is_stmt 0 view .LVU172
+ 780 00bc A37C     		ldrb	r3, [r4, #18]	@ zero_extendqisi2
+ 251:Drivers/Ethernet/Eth.c ****                 {
+ 781              		.loc 1 251 20 view .LVU173
+ 782 00be CBB9     		cbnz	r3, .L71
+ 262:Drivers/Ethernet/Eth.c ****                 {
+ 783              		.loc 1 262 17 is_stmt 1 view .LVU174
+ 262:Drivers/Ethernet/Eth.c ****                 {
+ 784              		.loc 1 262 30 is_stmt 0 view .LVU175
+ 785 00c0 636A     		ldr	r3, [r4, #36]
+ 262:Drivers/Ethernet/Eth.c ****                 {
+ 786              		.loc 1 262 20 view .LVU176
+ 787 00c2 23B1     		cbz	r3, .L65
+ 264:Drivers/Ethernet/Eth.c ****                 }
+ 788              		.loc 1 264 21 is_stmt 1 view .LVU177
+ 264:Drivers/Ethernet/Eth.c ****                 }
+ 789              		.loc 1 264 28 is_stmt 0 view .LVU178
+ 790 00c4 2046     		mov	r0, r4
+ 791 00c6 9847     		blx	r3
+ 792              	.LVL43:
+ 264:Drivers/Ethernet/Eth.c ****                 }
+ 793              		.loc 1 264 26 view .LVU179
+ 794 00c8 83B2     		uxth	r3, r0
+ 795 00ca ADF80230 		strh	r3, [sp, #2]	@ movhi
+ 796              	.L65:
+ 267:Drivers/Ethernet/Eth.c ****                 {
+ 797              		.loc 1 267 17 is_stmt 1 view .LVU180
+ 267:Drivers/Ethernet/Eth.c ****                 {
+ 798              		.loc 1 267 31 is_stmt 0 view .LVU181
+ 799 00ce E37C     		ldrb	r3, [r4, #19]	@ zero_extendqisi2
+ 267:Drivers/Ethernet/Eth.c ****                 {
+ 800              		.loc 1 267 20 view .LVU182
+ 801 00d0 032B     		cmp	r3, #3
+ 802 00d2 DDD1     		bne	.L54
+ 276:Drivers/Ethernet/Eth.c ****                     if (Eth_f_send(socketObj) == size)
+ 803              		.loc 1 276 21 is_stmt 1 view .LVU183
+ 276:Drivers/Ethernet/Eth.c ****                     if (Eth_f_send(socketObj) == size)
+ 804              		.loc 1 276 37 is_stmt 0 view .LVU184
+ 805 00d4 A38A     		ldrh	r3, [r4, #20]
+ 276:Drivers/Ethernet/Eth.c ****                     if (Eth_f_send(socketObj) == size)
+ 806              		.loc 1 276 26 view .LVU185
+ 807 00d6 ADF80230 		strh	r3, [sp, #2]	@ movhi
+ 277:Drivers/Ethernet/Eth.c ****                     {
+ 808              		.loc 1 277 21 is_stmt 1 view .LVU186
+ 277:Drivers/Ethernet/Eth.c ****                     {
+ 809              		.loc 1 277 25 is_stmt 0 view .LVU187
+ 810 00da 2046     		mov	r0, r4
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 40
+
+
+ 811 00dc FFF7FEFF 		bl	Eth_f_send
+ 812              	.LVL44:
+ 277:Drivers/Ethernet/Eth.c ****                     {
+ 813              		.loc 1 277 47 view .LVU188
+ 814 00e0 BDF80230 		ldrh	r3, [sp, #2]
+ 815 00e4 9BB2     		uxth	r3, r3
+ 277:Drivers/Ethernet/Eth.c ****                     {
+ 816              		.loc 1 277 24 view .LVU189
+ 817 00e6 9842     		cmp	r0, r3
+ 818 00e8 D2D1     		bne	.L54
+ 279:Drivers/Ethernet/Eth.c ****                             socketObj->exchangeState = state_idle;
+ 819              		.loc 1 279 25 is_stmt 1 view .LVU190
+ 279:Drivers/Ethernet/Eth.c ****                             socketObj->exchangeState = state_idle;
+ 820              		.loc 1 279 38 is_stmt 0 view .LVU191
+ 821 00ea A369     		ldr	r3, [r4, #24]
+ 279:Drivers/Ethernet/Eth.c ****                             socketObj->exchangeState = state_idle;
+ 822              		.loc 1 279 28 view .LVU192
+ 823 00ec 002B     		cmp	r3, #0
+ 824 00ee CFD1     		bne	.L54
+ 280:Drivers/Ethernet/Eth.c ****                     }
+ 825              		.loc 1 280 29 is_stmt 1 view .LVU193
+ 280:Drivers/Ethernet/Eth.c ****                     }
+ 826              		.loc 1 280 54 is_stmt 0 view .LVU194
+ 827 00f0 E374     		strb	r3, [r4, #19]
+ 828 00f2 CDE7     		b	.L54
+ 829              	.L71:
+ 253:Drivers/Ethernet/Eth.c ****                     socketObj->txFrameSize = size;
+ 830              		.loc 1 253 21 is_stmt 1 view .LVU195
+ 831 00f4 BDF80220 		ldrh	r2, [sp, #2]
+ 832 00f8 92B2     		uxth	r2, r2
+ 833 00fa 6168     		ldr	r1, [r4, #4]
+ 834 00fc E068     		ldr	r0, [r4, #12]
+ 835 00fe FFF7FEFF 		bl	memcpy
+ 836              	.LVL45:
+ 254:Drivers/Ethernet/Eth.c ****                     if (Eth_f_send(socketObj) == size)
+ 837              		.loc 1 254 21 view .LVU196
+ 254:Drivers/Ethernet/Eth.c ****                     if (Eth_f_send(socketObj) == size)
+ 838              		.loc 1 254 44 is_stmt 0 view .LVU197
+ 839 0102 BDF80230 		ldrh	r3, [sp, #2]
+ 840 0106 A382     		strh	r3, [r4, #20]	@ movhi
+ 255:Drivers/Ethernet/Eth.c ****                     {
+ 841              		.loc 1 255 21 is_stmt 1 view .LVU198
+ 255:Drivers/Ethernet/Eth.c ****                     {
+ 842              		.loc 1 255 25 is_stmt 0 view .LVU199
+ 843 0108 2046     		mov	r0, r4
+ 844 010a FFF7FEFF 		bl	Eth_f_send
+ 845              	.LVL46:
+ 255:Drivers/Ethernet/Eth.c ****                     {
+ 846              		.loc 1 255 47 view .LVU200
+ 847 010e BDF80230 		ldrh	r3, [sp, #2]
+ 258:Drivers/Ethernet/Eth.c ****                     break;
+ 848              		.loc 1 258 21 is_stmt 1 view .LVU201
+ 259:Drivers/Ethernet/Eth.c ****                 }
+ 849              		.loc 1 259 21 view .LVU202
+ 850 0112 BDE7     		b	.L54
+ 851              	.L62:
+ 288:Drivers/Ethernet/Eth.c ****             {
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 41
+
+
+ 852              		.loc 1 288 13 view .LVU203
+ 288:Drivers/Ethernet/Eth.c ****             {
+ 853              		.loc 1 288 26 is_stmt 0 view .LVU204
+ 854 0114 A36A     		ldr	r3, [r4, #40]
+ 288:Drivers/Ethernet/Eth.c ****             {
+ 855              		.loc 1 288 16 view .LVU205
+ 856 0116 002B     		cmp	r3, #0
+ 857 0118 BAD0     		beq	.L54
+ 293:Drivers/Ethernet/Eth.c ****             size = socketObj->txFrameSize;
+ 858              		.loc 1 293 24 is_stmt 1 view .LVU206
+ 859 011a 2046     		mov	r0, r4
+ 860 011c 9847     		blx	r3
+ 861              	.LVL47:
+ 294:Drivers/Ethernet/Eth.c ****             if (Eth_f_send(socketObj) == size)
+ 862              		.loc 1 294 13 view .LVU207
+ 294:Drivers/Ethernet/Eth.c ****             if (Eth_f_send(socketObj) == size)
+ 863              		.loc 1 294 29 is_stmt 0 view .LVU208
+ 864 011e A38A     		ldrh	r3, [r4, #20]
+ 294:Drivers/Ethernet/Eth.c ****             if (Eth_f_send(socketObj) == size)
+ 865              		.loc 1 294 18 view .LVU209
+ 866 0120 ADF80230 		strh	r3, [sp, #2]	@ movhi
+ 295:Drivers/Ethernet/Eth.c ****             {
+ 867              		.loc 1 295 13 is_stmt 1 view .LVU210
+ 295:Drivers/Ethernet/Eth.c ****             {
+ 868              		.loc 1 295 17 is_stmt 0 view .LVU211
+ 869 0124 2046     		mov	r0, r4
+ 870 0126 FFF7FEFF 		bl	Eth_f_send
+ 871              	.LVL48:
+ 295:Drivers/Ethernet/Eth.c ****             {
+ 872              		.loc 1 295 39 view .LVU212
+ 873 012a BDF80230 		ldrh	r3, [sp, #2]
+ 874 012e 9BB2     		uxth	r3, r3
+ 295:Drivers/Ethernet/Eth.c ****             {
+ 875              		.loc 1 295 16 view .LVU213
+ 876 0130 9842     		cmp	r0, r3
+ 877 0132 ADD1     		bne	.L54
+ 297:Drivers/Ethernet/Eth.c ****                     socketObj->exchangeState = state_idle;
+ 878              		.loc 1 297 17 is_stmt 1 view .LVU214
+ 297:Drivers/Ethernet/Eth.c ****                     socketObj->exchangeState = state_idle;
+ 879              		.loc 1 297 30 is_stmt 0 view .LVU215
+ 880 0134 A369     		ldr	r3, [r4, #24]
+ 297:Drivers/Ethernet/Eth.c ****                     socketObj->exchangeState = state_idle;
+ 881              		.loc 1 297 20 view .LVU216
+ 882 0136 002B     		cmp	r3, #0
+ 883 0138 AAD1     		bne	.L54
+ 298:Drivers/Ethernet/Eth.c ****             }
+ 884              		.loc 1 298 21 is_stmt 1 view .LVU217
+ 298:Drivers/Ethernet/Eth.c ****             }
+ 885              		.loc 1 298 46 is_stmt 0 view .LVU218
+ 886 013a E374     		strb	r3, [r4, #19]
+ 887 013c A8E7     		b	.L54
+ 888              	.L63:
+ 304:Drivers/Ethernet/Eth.c ****             {
+ 889              		.loc 1 304 13 is_stmt 1 view .LVU219
+ 304:Drivers/Ethernet/Eth.c ****             {
+ 890              		.loc 1 304 24 is_stmt 0 view .LVU220
+ 891 013e 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 42
+
+
+ 892 0140 FFF7FEFF 		bl	disconnect
+ 893              	.LVL49:
+ 304:Drivers/Ethernet/Eth.c ****             {
+ 894              		.loc 1 304 22 view .LVU221
+ 895 0144 0190     		str	r0, [sp, #4]
+ 304:Drivers/Ethernet/Eth.c ****             {
+ 896              		.loc 1 304 16 view .LVU222
+ 897 0146 0128     		cmp	r0, #1
+ 898 0148 02D0     		beq	.L66
+ 306:Drivers/Ethernet/Eth.c ****                 return ret;
+ 899              		.loc 1 306 17 is_stmt 1 view .LVU223
+ 900              		.syntax unified
+ 901              	@ 306 "Drivers/Ethernet/Eth.c" 1
+ 902 014a 00BF     		NOP
+ 903              	@ 0 "" 2
+ 307:Drivers/Ethernet/Eth.c ****             }
+ 904              		.loc 1 307 17 view .LVU224
+ 307:Drivers/Ethernet/Eth.c ****             }
+ 905              		.loc 1 307 24 is_stmt 0 view .LVU225
+ 906              		.thumb
+ 907              		.syntax unified
+ 908 014c 0198     		ldr	r0, [sp, #4]
+ 909 014e A1E7     		b	.L53
+ 910              	.L66:
+ 309:Drivers/Ethernet/Eth.c ****         }
+ 911              		.loc 1 309 13 is_stmt 1 view .LVU226
+ 309:Drivers/Ethernet/Eth.c ****         }
+ 912              		.loc 1 309 38 is_stmt 0 view .LVU227
+ 913 0150 0023     		movs	r3, #0
+ 914 0152 E374     		strb	r3, [r4, #19]
+ 312:Drivers/Ethernet/Eth.c ****         default:
+ 915              		.loc 1 312 13 is_stmt 1 view .LVU228
+ 916 0154 9CE7     		b	.L54
+ 917              	.L55:
+ 322:Drivers/Ethernet/Eth.c ****         {
+ 918              		.loc 1 322 9 view .LVU229
+ 322:Drivers/Ethernet/Eth.c ****         {
+ 919              		.loc 1 322 20 is_stmt 0 view .LVU230
+ 920 0156 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 921 0158 FFF7FEFF 		bl	disconnect
+ 922              	.LVL50:
+ 322:Drivers/Ethernet/Eth.c ****         {
+ 923              		.loc 1 322 18 view .LVU231
+ 924 015c 0190     		str	r0, [sp, #4]
+ 322:Drivers/Ethernet/Eth.c ****         {
+ 925              		.loc 1 322 12 view .LVU232
+ 926 015e 0128     		cmp	r0, #1
+ 927 0160 96D0     		beq	.L54
+ 325:Drivers/Ethernet/Eth.c ****             return ret;
+ 928              		.loc 1 325 13 is_stmt 1 view .LVU233
+ 929              		.syntax unified
+ 930              	@ 325 "Drivers/Ethernet/Eth.c" 1
+ 931 0162 00BF     		NOP
+ 932              	@ 0 "" 2
+ 326:Drivers/Ethernet/Eth.c ****         }
+ 933              		.loc 1 326 13 view .LVU234
+ 326:Drivers/Ethernet/Eth.c ****         }
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 43
+
+
+ 934              		.loc 1 326 20 is_stmt 0 view .LVU235
+ 935              		.thumb
+ 936              		.syntax unified
+ 937 0164 0198     		ldr	r0, [sp, #4]
+ 938 0166 95E7     		b	.L53
+ 939              		.cfi_endproc
+ 940              	.LFE577:
+ 942              		.section	.text.Eth_f_GetMacFromUID,"ax",%progbits
+ 943              		.align	1
+ 944              		.global	Eth_f_GetMacFromUID
+ 945              		.syntax unified
+ 946              		.thumb
+ 947              		.thumb_func
+ 949              	Eth_f_GetMacFromUID:
+ 950              	.LVL51:
+ 951              	.LFB578:
+ 356:Drivers/Ethernet/Eth.c ****     *(mac + 0) = 0x00;
+ 952              		.loc 1 356 1 is_stmt 1 view -0
+ 953              		.cfi_startproc
+ 954              		@ args = 0, pretend = 0, frame = 0
+ 955              		@ frame_needed = 0, uses_anonymous_args = 0
+ 356:Drivers/Ethernet/Eth.c ****     *(mac + 0) = 0x00;
+ 956              		.loc 1 356 1 is_stmt 0 view .LVU237
+ 957 0000 10B5     		push	{r4, lr}
+ 958              	.LCFI22:
+ 959              		.cfi_def_cfa_offset 8
+ 960              		.cfi_offset 4, -8
+ 961              		.cfi_offset 14, -4
+ 962 0002 0446     		mov	r4, r0
+ 357:Drivers/Ethernet/Eth.c ****     *(mac + 1) = 0x80;
+ 963              		.loc 1 357 5 is_stmt 1 view .LVU238
+ 357:Drivers/Ethernet/Eth.c ****     *(mac + 1) = 0x80;
+ 964              		.loc 1 357 16 is_stmt 0 view .LVU239
+ 965 0004 0023     		movs	r3, #0
+ 966 0006 0370     		strb	r3, [r0]
+ 358:Drivers/Ethernet/Eth.c ****     *(mac + 2) = 0xE1;
+ 967              		.loc 1 358 5 is_stmt 1 view .LVU240
+ 358:Drivers/Ethernet/Eth.c ****     *(mac + 2) = 0xE1;
+ 968              		.loc 1 358 16 is_stmt 0 view .LVU241
+ 969 0008 8023     		movs	r3, #128
+ 970 000a 4370     		strb	r3, [r0, #1]
+ 359:Drivers/Ethernet/Eth.c ****     *(mac + 3) = (uint8_t)(HAL_GetUIDw0());  // byte 0
+ 971              		.loc 1 359 5 is_stmt 1 view .LVU242
+ 359:Drivers/Ethernet/Eth.c ****     *(mac + 3) = (uint8_t)(HAL_GetUIDw0());  // byte 0
+ 972              		.loc 1 359 16 is_stmt 0 view .LVU243
+ 973 000c E123     		movs	r3, #225
+ 974 000e 8370     		strb	r3, [r0, #2]
+ 360:Drivers/Ethernet/Eth.c ****     *(mac + 4) = (uint8_t)(HAL_GetUIDw0()>>16);  // byte 2
+ 975              		.loc 1 360 5 is_stmt 1 view .LVU244
+ 360:Drivers/Ethernet/Eth.c ****     *(mac + 4) = (uint8_t)(HAL_GetUIDw0()>>16);  // byte 2
+ 976              		.loc 1 360 28 is_stmt 0 view .LVU245
+ 977 0010 FFF7FEFF 		bl	HAL_GetUIDw0
+ 978              	.LVL52:
+ 360:Drivers/Ethernet/Eth.c ****     *(mac + 4) = (uint8_t)(HAL_GetUIDw0()>>16);  // byte 2
+ 979              		.loc 1 360 16 view .LVU246
+ 980 0014 E070     		strb	r0, [r4, #3]
+ 361:Drivers/Ethernet/Eth.c ****     *(mac + 5) = (uint8_t)(HAL_GetUIDw1());  // byte 4
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 44
+
+
+ 981              		.loc 1 361 5 is_stmt 1 view .LVU247
+ 361:Drivers/Ethernet/Eth.c ****     *(mac + 5) = (uint8_t)(HAL_GetUIDw1());  // byte 4
+ 982              		.loc 1 361 28 is_stmt 0 view .LVU248
+ 983 0016 FFF7FEFF 		bl	HAL_GetUIDw0
+ 984              	.LVL53:
+ 361:Drivers/Ethernet/Eth.c ****     *(mac + 5) = (uint8_t)(HAL_GetUIDw1());  // byte 4
+ 985              		.loc 1 361 18 view .LVU249
+ 986 001a C0F30740 		ubfx	r0, r0, #16, #8
+ 361:Drivers/Ethernet/Eth.c ****     *(mac + 5) = (uint8_t)(HAL_GetUIDw1());  // byte 4
+ 987              		.loc 1 361 16 view .LVU250
+ 988 001e 2071     		strb	r0, [r4, #4]
+ 362:Drivers/Ethernet/Eth.c ****     return SET;
+ 989              		.loc 1 362 5 is_stmt 1 view .LVU251
+ 362:Drivers/Ethernet/Eth.c ****     return SET;
+ 990              		.loc 1 362 28 is_stmt 0 view .LVU252
+ 991 0020 FFF7FEFF 		bl	HAL_GetUIDw1
+ 992              	.LVL54:
+ 362:Drivers/Ethernet/Eth.c ****     return SET;
+ 993              		.loc 1 362 16 view .LVU253
+ 994 0024 6071     		strb	r0, [r4, #5]
+ 363:Drivers/Ethernet/Eth.c **** }
+ 995              		.loc 1 363 5 is_stmt 1 view .LVU254
+ 364:Drivers/Ethernet/Eth.c **** 
+ 996              		.loc 1 364 1 is_stmt 0 view .LVU255
+ 997 0026 0120     		movs	r0, #1
+ 998 0028 10BD     		pop	{r4, pc}
+ 364:Drivers/Ethernet/Eth.c **** 
+ 999              		.loc 1 364 1 view .LVU256
+ 1000              		.cfi_endproc
+ 1001              	.LFE578:
+ 1003              		.section	.rodata.Eth_f_Init.str1.4,"aMS",%progbits,1
+ 1004              		.align	2
+ 1005              	.LC0:
+ 1006 0000 02020202 		.ascii	"\002\002\002\002\002\002\002\002\000"
+ 1006      02020202 
+ 1006      00
+ 1007              		.section	.text.Eth_f_Init,"ax",%progbits
+ 1008              		.align	1
+ 1009              		.global	Eth_f_Init
+ 1010              		.syntax unified
+ 1011              		.thumb
+ 1012              		.thumb_func
+ 1014              	Eth_f_Init:
+ 1015              	.LFB574:
+  50:Drivers/Ethernet/Eth.c ****     wiz_NetInfo netInfoCheck;
+ 1016              		.loc 1 50 1 is_stmt 1 view -0
+ 1017              		.cfi_startproc
+ 1018              		@ args = 0, pretend = 0, frame = 32
+ 1019              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1020 0000 10B5     		push	{r4, lr}
+ 1021              	.LCFI23:
+ 1022              		.cfi_def_cfa_offset 8
+ 1023              		.cfi_offset 4, -8
+ 1024              		.cfi_offset 14, -4
+ 1025 0002 88B0     		sub	sp, sp, #32
+ 1026              	.LCFI24:
+ 1027              		.cfi_def_cfa_offset 40
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 45
+
+
+  51:Drivers/Ethernet/Eth.c ****     
+ 1028              		.loc 1 51 5 view .LVU258
+  53:Drivers/Ethernet/Eth.c ****     reg_wizchip_spi_cbfunc(spi_rb, spi_wb);
+ 1029              		.loc 1 53 5 view .LVU259
+ 1030 0004 2E49     		ldr	r1, .L81
+ 1031 0006 2F48     		ldr	r0, .L81+4
+ 1032 0008 FFF7FEFF 		bl	reg_wizchip_cs_cbfunc
+ 1033              	.LVL55:
+  54:Drivers/Ethernet/Eth.c ****     reg_wizchip_spiburst_cbfunc(spi_rb_burst, spi_wb_burst);
+ 1034              		.loc 1 54 5 view .LVU260
+ 1035 000c 2E49     		ldr	r1, .L81+8
+ 1036 000e 2F48     		ldr	r0, .L81+12
+ 1037 0010 FFF7FEFF 		bl	reg_wizchip_spi_cbfunc
+ 1038              	.LVL56:
+  55:Drivers/Ethernet/Eth.c **** 
+ 1039              		.loc 1 55 5 view .LVU261
+ 1040 0014 2E49     		ldr	r1, .L81+16
+ 1041 0016 2F48     		ldr	r0, .L81+20
+ 1042 0018 FFF7FEFF 		bl	reg_wizchip_spiburst_cbfunc
+ 1043              	.LVL57:
+  57:Drivers/Ethernet/Eth.c ****     wizchip_init(bufSize, bufSize);
+ 1044              		.loc 1 57 5 view .LVU262
+  57:Drivers/Ethernet/Eth.c ****     wizchip_init(bufSize, bufSize);
+ 1045              		.loc 1 57 13 is_stmt 0 view .LVU263
+ 1046 001c 2E4A     		ldr	r2, .L81+24
+ 1047 001e 6B46     		mov	r3, sp
+ 1048 0020 92E80300 		ldm	r2, {r0, r1}
+ 1049 0024 83E80300 		stm	r3, {r0, r1}
+  58:Drivers/Ethernet/Eth.c **** 
+ 1050              		.loc 1 58 5 is_stmt 1 view .LVU264
+ 1051 0028 1946     		mov	r1, r3
+ 1052 002a 1846     		mov	r0, r3
+ 1053 002c FFF7FEFF 		bl	wizchip_init
+ 1054              	.LVL58:
+  60:Drivers/Ethernet/Eth.c **** 
+ 1055              		.loc 1 60 5 view .LVU265
+ 1056 0030 4FF47F40 		mov	r0, #65280
+ 1057 0034 FFF7FEFF 		bl	wizchip_setinterruptmask
+ 1058              	.LVL59:
+  62:Drivers/Ethernet/Eth.c **** 
+ 1059              		.loc 1 62 5 view .LVU266
+ 1060 0038 284C     		ldr	r4, .L81+28
+ 1061 003a 2046     		mov	r0, r4
+ 1062 003c FFF7FEFF 		bl	Eth_f_GetMacFromUID
+ 1063              	.LVL60:
+  64:Drivers/Ethernet/Eth.c ****     getSHAR(netInfoCheck.mac);
+ 1064              		.loc 1 64 5 view .LVU267
+ 1065 0040 0622     		movs	r2, #6
+ 1066 0042 2146     		mov	r1, r4
+ 1067 0044 4FF41060 		mov	r0, #2304
+ 1068 0048 FFF7FEFF 		bl	WIZCHIP_WRITE_BUF
+ 1069              	.LVL61:
+  65:Drivers/Ethernet/Eth.c **** 
+ 1070              		.loc 1 65 5 view .LVU268
+ 1071 004c 0622     		movs	r2, #6
+ 1072 004e 02A9     		add	r1, sp, #8
+ 1073 0050 4FF41060 		mov	r0, #2304
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 46
+
+
+ 1074 0054 FFF7FEFF 		bl	WIZCHIP_READ_BUF
+ 1075              	.LVL62:
+  68:Drivers/Ethernet/Eth.c ****     {
+ 1076              		.loc 1 68 5 view .LVU269
+ 1077              	.LBB10:
+  68:Drivers/Ethernet/Eth.c ****     {
+ 1078              		.loc 1 68 10 view .LVU270
+  68:Drivers/Ethernet/Eth.c ****     {
+ 1079              		.loc 1 68 18 is_stmt 0 view .LVU271
+ 1080 0058 0023     		movs	r3, #0
+ 1081              	.LVL63:
+ 1082              	.L75:
+  68:Drivers/Ethernet/Eth.c ****     {
+ 1083              		.loc 1 68 27 is_stmt 1 discriminator 1 view .LVU272
+ 1084 005a 052B     		cmp	r3, #5
+ 1085 005c 08D8     		bhi	.L80
+  70:Drivers/Ethernet/Eth.c ****             return RESET; //
+ 1086              		.loc 1 70 9 view .LVU273
+  70:Drivers/Ethernet/Eth.c ****             return RESET; //
+ 1087              		.loc 1 70 27 is_stmt 0 view .LVU274
+ 1088 005e 1F4A     		ldr	r2, .L81+28
+  70:Drivers/Ethernet/Eth.c ****             return RESET; //
+ 1089              		.loc 1 70 13 view .LVU275
+ 1090 0060 D15C     		ldrb	r1, [r2, r3]	@ zero_extendqisi2
+  70:Drivers/Ethernet/Eth.c ****             return RESET; //
+ 1091              		.loc 1 70 54 view .LVU276
+ 1092 0062 02AA     		add	r2, sp, #8
+  70:Drivers/Ethernet/Eth.c ****             return RESET; //
+ 1093              		.loc 1 70 35 view .LVU277
+ 1094 0064 D25C     		ldrb	r2, [r2, r3]	@ zero_extendqisi2
+  70:Drivers/Ethernet/Eth.c ****             return RESET; //
+ 1095              		.loc 1 70 12 view .LVU278
+ 1096 0066 9142     		cmp	r1, r2
+ 1097 0068 28D1     		bne	.L78
+  68:Drivers/Ethernet/Eth.c ****     {
+ 1098              		.loc 1 68 33 is_stmt 1 discriminator 2 view .LVU279
+ 1099 006a 0133     		adds	r3, r3, #1
+ 1100              	.LVL64:
+  68:Drivers/Ethernet/Eth.c ****     {
+ 1101              		.loc 1 68 33 is_stmt 0 discriminator 2 view .LVU280
+ 1102 006c DBB2     		uxtb	r3, r3
+ 1103              	.LVL65:
+  68:Drivers/Ethernet/Eth.c ****     {
+ 1104              		.loc 1 68 33 discriminator 2 view .LVU281
+ 1105 006e F4E7     		b	.L75
+ 1106              	.L80:
+  68:Drivers/Ethernet/Eth.c ****     {
+ 1107              		.loc 1 68 33 discriminator 2 view .LVU282
+ 1108              	.LBE10:
+  74:Drivers/Ethernet/Eth.c ****     setRCR(3);  // 3 повтора
+ 1109              		.loc 1 74 5 is_stmt 1 view .LVU283
+ 1110 0070 0721     		movs	r1, #7
+ 1111 0072 4FF4C850 		mov	r0, #6400
+ 1112 0076 FFF7FEFF 		bl	WIZCHIP_WRITE
+ 1113              	.LVL66:
+  74:Drivers/Ethernet/Eth.c ****     setRCR(3);  // 3 повтора
+ 1114              		.loc 1 74 5 view .LVU284
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 47
+
+
+ 1115 007a D021     		movs	r1, #208
+ 1116 007c 4FF4D050 		mov	r0, #6656
+ 1117 0080 FFF7FEFF 		bl	WIZCHIP_WRITE
+ 1118              	.LVL67:
+  74:Drivers/Ethernet/Eth.c ****     setRCR(3);  // 3 повтора
+ 1119              		.loc 1 74 17 view .LVU285
+  75:Drivers/Ethernet/Eth.c **** 
+ 1120              		.loc 1 75 5 view .LVU286
+ 1121 0084 0321     		movs	r1, #3
+ 1122 0086 4FF4D850 		mov	r0, #6912
+ 1123 008a FFF7FEFF 		bl	WIZCHIP_WRITE
+ 1124              	.LVL68:
+  84:Drivers/Ethernet/Eth.c ****     setSUBR(netInfo.sn);
+ 1125              		.loc 1 84 5 view .LVU287
+ 1126 008e 144C     		ldr	r4, .L81+32
+ 1127 0090 0422     		movs	r2, #4
+ 1128 0092 2146     		mov	r1, r4
+ 1129 0094 4FF48070 		mov	r0, #256
+ 1130 0098 FFF7FEFF 		bl	WIZCHIP_WRITE_BUF
+ 1131              	.LVL69:
+  85:Drivers/Ethernet/Eth.c ****     setSIPR(netInfo.ip);
+ 1132              		.loc 1 85 5 view .LVU288
+ 1133 009c 0422     		movs	r2, #4
+ 1134 009e 211F     		subs	r1, r4, #4
+ 1135 00a0 4FF4A060 		mov	r0, #1280
+ 1136 00a4 FFF7FEFF 		bl	WIZCHIP_WRITE_BUF
+ 1137              	.LVL70:
+  86:Drivers/Ethernet/Eth.c **** #endif
+ 1138              		.loc 1 86 5 view .LVU289
+ 1139 00a8 0422     		movs	r2, #4
+ 1140 00aa A4F10801 		sub	r1, r4, #8
+ 1141 00ae 4FF47060 		mov	r0, #3840
+ 1142 00b2 FFF7FEFF 		bl	WIZCHIP_WRITE_BUF
+ 1143              	.LVL71:
+ 122:Drivers/Ethernet/Eth.c **** }
+ 1144              		.loc 1 122 5 view .LVU290
+ 122:Drivers/Ethernet/Eth.c **** }
+ 1145              		.loc 1 122 12 is_stmt 0 view .LVU291
+ 1146 00b6 0120     		movs	r0, #1
+ 1147              	.L76:
+ 123:Drivers/Ethernet/Eth.c **** 
+ 1148              		.loc 1 123 1 view .LVU292
+ 1149 00b8 08B0     		add	sp, sp, #32
+ 1150              	.LCFI25:
+ 1151              		.cfi_remember_state
+ 1152              		.cfi_def_cfa_offset 8
+ 1153              		@ sp needed
+ 1154 00ba 10BD     		pop	{r4, pc}
+ 1155              	.LVL72:
+ 1156              	.L78:
+ 1157              	.LCFI26:
+ 1158              		.cfi_restore_state
+ 1159              	.LBB11:
+  71:Drivers/Ethernet/Eth.c ****     }
+ 1160              		.loc 1 71 20 view .LVU293
+ 1161 00bc 0020     		movs	r0, #0
+ 1162 00be FBE7     		b	.L76
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 48
+
+
+ 1163              	.L82:
+ 1164              		.align	2
+ 1165              	.L81:
+ 1166 00c0 00000000 		.word	cs_desel
+ 1167 00c4 00000000 		.word	cs_sel
+ 1168 00c8 00000000 		.word	spi_wb
+ 1169 00cc 00000000 		.word	spi_rb
+ 1170 00d0 00000000 		.word	spi_wb_burst
+ 1171 00d4 00000000 		.word	spi_rb_burst
+ 1172 00d8 00000000 		.word	.LC0
+ 1173 00dc 00000000 		.word	netInfo
+ 1174 00e0 0E000000 		.word	netInfo+14
+ 1175              	.LBE11:
+ 1176              		.cfi_endproc
+ 1177              	.LFE574:
+ 1179              		.global	netInfo
+ 1180              		.section	.data.netInfo,"aw"
+ 1181              		.align	2
+ 1184              	netInfo:
+ 1185 0000 00000000 		.space	6
+ 1185      0000
+ 1186 0006 C0A8009B 		.ascii	"\300\250\000\233"
+ 1187 000a FFFFFF00 		.ascii	"\377\377\377\000"
+ 1188 000e C0A80001 		.ascii	"\300\250\000\001"
+ 1189 0012 00000000 		.space	5
+ 1189      00
+ 1190              		.text
+ 1191              	.Letext0:
+ 1192              		.file 3 "c:\\vscode\\vscodestmtools\\arm-none-eabi-gcc\\12.2.1-1.2.1\\.content\\arm-none-eabi\\inc
+ 1193              		.file 4 "c:\\vscode\\vscodestmtools\\arm-none-eabi-gcc\\12.2.1-1.2.1\\.content\\arm-none-eabi\\inc
+ 1194              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 1195              		.file 6 "c:\\vscode\\vscodestmtools\\arm-none-eabi-gcc\\12.2.1-1.2.1\\.content\\lib\\gcc\\arm-none
+ 1196              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h"
+ 1197              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 1198              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 1199              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h"
+ 1200              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h"
+ 1201              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h"
+ 1202              		.file 13 "Drivers/Ethernet/Eth.h"
+ 1203              		.file 14 "ioLibrary_Driver-master/Ethernet/wizchip_conf.h"
+ 1204              		.file 15 "Core/Inc/spi.h"
+ 1205              		.file 16 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 1206              		.file 17 "ioLibrary_Driver-master/Ethernet/socket.h"
+ 1207              		.file 18 "ioLibrary_Driver-master/Ethernet/W5500/w5500.h"
+ 1208              		.file 19 "c:\\vscode\\vscodestmtools\\arm-none-eabi-gcc\\12.2.1-1.2.1\\.content\\arm-none-eabi\\in
+ 1209              		.file 20 "Core/Inc/main.h"
+ 1210              		.file 21 "<built-in>"
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 49
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Eth.c
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:19     .text.cs_sel:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:24     .text.cs_sel:0000000000000000 cs_sel
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:51     .text.cs_sel:000000000000000c $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:56     .text.cs_desel:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:61     .text.cs_desel:0000000000000000 cs_desel
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:87     .text.cs_desel:000000000000000c $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:92     .text.spi_wb_burst:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:97     .text.spi_wb_burst:0000000000000000 spi_wb_burst
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:142    .text.spi_wb_burst:0000000000000020 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:147    .text.spi_rb_burst:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:152    .text.spi_rb_burst:0000000000000000 spi_rb_burst
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:197    .text.spi_rb_burst:0000000000000020 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:202    .text.spi_wb:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:207    .text.spi_wb:0000000000000000 spi_wb
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:254    .text.spi_wb:0000000000000028 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:259    .text.spi_rb:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:264    .text.spi_rb:0000000000000000 spi_rb
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:308    .text.spi_rb:0000000000000028 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:313    .text.Eth_f_recv:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:318    .text.Eth_f_recv:0000000000000000 Eth_f_recv
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:432    .text.Eth_f_send:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:437    .text.Eth_f_send:0000000000000000 Eth_f_send
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:588    .text.Eth_f_runTcpSrv:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:594    .text.Eth_f_runTcpSrv:0000000000000000 Eth_f_runTcpSrv
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:632    .text.Eth_f_runTcpSrv:0000000000000024 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:943    .text.Eth_f_GetMacFromUID:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:949    .text.Eth_f_GetMacFromUID:0000000000000000 Eth_f_GetMacFromUID
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:1004   .rodata.Eth_f_Init.str1.4:0000000000000000 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:1008   .text.Eth_f_Init:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:1014   .text.Eth_f_Init:0000000000000000 Eth_f_Init
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:1166   .text.Eth_f_Init:00000000000000c0 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:1184   .data.netInfo:0000000000000000 netInfo
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:1181   .data.netInfo:0000000000000000 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:661    .text.Eth_f_runTcpSrv:0000000000000041 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s:661    .text.Eth_f_runTcpSrv:0000000000000042 $t
+
+UNDEFINED SYMBOLS
+HAL_SPI_Transmit_DMA
+HAL_SPI_GetState
+Error_Handler
+hspi2
+HAL_SPI_Receive_DMA
+HAL_SPI_Transmit
+HAL_SPI_Receive
+getSn_RX_RSR
+recv
+disconnect
+getSn_TX_FSR
+send
+WIZCHIP_READ
+socket
+listen
+WIZCHIP_WRITE
+memcpy
+HAL_GetUIDw0
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\ccMtN8jd.s 			page 50
+
+
+HAL_GetUIDw1
+reg_wizchip_cs_cbfunc
+reg_wizchip_spi_cbfunc
+reg_wizchip_spiburst_cbfunc
+wizchip_init
+wizchip_setinterruptmask
+WIZCHIP_WRITE_BUF
+WIZCHIP_READ_BUF

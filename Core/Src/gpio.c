@@ -46,35 +46,15 @@ void MX_GPIO_Init(void)
   LL_GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
-  LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOC);
   LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOD);
-  LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOA);
   LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOB);
+  LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOA);
 
   /**/
   LL_GPIO_ResetOutputPin(W5500_CS_GPIO_Port, W5500_CS_Pin);
 
   /**/
   LL_GPIO_ResetOutputPin(GPIOA, USB_ReNum_Pin|OD_LED2G_Pin);
-
-  /**/
-  GPIO_InitStruct.Pin = ID_8_Pin|ID_9_Pin|ID_10_Pin;
-  GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = LL_GPIO_PULL_DOWN;
-  LL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
-  /**/
-  GPIO_InitStruct.Pin = ID_11_Pin|ID_12_Pin|ID_13_Pin|ID_1_Pin
-                          |ID_2_Pin|ID_3_Pin;
-  GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = LL_GPIO_PULL_DOWN;
-  LL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /**/
-  GPIO_InitStruct.Pin = ID_4_Pin|ID_5_Pin|ID_6_Pin|ID_7_Pin;
-  GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = LL_GPIO_PULL_DOWN;
-  LL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /**/
   GPIO_InitStruct.Pin = W5500_CS_Pin;

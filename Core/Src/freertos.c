@@ -49,15 +49,21 @@ int32_t cbckModbusTcpServer(Eth_t_SocTcp* socket);
 #define MODBUS_TCP_SERVER_SOC_CNT (4)
 Eth_t_SocTcp tcpModbusSocket[MODBUS_TCP_SERVER_SOC_CNT];
 uint8_t modbusBufRxTxTCP[MODBUS_SS_BUF_CNT];
-uint8_t modbusBufRxTxRtu485[MODBUS_SS_BUF_CNT];
-#define MODBUS_TABLE_HOLDING_QUANT (MBP_DI_STATE - MBP_AI1_X + 1)
+uint8_t modbusBufRxTxRtu485[50];
+#define MODBUS_TABLE_HOLDING_QUANT (MBP_reg_12 - MBP_reg_0 + 1)
 uint16_t modbusHoldingBuf[MODBUS_TABLE_HOLDING_QUANT];
+
+uint8_t mdb_buf[MODBUS_TABLE_HOLDING_QUANT];
+
+uint16_t mdb_1 = 0;
+uint16_t mdb_2 = 0;
+uint16_t mdb_3 = 0;
 
 //--ModbusSS
 ModbusSS_table_t modbusTableHolding1 = {
   .buf = (uint8_t*)modbusHoldingBuf,
   .quantity = MODBUS_TABLE_HOLDING_QUANT,
-  .regNo = MBP_AI1_X,
+  .regNo = MBP_reg_0,
   .type = ModbusSS_Holding
 };
 
@@ -108,6 +114,14 @@ const osThreadAttr_t taskNet_attributes = {
   .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
+
+osThreadId_t taskMdbHandle;
+const osThreadAttr_t taskMdb_attributes = {
+  .name = "taskMdb",
+  .stack_size = 256 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+
 /* USER CODE END Variables */
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
@@ -121,12 +135,15 @@ const osThreadAttr_t defaultTask_attributes = {
 /* USER CODE BEGIN FunctionPrototypes */
 void taskLedEntry(void *argument);
 void taskNetEntry(void *argument);
+void taskMdbEntry(void *argument);
+
+__STATIC_INLINE uint16_t _Crc16_mdb(uint8_t *pcBlock, uint16_t len);
+
 
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void *argument);
 
-extern void MX_USB_DEVICE_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
 /**
@@ -162,6 +179,7 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN RTOS_THREADS */
   taskLedHandle = osThreadNew(taskLedEntry, NULL, &taskLed_attributes);
   taskNetHandle = osThreadNew(taskNetEntry, NULL, &taskNet_attributes);
+  taskMdbHandle = osThreadNew(taskMdbEntry, NULL, &taskMdb_attributes);
 
   asm("NOP");
   /* USER CODE END RTOS_THREADS */
@@ -181,8 +199,6 @@ void MX_FREERTOS_Init(void) {
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void *argument)
 {
-  /* init code for USB_DEVICE */
-  MX_USB_DEVICE_Init();
   /* USER CODE BEGIN StartDefaultTask */
 
   asm("NOP");
@@ -190,18 +206,17 @@ void StartDefaultTask(void *argument)
   // uint16_t state_DI = 0;
   // uint16_t state_AI[2];
 
-  HAL_UART_Receive_IT(&huart1, modbusBufRxTxRtu485,10);
-
+  // HAL_UART_Receive_IT(&huart1, modbusBufRxTxRtu485,10);
 
   /* Infinite loop */
   for(;;)
   {
-    for (int i = BSP_DI1; i < BSP_DI_COUNT; i++)
-    {
-        bsp_di_get(i);
-    }
-    asm("NOP");
-    bsp_ai_read();
+    // for (int i = BSP_DI1; i < BSP_DI_COUNT; i++)
+    // {
+    //     bsp_di_get(i);
+    // }
+    // asm("NOP");
+    // bsp_ai_read();
 
     // LL_GPIO_TogglePin(O_D_Led_GPIO_Port, O_D_Led_Pin);
     osDelay(1);
@@ -215,9 +230,11 @@ void StartDefaultTask(void *argument)
 void taskLedEntry(void *argument)
 {
   /* USER CODE BEGIN taskLedEntry */
+
   BSP_LED1_RG_TIM_START();
  
   /* Infinite loop */
+
   for(;;)
   {
     bsp_led1_rg_incDecInv(1);
@@ -225,6 +242,42 @@ void taskLedEntry(void *argument)
   }
   /* USER CODE END taskLedEntry */
 }
+
+
+void taskMdbEntry(void *argument)
+{
+  /* USER CODE BEGIN taskMdbEntry */
+  
+
+ 
+  /* Infinite loop */
+
+  for(;;)
+  {
+    static uint16_t mdb_req_time = 0;
+    static uint16_t crc = 0;
+    osDelay(1);
+      if (mdb_req_time++ > 1000)
+  {
+    modbusBufRxTxRtu485[0] = 0x01;
+    modbusBufRxTxRtu485[1] = 0x04;
+    modbusBufRxTxRtu485[2] = 0x00;
+    modbusBufRxTxRtu485[3] = 0x01;
+    modbusBufRxTxRtu485[4] = 0x00;
+    modbusBufRxTxRtu485[5] = 0x03;
+
+    crc = _Crc16_mdb(modbusBufRxTxRtu485, 6);
+    modbusBufRxTxRtu485[6] = (uint8_t)crc;
+    modbusBufRxTxRtu485[7] = (uint8_t)(crc>>8);
+
+    HAL_UART_Transmit_IT(&huart1,modbusBufRxTxRtu485,8);
+    //BSP_LED2_G_TOGGLE();
+    mdb_req_time = 0;
+  }
+  }
+  /* USER CODE END taskMdbEntry */
+}
+
 
 //---------------------------------- NETWORK 
 void taskNetEntry(void *argument)
@@ -261,9 +314,10 @@ for (;;)
     }
   }
 
-  BSP_LED2_G_TOGGLE();
+  // BSP_LED2_G_TOGGLE();
 
   osDelay(1);
+
 }
 /* USER CODE END taskLedEntry */
 }
@@ -283,16 +337,52 @@ void modbusHoldingReq(ModbusSS_table_t* table, uint16_t reg, uint16_t quantity){
       asm("NOP");
       switch (r)
       {
-      case MBP_AI1_X:
-        ModbusSS_SetWord(table, r, bsp_ai_read_cache(BSP_AI1));
+      case MBP_reg_0:
+        ModbusSS_SetWord(table, r, mdb_buf[0]);
         asm("NOP");
         break;
-      case MBP_AI2_Y:
-        ModbusSS_SetWord(table, r, bsp_ai_read_cache(BSP_AI2));
+      case MBP_reg_1:
+        ModbusSS_SetWord(table, r, mdb_buf[1]);
         asm("NOP");
         break;
-      case MBP_DI_STATE:
-        ModbusSS_SetWord(table, r, bsp_di_get_cache_pack16());
+      case MBP_reg_2:
+        ModbusSS_SetWord(table, r, mdb_buf[2]);
+        asm("NOP");
+        break;
+      case MBP_reg_3:
+        ModbusSS_SetWord(table, r, mdb_buf[3]);
+        asm("NOP");
+        break;
+      case MBP_reg_4:
+        ModbusSS_SetWord(table, r, mdb_buf[4]);
+        asm("NOP");
+        break;
+      case MBP_reg_5:
+        ModbusSS_SetWord(table, r, mdb_buf[5]);
+        asm("NOP");
+        break;
+      case MBP_reg_6:
+        ModbusSS_SetWord(table, r, mdb_buf[6]);
+        asm("NOP");
+        break;
+      case MBP_reg_7:
+        ModbusSS_SetWord(table, r, mdb_buf[7]);
+        asm("NOP");
+        break;
+      case MBP_reg_8:
+        ModbusSS_SetWord(table, r, mdb_buf[8]);
+        asm("NOP");
+        break;
+      case MBP_reg_9:
+        ModbusSS_SetWord(table, r, mdb_buf[9]);
+        asm("NOP");
+        break;
+      case MBP_reg_10:
+        ModbusSS_SetWord(table, r, mdb_buf[10]);
+        asm("NOP");
+        break;
+      case MBP_reg_11:
+        ModbusSS_SetWord(table, r, mdb_buf[11]);
         asm("NOP");
         break;
       default:
@@ -303,18 +393,94 @@ void modbusHoldingReq(ModbusSS_table_t* table, uint16_t reg, uint16_t quantity){
 }
 
 
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
-
-  for (int i = 0; i < 10; i++)
-  {
-    modbusBufRxTxRtu485[i] = i;
-  }
-  HAL_UART_Transmit_IT(huart,modbusBufRxTxRtu485,10);
-
-  HAL_UART_Receive_IT(&huart1, modbusBufRxTxRtu485,10);
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+  uint8_t x = 0;
   asm("NOP");
 
+
+  for (uint8_t i = 0; i < 11; i++)
+  {
+    mdb_buf[i] = modbusBufRxTxRtu485[i];
+  }
+
+  asm("NOP");
+  BSP_LED2_G_TOGGLE();
 }
+
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
+{
+  for (uint8_t i = 0; i < 50; i++)
+  {
+    modbusBufRxTxRtu485[i] = 0;
+  }
+  HAL_UART_Receive_IT(&huart1, modbusBufRxTxRtu485,11);
+}
+
+
+__STATIC_INLINE uint16_t _Crc16_mdb(uint8_t *pcBlock, uint16_t len)
+{
+    uint16_t w = 0;
+    uint8_t shift_cnt;
+
+        w = 0xffffU;
+        for (; len > 0; len--)
+        {
+            w = (uint16_t)((w / 256U) * 256U + ((w % 256U) ^ (*pcBlock++)));
+            for (shift_cnt = 0; shift_cnt < 8; shift_cnt++)
+            {
+                if ((w & 0x1) == 1)
+                    w = (uint16_t)((w >> 1) ^ 0xa001U);
+                else
+                    w >>= 1;
+            }
+        }
+    return w;
+}
+
+// void USART1_IRQHandler(void)
+// {
+//   // RX READY
+//   if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE))
+//   {
+//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_IDLE);
+//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_RXNE);
+//     asm("NOP");
+
+//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_ORE); // OVERRUN
+//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_FE);  // OVERRUN
+//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_PE);  // OVERRUN
+//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_TXE); // OVERRUN
+//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_NE);  // OVERRUN
+
+//     for (uint8_t i = 0; i < MODBUS_TABLE_HOLDING_QUANT; i++)
+//     {
+//       mdb_buf[i] = modbusBufRxTxRtu485[i];
+//     }
+//     BSP_LED2_G_TOGGLE();
+//   }
+//   else if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_RXNE))
+//   {
+//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_RXNE);
+//   }
+//   // TRANSFER COMPLETE
+//   else if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_TC))
+//   {
+//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_TC);
+//     asm("NOP");
+//     HAL_UART_Receive_IT(&huart1, modbusBufRxTxRtu485, 12);
+//   }
+//   else
+//   {
+//     // Error_Handler();
+//     // NVIC_SystemReset();
+//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_CTS);  // OVERRUN
+//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_LBD);  // OVERRUN
+//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_TC);   // OVERRUN
+//     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_IDLE); // OVERRUN
+//     asm("NOP");
+//   }
+// }
 
 /* USER CODE END Application */
 

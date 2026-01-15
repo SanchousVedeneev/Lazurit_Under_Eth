@@ -56,44 +56,4 @@ void bsp_led1_rg_incDecInv(int32_t inc);
 #define BSP_LED2_G_TOGGLE()                     (LL_GPIO_TogglePin(OD_LED2G_GPIO_Port,OD_LED2G_Pin))
 //----------------------- LED 2 Green End
 
-
-// DI States
-typedef enum{
-    BSP_DI1 = 0,
-    BSP_DI2,
-    BSP_DI3,
-    BSP_DI4,
-    BSP_DI5,
-    BSP_DI6,
-    BSP_DI7,
-    BSP_DI8,
-    BSP_DI9,
-    BSP_DI10,
-    BSP_DI11,
-    BSP_DI12,
-    BSP_DI13
-}bsp_di_enum;
-
-#define BSP_DI_COUNT (BSP_DI13 - BSP_DI1 +1)
-
-uint8_t bsp_di_get(bsp_di_enum di);
-uint8_t bsp_di_get_cache(bsp_di_enum di);
-uint16_t bsp_di_get_cache_pack16();
-// DI States End
-
-
-//Analog input
-typedef enum{
-    BSP_AI1 = 0,
-    BSP_AI2
-}bsp_ai_enum;
-
-#define BSP_AI_COUNT (BSP_AI2 - BSP_AI1 + 1)
-
-void bsp_ai_read(void);
-uint16_t bsp_ai_read_cache(bsp_ai_enum ai);
-//Analog input end
-
-
-
 #endif

@@ -1,0 +1,1178 @@
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"param.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.file 1 "Drivers/Parameters/param.c"
+  18              		.section	.text.param_f_findParamIdx,"ax",%progbits
+  19              		.align	1
+  20              		.global	param_f_findParamIdx
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  25              	param_f_findParamIdx:
+  26              	.LVL0:
+  27              	.LFB577:
+   1:Drivers/Parameters/param.c **** 
+   2:Drivers/Parameters/param.c **** #include "param.h"
+   3:Drivers/Parameters/param.c **** //#include <stddef.h>
+   4:Drivers/Parameters/param.c **** 
+   5:Drivers/Parameters/param.c **** #include "main.h"
+   6:Drivers/Parameters/param.c **** #include <string.h>
+   7:Drivers/Parameters/param.c **** #include <stdio.h>
+   8:Drivers/Parameters/param.c **** 
+   9:Drivers/Parameters/param.c **** 
+  10:Drivers/Parameters/param.c **** int16_t param_f_findParamIdx(param_t_list *list, char *key, uint16_t keyLen)
+  11:Drivers/Parameters/param.c **** {
+  28              		.loc 1 11 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		.loc 1 11 1 is_stmt 0 view .LVU1
+  33 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 24
+  36              		.cfi_offset 4, -24
+  37              		.cfi_offset 5, -20
+  38              		.cfi_offset 6, -16
+  39              		.cfi_offset 7, -12
+  40              		.cfi_offset 8, -8
+  41              		.cfi_offset 14, -4
+  42 0004 0546     		mov	r5, r0
+  43 0006 0F46     		mov	r7, r1
+  44 0008 1646     		mov	r6, r2
+  12:Drivers/Parameters/param.c ****    int16_t idx = -1;
+  45              		.loc 1 12 4 is_stmt 1 view .LVU2
+  46              	.LVL1:
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s 			page 2
+
+
+  13:Drivers/Parameters/param.c ****     int16_t len = 0;
+  47              		.loc 1 13 5 view .LVU3
+  14:Drivers/Parameters/param.c ****     for(int i = 0; i < list->count ; i++){
+  48              		.loc 1 14 5 view .LVU4
+  49              	.LBB2:
+  50              		.loc 1 14 9 view .LVU5
+  51              		.loc 1 14 13 is_stmt 0 view .LVU6
+  52 000a 0024     		movs	r4, #0
+  53              		.loc 1 14 5 view .LVU7
+  54 000c 00E0     		b	.L2
+  55              	.LVL2:
+  56              	.L3:
+  57              		.loc 1 14 39 is_stmt 1 discriminator 2 view .LVU8
+  58 000e 0134     		adds	r4, r4, #1
+  59              	.LVL3:
+  60              	.L2:
+  61              		.loc 1 14 22 discriminator 1 view .LVU9
+  62              		.loc 1 14 28 is_stmt 0 discriminator 1 view .LVU10
+  63 0010 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+  64              		.loc 1 14 22 discriminator 1 view .LVU11
+  65 0012 A342     		cmp	r3, r4
+  66 0014 14DD     		ble	.L7
+  15:Drivers/Parameters/param.c ****         len = strlen(list->elements[i].key);
+  67              		.loc 1 15 9 is_stmt 1 view .LVU12
+  68              		.loc 1 15 26 is_stmt 0 view .LVU13
+  69 0016 6B68     		ldr	r3, [r5, #4]
+  70              		.loc 1 15 36 view .LVU14
+  71 0018 C4EBC402 		rsb	r2, r4, r4, lsl #3
+  72 001c 03EB8203 		add	r3, r3, r2, lsl #2
+  73              		.loc 1 15 15 view .LVU15
+  74 0020 D3F80480 		ldr	r8, [r3, #4]
+  75 0024 4046     		mov	r0, r8
+  76 0026 FFF7FEFF 		bl	strlen
+  77              	.LVL4:
+  78              		.loc 1 15 13 view .LVU16
+  79 002a 02B2     		sxth	r2, r0
+  80              	.LVL5:
+  16:Drivers/Parameters/param.c ****         if(
+  81              		.loc 1 16 9 is_stmt 1 view .LVU17
+  82              		.loc 1 16 11 is_stmt 0 view .LVU18
+  83 002c B242     		cmp	r2, r6
+  84 002e EED1     		bne	.L3
+  17:Drivers/Parameters/param.c ****         (len == keyLen) &&
+  18:Drivers/Parameters/param.c ****         (strncmp(list->elements[i].key, key, len)==0)
+  85              		.loc 1 18 10 view .LVU19
+  86 0030 3946     		mov	r1, r7
+  87 0032 4046     		mov	r0, r8
+  88 0034 FFF7FEFF 		bl	strncmp
+  89              	.LVL6:
+  17:Drivers/Parameters/param.c ****         (len == keyLen) &&
+  90              		.loc 1 17 25 view .LVU20
+  91 0038 0028     		cmp	r0, #0
+  92 003a E8D1     		bne	.L3
+  19:Drivers/Parameters/param.c ****         ){
+  20:Drivers/Parameters/param.c ****         // printf("Param idx = %d" ,i);
+  21:Drivers/Parameters/param.c ****             idx = i;
+  93              		.loc 1 21 13 is_stmt 1 view .LVU21
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s 			page 3
+
+
+  94              		.loc 1 21 17 is_stmt 0 view .LVU22
+  95 003c 20B2     		sxth	r0, r4
+  96              	.LVL7:
+  22:Drivers/Parameters/param.c ****             break;
+  97              		.loc 1 22 13 is_stmt 1 view .LVU23
+  98 003e 01E0     		b	.L4
+  99              	.LVL8:
+ 100              	.L7:
+ 101              		.loc 1 22 13 is_stmt 0 view .LVU24
+ 102              	.LBE2:
+  12:Drivers/Parameters/param.c ****     int16_t len = 0;
+ 103              		.loc 1 12 12 view .LVU25
+ 104 0040 4FF0FF30 		mov	r0, #-1
+ 105              	.LVL9:
+ 106              	.L4:
+  23:Drivers/Parameters/param.c ****         }
+  24:Drivers/Parameters/param.c ****     }
+  25:Drivers/Parameters/param.c ****     return idx;
+ 107              		.loc 1 25 5 is_stmt 1 view .LVU26
+  26:Drivers/Parameters/param.c **** }
+ 108              		.loc 1 26 1 is_stmt 0 view .LVU27
+ 109 0044 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 110              		.loc 1 26 1 view .LVU28
+ 111              		.cfi_endproc
+ 112              	.LFE577:
+ 114              		.global	__aeabi_fcmpeq
+ 115              		.section	.text.param_f_setParam,"ax",%progbits
+ 116              		.align	1
+ 117              		.global	param_f_setParam
+ 118              		.syntax unified
+ 119              		.thumb
+ 120              		.thumb_func
+ 122              	param_f_setParam:
+ 123              	.LVL10:
+ 124              	.LFB578:
+  27:Drivers/Parameters/param.c **** 
+  28:Drivers/Parameters/param.c **** int8_t param_f_setParam(param_t *el, void *value)
+  29:Drivers/Parameters/param.c **** {
+ 125              		.loc 1 29 1 is_stmt 1 view -0
+ 126              		.cfi_startproc
+ 127              		@ args = 0, pretend = 0, frame = 0
+ 128              		@ frame_needed = 0, uses_anonymous_args = 0
+  30:Drivers/Parameters/param.c ****     if (el == NULL)
+ 129              		.loc 1 30 5 view .LVU30
+ 130              		.loc 1 30 8 is_stmt 0 view .LVU31
+ 131 0000 0028     		cmp	r0, #0
+ 132 0002 3AD0     		beq	.L17
+  29:Drivers/Parameters/param.c ****     if (el == NULL)
+ 133              		.loc 1 29 1 view .LVU32
+ 134 0004 38B5     		push	{r3, r4, r5, lr}
+ 135              	.LCFI1:
+ 136              		.cfi_def_cfa_offset 16
+ 137              		.cfi_offset 3, -16
+ 138              		.cfi_offset 4, -12
+ 139              		.cfi_offset 5, -8
+ 140              		.cfi_offset 14, -4
+ 141 0006 0546     		mov	r5, r0
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s 			page 4
+
+
+  31:Drivers/Parameters/param.c ****         return PARAM_ERR_NOT_FOUND;
+  32:Drivers/Parameters/param.c **** 
+  33:Drivers/Parameters/param.c ****     uint8_t status = PARAM_OK;
+ 142              		.loc 1 33 5 is_stmt 1 view .LVU33
+ 143              	.LVL11:
+  34:Drivers/Parameters/param.c ****     switch (el->type)
+ 144              		.loc 1 34 5 view .LVU34
+ 145              		.loc 1 34 15 is_stmt 0 view .LVU35
+ 146 0008 047A     		ldrb	r4, [r0, #8]	@ zero_extendqisi2
+ 147              		.loc 1 34 5 view .LVU36
+ 148 000a 631E     		subs	r3, r4, #1
+ 149 000c 032B     		cmp	r3, #3
+ 150 000e 2CD8     		bhi	.L18
+ 151 0010 DFE803F0 		tbb	[pc, r3]
+ 152              	.L12:
+ 153 0014 02       		.byte	(.L15-.L12)/2
+ 154 0015 0B       		.byte	(.L14-.L12)/2
+ 155 0016 19       		.byte	(.L13-.L12)/2
+ 156 0017 25       		.byte	(.L11-.L12)/2
+ 157              		.p2align 1
+ 158              	.L15:
+ 159              	.LBB3:
+  35:Drivers/Parameters/param.c ****     {
+  36:Drivers/Parameters/param.c ****     case p_t_int32_t:
+  37:Drivers/Parameters/param.c ****         int32_t newVal = (int32_t)value;
+ 160              		.loc 1 37 9 is_stmt 1 view .LVU37
+ 161              	.LVL12:
+  38:Drivers/Parameters/param.c ****         if (newVal != el->value)
+ 162              		.loc 1 38 9 view .LVU38
+ 163              		.loc 1 38 25 is_stmt 0 view .LVU39
+ 164 0018 4369     		ldr	r3, [r0, #20]
+ 165              		.loc 1 38 12 view .LVU40
+ 166 001a 8B42     		cmp	r3, r1
+ 167 001c 23D0     		beq	.L10
+  39:Drivers/Parameters/param.c ****         {
+  40:Drivers/Parameters/param.c ****             el->value = newVal;
+ 168              		.loc 1 40 13 is_stmt 1 view .LVU41
+ 169              		.loc 1 40 23 is_stmt 0 view .LVU42
+ 170 001e 4161     		str	r1, [r0, #20]
+  41:Drivers/Parameters/param.c ****             if (el->event != NULL)
+ 171              		.loc 1 41 13 is_stmt 1 view .LVU43
+ 172              		.loc 1 41 19 is_stmt 0 view .LVU44
+ 173 0020 8369     		ldr	r3, [r0, #24]
+ 174              		.loc 1 41 16 view .LVU45
+ 175 0022 03B3     		cbz	r3, .L10
+  42:Drivers/Parameters/param.c ****             {
+  43:Drivers/Parameters/param.c ****                 el->event(el,NULL);
+ 176              		.loc 1 43 17 is_stmt 1 view .LVU46
+ 177 0024 0021     		movs	r1, #0
+ 178              	.LVL13:
+ 179              		.loc 1 43 17 is_stmt 0 view .LVU47
+ 180 0026 9847     		blx	r3
+ 181              	.LVL14:
+ 182              		.loc 1 43 17 view .LVU48
+ 183 0028 1DE0     		b	.L10
+ 184              	.LVL15:
+ 185              	.L14:
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s 			page 5
+
+
+  44:Drivers/Parameters/param.c ****             }
+  45:Drivers/Parameters/param.c ****         }
+  46:Drivers/Parameters/param.c ****         break;
+  47:Drivers/Parameters/param.c ****     case p_t_float:
+  48:Drivers/Parameters/param.c ****         if (value == NULL) return PARAM_ERR_VALUE;
+ 186              		.loc 1 48 9 is_stmt 1 view .LVU49
+ 187              		.loc 1 48 12 is_stmt 0 view .LVU50
+ 188 002a 49B3     		cbz	r1, .L19
+  49:Drivers/Parameters/param.c ****         float *fl = (float *)el->value;
+ 189              		.loc 1 49 9 is_stmt 1 view .LVU51
+ 190              		.loc 1 49 32 is_stmt 0 view .LVU52
+ 191 002c 4369     		ldr	r3, [r0, #20]
+ 192              	.LVL16:
+  50:Drivers/Parameters/param.c ****         float flVal = *(float *)el->value;
+ 193              		.loc 1 50 9 is_stmt 1 view .LVU53
+ 194              		.loc 1 50 15 is_stmt 0 view .LVU54
+ 195 002e 1868     		ldr	r0, [r3]	@ float
+ 196              	.LVL17:
+  51:Drivers/Parameters/param.c ****         if (*fl != flVal)
+ 197              		.loc 1 51 9 is_stmt 1 view .LVU55
+ 198              		.loc 1 51 12 is_stmt 0 view .LVU56
+ 199 0030 0146     		mov	r1, r0
+ 200              	.LVL18:
+ 201              		.loc 1 51 12 view .LVU57
+ 202 0032 FFF7FEFF 		bl	__aeabi_fcmpeq
+ 203              	.LVL19:
+ 204              		.loc 1 51 12 view .LVU58
+ 205 0036 D0B9     		cbnz	r0, .L25
+  52:Drivers/Parameters/param.c ****         {
+  53:Drivers/Parameters/param.c ****             *fl = flVal;
+ 206              		.loc 1 53 13 is_stmt 1 view .LVU59
+  54:Drivers/Parameters/param.c ****             if (el->event != NULL)
+ 207              		.loc 1 54 13 view .LVU60
+ 208              		.loc 1 54 19 is_stmt 0 view .LVU61
+ 209 0038 AB69     		ldr	r3, [r5, #24]
+ 210              		.loc 1 54 16 view .LVU62
+ 211 003a D3B1     		cbz	r3, .L21
+  55:Drivers/Parameters/param.c ****             {
+  56:Drivers/Parameters/param.c ****                 el->event(el,NULL);
+ 212              		.loc 1 56 17 is_stmt 1 view .LVU63
+ 213 003c 0021     		movs	r1, #0
+ 214 003e 2846     		mov	r0, r5
+ 215 0040 9847     		blx	r3
+ 216              	.LVL20:
+ 217              	.LBE3:
+  33:Drivers/Parameters/param.c ****     switch (el->type)
+ 218              		.loc 1 33 13 is_stmt 0 view .LVU64
+ 219 0042 0124     		movs	r4, #1
+ 220 0044 0FE0     		b	.L10
+ 221              	.LVL21:
+ 222              	.L13:
+ 223              	.LBB4:
+  57:Drivers/Parameters/param.c ****             }
+  58:Drivers/Parameters/param.c ****         }
+  59:Drivers/Parameters/param.c ****         break;
+  60:Drivers/Parameters/param.c ****     case p_t_string:
+  61:Drivers/Parameters/param.c ****         if (value == NULL) return PARAM_ERR_VALUE;
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s 			page 6
+
+
+ 224              		.loc 1 61 9 is_stmt 1 view .LVU65
+ 225              		.loc 1 61 12 is_stmt 0 view .LVU66
+ 226 0046 F1B1     		cbz	r1, .L22
+  62:Drivers/Parameters/param.c ****         char *chBuf = (char *)el->valuePtr;
+ 227              		.loc 1 62 9 is_stmt 1 view .LVU67
+ 228              	.LVL22:
+  63:Drivers/Parameters/param.c ****         char *inStr = (char *)value;
+ 229              		.loc 1 63 9 view .LVU68
+  64:Drivers/Parameters/param.c ****         // if (strlen(inStr) >= el->valueSize)
+  65:Drivers/Parameters/param.c ****         // {
+  66:Drivers/Parameters/param.c ****             strncpy(chBuf, inStr, el->valueSize);
+ 230              		.loc 1 66 13 view .LVU69
+ 231 0048 028A     		ldrh	r2, [r0, #16]
+ 232 004a C068     		ldr	r0, [r0, #12]
+ 233              	.LVL23:
+ 234              		.loc 1 66 13 is_stmt 0 view .LVU70
+ 235 004c FFF7FEFF 		bl	strncpy
+ 236              	.LVL24:
+  67:Drivers/Parameters/param.c ****         // }
+  68:Drivers/Parameters/param.c ****         // else
+  69:Drivers/Parameters/param.c ****         // {
+  70:Drivers/Parameters/param.c ****         //     strcpy(chBuf, inStr);
+  71:Drivers/Parameters/param.c ****         // }
+  72:Drivers/Parameters/param.c ****         if (el->event != NULL)
+ 237              		.loc 1 72 9 is_stmt 1 view .LVU71
+ 238              		.loc 1 72 15 is_stmt 0 view .LVU72
+ 239 0050 AB69     		ldr	r3, [r5, #24]
+ 240              		.loc 1 72 12 view .LVU73
+ 241 0052 83B1     		cbz	r3, .L23
+  73:Drivers/Parameters/param.c ****         {
+  74:Drivers/Parameters/param.c ****             el->event(el,NULL);
+ 242              		.loc 1 74 13 is_stmt 1 view .LVU74
+ 243 0054 0021     		movs	r1, #0
+ 244 0056 2846     		mov	r0, r5
+ 245 0058 9847     		blx	r3
+ 246              	.LVL25:
+ 247              	.LBE4:
+  33:Drivers/Parameters/param.c ****     switch (el->type)
+ 248              		.loc 1 33 13 is_stmt 0 view .LVU75
+ 249 005a 0124     		movs	r4, #1
+ 250 005c 03E0     		b	.L10
+ 251              	.LVL26:
+ 252              	.L11:
+ 253              	.LBB5:
+  75:Drivers/Parameters/param.c ****         }
+  76:Drivers/Parameters/param.c **** 
+  77:Drivers/Parameters/param.c ****         break;
+  78:Drivers/Parameters/param.c ****     case p_t_event:
+  79:Drivers/Parameters/param.c ****         el->value += 1;
+ 254              		.loc 1 79 9 is_stmt 1 view .LVU76
+ 255              		.loc 1 79 11 is_stmt 0 view .LVU77
+ 256 005e 4369     		ldr	r3, [r0, #20]
+ 257              		.loc 1 79 19 view .LVU78
+ 258 0060 0133     		adds	r3, r3, #1
+ 259 0062 4361     		str	r3, [r0, #20]
+  80:Drivers/Parameters/param.c ****         break;
+ 260              		.loc 1 80 9 is_stmt 1 view .LVU79
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s 			page 7
+
+
+ 261              	.LBE5:
+  33:Drivers/Parameters/param.c ****     switch (el->type)
+ 262              		.loc 1 33 13 is_stmt 0 view .LVU80
+ 263 0064 0124     		movs	r4, #1
+ 264              	.LVL27:
+ 265              	.L10:
+  81:Drivers/Parameters/param.c ****     default:
+  82:Drivers/Parameters/param.c ****         status = PARAM_ERR_TYPE;
+  83:Drivers/Parameters/param.c ****         break;
+  84:Drivers/Parameters/param.c ****     }
+  85:Drivers/Parameters/param.c ****     return status;
+ 266              		.loc 1 85 5 is_stmt 1 view .LVU81
+ 267              		.loc 1 85 12 is_stmt 0 view .LVU82
+ 268 0066 60B2     		sxtb	r0, r4
+ 269              	.LVL28:
+ 270              	.L9:
+  86:Drivers/Parameters/param.c **** }
+ 271              		.loc 1 86 1 view .LVU83
+ 272 0068 38BD     		pop	{r3, r4, r5, pc}
+ 273              	.LVL29:
+ 274              	.L18:
+  34:Drivers/Parameters/param.c ****     {
+ 275              		.loc 1 34 5 view .LVU84
+ 276 006a FE24     		movs	r4, #254
+ 277 006c FBE7     		b	.L10
+ 278              	.LVL30:
+ 279              	.L25:
+  33:Drivers/Parameters/param.c ****     switch (el->type)
+ 280              		.loc 1 33 13 view .LVU85
+ 281 006e 0124     		movs	r4, #1
+ 282 0070 F9E7     		b	.L10
+ 283              	.L21:
+  33:Drivers/Parameters/param.c ****     switch (el->type)
+ 284              		.loc 1 33 13 view .LVU86
+ 285 0072 0124     		movs	r4, #1
+ 286 0074 F7E7     		b	.L10
+ 287              	.LVL31:
+ 288              	.L23:
+  33:Drivers/Parameters/param.c ****     switch (el->type)
+ 289              		.loc 1 33 13 view .LVU87
+ 290 0076 0124     		movs	r4, #1
+ 291 0078 F5E7     		b	.L10
+ 292              	.LVL32:
+ 293              	.L17:
+ 294              	.LCFI2:
+ 295              		.cfi_def_cfa_offset 0
+ 296              		.cfi_restore 3
+ 297              		.cfi_restore 4
+ 298              		.cfi_restore 5
+ 299              		.cfi_restore 14
+  31:Drivers/Parameters/param.c **** 
+ 300              		.loc 1 31 16 view .LVU88
+ 301 007a 4FF0FF30 		mov	r0, #-1
+ 302              	.LVL33:
+ 303              		.loc 1 86 1 view .LVU89
+ 304 007e 7047     		bx	lr
+ 305              	.LVL34:
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s 			page 8
+
+
+ 306              	.L19:
+ 307              	.LCFI3:
+ 308              		.cfi_def_cfa_offset 16
+ 309              		.cfi_offset 3, -16
+ 310              		.cfi_offset 4, -12
+ 311              		.cfi_offset 5, -8
+ 312              		.cfi_offset 14, -4
+ 313              	.LBB6:
+  48:Drivers/Parameters/param.c ****         float *fl = (float *)el->value;
+ 314              		.loc 1 48 35 view .LVU90
+ 315 0080 6FF00200 		mvn	r0, #2
+ 316              	.LVL35:
+  48:Drivers/Parameters/param.c ****         float *fl = (float *)el->value;
+ 317              		.loc 1 48 35 view .LVU91
+ 318 0084 F0E7     		b	.L9
+ 319              	.LVL36:
+ 320              	.L22:
+  61:Drivers/Parameters/param.c ****         char *chBuf = (char *)el->valuePtr;
+ 321              		.loc 1 61 35 view .LVU92
+ 322 0086 6FF00200 		mvn	r0, #2
+ 323              	.LVL37:
+  61:Drivers/Parameters/param.c ****         char *chBuf = (char *)el->valuePtr;
+ 324              		.loc 1 61 35 view .LVU93
+ 325 008a EDE7     		b	.L9
+ 326              	.LBE6:
+ 327              		.cfi_endproc
+ 328              	.LFE578:
+ 330              		.section	.rodata.param_f_setFromCgiStr.str1.4,"aMS",%progbits,1
+ 331              		.align	2
+ 332              	.LC0:
+ 333 0000 256C6400 		.ascii	"%ld\000"
+ 334              		.align	2
+ 335              	.LC1:
+ 336 0004 256600   		.ascii	"%f\000"
+ 337              		.section	.text.param_f_setFromCgiStr,"ax",%progbits
+ 338              		.align	1
+ 339              		.global	param_f_setFromCgiStr
+ 340              		.syntax unified
+ 341              		.thumb
+ 342              		.thumb_func
+ 344              	param_f_setFromCgiStr:
+ 345              	.LVL38:
+ 346              	.LFB579:
+  87:Drivers/Parameters/param.c **** 
+  88:Drivers/Parameters/param.c **** // int8_t param_f_setParamFromStr(param_t_list *list, char *key, char *str)
+  89:Drivers/Parameters/param.c **** // {
+  90:Drivers/Parameters/param.c **** //     param_t *el = NULL;
+  91:Drivers/Parameters/param.c **** //     __IO int16_t paramIdx = 0;
+  92:Drivers/Parameters/param.c **** //     if ((paramIdx = param_f_findParamIdx(list, key)) < 0)
+  93:Drivers/Parameters/param.c **** //     {
+  94:Drivers/Parameters/param.c **** //         return PARAM_ERR_NOT_FOUND;
+  95:Drivers/Parameters/param.c **** //     }
+  96:Drivers/Parameters/param.c **** //     el = &list->elements[paramIdx];
+  97:Drivers/Parameters/param.c **** //     asm("NOP");
+  98:Drivers/Parameters/param.c **** 
+  99:Drivers/Parameters/param.c **** //     void *value = NULL;
+ 100:Drivers/Parameters/param.c **** //     switch (el->type)
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s 			page 9
+
+
+ 101:Drivers/Parameters/param.c **** //     {
+ 102:Drivers/Parameters/param.c **** //     case p_t_int32_t:
+ 103:Drivers/Parameters/param.c **** //         int32_t s32 = 0;
+ 104:Drivers/Parameters/param.c **** //         sscanf(str, "%ld", &s32);
+ 105:Drivers/Parameters/param.c **** //         value = (void *)s32;
+ 106:Drivers/Parameters/param.c **** //         break;
+ 107:Drivers/Parameters/param.c **** //     case p_t_string:
+ 108:Drivers/Parameters/param.c **** //         value = (void*)str;
+ 109:Drivers/Parameters/param.c **** //     break;
+ 110:Drivers/Parameters/param.c **** //     default:
+ 111:Drivers/Parameters/param.c **** //         break;
+ 112:Drivers/Parameters/param.c **** //     }
+ 113:Drivers/Parameters/param.c **** 
+ 114:Drivers/Parameters/param.c **** //     return param_f_setParam(el, value);
+ 115:Drivers/Parameters/param.c **** // }
+ 116:Drivers/Parameters/param.c **** 
+ 117:Drivers/Parameters/param.c **** int8_t param_f_setFromCgiStr(param_t_list *list, char *cgiStr)
+ 118:Drivers/Parameters/param.c **** {
+ 347              		.loc 1 118 1 is_stmt 1 view -0
+ 348              		.cfi_startproc
+ 349              		@ args = 0, pretend = 0, frame = 8
+ 350              		@ frame_needed = 0, uses_anonymous_args = 0
+ 351              		.loc 1 118 1 is_stmt 0 view .LVU95
+ 352 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 353              	.LCFI4:
+ 354              		.cfi_def_cfa_offset 20
+ 355              		.cfi_offset 4, -20
+ 356              		.cfi_offset 5, -16
+ 357              		.cfi_offset 6, -12
+ 358              		.cfi_offset 7, -8
+ 359              		.cfi_offset 14, -4
+ 360 0002 83B0     		sub	sp, sp, #12
+ 361              	.LCFI5:
+ 362              		.cfi_def_cfa_offset 32
+ 363 0004 0646     		mov	r6, r0
+ 364 0006 0D46     		mov	r5, r1
+ 119:Drivers/Parameters/param.c ****     char* equals = strchr(cgiStr, '=');
+ 365              		.loc 1 119 5 is_stmt 1 view .LVU96
+ 366              		.loc 1 119 20 is_stmt 0 view .LVU97
+ 367 0008 3D21     		movs	r1, #61
+ 368              	.LVL39:
+ 369              		.loc 1 119 20 view .LVU98
+ 370 000a 2846     		mov	r0, r5
+ 371              	.LVL40:
+ 372              		.loc 1 119 20 view .LVU99
+ 373 000c FFF7FEFF 		bl	strchr
+ 374              	.LVL41:
+ 375 0010 0446     		mov	r4, r0
+ 376              	.LVL42:
+ 120:Drivers/Parameters/param.c ****     char* nextParam = strchr(cgiStr,'&');
+ 377              		.loc 1 120 5 is_stmt 1 view .LVU100
+ 378              		.loc 1 120 23 is_stmt 0 view .LVU101
+ 379 0012 2621     		movs	r1, #38
+ 380 0014 2846     		mov	r0, r5
+ 381              	.LVL43:
+ 382              		.loc 1 120 23 view .LVU102
+ 383 0016 FFF7FEFF 		bl	strchr
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s 			page 10
+
+
+ 384              	.LVL44:
+ 121:Drivers/Parameters/param.c ****     if(equals == NULL) return PARAM_ERR_CGI;
+ 385              		.loc 1 121 5 is_stmt 1 view .LVU103
+ 386              		.loc 1 121 7 is_stmt 0 view .LVU104
+ 387 001a 002C     		cmp	r4, #0
+ 388 001c 57D0     		beq	.L43
+ 389 001e 0746     		mov	r7, r0
+ 122:Drivers/Parameters/param.c ****     uint16_t keyLen = equals - cgiStr;
+ 390              		.loc 1 122 5 is_stmt 1 view .LVU105
+ 391              		.loc 1 122 30 is_stmt 0 view .LVU106
+ 392 0020 621B     		subs	r2, r4, r5
+ 393              	.LVL45:
+ 123:Drivers/Parameters/param.c ****     int16_t idx = param_f_findParamIdx(list,cgiStr,keyLen);
+ 394              		.loc 1 123 5 is_stmt 1 view .LVU107
+ 395              		.loc 1 123 19 is_stmt 0 view .LVU108
+ 396 0022 92B2     		uxth	r2, r2
+ 397              		.loc 1 123 19 view .LVU109
+ 398 0024 2946     		mov	r1, r5
+ 399 0026 3046     		mov	r0, r6
+ 400              	.LVL46:
+ 401              		.loc 1 123 19 view .LVU110
+ 402 0028 FFF7FEFF 		bl	param_f_findParamIdx
+ 403              	.LVL47:
+ 124:Drivers/Parameters/param.c ****     if(idx == -1){
+ 404              		.loc 1 124 5 is_stmt 1 view .LVU111
+ 405              		.loc 1 124 7 is_stmt 0 view .LVU112
+ 406 002c B0F1FF3F 		cmp	r0, #-1
+ 407 0030 0DD0     		beq	.L48
+ 125:Drivers/Parameters/param.c ****         return idx;
+ 126:Drivers/Parameters/param.c ****     }
+ 127:Drivers/Parameters/param.c ****     param_t *p = &list->elements[idx];
+ 408              		.loc 1 127 5 is_stmt 1 view .LVU113
+ 409              		.loc 1 127 23 is_stmt 0 view .LVU114
+ 410 0032 7568     		ldr	r5, [r6, #4]
+ 411              	.LVL48:
+ 412              		.loc 1 127 33 view .LVU115
+ 413 0034 C0EBC003 		rsb	r3, r0, r0, lsl #3
+ 414              		.loc 1 127 14 view .LVU116
+ 415 0038 05EB8305 		add	r5, r5, r3, lsl #2
+ 416              	.LVL49:
+ 128:Drivers/Parameters/param.c ****     equals += 1;
+ 417              		.loc 1 128 5 is_stmt 1 view .LVU117
+ 418              		.loc 1 128 12 is_stmt 0 view .LVU118
+ 419 003c 0134     		adds	r4, r4, #1
+ 420              	.LVL50:
+ 129:Drivers/Parameters/param.c ****     uint16_t dataLen = 0;
+ 421              		.loc 1 129 5 is_stmt 1 view .LVU119
+ 130:Drivers/Parameters/param.c ****     switch (p->type)
+ 422              		.loc 1 130 5 view .LVU120
+ 423              		.loc 1 130 14 is_stmt 0 view .LVU121
+ 424 003e 2B7A     		ldrb	r3, [r5, #8]	@ zero_extendqisi2
+ 425              		.loc 1 130 5 view .LVU122
+ 426 0040 013B     		subs	r3, r3, #1
+ 427 0042 032B     		cmp	r3, #3
+ 428 0044 3DD8     		bhi	.L44
+ 429 0046 DFE803F0 		tbb	[pc, r3]
+ 430              	.L35:
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s 			page 11
+
+
+ 431 004a 04       		.byte	(.L38-.L35)/2
+ 432 004b 28       		.byte	(.L37-.L35)/2
+ 433 004c 10       		.byte	(.L36-.L35)/2
+ 434 004d 36       		.byte	(.L34-.L35)/2
+ 435              	.LVL51:
+ 436              		.p2align 1
+ 437              	.L48:
+ 125:Drivers/Parameters/param.c ****     }
+ 438              		.loc 1 125 9 is_stmt 1 view .LVU123
+ 125:Drivers/Parameters/param.c ****     }
+ 439              		.loc 1 125 16 is_stmt 0 view .LVU124
+ 440 004e 40B2     		sxtb	r0, r0
+ 441              	.LVL52:
+ 125:Drivers/Parameters/param.c ****     }
+ 442              		.loc 1 125 16 view .LVU125
+ 443 0050 35E0     		b	.L31
+ 444              	.LVL53:
+ 445              	.L38:
+ 446              	.LBB7:
+ 131:Drivers/Parameters/param.c ****     {
+ 132:Drivers/Parameters/param.c ****     case p_t_int32_t:
+ 133:Drivers/Parameters/param.c ****         int32_t s32 = 0;
+ 447              		.loc 1 133 9 is_stmt 1 view .LVU126
+ 448              		.loc 1 133 17 is_stmt 0 view .LVU127
+ 449 0052 0023     		movs	r3, #0
+ 450 0054 0193     		str	r3, [sp, #4]
+ 134:Drivers/Parameters/param.c ****         if (sscanf(equals, "%ld", &s32))
+ 451              		.loc 1 134 9 is_stmt 1 view .LVU128
+ 452              		.loc 1 134 13 is_stmt 0 view .LVU129
+ 453 0056 01AA     		add	r2, sp, #4
+ 454 0058 1E49     		ldr	r1, .L51
+ 455 005a 2046     		mov	r0, r4
+ 456              	.LVL54:
+ 457              		.loc 1 134 13 view .LVU130
+ 458 005c FFF7FEFF 		bl	sscanf
+ 459              	.LVL55:
+ 460              		.loc 1 134 12 view .LVU131
+ 461 0060 0028     		cmp	r0, #0
+ 462 0062 31D0     		beq	.L45
+ 135:Drivers/Parameters/param.c ****         {
+ 136:Drivers/Parameters/param.c ****             p->value = s32;
+ 463              		.loc 1 136 13 is_stmt 1 view .LVU132
+ 464              		.loc 1 136 22 is_stmt 0 view .LVU133
+ 465 0064 019B     		ldr	r3, [sp, #4]
+ 466 0066 6B61     		str	r3, [r5, #20]
+ 137:Drivers/Parameters/param.c ****         }
+ 138:Drivers/Parameters/param.c ****         else
+ 139:Drivers/Parameters/param.c ****             return PARAM_ERR_SCAN;
+ 140:Drivers/Parameters/param.c ****         break;
+ 467              		.loc 1 140 9 is_stmt 1 view .LVU134
+ 468 0068 28E0     		b	.L39
+ 469              	.LVL56:
+ 470              	.L36:
+ 141:Drivers/Parameters/param.c ****     case p_t_string:
+ 142:Drivers/Parameters/param.c ****     {
+ 143:Drivers/Parameters/param.c ****         memset(p->valuePtr, 0, p->valueSize);
+ 471              		.loc 1 143 9 view .LVU135
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s 			page 12
+
+
+ 472 006a 2A8A     		ldrh	r2, [r5, #16]
+ 473 006c 0021     		movs	r1, #0
+ 474 006e E868     		ldr	r0, [r5, #12]
+ 475              	.LVL57:
+ 476              		.loc 1 143 9 is_stmt 0 view .LVU136
+ 477 0070 FFF7FEFF 		bl	memset
+ 478              	.LVL58:
+ 144:Drivers/Parameters/param.c ****         if (nextParam == NULL) dataLen = strlen(equals);
+ 479              		.loc 1 144 9 is_stmt 1 view .LVU137
+ 480              		.loc 1 144 12 is_stmt 0 view .LVU138
+ 481 0074 3FB1     		cbz	r7, .L49
+ 145:Drivers/Parameters/param.c ****         else dataLen = nextParam - equals;
+ 482              		.loc 1 145 14 is_stmt 1 view .LVU139
+ 483              		.loc 1 145 34 is_stmt 0 view .LVU140
+ 484 0076 3A1B     		subs	r2, r7, r4
+ 485              		.loc 1 145 22 view .LVU141
+ 486 0078 92B2     		uxth	r2, r2
+ 487              	.LVL59:
+ 488              	.L41:
+ 146:Drivers/Parameters/param.c **** 
+ 147:Drivers/Parameters/param.c ****         if (dataLen <= p->valueSize)
+ 489              		.loc 1 147 9 is_stmt 1 view .LVU142
+ 490              		.loc 1 147 25 is_stmt 0 view .LVU143
+ 491 007a 2B8A     		ldrh	r3, [r5, #16]
+ 492              		.loc 1 147 12 view .LVU144
+ 493 007c 9342     		cmp	r3, r2
+ 494 007e 07D2     		bcs	.L50
+ 148:Drivers/Parameters/param.c ****             strncpy(p->valuePtr, equals, dataLen);
+ 149:Drivers/Parameters/param.c ****         else
+ 150:Drivers/Parameters/param.c ****             return PARAM_ERR_VALUE;
+ 495              		.loc 1 150 20 view .LVU145
+ 496 0080 6FF00200 		mvn	r0, #2
+ 151:Drivers/Parameters/param.c ****     }
+ 152:Drivers/Parameters/param.c ****         break;
+ 153:Drivers/Parameters/param.c ****     case p_t_float:{
+ 154:Drivers/Parameters/param.c ****         float f32 = 0;
+ 155:Drivers/Parameters/param.c ****         if (sscanf(equals, "%f", &f32))
+ 156:Drivers/Parameters/param.c ****         {
+ 157:Drivers/Parameters/param.c ****             float* pf32 = (float*)&p->value;
+ 158:Drivers/Parameters/param.c ****             *pf32 = f32;
+ 159:Drivers/Parameters/param.c ****         }
+ 160:Drivers/Parameters/param.c ****         else
+ 161:Drivers/Parameters/param.c ****             return PARAM_ERR_SCAN;
+ 162:Drivers/Parameters/param.c ****     }
+ 163:Drivers/Parameters/param.c ****         break;
+ 164:Drivers/Parameters/param.c ****     case p_t_event:{
+ 165:Drivers/Parameters/param.c ****         p->value ++;
+ 166:Drivers/Parameters/param.c ****     }
+ 167:Drivers/Parameters/param.c ****     break;
+ 168:Drivers/Parameters/param.c ****     default:
+ 169:Drivers/Parameters/param.c ****         return PARAM_ERR_TYPE;
+ 170:Drivers/Parameters/param.c ****         break;
+ 497              		.loc 1 170 9 is_stmt 1 view .LVU146
+ 498 0084 1BE0     		b	.L31
+ 499              	.LVL60:
+ 500              	.L49:
+ 144:Drivers/Parameters/param.c ****         else dataLen = nextParam - equals;
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s 			page 13
+
+
+ 501              		.loc 1 144 32 discriminator 1 view .LVU147
+ 144:Drivers/Parameters/param.c ****         else dataLen = nextParam - equals;
+ 502              		.loc 1 144 42 is_stmt 0 discriminator 1 view .LVU148
+ 503 0086 2046     		mov	r0, r4
+ 504 0088 FFF7FEFF 		bl	strlen
+ 505              	.LVL61:
+ 144:Drivers/Parameters/param.c ****         else dataLen = nextParam - equals;
+ 506              		.loc 1 144 40 discriminator 1 view .LVU149
+ 507 008c 82B2     		uxth	r2, r0
+ 508              	.LVL62:
+ 144:Drivers/Parameters/param.c ****         else dataLen = nextParam - equals;
+ 509              		.loc 1 144 40 discriminator 1 view .LVU150
+ 510 008e F4E7     		b	.L41
+ 511              	.L50:
+ 148:Drivers/Parameters/param.c ****             strncpy(p->valuePtr, equals, dataLen);
+ 512              		.loc 1 148 13 is_stmt 1 view .LVU151
+ 513 0090 2146     		mov	r1, r4
+ 514 0092 E868     		ldr	r0, [r5, #12]
+ 515 0094 FFF7FEFF 		bl	strncpy
+ 516              	.LVL63:
+ 152:Drivers/Parameters/param.c ****     case p_t_float:{
+ 517              		.loc 1 152 9 view .LVU152
+ 518 0098 10E0     		b	.L39
+ 519              	.LVL64:
+ 520              	.L37:
+ 521              	.LBB8:
+ 154:Drivers/Parameters/param.c ****         if (sscanf(equals, "%f", &f32))
+ 522              		.loc 1 154 9 view .LVU153
+ 154:Drivers/Parameters/param.c ****         if (sscanf(equals, "%f", &f32))
+ 523              		.loc 1 154 15 is_stmt 0 view .LVU154
+ 524 009a 0023     		movs	r3, #0
+ 525 009c 0193     		str	r3, [sp, #4]	@ float
+ 155:Drivers/Parameters/param.c ****         {
+ 526              		.loc 1 155 9 is_stmt 1 view .LVU155
+ 155:Drivers/Parameters/param.c ****         {
+ 527              		.loc 1 155 13 is_stmt 0 view .LVU156
+ 528 009e 01AA     		add	r2, sp, #4
+ 529 00a0 0D49     		ldr	r1, .L51+4
+ 530 00a2 2046     		mov	r0, r4
+ 531              	.LVL65:
+ 155:Drivers/Parameters/param.c ****         {
+ 532              		.loc 1 155 13 view .LVU157
+ 533 00a4 FFF7FEFF 		bl	sscanf
+ 534              	.LVL66:
+ 155:Drivers/Parameters/param.c ****         {
+ 535              		.loc 1 155 12 view .LVU158
+ 536 00a8 10B1     		cbz	r0, .L42
+ 537              	.LBB9:
+ 157:Drivers/Parameters/param.c ****             *pf32 = f32;
+ 538              		.loc 1 157 13 is_stmt 1 view .LVU159
+ 539              	.LVL67:
+ 158:Drivers/Parameters/param.c ****         }
+ 540              		.loc 1 158 13 view .LVU160
+ 158:Drivers/Parameters/param.c ****         }
+ 541              		.loc 1 158 19 is_stmt 0 view .LVU161
+ 542 00aa 019B     		ldr	r3, [sp, #4]	@ float
+ 543 00ac 6B61     		str	r3, [r5, #20]	@ float
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s 			page 14
+
+
+ 544              	.LBE9:
+ 545 00ae 05E0     		b	.L39
+ 546              	.LVL68:
+ 547              	.L42:
+ 161:Drivers/Parameters/param.c ****     }
+ 548              		.loc 1 161 13 is_stmt 1 view .LVU162
+ 161:Drivers/Parameters/param.c ****     }
+ 549              		.loc 1 161 20 is_stmt 0 view .LVU163
+ 550 00b0 6FF00400 		mvn	r0, #4
+ 551 00b4 03E0     		b	.L31
+ 552              	.LVL69:
+ 553              	.L34:
+ 161:Drivers/Parameters/param.c ****     }
+ 554              		.loc 1 161 20 view .LVU164
+ 555              	.LBE8:
+ 165:Drivers/Parameters/param.c ****     }
+ 556              		.loc 1 165 9 is_stmt 1 view .LVU165
+ 165:Drivers/Parameters/param.c ****     }
+ 557              		.loc 1 165 10 is_stmt 0 view .LVU166
+ 558 00b6 6B69     		ldr	r3, [r5, #20]
+ 165:Drivers/Parameters/param.c ****     }
+ 559              		.loc 1 165 18 view .LVU167
+ 560 00b8 0133     		adds	r3, r3, #1
+ 561 00ba 6B61     		str	r3, [r5, #20]
+ 167:Drivers/Parameters/param.c ****     default:
+ 562              		.loc 1 167 5 is_stmt 1 view .LVU168
+ 563              	.LVL70:
+ 564              	.L39:
+ 167:Drivers/Parameters/param.c ****     default:
+ 565              		.loc 1 167 5 is_stmt 0 view .LVU169
+ 566              	.LBE7:
+ 171:Drivers/Parameters/param.c ****     }
+ 172:Drivers/Parameters/param.c **** 
+ 173:Drivers/Parameters/param.c ****     return PARAM_OK;
+ 567              		.loc 1 173 5 is_stmt 1 view .LVU170
+ 568              		.loc 1 173 12 is_stmt 0 view .LVU171
+ 569 00bc 0120     		movs	r0, #1
+ 570              	.LVL71:
+ 571              	.L31:
+ 174:Drivers/Parameters/param.c **** }
+ 572              		.loc 1 174 1 view .LVU172
+ 573 00be 03B0     		add	sp, sp, #12
+ 574              	.LCFI6:
+ 575              		.cfi_remember_state
+ 576              		.cfi_def_cfa_offset 20
+ 577              		@ sp needed
+ 578 00c0 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 579              	.LVL72:
+ 580              	.L44:
+ 581              	.LCFI7:
+ 582              		.cfi_restore_state
+ 130:Drivers/Parameters/param.c ****     {
+ 583              		.loc 1 130 5 view .LVU173
+ 584 00c2 6FF00100 		mvn	r0, #1
+ 585              	.LVL73:
+ 130:Drivers/Parameters/param.c ****     {
+ 586              		.loc 1 130 5 view .LVU174
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s 			page 15
+
+
+ 587 00c6 FAE7     		b	.L31
+ 588              	.L45:
+ 589              	.LBB10:
+ 139:Drivers/Parameters/param.c ****         break;
+ 590              		.loc 1 139 20 view .LVU175
+ 591 00c8 6FF00400 		mvn	r0, #4
+ 592 00cc F7E7     		b	.L31
+ 593              	.LVL74:
+ 594              	.L43:
+ 139:Drivers/Parameters/param.c ****         break;
+ 595              		.loc 1 139 20 view .LVU176
+ 596              	.LBE10:
+ 121:Drivers/Parameters/param.c ****     uint16_t keyLen = equals - cgiStr;
+ 597              		.loc 1 121 31 view .LVU177
+ 598 00ce 6FF00300 		mvn	r0, #3
+ 599              	.LVL75:
+ 121:Drivers/Parameters/param.c ****     uint16_t keyLen = equals - cgiStr;
+ 600              		.loc 1 121 31 view .LVU178
+ 601 00d2 F4E7     		b	.L31
+ 602              	.L52:
+ 603              		.align	2
+ 604              	.L51:
+ 605 00d4 00000000 		.word	.LC0
+ 606 00d8 04000000 		.word	.LC1
+ 607              		.cfi_endproc
+ 608              	.LFE579:
+ 610              		.section	.text.param_f_checkEvents,"ax",%progbits
+ 611              		.align	1
+ 612              		.global	param_f_checkEvents
+ 613              		.syntax unified
+ 614              		.thumb
+ 615              		.thumb_func
+ 617              	param_f_checkEvents:
+ 618              	.LVL76:
+ 619              	.LFB580:
+ 175:Drivers/Parameters/param.c **** 
+ 176:Drivers/Parameters/param.c **** // param_t *param_f_getParam(param_t_list *list, char *key)
+ 177:Drivers/Parameters/param.c **** // {
+ 178:Drivers/Parameters/param.c **** //     for (uint8_t i = 0; i < list->count; i++)
+ 179:Drivers/Parameters/param.c **** //     {
+ 180:Drivers/Parameters/param.c **** //         param_t *el = &list->elements[i];
+ 181:Drivers/Parameters/param.c **** //         size_t keyLen = strlen(el->key);
+ 182:Drivers/Parameters/param.c **** //         if (strncmp(key, el->key, keyLen) == 0)
+ 183:Drivers/Parameters/param.c **** //         {
+ 184:Drivers/Parameters/param.c **** //             return el;
+ 185:Drivers/Parameters/param.c **** //         }
+ 186:Drivers/Parameters/param.c **** //     }
+ 187:Drivers/Parameters/param.c **** //     return NULL;
+ 188:Drivers/Parameters/param.c **** // }
+ 189:Drivers/Parameters/param.c **** 
+ 190:Drivers/Parameters/param.c **** void param_f_checkEvents(param_t_list *list, void* context)
+ 191:Drivers/Parameters/param.c **** {
+ 620              		.loc 1 191 1 is_stmt 1 view -0
+ 621              		.cfi_startproc
+ 622              		@ args = 0, pretend = 0, frame = 0
+ 623              		@ frame_needed = 0, uses_anonymous_args = 0
+ 624              		.loc 1 191 1 is_stmt 0 view .LVU180
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s 			page 16
+
+
+ 625 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 626              	.LCFI8:
+ 627              		.cfi_def_cfa_offset 24
+ 628              		.cfi_offset 3, -24
+ 629              		.cfi_offset 4, -20
+ 630              		.cfi_offset 5, -16
+ 631              		.cfi_offset 6, -12
+ 632              		.cfi_offset 7, -8
+ 633              		.cfi_offset 14, -4
+ 634 0002 0646     		mov	r6, r0
+ 635 0004 0F46     		mov	r7, r1
+ 192:Drivers/Parameters/param.c **** 
+ 193:Drivers/Parameters/param.c ****     for (size_t i = 0; i < list->count; i++)
+ 636              		.loc 1 193 5 is_stmt 1 view .LVU181
+ 637              	.LBB11:
+ 638              		.loc 1 193 10 view .LVU182
+ 639              	.LVL77:
+ 640              		.loc 1 193 17 is_stmt 0 view .LVU183
+ 641 0006 0025     		movs	r5, #0
+ 642              		.loc 1 193 5 view .LVU184
+ 643 0008 0AE0     		b	.L54
+ 644              	.LVL78:
+ 645              	.L60:
+ 646              	.LBB12:
+ 194:Drivers/Parameters/param.c ****     {
+ 195:Drivers/Parameters/param.c ****         param_t *el = &list->elements[i];
+ 196:Drivers/Parameters/param.c ****         if (el->type == p_t_event)
+ 197:Drivers/Parameters/param.c ****         {
+ 198:Drivers/Parameters/param.c ****             while (el->value)
+ 199:Drivers/Parameters/param.c ****             {
+ 200:Drivers/Parameters/param.c ****                 if (el->event != NULL)
+ 201:Drivers/Parameters/param.c ****                 {
+ 202:Drivers/Parameters/param.c ****                     el->value--;
+ 647              		.loc 1 202 21 is_stmt 1 view .LVU185
+ 648              		.loc 1 202 30 is_stmt 0 view .LVU186
+ 649 000a 013B     		subs	r3, r3, #1
+ 650 000c 6361     		str	r3, [r4, #20]
+ 203:Drivers/Parameters/param.c ****                     el->event(el,context);
+ 651              		.loc 1 203 21 is_stmt 1 view .LVU187
+ 652 000e 3946     		mov	r1, r7
+ 653 0010 2046     		mov	r0, r4
+ 654 0012 9047     		blx	r2
+ 655              	.LVL79:
+ 656              	.L55:
+ 198:Drivers/Parameters/param.c ****             {
+ 657              		.loc 1 198 20 view .LVU188
+ 198:Drivers/Parameters/param.c ****             {
+ 658              		.loc 1 198 22 is_stmt 0 view .LVU189
+ 659 0014 6369     		ldr	r3, [r4, #20]
+ 198:Drivers/Parameters/param.c ****             {
+ 660              		.loc 1 198 20 view .LVU190
+ 661 0016 13B1     		cbz	r3, .L56
+ 200:Drivers/Parameters/param.c ****                 {
+ 662              		.loc 1 200 17 is_stmt 1 view .LVU191
+ 200:Drivers/Parameters/param.c ****                 {
+ 663              		.loc 1 200 23 is_stmt 0 view .LVU192
+ 664 0018 A269     		ldr	r2, [r4, #24]
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s 			page 17
+
+
+ 200:Drivers/Parameters/param.c ****                 {
+ 665              		.loc 1 200 20 view .LVU193
+ 666 001a 002A     		cmp	r2, #0
+ 667 001c F5D1     		bne	.L60
+ 668              	.L56:
+ 200:Drivers/Parameters/param.c ****                 {
+ 669              		.loc 1 200 20 view .LVU194
+ 670              	.LBE12:
+ 193:Drivers/Parameters/param.c ****     {
+ 671              		.loc 1 193 42 is_stmt 1 discriminator 2 view .LVU195
+ 672 001e 0135     		adds	r5, r5, #1
+ 673              	.LVL80:
+ 674              	.L54:
+ 193:Drivers/Parameters/param.c ****     {
+ 675              		.loc 1 193 26 discriminator 1 view .LVU196
+ 193:Drivers/Parameters/param.c ****     {
+ 676              		.loc 1 193 32 is_stmt 0 discriminator 1 view .LVU197
+ 677 0020 3378     		ldrb	r3, [r6]	@ zero_extendqisi2
+ 193:Drivers/Parameters/param.c ****     {
+ 678              		.loc 1 193 26 discriminator 1 view .LVU198
+ 679 0022 AB42     		cmp	r3, r5
+ 680 0024 08D9     		bls	.L61
+ 681              	.LBB13:
+ 195:Drivers/Parameters/param.c ****         if (el->type == p_t_event)
+ 682              		.loc 1 195 9 is_stmt 1 view .LVU199
+ 195:Drivers/Parameters/param.c ****         if (el->type == p_t_event)
+ 683              		.loc 1 195 28 is_stmt 0 view .LVU200
+ 684 0026 7468     		ldr	r4, [r6, #4]
+ 195:Drivers/Parameters/param.c ****         if (el->type == p_t_event)
+ 685              		.loc 1 195 38 view .LVU201
+ 686 0028 C5EBC503 		rsb	r3, r5, r5, lsl #3
+ 195:Drivers/Parameters/param.c ****         if (el->type == p_t_event)
+ 687              		.loc 1 195 18 view .LVU202
+ 688 002c 04EB8304 		add	r4, r4, r3, lsl #2
+ 689              	.LVL81:
+ 196:Drivers/Parameters/param.c ****         {
+ 690              		.loc 1 196 9 is_stmt 1 view .LVU203
+ 196:Drivers/Parameters/param.c ****         {
+ 691              		.loc 1 196 15 is_stmt 0 view .LVU204
+ 692 0030 237A     		ldrb	r3, [r4, #8]	@ zero_extendqisi2
+ 196:Drivers/Parameters/param.c ****         {
+ 693              		.loc 1 196 12 view .LVU205
+ 694 0032 042B     		cmp	r3, #4
+ 695 0034 F3D1     		bne	.L56
+ 696 0036 EDE7     		b	.L55
+ 697              	.LVL82:
+ 698              	.L61:
+ 196:Drivers/Parameters/param.c ****         {
+ 699              		.loc 1 196 12 view .LVU206
+ 700              	.LBE13:
+ 701              	.LBE11:
+ 204:Drivers/Parameters/param.c ****                 }
+ 205:Drivers/Parameters/param.c ****                 else
+ 206:Drivers/Parameters/param.c ****                 {
+ 207:Drivers/Parameters/param.c ****                     break;
+ 208:Drivers/Parameters/param.c ****                 }
+ 209:Drivers/Parameters/param.c ****             }
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s 			page 18
+
+
+ 210:Drivers/Parameters/param.c ****         }
+ 211:Drivers/Parameters/param.c ****     }
+ 212:Drivers/Parameters/param.c **** }
+ 702              		.loc 1 212 1 view .LVU207
+ 703 0038 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 704              		.loc 1 212 1 view .LVU208
+ 705              		.cfi_endproc
+ 706              	.LFE580:
+ 708              		.section	.text.param_f_isEqual,"ax",%progbits
+ 709              		.align	1
+ 710              		.global	param_f_isEqual
+ 711              		.syntax unified
+ 712              		.thumb
+ 713              		.thumb_func
+ 715              	param_f_isEqual:
+ 716              	.LVL83:
+ 717              	.LFB581:
+ 213:Drivers/Parameters/param.c **** 
+ 214:Drivers/Parameters/param.c **** int8_t param_f_isEqual(param_t *param, const void *value)
+ 215:Drivers/Parameters/param.c **** {
+ 718              		.loc 1 215 1 is_stmt 1 view -0
+ 719              		.cfi_startproc
+ 720              		@ args = 0, pretend = 0, frame = 0
+ 721              		@ frame_needed = 0, uses_anonymous_args = 0
+ 216:Drivers/Parameters/param.c ****     int8_t ret = RESET;
+ 722              		.loc 1 216 5 view .LVU210
+ 217:Drivers/Parameters/param.c ****     if(param==NULL) return PARAM_ERR_NOT_FOUND;
+ 723              		.loc 1 217 5 view .LVU211
+ 724              		.loc 1 217 7 is_stmt 0 view .LVU212
+ 725 0000 58B1     		cbz	r0, .L64
+ 215:Drivers/Parameters/param.c ****     int8_t ret = RESET;
+ 726              		.loc 1 215 1 view .LVU213
+ 727 0002 08B5     		push	{r3, lr}
+ 728              	.LCFI9:
+ 729              		.cfi_def_cfa_offset 8
+ 730              		.cfi_offset 3, -8
+ 731              		.cfi_offset 14, -4
+ 218:Drivers/Parameters/param.c ****     switch (param->type)
+ 732              		.loc 1 218 5 is_stmt 1 view .LVU214
+ 733              		.loc 1 218 18 is_stmt 0 view .LVU215
+ 734 0004 027A     		ldrb	r2, [r0, #8]	@ zero_extendqisi2
+ 735              		.loc 1 218 5 view .LVU216
+ 736 0006 032A     		cmp	r2, #3
+ 737 0008 01D0     		beq	.L71
+ 216:Drivers/Parameters/param.c ****     if(param==NULL) return PARAM_ERR_NOT_FOUND;
+ 738              		.loc 1 216 12 view .LVU217
+ 739 000a 0020     		movs	r0, #0
+ 740              	.LVL84:
+ 741              	.L63:
+ 219:Drivers/Parameters/param.c ****     {
+ 220:Drivers/Parameters/param.c ****     case p_t_string:
+ 221:Drivers/Parameters/param.c ****         if(strcmp(param->valuePtr,value)==0){
+ 222:Drivers/Parameters/param.c ****             ret = SET;
+ 223:Drivers/Parameters/param.c ****         }
+ 224:Drivers/Parameters/param.c ****         break;
+ 225:Drivers/Parameters/param.c ****     
+ 226:Drivers/Parameters/param.c ****     default:
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s 			page 19
+
+
+ 227:Drivers/Parameters/param.c ****         break;
+ 228:Drivers/Parameters/param.c ****     }
+ 229:Drivers/Parameters/param.c ****     return ret;
+ 230:Drivers/Parameters/param.c **** }
+ 742              		.loc 1 230 1 view .LVU218
+ 743 000c 08BD     		pop	{r3, pc}
+ 744              	.LVL85:
+ 745              	.L71:
+ 221:Drivers/Parameters/param.c ****             ret = SET;
+ 746              		.loc 1 221 9 is_stmt 1 view .LVU219
+ 221:Drivers/Parameters/param.c ****             ret = SET;
+ 747              		.loc 1 221 12 is_stmt 0 view .LVU220
+ 748 000e C068     		ldr	r0, [r0, #12]
+ 749              	.LVL86:
+ 221:Drivers/Parameters/param.c ****             ret = SET;
+ 750              		.loc 1 221 12 view .LVU221
+ 751 0010 FFF7FEFF 		bl	strcmp
+ 752              	.LVL87:
+ 221:Drivers/Parameters/param.c ****             ret = SET;
+ 753              		.loc 1 221 11 view .LVU222
+ 754 0014 20B1     		cbz	r0, .L66
+ 216:Drivers/Parameters/param.c ****     if(param==NULL) return PARAM_ERR_NOT_FOUND;
+ 755              		.loc 1 216 12 view .LVU223
+ 756 0016 0020     		movs	r0, #0
+ 757 0018 F8E7     		b	.L63
+ 758              	.LVL88:
+ 759              	.L64:
+ 760              	.LCFI10:
+ 761              		.cfi_def_cfa_offset 0
+ 762              		.cfi_restore 3
+ 763              		.cfi_restore 14
+ 217:Drivers/Parameters/param.c ****     switch (param->type)
+ 764              		.loc 1 217 28 view .LVU224
+ 765 001a 4FF0FF30 		mov	r0, #-1
+ 766              	.LVL89:
+ 767              		.loc 1 230 1 view .LVU225
+ 768 001e 7047     		bx	lr
+ 769              	.LVL90:
+ 770              	.L66:
+ 771              	.LCFI11:
+ 772              		.cfi_def_cfa_offset 8
+ 773              		.cfi_offset 3, -8
+ 774              		.cfi_offset 14, -4
+ 222:Drivers/Parameters/param.c ****         }
+ 775              		.loc 1 222 17 view .LVU226
+ 776 0020 0120     		movs	r0, #1
+ 777 0022 F3E7     		b	.L63
+ 778              		.cfi_endproc
+ 779              	.LFE581:
+ 781              		.text
+ 782              	.Letext0:
+ 783              		.file 2 "c:\\vscode\\vscodestmtools\\arm-none-eabi-gcc\\12.2.1-1.2.1\\.content\\arm-none-eabi\\inc
+ 784              		.file 3 "c:\\vscode\\vscodestmtools\\arm-none-eabi-gcc\\12.2.1-1.2.1\\.content\\arm-none-eabi\\inc
+ 785              		.file 4 "Drivers/Parameters/param.h"
+ 786              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h"
+ 787              		.file 6 "c:\\vscode\\vscodestmtools\\arm-none-eabi-gcc\\12.2.1-1.2.1\\.content\\lib\\gcc\\arm-none
+ 788              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h"
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s 			page 20
+
+
+ 789              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h"
+ 790              		.file 9 "c:\\vscode\\vscodestmtools\\arm-none-eabi-gcc\\12.2.1-1.2.1\\.content\\arm-none-eabi\\inc
+ 791              		.file 10 "c:\\vscode\\vscodestmtools\\arm-none-eabi-gcc\\12.2.1-1.2.1\\.content\\arm-none-eabi\\in
+ 792              		.file 11 "<built-in>"
+ARM GAS  C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s 			page 21
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 param.c
+C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s:19     .text.param_f_findParamIdx:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s:25     .text.param_f_findParamIdx:0000000000000000 param_f_findParamIdx
+C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s:116    .text.param_f_setParam:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s:122    .text.param_f_setParam:0000000000000000 param_f_setParam
+C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s:153    .text.param_f_setParam:0000000000000014 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s:157    .text.param_f_setParam:0000000000000018 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s:331    .rodata.param_f_setFromCgiStr.str1.4:0000000000000000 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s:338    .text.param_f_setFromCgiStr:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s:344    .text.param_f_setFromCgiStr:0000000000000000 param_f_setFromCgiStr
+C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s:431    .text.param_f_setFromCgiStr:000000000000004a $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s:436    .text.param_f_setFromCgiStr:000000000000004e $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s:605    .text.param_f_setFromCgiStr:00000000000000d4 $d
+C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s:611    .text.param_f_checkEvents:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s:617    .text.param_f_checkEvents:0000000000000000 param_f_checkEvents
+C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s:709    .text.param_f_isEqual:0000000000000000 $t
+C:\Users\VIDCOM~1\AppData\Local\Temp\cciMhDlU.s:715    .text.param_f_isEqual:0000000000000000 param_f_isEqual
+
+UNDEFINED SYMBOLS
+strlen
+strncmp
+__aeabi_fcmpeq
+strncpy
+strchr
+sscanf
+memset
+strcmp
